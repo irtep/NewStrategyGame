@@ -1,2 +1,5 @@
-# NewStrategyGame
-New try to make a strategy game. This time theme is sci-fi and language vanilla JS. Lets see how this goes.
+/*
+I try to make a strategy game.
+
+try number about ten... lets see if i can finish it this time :)
+*/
