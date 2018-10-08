@@ -26,7 +26,8 @@ function drawUnits(gameObject,canvas,ctx) {
     ctx.fillText(shortDesc, unit.location.x-40, unit.location.y);
     ctx.fillText(actionDesc, unit.location.x-40, unit.location.y +13);  
   })
-  gameObject.army2.forEach((unit) => { // draw army 1
+  
+  gameObject.army2.forEach((unit) => { // draw army 2
     const shortDesc = unit.quantity + ' x ' + unit.unit;
     let actionDesc;
     const foundUnit = searchUnitByName(unit.unit, gameObject.factions[1]);
@@ -55,10 +56,11 @@ function drawUnits(gameObject,canvas,ctx) {
 }
 
 function draw(gameObject) {
-  console.log('draw fired');
-  const canvas = gameObject.canvas;
+  console.log('draw fired, gO:', gameObject);
+  const canvas = document.getElementById('kanveesi');
   const ctx = canvas.getContext("2d");
 
   ctx.clearRect(0,0,canvas.width,canvas.height);  // clear all 
+  // add drawTerrain
   drawUnits(gameObject,canvas,ctx);
 }
