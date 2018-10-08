@@ -11,3 +11,15 @@
   right: 0;
   background-color: darkgreen;
 } 
+#console1 {				
+  position: fixed;
+	top: 20%;
+	left: 1px;  
+	float: left;
+}
+.commands {
+  background-color: gray;
+  color: RGB(73, 251, 53);
+  width: 110%;
+  height: 110%;
+}
