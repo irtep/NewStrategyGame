@@ -55,9 +55,10 @@ function drawUnits(gameObject,canvas,ctx) {
 }
 
 function draw(gameObject) {
-    const canvas = gameObject.canvas;
-    const ctx = canvas.getContext("2d");
+  console.log('draw fired');
+  const canvas = gameObject.canvas;
+  const ctx = canvas.getContext("2d");
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);  // clear all 
-        drawUnits(gameObject,canvas,ctx);
+  ctx.clearRect(0,0,canvas.width,canvas.height);  // clear all 
+  drawUnits(gameObject,canvas,ctx);
 }
