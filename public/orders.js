@@ -10,8 +10,10 @@
 
 // shoot target, but keep position. (shoot target, but dont chase if target out of los/range)
 
-// embark to transport (embark to transport that is near)
+// embark to transport or building (embark to transport that is near)
 
-// disembark troops (disembard troops from transport)
+// disembark troops (disembard troops from transport or from building)
 
 // join squad (characters only. join squad that is near)
+
+// run (double movement, but no shooting)
