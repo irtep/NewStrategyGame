@@ -15,8 +15,12 @@ function clickedUnit(who){
   console.log('clicked: ', who);
 }
 
-function howeredUnit(who){
-  console.log('howered: ', who);
+function howerIn(who){
+  console.log('howeredIn: ', who);
+}
+
+function howerOut(who){
+  console.log('howeredOut: ', who);
 }
 
 function createUnitButtons(gameObject){
@@ -31,9 +35,11 @@ function createUnitButtons(gameObject){
   for (let i = 0; i < gameObject.army2.length; i++) {
     const nameOfTarget = gameObject.army2[i].unit
     p2units.innerHTML = p2units.innerHTML + '<br><input type= "button" id= "unit'+ i +'button" class= "units" value= "'+ 
-    nameOfTarget +'" onclick= clickedUnit('+ i +')>'
+    nameOfTarget +'" onclick= clickedUnit('+ i +') '+
+    'onmouseover= howerIn('+ i +') onmouseout= howerOut(̈́'+ i +')>'
   }  
 }
 /*
+onmouseout has some problem!
 onmouseover="bigImg(this)" onmouseout="normalImg(this)"
 */
