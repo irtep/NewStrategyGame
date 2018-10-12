@@ -1,5 +1,19 @@
+// Collision detect:
+function collisionDetect(locFrom, radiusFrom, locTo, radiusTo){
+  // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+  var circle1 = {radius: 20, x: 5, y: 5};
+  var circle2 = {radius: 12, x: 10, y: 5};
+
+  var dx = circle1.x - circle2.x;
+  var dy = circle1.y - circle2.y;
+  var distance = Math.sqrt(dx * dx + dy * dy);
+
+  if (distance < circle1.radius + circle2.radius) {
+    // collision detected!
+  }
+}
+
 // Distance check
-/*
 function distanceCheck(fromWhere, toWhere){
   const a = fromWhere.x - toWhere.x // x1 - x2;
   const b = fromWhere.y - toWhere.y // y1 - y2;
@@ -7,56 +21,113 @@ function distanceCheck(fromWhere, toWhere){
   const c = Math.sqrt( a*a + b*b );
   return c;
 }  
-*/  
-/*
+
 // find direct way by less distance
 function findDirection(dirFrom, dirTo, distance){
   let shortest;
-  let directions = [n: null, ne: null, e: null, se: null, s: null, sw: null, w: null, nw: null];
+  let fullList = [];
+  let directions = {n: null, ne: null, e: null, se: null, s: null, sw: null, w: null, nw: null};
 
   // check that if there yet and then 9 directions
   if (dirFrom === dirTo) {
     return 'atDestination';
-  } else {
-    let checkN = {x: dirFrom.x, y: dirFrom.y - 1};
-    directions.n = distanceCheck(dirFrom.x, dirFrom.y);  
+  } else { 
     
-    let checkN = {x: dirFrom.x, y: dirFrom.y - 1};
-    directions.n = distanceCheck(dirFrom.x, dirFrom.y); 
+    let check = {x: dirFrom.x, y: dirFrom.y - 1};
+    directions.n = distanceCheck(check, dirTo); 
     
-    let checkN = {x: dirFrom.x, y: dirFrom.y - 1};
-    directions.n = distanceCheck(dirFrom.x, dirFrom.y); 
+    check = {x: dirFrom.x + 1, y: dirFrom.y - 1};
+    directions.ne = distanceCheck(check, dirTo); 
     
-    let checkN = {x: dirFrom.x, y: dirFrom.y - 1};
-    directions.n = distanceCheck(dirFrom.x, dirFrom.y); 
+    check = {x: dirFrom.x + 1, y: dirFrom.y};
+    directions.e = distanceCheck(check, dirTo); 
     
-    let checkN = {x: dirFrom.x, y: dirFrom.y - 1};
-    directions.n = distanceCheck(dirFrom.x, dirFrom.y); 
+    check = {x: dirFrom.x + 1, y: dirFrom.y + 1};
+    directions.se = distanceCheck(check, dirTo); 
     
-    let checkN = {x: dirFrom.x, y: dirFrom.y - 1};
-    directions.n = distanceCheck(dirFrom.x, dirFrom.y); 
+    check = {x: dirFrom.x, y: dirFrom.y + 1};
+    directions.s = distanceCheck(check, dirTo); 
     
-    let checkN = {x: dirFrom.x, y: dirFrom.y - 1};
-    directions.n = distanceCheck(dirFrom.x, dirFrom.y); 
+    check = {x: dirFrom.x - 1, y: dirFrom.y + 1};
+    directions.sw = distanceCheck(check, dirTo); 
     
-    let checkN = {x: dirFrom.x, y: dirFrom.y - 1};
-    directions.n = distanceCheck(dirFrom.x, dirFrom.y); 
+    check = {x: dirFrom.x - 1, y: dirFrom.y};
+    directions.w = distanceCheck(check, dirTo); 
     
-    let checkN = {x: dirFrom.x, y: dirFrom.y - 1};
-    directions.n = distanceCheck(dirFrom.x, dirFrom.y); 
+    check = {x: dirFrom.x - 1, y: dirFrom.y - 1};
+    directions.nw = distanceCheck(check, dirTo); 
   }
+  fullList.push(directions.nw);fullList.push(directions.n);fullList.push(directions.ne);
+  fullList.push(directions.w);fullList.push(directions.e);
+  fullList.push(directions.sw);fullList.push(directions.s);fullList.push(directions.se);
+  // check which is the shortest
+  const sortedList = fullList.sort((a, b) => a - b);
+  for (var key in directions) {
+    if (directions.hasOwnProperty(key)) {
+      if (directions[key] == sortedList[0]) {
+        shortest = key;
+        return shortest;
+      } 
+    }
+  } 
 }
-*/
-// LOS check
-/*
-function losCheck(fromWhere, toWhere){
+
+// LOS and Range check
+function losAndRangeCheck(fromWhere, toWhere, gameObject){
   let path = [];
   let distance = distanceCheck(fromWhere, toWhere);
   let whereNow = fromWhere;
-  
-  for (; fromWhere === toWhere;) {
-    let nextStep = findDirection(whereNow, toWhere, distance);
+  let collision = false;
+  const activeUnit = searchUnitByLocation(fromWhere, gameObject);
+  const targetUnit = searchUnitByLocation(toWhere, gameObject);
+  console.log('l and r check: ', whereNow, toWhere);
+  const forCheckUnits1 = gameObject.army1.concat([]);
+  const forCheckUnits2 = gameObject.army2.concat([]);
+  const allUnits = forCheckUnits1.concat(forCheckUnits2);
+  // terrain can be checked from original gameObject
+  // for radius:
+  /*
+  const foundUnit = searchUnitByName(unit.unit, gameObject.factions[0]);
+  const totalSize = foundUnit.size * unit.quantity; // radius
+  */
     
+  // delete active unit from forCheckUnits1 or 2.
+  for (let ii = 0; ii < allUnits.length; ii++) {
+    if (fromWhere.x === allUnits[ii].x && fromWhere.y === allUnits[ii].y) {
+      console.log('found to be deleted: ', ii);
+      allUnits.splice(ii, 1);
+    }
   }
+  
+  for (let i = 0; i < distance; i++) {
+    let nextStep = findDirection(whereNow, toWhere, distance);
+
+    switch (nextStep) {
+      case 'n': whereNow.x = whereNow.x; whereNow.y = whereNow.y -1; break;
+      case 'ne': whereNow.x = whereNow.x + 1; whereNow.y = whereNow.y - 1; break; 
+      case 'e': whereNow.x = whereNow.x + 1; whereNow.y = whereNow.y; break; 
+      case 'se': whereNow.x = whereNow.x + 1; whereNow.y = whereNow.y + 1; break; 
+      case 's': whereNow.x = whereNow.x; whereNow.y = whereNow.y + 1; break; 
+      case 'sw': whereNow.x = whereNow.x - 1; whereNow.y = whereNow.y + 1; break; 
+      case 'w': whereNow.x = whereNow.x - 1; whereNow.y = whereNow.y; break; 
+      case 'nw': whereNow.x = whereNow.x - 1; whereNow.y = whereNow.y - 1; break;   
+    }
+    /* Check collision:
+    for (let ix = 0; ix < allUnits.length; ix++) {
+      let collisionResult = collisionDetect(whereNow, 1, toWhere, radiusTo);
+
+      if (collisionResult === 'collision'){
+        return 'no los';  
+      }
+    }
+    let collisionResult = collisionDetect(whereNow, 1, locTo, radiusTo);
+    */
+  }
+  console.log('los path: ', path);
 }
+
+/*
+const dirConf = {n: [0, -1], ne: [1, -1], e: [1, 0],
+                se: [1, 1], s: [0, 1], sw: [-1, 1],
+                w: [-1, 0], nw: [-1, -1]};
 */

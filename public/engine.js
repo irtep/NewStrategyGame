@@ -58,9 +58,13 @@ function startGame(){
   // prepare saving of object, by stringifiyng it:
   const gOstring = JSON.stringify(gameObject);
    // Save gameObject to sessionStorage
-  sessionStorage.setItem('storedFile', gOstring);
-  
+  sessionStorage.setItem('storedFile', gOstring); 
+  // Los and range checker test:
+  const testWhere = {x: 100, y: 100};
+  const testTo = {x: 320, y: 23};
+  losAndRangeCheck(testWhere, testTo, gameObject);
 }
 
 // Calls:
 startGame();
+console.log('los and range check test: ');
