@@ -1,16 +1,26 @@
+/*
+  // Los and range example:
+  const testWhere = {x: 250, y: 100};
+  const testTo = {x: 100, y: 508};
+  losAndRangeCheck(testWhere, testTo, gameObject);
+*/
+
 // Collision detect:
 function collisionDetect(locFrom, radiusFrom, locTo, radiusTo){
   // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
-  var circle1 = {radius: 20, x: 5, y: 5};
-  var circle2 = {radius: 12, x: 10, y: 5};
-
+  let circle1 = {radius: null, x: null, y: null};
+  let circle2 = {radius: null, x: null, y: null};
+  
+  circle1.radius = radiusFrom; circle1.x = locFrom.x; circle1.y = locFrom.y;
+  circle2.radius = radiusTo; circle2.x = locTo.x; circle2.y = locTo.y;
+  
   var dx = circle1.x - circle2.x;
   var dy = circle1.y - circle2.y;
   var distance = Math.sqrt(dx * dx + dy * dy);
 
   if (distance < circle1.radius + circle2.radius) {
-    // collision detected!
-  }
+    console.log('collision'); return 'collision';
+  } else {console.log('no collision'); return 'no collision';}
 }
 
 // Distance check
@@ -93,12 +103,12 @@ function losAndRangeCheck(fromWhere, toWhere, gameObject){
     
   // delete active unit from forCheckUnits1 or 2.
   for (let ii = 0; ii < allUnits.length; ii++) {
-    if (fromWhere.x === allUnits[ii].x && fromWhere.y === allUnits[ii].y) {
+    if (fromWhere.x === allUnits[ii].location.x && fromWhere.y === allUnits[ii].location.y) {
       console.log('found to be deleted: ', ii);
       allUnits.splice(ii, 1);
     }
   }
-  
+  console.log('allUnits: ', allUnits);
   for (let i = 0; i < distance; i++) {
     let nextStep = findDirection(whereNow, toWhere, distance);
 
@@ -112,18 +122,29 @@ function losAndRangeCheck(fromWhere, toWhere, gameObject){
       case 'w': whereNow.x = whereNow.x - 1; whereNow.y = whereNow.y; break; 
       case 'nw': whereNow.x = whereNow.x - 1; whereNow.y = whereNow.y - 1; break;   
     }
-    /* Check collision:
+    
+    // Check collision:
     for (let ix = 0; ix < allUnits.length; ix++) {
-      let collisionResult = collisionDetect(whereNow, 1, toWhere, radiusTo);
+      const foundUnit = searchUnitByName(allUnits[ix].unit, gameObject.factions[0]);
+      const radiusOfTarget = foundUnit.size * allUnits[ix].quantity;
+      let collisionResult = collisionDetect(whereNow, 1, allUnits[ix].location, radiusOfTarget);
 
       if (collisionResult === 'collision'){
-        return 'no los';  
+        console.log('collision: ', allUnits[ix]);
+        collision = true;  
       }
+      if (collision === true){
+        return 'collision';
+      } 
     }
-    let collisionResult = collisionDetect(whereNow, 1, locTo, radiusTo);
-    */
+    if (collision === true){
+      return 'collision';
+    }
   }
-  console.log('los path: ', path);
+  if (collision === false){
+    console.log('no collision');
+    return 'no collision';
+  }
 }
 
 /*

@@ -1,8 +1,12 @@
 // ORDERS:
 
 // standby (do not move, but shoot closest enemy in LOS and in range)
+  // check range of weapon(s), then if any enemies around
+    // shoot closest
 
 // hunt to shoot (start to move towards target in order to get in range an in LOS. stop moving when in range)
+  // check where is target and if in range.
+    // if in range shoot. if not in range move towards
 
 // hunt to assault (start to move towards target in order to engage in melee)
 
