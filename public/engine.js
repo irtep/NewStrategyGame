@@ -29,7 +29,7 @@ function roundExecutor(){
       console.log('move order executions'); 
     }, 1000);
     setTimeout(() => { 
-      console.log('shoot order executions'); 
+      console.log('shoot/melee order executions'); 
     }, 2000);
     
     draw(gameObject);
@@ -46,9 +46,9 @@ function startGame(){
             {unit: 'Grizzly battletank', id: 2, location: {x: 250, y: 100, z: 0}, quantity: 1, order: 'standby', target: null, engaged: null,
             joinedCharacters: []}
            ],
-    army2: [{unit: 'Guardsman', id: 1, location: {x: 100, y: 500, z: 0}, quantity: 5, order: 'standby', targeted: null, engaged: null,
+    army2: [{unit: 'Guardsman', id: 3, location: {x: 100, y: 500, z: 0}, quantity: 5, order: 'standby', targeted: null, engaged: null,
             joinedCharacters: []},
-            {unit: 'Grizzly battletank', id: 2, location: {x: 330, y: 510, z: 0}, quantity: 1, order: 'standby', target: null, engaged: null,
+            {unit: 'Grizzly battletank', id: 4, location: {x: 330, y: 510, z: 0}, quantity: 1, order: 'standby', target: null, engaged: null,
             joinedCharacters: []}
            ]  
     // Add terrain elements.
@@ -59,12 +59,7 @@ function startGame(){
   const gOstring = JSON.stringify(gameObject);
    // Save gameObject to sessionStorage
   sessionStorage.setItem('storedFile', gOstring); 
-  // Los and range checker test:
-  const testWhere = {x: 100, y: 100};
-  const testTo = {x: 320, y: 23};
-  losAndRangeCheck(testWhere, testTo, gameObject);
 }
 
 // Calls:
 startGame();
-console.log('los and range check test: ');
