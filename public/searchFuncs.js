@@ -20,3 +20,23 @@ function searchUnitByLocation(location, object){
     }
   }
 }
+
+// search weapons stats // name ranged or melee
+function searchStatsOfWeapon(nameOfWeapon, weaponType){
+  let object;
+  switch (weaponType) {
+    case 'ranged':
+      object = rangedWeapons;
+    break;
+    case 'melee':
+      object = meleeWeapons;
+    break;
+    default: console.log('weapon type not found');  
+  }
+  for (let i = 0; object.length; i++){
+    if (nameOfWeapon === object[i].nombre){
+      console.log('returning weapon: ', object[i]);
+      return object[i];
+    }
+  }
+}

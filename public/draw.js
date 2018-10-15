@@ -1,4 +1,4 @@
-function drawUnits(gameObject,canvas,ctx) {
+function drawUnits(canvas,ctx) {
   gameObject.army1.forEach((unit) => { // draw army 1
     const shortDesc = unit.quantity + ' x ' + unit.unit;
     let actionDesc;
@@ -19,6 +19,28 @@ function drawUnits(gameObject,canvas,ctx) {
       ctx.arc(unit.location.x, unit.location.y, foundUnit.size, 0, 2 * Math.PI); 
     } 
     ctx.fill();
+    ctx.closePath();
+    // paint range limit: 
+    ctx.beginPath();  
+    ctx.strokeStyle = 'gold';
+    if (unit.highlighted === true){
+      if (foundUnit.rangedWeapons.length > 0){
+        console.log('foundUnit.rangedW: ', foundUnit.rangedWeapons[0]);
+        const foundWeapon = searchStatsOfWeapon(foundUnit.rangedWeapons[0], 'ranged');
+        console.log('fw: ', foundWeapon);
+        const weaponRadius = foundWeapon.range;
+        console.log('wr', weaponRadius);
+        ctx.arc(unit.location.x, unit.location.y, weaponRadius, 0, 2 * Math.PI);
+        // text:
+        
+        ctx.font = '15px serif';
+        ctx.fillStyle = 'gold';
+        ctx.fillText('main weapon range', unit.location.x-40, unit.location.y +33); 
+      }
+    } else { // if no ranged weapon:
+      ctx.arc(unit.location.x, unit.location.y, 0, 0, 2 * Math.PI); 
+    } 
+    ctx.stroke();
     ctx.closePath();
     // write info texts:
     ctx.font = '15px serif';
@@ -47,6 +69,28 @@ function drawUnits(gameObject,canvas,ctx) {
     } 
     ctx.fill();
     ctx.closePath();
+    // paint range limit: 
+    ctx.beginPath();  
+    ctx.strokeStyle = 'purple';
+    if (unit.highlighted === true){
+      if (foundUnit.rangedWeapons.length > 0){
+        console.log('foundUnit.rangedW: ', foundUnit.rangedWeapons[0]);
+        const foundWeapon = searchStatsOfWeapon(foundUnit.rangedWeapons[0], 'ranged');
+        console.log('fw: ', foundWeapon);
+        const weaponRadius = foundWeapon.range;
+        console.log('wr', weaponRadius);
+        ctx.arc(unit.location.x, unit.location.y, weaponRadius, 0, 2 * Math.PI);
+        // text:
+        
+        ctx.font = '15px serif';
+        ctx.fillStyle = 'purple';
+        ctx.fillText('main weapon range', unit.location.x-40, unit.location.y +33); 
+      }
+    } else { // if no ranged weapon:
+      ctx.arc(unit.location.x, unit.location.y, 0, 0, 2 * Math.PI); 
+    } 
+    ctx.stroke();
+    ctx.closePath();
     // write info texts:
     ctx.font = '15px serif';
     ctx.fillStyle = 'blue';
@@ -55,12 +99,11 @@ function drawUnits(gameObject,canvas,ctx) {
   }) 
 }
 
-function draw(gameObject) {
-  console.log('draw fired, gO:', gameObject);
+function draw() {
   const canvas = document.getElementById('kanveesi');
   const ctx = canvas.getContext("2d");
 
   ctx.clearRect(0,0,canvas.width,canvas.height);  // clear all 
   // add drawTerrain
-  drawUnits(gameObject,canvas,ctx);
+  drawUnits(canvas,ctx);
 }
