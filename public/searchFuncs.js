@@ -35,7 +35,6 @@ function searchStatsOfWeapon(nameOfWeapon, weaponType){
   }
   for (let i = 0; object.length; i++){
     if (nameOfWeapon === object[i].nombre){
-      console.log('returning weapon: ', object[i]);
       return object[i];
     }
   }
