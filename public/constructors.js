@@ -9,13 +9,13 @@ function gameUnit(nombre, type, desc, meleeWeapons, rangedWeapons,
   this.stats = stats;
   this.size = size;
   this.army = army; 
-  
+  /*
   this.highlight = () => {
     this.highlighted = true;
   }
   this.unHighlight = () => {
     this.highlighted = false;
-  }
+  }*/
 }
 
 function weapon(nombre, range, type, attacks, str, ap, wounds, barrage){

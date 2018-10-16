@@ -7,7 +7,7 @@ function drawUnits(canvas,ctx) {
     if (unit.order === 'standby') {
       actionDesc = 'order: ' + unit.order;    
     } else {
-      actionDesc = 'order: ' + unit.order + ' at ' + unit.targeted;
+      actionDesc = 'order: ' + unit.order + ' at ' + unit.target;
     }
     // paint units circle
     ctx.beginPath();  
@@ -27,12 +27,9 @@ function drawUnits(canvas,ctx) {
       if (foundUnit.rangedWeapons.length > 0){
         console.log('foundUnit.rangedW: ', foundUnit.rangedWeapons[0]);
         const foundWeapon = searchStatsOfWeapon(foundUnit.rangedWeapons[0], 'ranged');
-        console.log('fw: ', foundWeapon);
         const weaponRadius = foundWeapon.range;
-        console.log('wr', weaponRadius);
         ctx.arc(unit.location.x, unit.location.y, weaponRadius, 0, 2 * Math.PI);
         // text:
-        
         ctx.font = '15px serif';
         ctx.fillStyle = 'gold';
         ctx.fillText('main weapon range', unit.location.x-40, unit.location.y +33); 
@@ -56,7 +53,7 @@ function drawUnits(canvas,ctx) {
     if (unit.order === 'standby') {
       actionDesc = 'order: ' + unit.order;    
     } else {
-      actionDesc = 'order: ' + unit.order + ' at ' + unit.targeted;
+      actionDesc = 'order: ' + unit.order + ' at ' + unit.target;
     }
     // paint units circle
     ctx.beginPath();  
@@ -76,12 +73,9 @@ function drawUnits(canvas,ctx) {
       if (foundUnit.rangedWeapons.length > 0){
         console.log('foundUnit.rangedW: ', foundUnit.rangedWeapons[0]);
         const foundWeapon = searchStatsOfWeapon(foundUnit.rangedWeapons[0], 'ranged');
-        console.log('fw: ', foundWeapon);
         const weaponRadius = foundWeapon.range;
-        console.log('wr', weaponRadius);
         ctx.arc(unit.location.x, unit.location.y, weaponRadius, 0, 2 * Math.PI);
         // text:
-        
         ctx.font = '15px serif';
         ctx.fillStyle = 'purple';
         ctx.fillText('main weapon range', unit.location.x-40, unit.location.y +33); 

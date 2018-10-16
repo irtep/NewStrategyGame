@@ -3,6 +3,7 @@
 const rangedWeapons = [
   new weapon('assault rifle', 300, 'rapid', 1, 3, 0, 1, false),
   new weapon('laser rifle', 300, 'rapid', 1, 4, 0, 1, false),
+  new weapon('sniper rifle', 450, 'rifle', 1, 4, 0, 1, false),
   new weapon('heavy machinegun', 450, 'heavy', 3, 5, 1, 1, false),
   new weapon('battlecannon', 600, 'heavy', 'd6', 8, 3, 'd6', false)
 ];

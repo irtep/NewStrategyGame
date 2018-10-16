@@ -1,5 +1,16 @@
 // ORDERS:
+const orders = [
+  'standby',
+  'move',
+  'shoot',
+  'assault',
+  'run'
+];
 
+function moveUnit(to, who){
+  //collisionDetect(locFrom, radiusFrom, locTo, radiusTo)
+
+}
 // standby (do not move, but shoot closest enemy in LOS and in range)
   // check range of weapon(s), then if any enemies around
     // shoot closest

@@ -4,48 +4,45 @@ const gameLooper = setInterval(roundExecutor, 4000); // execute orders
 
 // Event listeners
 const listenPause = document.getElementById('pauseButton').addEventListener("click", pauseGame);
-/*
-const unitButtonClass = document.getElementsByClassName("units");
-// listen all with class units for clicks
-for (var i = 0; i < unitButtonClass.length; i++) {
-    unitButtonClass[i].addEventListener('click', clickedUnit, false);
-}
-// listen all with class units for hover
-for (var i = 0; i < unitButtonClass.length; i++) {
-    unitButtonClass[i].addEventListener('click', howeredUnit, false);
-}
-*/
+
 // Functions:
 function roundExecutor(){
   console.log('new round starts');
   draw();
-  if (pause === false){
-    
+  if (pause === false){    
     draw();
-  
+    // gather all units:
+    const forCheckUnits1 = gameObject.army1.concat([]);
+    const forCheckUnits2 = gameObject.army2.concat([]);
+    const allUnits = forCheckUnits1.concat(forCheckUnits2);
+    
+    // get ini values:
+    for (let i = 0; i < allUnits.length; i++){
+      let objecti;
+      
+      if (allUnits[i].commander === 'army1'){
+        objecti = gameObject.factions[0];
+      } else { objecti = gameObject.factions[1]}
+      
+      const theUnit = searchUnitByName(allUnits[i].unit, objecti);
+      allUnits[i].ini = theUnit.stats.i;
+    }
+    allUnits.sort(compare);
+    
+    console.log('allunits: ', allUnits);
     setTimeout(() => { 
       console.log('move order executions'); 
     }, 1000);
     setTimeout(() => { 
       console.log('shoot/melee order executions'); 
     }, 2000);
-    
     draw();
   }  
 }
 
-function startGame(){ 
-  console.log('startGame fired.');
-
+function startGame(){
   draw();
   createUnitButtons();
-  // prepare saving of object, by stringifiyng it:
-  /*Not needed as moved gameObject to global
-  const gOstring = JSON.stringify(gameObject);
-   // Save gameObject to sessionStorage
-  sessionStorage.setItem('storedFile', gOstring); 
-  */
 }
-
 // Calls:
 startGame();

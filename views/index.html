@@ -19,7 +19,18 @@
       <br>Player two units:<br>
       <div id="p2units"></div><br>
       Available commands:<br>
-      <div id="availCommands"></div>
+      <div id="availCommands"></div><br>
+      <div id="moveTargets">
+      <input type="button" id= "nw" class= "moveTargets" value= "nw" onclick= "clickedUnit2(this.value)">
+      <input type="button" id= "n" class= "moveTargets" value= "n" onclick= "clickedUnit2(this.value)">
+      <input type="button" id= "ne" class= "moveTargets" value= "ne" onclick= "clickedUnit2(this.value)"><br>
+      <input type="button" id= "w" class= "moveTargets" value= "w" onclick= "clickedUnit2(this.value)">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+      <input type="button" id= "e" class= "moveTargets" value= "e" onclick= "clickedUnit2(this.value)"><br>
+      <input type="button" id= "sw" class= "moveTargets" value= "sw" onclick= "clickedUnit2(this.value)">
+      <input type="button" id= "s" class= "moveTargets" value= "s" onclick= "clickedUnit2(this.value)">
+      <input type="button" id= "se" class= "moveTargets" value= "se" onclick= "clickedUnit2(this.value)"><br>  
+      </div>
     </div> 
     <script src="/constructors.js"></script>
     <script src="/units.js"></script>
@@ -27,9 +38,10 @@
     <script src="/gameObject.js"></script>
     <script src="/searchFuncs.js"></script>
     <script src="/draw.js"></script>
-    <script src="/buttonCommands.js"></script>
-    <script src="/unitActions.js"></script>
     <script src="/orders.js"></script>
+    <script src="/buttonCommands.js"></script>
+    <script src="/engineUtils.js"></script>
+    <script src="/unitActions.js"></script>
     <script src="/engine.js"></script>
   </body>
 </html>
