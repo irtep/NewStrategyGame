@@ -2,7 +2,6 @@ function drawUnits(canvas,ctx) {
   gameObject.army1.forEach((unit) => { // draw army 1
     const shortDesc = unit.quantity + ' x ' + unit.unit;
     let actionDesc;
-    const foundUnit = searchUnitByName(unit.unit, gameObject.factions[0]);
     
     if (unit.order === 'standby') {
       actionDesc = 'order: ' + unit.order;    
@@ -12,11 +11,11 @@ function drawUnits(canvas,ctx) {
     // paint units circle
     ctx.beginPath();  
     ctx.fillStyle = 'black';
-    if (foundUnit.type === 'infantry'){  
-      const totalSize = foundUnit.size * unit.quantity;
+    if (unit.details.type === 'infantry'){  
+      const totalSize = unit.details.size * unit.quantity;
       ctx.arc(unit.location.x, unit.location.y, totalSize, 0, 2 * Math.PI);
     } else {
-      ctx.arc(unit.location.x, unit.location.y, foundUnit.size, 0, 2 * Math.PI); 
+      ctx.arc(unit.location.x, unit.location.y, unit.details.size, 0, 2 * Math.PI); 
     } 
     ctx.fill();
     ctx.closePath();
@@ -24,9 +23,8 @@ function drawUnits(canvas,ctx) {
     ctx.beginPath();  
     ctx.strokeStyle = 'gold';
     if (unit.highlighted === true){
-      if (foundUnit.rangedWeapons.length > 0){
-        console.log('foundUnit.rangedW: ', foundUnit.rangedWeapons[0]);
-        const foundWeapon = searchStatsOfWeapon(foundUnit.rangedWeapons[0], 'ranged');
+      if (unit.details.rangedWeapons.length > 0){
+        const foundWeapon = searchStatsOfWeapon(unit.details.rangedWeapons[0], 'ranged');
         const weaponRadius = foundWeapon.range;
         ctx.arc(unit.location.x, unit.location.y, weaponRadius, 0, 2 * Math.PI);
         // text:
@@ -49,7 +47,7 @@ function drawUnits(canvas,ctx) {
   gameObject.army2.forEach((unit) => { // draw army 2
     const shortDesc = unit.quantity + ' x ' + unit.unit;
     let actionDesc;
-    const foundUnit = searchUnitByName(unit.unit, gameObject.factions[1]);
+    
     if (unit.order === 'standby') {
       actionDesc = 'order: ' + unit.order;    
     } else {
@@ -58,11 +56,11 @@ function drawUnits(canvas,ctx) {
     // paint units circle
     ctx.beginPath();  
     ctx.fillStyle = 'black';
-    if (foundUnit.type === 'infantry'){  
-      const totalSize = foundUnit.size * unit.quantity;
+    if (unit.details.type === 'infantry'){  
+      const totalSize = unit.details.size * unit.quantity;
       ctx.arc(unit.location.x, unit.location.y, totalSize, 0, 2 * Math.PI);
     } else {
-      ctx.arc(unit.location.x, unit.location.y, foundUnit.size, 0, 2 * Math.PI); 
+      ctx.arc(unit.location.x, unit.location.y, unit.details.size, 0, 2 * Math.PI); 
     } 
     ctx.fill();
     ctx.closePath();
@@ -70,9 +68,8 @@ function drawUnits(canvas,ctx) {
     ctx.beginPath();  
     ctx.strokeStyle = 'purple';
     if (unit.highlighted === true){
-      if (foundUnit.rangedWeapons.length > 0){
-        console.log('foundUnit.rangedW: ', foundUnit.rangedWeapons[0]);
-        const foundWeapon = searchStatsOfWeapon(foundUnit.rangedWeapons[0], 'ranged');
+      if (unit.details.rangedWeapons.length > 0){
+        const foundWeapon = searchStatsOfWeapon(unit.details.rangedWeapons[0], 'ranged');
         const weaponRadius = foundWeapon.range;
         ctx.arc(unit.location.x, unit.location.y, weaponRadius, 0, 2 * Math.PI);
         // text:
