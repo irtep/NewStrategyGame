@@ -1,7 +1,6 @@
 function gameUnit(nombre, type, desc, meleeWeapons, rangedWeapons,
                        stats, size, army) {
   this.nombre = nombre;
-  this.location = location;
   this.type = type;
   this.desc = desc;
   this.meleeWeapons = meleeWeapons;
