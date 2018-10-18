@@ -90,11 +90,41 @@ function drawUnits(canvas,ctx) {
   }) 
 }
 
+function drawTerrain(canvas,ctx) {
+  gameObject.terrain.forEach((unit) => { // draw terrain  
+    
+    if (unit.type === 'building'){
+      const x = unit.location.x;
+      const y = unit.location.y; 
+      const wi = unit.size.width;
+      const he = unit.size.height;
+      ctx.beginPath();
+      ctx.fillStyle = 'black';
+      ctx.fillRect(x, y, wi, he);
+      ctx.stroke();
+      ctx.closePath();
+    } else {
+      for (let i = 0; i < unit.locations.length; i++){
+        const x = unit.locations[i].x;
+        const y = unit.locations[i].y;
+        const rad = unit.radiuses[i];
+        ctx.beginPath();
+        ctx.fillStyle = 'rgb(0,60,0)';
+        ctx.arc(x, y, rad, 0, 2 * Math.PI);
+        //ctx.arc(10, 10, 50, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
+  });
+}                             
+                             
+
 function draw() {
   const canvas = document.getElementById('kanveesi');
   const ctx = canvas.getContext("2d");
 
   ctx.clearRect(0,0,canvas.width,canvas.height);  // clear all 
-  // add drawTerrain
-  drawUnits(canvas,ctx);
+  drawTerrain(canvas, ctx);
+  drawUnits(canvas, ctx);
 }

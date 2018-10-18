@@ -16,11 +16,11 @@ function moveUnit(who, to){
   let allies = []; 
   let enemies = [];
   let oldLocation = who.location;
-  //let newLocation = oldLocation.concat([]);
   var newLocation = JSON.parse(JSON.stringify(oldLocation));
   let collision = false;
   let wallOnWay = false;
   const size = who.details.size * who.quantity;
+  const adjustedSize = Math.round(size * 0.75);
   
   // delete active unit from forCheckUnits1 or 2.
   for (let ii = 0; ii < allUnits.length; ii++) {
@@ -45,10 +45,9 @@ function moveUnit(who, to){
   for (let ix = 0; ix < allUnits.length; ix++){
     const targetLoc = allUnits[ix].location;
     const targetSize = allUnits[ix].details.size * allUnits[ix].quantity;
-    let collisionResult = collisionDetect(oldLocation, size, targetLoc, targetSize);
+    let collisionResult = collisionDetect(newLocation, size, targetLoc, targetSize);
     
     if (collisionResult === 'collision'){
-      console.log('collision: ', allUnits[ix]);
       collision = true;
     }
   }
@@ -58,54 +57,54 @@ function moveUnit(who, to){
   // detect wall collision:
   switch (to){
       case 'n': 
-        if (newLocation.y === -1 + (size / 2)) { // n
+        if (newLocation.y === -1 + (size)) { // n
           collision = true;
         }
       break;
       case 'ne':  
-        if (newLocation.y === -1 + (size / 2)) {  // n
+        if (newLocation.y === -1 + (size)) {  // n
           collision = true;
         }  
-        if (newLocation.x === cWidth - (size / 2)) {  // e
+        if (newLocation.x === cWidth - (size)) {  // e
           collision = true;
         }
       break; 
       case 'e':  
-        if (newLocation.x === cWidth - (size / 2)) {  // e
+        if (newLocation.x === cWidth - (size)) {  // e
           collision = true;
         }
       break; 
       case 'se':   
-        if (newLocation.y === cHeight - (size / 2)) { // s
+        if (newLocation.y === cHeight - (size)) { // s
           collision = true;
         }
-        if (newLocation.x === cWidth - (size / 2)) {  // e
+        if (newLocation.x === cWidth - (size)) {  // e
           collision = true;
         }
       break; 
       case 's': 
-        if (newLocation.y === cHeight - (size / 2)) { // s
+        if (newLocation.y === cHeight - (size)) { // s
           collision = true;
         }
       break; 
       case 'sw': 
-        if (newLocation.y === cHeight - (size / 2)) { // s
+        if (newLocation.y === cHeight - (size)) { // s
           collision = true;
         } 
-        if (newLocation.x === -1 + (size / 2)) { // w
+        if (newLocation.x === -1 + (size)) { // w
           collision = true;
         }
       break; 
       case 'w': 
-        if (newLocation.x === -1 + (size / 2)) { // w
+        if (newLocation.x === -1 + (size)) { // w
           collision = true;
         }
       break; 
       case 'nw': 
-        if (newLocation.y === -1 + (size / 2)) { // n
+        if (newLocation.y === -1 + (size)) { // n
           collision = true;
         } 
-        if (newLocation.x === -1 + (size / 2)) { // w
+        if (newLocation.x === -1 + (size)) { // w
           wallOnWay = true;
         }
       break;
@@ -117,7 +116,7 @@ function moveUnit(who, to){
     return 'collision';
   }
   
-    if (collision === false){
+  if (collision === false){
     return newLocation;    
   }
   

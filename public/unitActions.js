@@ -19,8 +19,11 @@ function collisionDetect(locFrom, radiusFrom, locTo, radiusTo){
   var distance = Math.sqrt(dx * dx + dy * dy);
 
   if (distance < circle1.radius + circle2.radius) {
-    console.log('collision'); return 'collision';
-  } else {console.log('no collision'); return 'no collision';}
+    console.log('c detect: collision', circle1.x, circle2.x); 
+    return 'collision';
+  } else { 
+    return 'no collision';
+  }
 }
 
 // Distance check

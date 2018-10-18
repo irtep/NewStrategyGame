@@ -12,43 +12,35 @@ function pauseGame(){
 }
 
 function setCommand(command){
-  console.log('command selected:', command);
   const selectedUnit = gameObject.selectedUnits.player1;
   const targetedNumber = gameObject.targetedUnits.player1;
   const ifNan = isNaN(targetedNumber);
   let targetedUnit;
   if (ifNan === true) {
     targetedUnit = targetedNumber;
-    console.log('true', targetedUnit);
   } else {
-    console.log('false');
     targetedUnit = gameObject.army2[targetedNumber].unit;
   }
-  console.log('tN tU: ', targetedNumber, targetedUnit);
   
   gameObject.army1[selectedUnit].order = command;
   gameObject.army1[selectedUnit].target = targetedUnit;
 }
 
 function clickedUnit1(who){
-  console.log('clicked: ', who);
   gameObject.selectedUnits.player1 = who;
 }
 
 function clickedUnit2(who){
-  console.log('clicked: ', who);
   gameObject.targetedUnits.player1 = who;
 }
 
 function howerInPlayer1(who){
-  console.log('howeredIn1: ', who);
   gameObject.army1[who].highlighted = true;
   howerOut(who, 1);
   draw();
 }
 
 function howerInPlayer2(who){
-  console.log('howeredIn2', who);
   gameObject.army2[who].highlighted = true;
   howerOut(who, 2);
   draw();
@@ -59,11 +51,9 @@ function howerOut(who, whichPlayer){
     switch (whichPlayer) {
       case 1:
         gameObject.army1[who].highlighted = false;
-        console.log(who, ' hl set to false');
       break;
       case 2:
         gameObject.army2[who].highlighted = false;
-        console.log(who, ' h2 set to false');
       break;
       default: console.log('whichplayer not found');  
     } 
