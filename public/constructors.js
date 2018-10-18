@@ -8,13 +8,6 @@ function gameUnit(nombre, type, desc, meleeWeapons, rangedWeapons,
   this.stats = stats;
   this.size = size;
   this.army = army; 
-  /*
-  this.highlight = () => {
-    this.highlighted = true;
-  }
-  this.unHighlight = () => {
-    this.highlighted = false;
-  }*/
 }
 
 function weapon(nombre, range, type, attacks, str, ap, wounds, barrage){
@@ -26,4 +19,17 @@ function weapon(nombre, range, type, attacks, str, ap, wounds, barrage){
   this.ap = ap;
   this.wounds = wounds;
   this.barrage = barrage;
+}
+
+function building(nombre, width, height){
+  this.nombre = nombre;
+  this.width = width;
+  this.height = height;
+}
+
+function forest(nombre, trees, radiuses, locations){
+  this.nombre = nombre;
+  this.trees = trees;
+  this.radiuses = radiuses;
+  this.locations = locations;
 }

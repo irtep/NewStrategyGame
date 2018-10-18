@@ -4,6 +4,7 @@ const gameLooper = setInterval(roundExecutor, 1000); // execute orders
 
 // Event listeners
 const listenPause = document.getElementById('pauseButton').addEventListener("click", pauseGame);
+const keyListeners = window.addEventListener("keydown", checkKeyPressed, false); 
 
 // Functions:
 function roundExecutor(){
@@ -28,7 +29,6 @@ function roundExecutor(){
           for (let iii = 0; iii < unitInAction.details.stats.m; iii++){
             const moveAttempt = moveUnit(unitInAction, unitInAction.target);
             if (moveAttempt === 'collision'){
-              console.log('cant move to that direction');
             } else {
               unitInAction.location = moveAttempt;
             }
