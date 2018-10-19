@@ -2,7 +2,7 @@
 const orders = [
   'standby',
   'move',   // moveUnit(who, to)
-  'shoot',
+  'shoot',  // shootTarget(who, to)
   'assault',
   'run'
 ];
@@ -48,6 +48,36 @@ function moveUnit(who, to, mode){
     let collisionResult = collisionDetect(newLocation, size, targetLoc, targetSize);
     
     if (collisionResult === 'collision'){
+      if (who.commander !== allUnits[ix].commander){
+        let whoDubli = false;
+        let allUnitDubli = false;
+        
+        // check that opponent is not already at engaged list
+        if (who.engaged.yes === true) {
+          for (let i = 0; i < who.engaged.withWho.length; i++) {
+            if (allUnits[ix] === who.engaged.withWho[i]) {whoDubli = true;}
+          }    
+        }
+        
+        if (allUnits[ix].engaged.yes === true) {
+          for (let i = 0; i < allUnits[ix].engaged.withWho.length; i++) {
+            if (who === allUnits[ix].engaged.withWho[i]) {allUnitDubli = true;}    
+          }
+        }
+        
+        who.engaged.yes = true;
+        
+        if (whoDubli === false) {   
+          who.engaged.withWho.push(allUnits[ix]);
+        }
+      
+        allUnits[ix].engaged.yes = true;
+        
+        if (whoDubli === false) {
+          allUnits[ix].engaged.withWho.push(who);
+        }  
+        console.log('added close combat: ', gameObject);
+      }
       collision = true;
     }
   }
@@ -132,6 +162,16 @@ function moveUnit(who, to, mode){
   
 } // moveUnit terminates
 
+// shoot target
+function shootTarget(who, to){
+  const losAndR = losAndRangeCheck(who.location, to.location);
+  
+  if (losAndR === 'collision'){console.log('no los or range');}
+  if (losAndR === 'no collision') {
+    executeAttack('ranged', who, to, modAttack, modDefend);
+  }
+}
+
 // standby (do not move, but shoot closest enemy in LOS and in range)
   // check range of weapon(s), then if any enemies around
     // shoot closest
@@ -143,8 +183,6 @@ function moveUnit(who, to, mode){
 // hunt to assault (start to move towards target in order to engage in melee)
 
 // move to direction (move to w,nw,n,ne,e,se,s,sw. shoot targets while moving)
-
-// shoot target, but keep position. (shoot target, but dont chase if target out of los/range)
 
 // embark to transport or building (embark to transport that is near)
 
