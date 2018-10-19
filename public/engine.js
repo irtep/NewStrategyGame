@@ -19,13 +19,12 @@ function roundExecutor(){
     
     allUnits.sort(compare); // sort to initiative order
     
-    console.log('allunits: ', allUnits);
     setTimeout(() => { 
       console.log('move order executions'); 
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
-        if (unitInAction.order === 'move' && unitInAction.engaged === false) {
+        if (unitInAction.order === 'move' && unitInAction.engaged.yes === false) {
           for (let iii = 0; iii < unitInAction.details.stats.m; iii++){
             const moveAttempt = moveUnit(unitInAction, unitInAction.target);
             if (moveAttempt === 'collision'){
@@ -34,7 +33,7 @@ function roundExecutor(){
             }
           }  
         }
-        if (unitInAction.order === 'run' && unitInAction.engaged === false) {
+        if (unitInAction.order === 'run' && unitInAction.engaged.yes === false) {
           const runSpeed = unitInAction.details.stats.m * 2;
           
           for (let iii = 0; iii < runSpeed; iii++){
@@ -49,6 +48,27 @@ function roundExecutor(){
     }, 350);
     setTimeout(() => { 
       console.log('shoot/melee order executions'); 
+      for (let i = 0; i < allUnits.length; i++) {
+        const unitInAction = allUnits[i];
+        
+        if (unitInAction.order === 'shoot' && unitInAction.engaged.yes === false) {
+          const shootAttempt = shootTarget(unitInAction, unitInAction.target);
+        }  
+        if (unitInAction.order === 'standby' && unitInAction.engaged.yes === false) {
+        
+        }  
+        if (unitInAction.order === 'melee') {
+        
+        }
+          
+        if (unitInAction.order === 'standby' && unitInAction.engaged.yes === false) {
+        
+        }
+        if (unitInAction.order === 'move' && unitInAction.engaged.yes === false) {
+            
+        }        
+      }
+      
     }, 450);
     draw();
   }  
