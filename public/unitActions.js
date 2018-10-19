@@ -4,8 +4,28 @@
   const testTo = {x: 100, y: 508};
   losAndRangeCheck(testWhere, testTo, gameObject);
 */
+function callDice(max){
+    const result =  1 + Math.floor(Math.random() * max);
+    return result;
+}  
 
-// Collision detect:
+// return true if the rectangle and circle are colliding
+function RectCircleColliding(circle,rect){
+  var distX = Math.abs(circle.x - rect.x-rect.w/2);
+  var distY = Math.abs(circle.y - rect.y-rect.h/2);
+
+  if (distX > (rect.w/2 + circle.r)) { return false; }
+  if (distY > (rect.h/2 + circle.r)) { return false; }
+
+  if (distX <= (rect.w/2)) { return true; } 
+  if (distY <= (rect.h/2)) { return true; }
+
+  var dx=distX-rect.w/2;
+  var dy=distY-rect.h/2;
+  return (dx*dx+dy*dy<=(circle.r*circle.r));
+}
+
+// Collision detect, circle to circle:
 function collisionDetect(locFrom, radiusFrom, locTo, radiusTo){
   // https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
   let circle1 = {radius: null, x: null, y: null};
@@ -19,7 +39,6 @@ function collisionDetect(locFrom, radiusFrom, locTo, radiusTo){
   var distance = Math.sqrt(dx * dx + dy * dy);
 
   if (distance < circle1.radius + circle2.radius) {
-    console.log('c detect: collision', circle1.x, circle2.x); 
     return 'collision';
   } else { 
     return 'no collision';
@@ -91,9 +110,9 @@ function losAndRangeCheck(fromWhere, toWhere){
   let distance = distanceCheck(fromWhere, toWhere);
   let whereNow = fromWhere;
   let collision = false;
+  let inForest = false;
   const activeUnit = searchUnitByLocation(fromWhere, gameObject);
   const targetUnit = searchUnitByLocation(toWhere, gameObject);
-  console.log('l and r check: ', whereNow, toWhere);
   const forCheckUnits1 = gameObject.army1.concat([]);
   const forCheckUnits2 = gameObject.army2.concat([]);
   const allUnits = forCheckUnits1.concat(forCheckUnits2);
@@ -107,11 +126,9 @@ function losAndRangeCheck(fromWhere, toWhere){
   // delete active unit from forCheckUnits1 or 2.
   for (let ii = 0; ii < allUnits.length; ii++) {
     if (fromWhere.x === allUnits[ii].location.x && fromWhere.y === allUnits[ii].location.y) {
-      console.log('found to be deleted: ', ii);
       allUnits.splice(ii, 1);
     }
   }
-  console.log('allUnits: ', allUnits);
   for (let i = 0; i < distance; i++) {
     let nextStep = findDirection(whereNow, toWhere, distance);
 
@@ -126,26 +143,58 @@ function losAndRangeCheck(fromWhere, toWhere){
       case 'nw': whereNow.x = whereNow.x - 1; whereNow.y = whereNow.y - 1; break;   
     }
     
-    // Check collision:
+    // Check collision with units:
     for (let ix = 0; ix < allUnits.length; ix++) {
       const foundUnit = searchUnitByName(allUnits[ix].unit, gameObject.factions[0]);
       const radiusOfTarget = foundUnit.size * allUnits[ix].quantity;
       let collisionResult = collisionDetect(whereNow, 1, allUnits[ix].location, radiusOfTarget);
 
       if (collisionResult === 'collision'){
-        console.log('collision: ', allUnits[ix]);
         collision = true;  
       }
       if (collision === true){
         return 'collision';
       } 
     }
+    
+    // check collision with buildings:
+    for (let iix = 0; iix < gameObject.terrain.length; iix++) {
+      const terrainInTurn = gameObject.terrain[iix];
+      
+      if (terrainInTurn.type === 'building'){
+        const circle = {x: whereNow.x, y: whereNow.y, r: 1};
+        const rect = {x: terrainInTurn.location.x, y: terrainInTurn.location.y, 
+                    w: terrainInTurn.size.width, h: terrainInTurn.size.height};
+        const testResult = RectCircleColliding(circle,rect); // returns true if collision
+        
+        if (testResult === true){
+          return 'collision';
+        }
+      }  
+      if (terrainInTurn.type === 'forest'){ // check if in forest
+        for (let iox = 0; iox < terrainInTurn.trees; iox++) {
+          let collisionResult = collisionDetect(whereNow, 1, terrainInTurn.locations[iox], terrainInTurn.radiuses[iox]);
+        
+          if (collisionResult === 'collision') { // check if forest broke LoS
+            let lossOfLosTest = callDice(100);
+            console.log('in forest test launched at', whereNow, ' result: ', lossOfLosTest);
+            if (lossOfLosTest < 11) {
+              return 'collision'; 
+            }
+          }  
+        }  
+        /*  how forests are there:
+              {forest: 'small forest', locations: [{x: 100, y: 330},{x: 155, y: 330},{x: 220, y: 390},{x: 200, y: 330}],
+               trees: 4, radiuses: [25, 54, 48, 27], type: 'forest'}
+        */
+      }
+    }
+    
     if (collision === true){
       return 'collision';
     }
   }
   if (collision === false){
-    console.log('no collision');
     return 'no collision';
   }
 }
