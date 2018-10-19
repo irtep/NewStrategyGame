@@ -1,13 +1,13 @@
 // ORDERS:
 const orders = [
   'standby',
-  'move',
+  'move',   // moveUnit(who, to)
   'shoot',
   'assault',
   'run'
 ];
 
-function moveUnit(who, to){
+function moveUnit(who, to, mode){
   const cWidth = 950;
   const cHeight = 600;
   const forCheckUnits1 = gameObject.army1.concat([]);
@@ -52,8 +52,18 @@ function moveUnit(who, to){
     }
   }
   
-  // detect collision with terrain (not added terrains yet)
-  
+  // detect collision with terrain (buildings, true if collision):
+  for (let iix = 0; iix < gameObject.terrain.length; iix++) {
+    if (gameObject.terrain[iix].type === 'building'){
+      const circle = {x: newLocation.x, y: newLocation.y, r: size};
+      const rect = {x: gameObject.terrain[iix].location.x, y: gameObject.terrain[iix].location.y, 
+                    w: gameObject.terrain[iix].size.width, h: gameObject.terrain[iix].size.height};
+      const testResult = RectCircleColliding(circle,rect); // returns true if collision
+      if (testResult === true){
+        collision = true;
+      }  
+    }
+  }
   // detect wall collision:
   switch (to){
       case 'n': 

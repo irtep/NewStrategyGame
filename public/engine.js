@@ -34,6 +34,17 @@ function roundExecutor(){
             }
           }  
         }
+        if (unitInAction.order === 'run' && unitInAction.engaged === false) {
+          const runSpeed = unitInAction.details.stats.m * 2;
+          
+          for (let iii = 0; iii < runSpeed; iii++){
+            const moveAttempt = moveUnit(unitInAction, unitInAction.target);
+            if (moveAttempt === 'collision'){
+            } else {
+              unitInAction.location = moveAttempt;
+            }
+          }  
+        }
       }
     }, 350);
     setTimeout(() => { 
