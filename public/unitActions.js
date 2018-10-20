@@ -105,7 +105,7 @@ function findDirection(dirFrom, dirTo, distance){
 }
 
 // LOS and Range check
-function losAndRangeCheck(fromWhere, toWhere){
+function losCheck(fromWhere, toWhere){
   let path = [];
   let distance = distanceCheck(fromWhere, toWhere);
   let whereNow = fromWhere;

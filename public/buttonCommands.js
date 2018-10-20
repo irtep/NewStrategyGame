@@ -1,3 +1,4 @@
+
 function pauseGame(){
   const pButton = document.getElementById('pauseButton');
   if (pause === true){
@@ -19,7 +20,7 @@ function setCommand(command){
   if (ifNan === true) {
     targetedUnit = targetedNumber;
   } else {
-    targetedUnit = gameObject.army2[targetedNumber].unit;
+    targetedUnit = gameObject.army2[targetedNumber];
   }
   
   gameObject.army1[selectedUnit].order = command;

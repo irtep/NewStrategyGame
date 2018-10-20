@@ -164,11 +164,13 @@ function moveUnit(who, to, mode){
 
 // shoot target
 function shootTarget(who, to){
-  const losAndR = losAndRangeCheck(who.location, to.location);
+  const losAndR = losCheck(who.location, to.location);
   
   if (losAndR === 'collision'){console.log('no los or range');}
   if (losAndR === 'no collision') {
-    executeAttack('ranged', who, to, modAttack, modDefend);
+    for (let i = 0; i < who.details.rangedWeapons.length; i++){
+      executeAttack('ranged', who, to, modAttack, modDefend, i);
+    }  
   }
 }
 
