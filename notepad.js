@@ -1,6 +1,5 @@
 /*
 Next:
 
-continue with executeAttack
-
+identify bug at shooting
 */

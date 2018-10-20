@@ -1,6 +1,6 @@
 
 let pause = true; // starts as true
-const gameLooper = setInterval(roundExecutor, 1000); // execute orders
+const gameLooper = setInterval(roundExecutor, 1500); // execute orders
 
 // Event listeners
 const listenPause = document.getElementById('pauseButton').addEventListener("click", pauseGame);
@@ -20,7 +20,7 @@ function roundExecutor(){
     allUnits.sort(compare); // sort to initiative order
     
     setTimeout(() => { 
-      console.log('move order executions'); 
+      console.log('move order executions', gameObject); 
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
@@ -47,7 +47,7 @@ function roundExecutor(){
       }
     }, 350);
     setTimeout(() => { 
-      console.log('shoot/melee order executions'); 
+      console.log('shoot/melee order executions', gameObject); 
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
@@ -69,7 +69,7 @@ function roundExecutor(){
         }        
       }
       
-    }, 450);
+    }, 650);
     draw();
   }  
 }

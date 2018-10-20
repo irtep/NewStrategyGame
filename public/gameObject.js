@@ -23,7 +23,7 @@
               {forest: 'small forest', locations: [{x: 100, y: 330},{x: 155, y: 330},{x: 220, y: 390},{x: 200, y: 330}],
                trees: 4, radiuses: [25, 54, 48, 27], type: 'forest'}
              ],
-    selectedUnits: {player1: null, player2: null},
+    selectedUnits: {player1: null, player2: null}, 
     targetedUnits: {player2: null, player2: null}
     // Add terrain elements.
   };

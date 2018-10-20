@@ -5,8 +5,8 @@ function drawUnits(canvas,ctx) {
     
     if (unit.order === 'standby') {
       actionDesc = 'order: ' + unit.order;    
-    } else {
-      actionDesc = 'order: ' + unit.order + ' at ' + unit.target;
+    } else { // need to make owns for shooting and moving
+      actionDesc = 'order: ' + unit.order + ' at ' + unit.target.unit;
     }
     // paint units circle
     ctx.beginPath();  
