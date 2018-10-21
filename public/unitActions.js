@@ -107,21 +107,18 @@ function findDirection(dirFrom, dirTo, distance){
 // LOS and Range check
 function losCheck(fromWhere, toWhere){
   let path = [];
-  let distance = distanceCheck(fromWhere, toWhere);
-  let whereNow = fromWhere;
-  let collision = false;
+  const deWhere = Object.assign({}, fromWhere);  //  Object.assign({c: 4, d: 5}, object1);
+  const aWhere = Object.assign({}, toWhere);
+  let distance = distanceCheck(deWhere, aWhere);
+  let whereNow = deWhere;
+  let losBlocked = false;
   let inForest = false;
   const activeUnit = searchUnitByLocation(fromWhere, gameObject);
   const targetUnit = searchUnitByLocation(toWhere, gameObject);
   const forCheckUnits1 = gameObject.army1.concat([]);
   const forCheckUnits2 = gameObject.army2.concat([]);
   const allUnits = forCheckUnits1.concat(forCheckUnits2);
-  // terrain can be checked from original gameObject
-  // for radius:
-  /*
-  const foundUnit = searchUnitByName(unit.unit, gameObject.factions[0]);
-  const totalSize = foundUnit.size * unit.quantity; // radius
-  */
+  console.log('los check start: ', deWhere, aWhere);
     
   // delete active unit from forCheckUnits1 or 2.
   for (let ii = 0; ii < allUnits.length; ii++) {
@@ -129,8 +126,14 @@ function losCheck(fromWhere, toWhere){
       allUnits.splice(ii, 1);
     }
   }
+  // delete also the target.
+    for (let ii = 0; ii < allUnits.length; ii++) {
+    if (toWhere.x === allUnits[ii].location.x && toWhere.y === allUnits[ii].location.y) {
+      allUnits.splice(ii, 1);
+    }
+  }
   for (let i = 0; i < distance; i++) {
-    let nextStep = findDirection(whereNow, toWhere, distance);
+    let nextStep = findDirection(whereNow, aWhere, distance);
 
     switch (nextStep) {
       case 'n': whereNow.x = whereNow.x; whereNow.y = whereNow.y -1; break;
@@ -150,10 +153,11 @@ function losCheck(fromWhere, toWhere){
       let collisionResult = collisionDetect(whereNow, 1, allUnits[ix].location, radiusOfTarget);
 
       if (collisionResult === 'collision'){
-        collision = true;  
+        console.log('collision with unit: ', allUnits[ix].unit);
+        losBlocked = true;  
       }
-      if (collision === true){
-        return 'collision';
+      if (losBlocked === true){
+        return 'losBlocked';
       } 
     }
     
@@ -168,7 +172,8 @@ function losCheck(fromWhere, toWhere){
         const testResult = RectCircleColliding(circle,rect); // returns true if collision
         
         if (testResult === true){
-          return 'collision';
+          console.log('los blocked by building: ', gameObject.terrain[iix]);
+          return 'losBlocked';
         }
       }  
       if (terrainInTurn.type === 'forest'){ // check if in forest
@@ -179,7 +184,8 @@ function losCheck(fromWhere, toWhere){
             let lossOfLosTest = callDice(100);
             console.log('in forest test launched at', whereNow, ' result: ', lossOfLosTest);
             if (lossOfLosTest < 11) {
-              return 'collision'; 
+              console.log('los blocked by forest');
+              return 'losBlocked'; 
             }
           }  
         }  
@@ -190,12 +196,12 @@ function losCheck(fromWhere, toWhere){
       }
     }
     
-    if (collision === true){
-      return 'collision';
+    if (losBlocked === true){
+      return 'losBlocked';
     }
   }
-  if (collision === false){
-    return 'no collision';
+  if (losBlocked === false){
+    return 'los ok';
   }
 }
 

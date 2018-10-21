@@ -66,12 +66,14 @@ function moveUnit(who, to, mode){
         }
         
         who.engaged.yes = true;
+        console.log('added to engaged: ', who);
         
         if (whoDubli === false) {   
           who.engaged.withWho.push(allUnits[ix]);
         }
       
         allUnits[ix].engaged.yes = true;
+        console.log('added unit to combat: ', allUnits[ix]);
         
         if (whoDubli === false) {
           allUnits[ix].engaged.withWho.push(who);
@@ -164,12 +166,15 @@ function moveUnit(who, to, mode){
 
 // shoot target
 function shootTarget(who, to){
+  let modAttack = 0;
   const losAndR = losCheck(who.location, to.location);
+  if (who.order === 'move') {
+  }
   
-  if (losAndR === 'collision'){console.log('no los or range');}
-  if (losAndR === 'no collision') {
+  if (losAndR === 'losBlocked'){console.log('no los');}
+  if (losAndR === 'los ok') {
     for (let i = 0; i < who.details.rangedWeapons.length; i++){
-      executeAttack('ranged', who, to, modAttack, modDefend, i);
+      executeAttack('ranged', who, to, modAttack, i);
     }  
   }
 }
