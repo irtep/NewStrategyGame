@@ -167,13 +167,21 @@ function moveUnit(who, to, mode){
 // shoot target
 function shootTarget(who, to){
   let modAttack = 0;
+ // const weaponsStats =  searchStatsOfWeapon(who.details.rangedWeapons[attackNumber], 'ranged');
   const losAndR = losCheck(who.location, to.location);
+  
   if (who.order === 'move') {
+    console.log('shooting while moving');
   }
   
+  console.log('los check: ', losAndR);
   if (losAndR === 'losBlocked'){console.log('no los');}
   if (losAndR === 'los ok') {
     for (let i = 0; i < who.details.rangedWeapons.length; i++){
+      who.firing = true;
+      setTimeout(() => {
+        who.firing = false;  
+      }, 900);
       executeAttack('ranged', who, to, modAttack, i);
     }  
   }

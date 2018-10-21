@@ -55,7 +55,8 @@ function roundExecutor(){
           const shootAttempt = shootTarget(unitInAction, unitInAction.target);
         }  
         if (unitInAction.order === 'standby' && unitInAction.engaged.yes === false) {
-        
+          const closestList = searchClosestOpponent(unitInAction);
+          console.log('closest list: ', closestList);
         }  
         if (unitInAction.order === 'melee') {
         
