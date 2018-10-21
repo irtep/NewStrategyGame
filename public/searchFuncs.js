@@ -39,3 +39,23 @@ function searchStatsOfWeapon(nameOfWeapon, weaponType){
     }
   }
 }
+
+// closest opponent:
+function searchClosestOpponent(who){
+  let opponent;
+  
+  if (who.commander === 'army1'){
+    opponent = gameObject.army2;
+  } else {
+    opponent = gameObject.army1;
+  }
+  
+ const theList = opponent.concat([]); 
+  
+  for (let i = 0; i < opponent.length; i++){
+    distance = distanceCheck(who.location, theList[i].location)
+    theList[i].distance = distance;  
+  }
+  theList.sort(sortToDistance);
+  return theList;
+}

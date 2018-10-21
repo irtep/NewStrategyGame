@@ -5,8 +5,10 @@ function drawUnits(canvas,ctx) {
     
     if (unit.order === 'standby') {
       actionDesc = 'order: ' + unit.order;    
-    } else { // need to make owns for shooting and moving
+    } else if (unit.order === 'shoot'){ // need to make owns for shooting and moving
       actionDesc = 'order: ' + unit.order + ' at ' + unit.target.unit;
+    } else {
+      actionDesc = 'order: ' + unit.order + ' at ' + unit.target;
     }
     // paint units circle
     ctx.beginPath();  
@@ -42,6 +44,15 @@ function drawUnits(canvas,ctx) {
     ctx.fillStyle = 'white';
     ctx.fillText(shortDesc, unit.location.x-40, unit.location.y);
     ctx.fillText(actionDesc, unit.location.x-40, unit.location.y +13);  
+    // paint firing lines:
+    if (unit.firing === true && unit.target !== null){
+      ctx.beginPath();
+      ctx.moveTo(unit.location.x, unit.location.y);
+      ctx.lineTo(unit.target.location.x, unit.target.location.y);
+      ctx.stroke();
+      ctx.fillStyle = 'red';
+      ctx.fillText('firing!', unit.location.x-40, unit.location.y +33);
+    }
   })
   
   gameObject.army2.forEach((unit) => { // draw army 2
@@ -49,10 +60,12 @@ function drawUnits(canvas,ctx) {
     let actionDesc;
     
     if (unit.order === 'standby') {
-      actionDesc = 'order: ' + unit.order;    
+      actionDesc = 'order: ' + unit.order;        
+    } else if (unit.order === 'shoot'){ // need to make owns for shooting and moving
+      actionDesc = 'order: ' + unit.order + ' at ' + unit.target.unit;
     } else {
       actionDesc = 'order: ' + unit.order + ' at ' + unit.target;
-    }
+    }  
     // paint units circle
     ctx.beginPath();  
     ctx.fillStyle = 'black';
@@ -86,7 +99,16 @@ function drawUnits(canvas,ctx) {
     ctx.font = '15px serif';
     ctx.fillStyle = 'blue';
     ctx.fillText(shortDesc, unit.location.x-40, unit.location.y);
-    ctx.fillText(actionDesc, unit.location.x-40, unit.location.y +13);  
+    ctx.fillText(actionDesc, unit.location.x-40, unit.location.y +13);    
+    // paint firing lines:
+    if (unit.firing === true && unit.target !== null){
+      ctx.beginPath();
+      ctx.moveTo(unit.location.x, unit.location.y);
+      ctx.lineTo(unit.target.location.x, unit.target.location.y);
+      ctx.stroke();
+      ctx.fillStyle = 'red';
+      ctx.fillText('firing!', unit.location.x-40, unit.location.y +33);
+    }
   }) 
 }
 

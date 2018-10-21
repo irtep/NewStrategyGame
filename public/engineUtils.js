@@ -7,6 +7,16 @@ function compare(a,b) {
   return 0;
 }
 
+// sort to distance order, from lowest to highest:
+// to sort in initiative order
+function sortToDistance(a,b) {
+  if (a.details.stats.i > b.details.stats.i)
+    return 1;
+  if (a.details.stats.i < b.details.stats.i)
+    return -1;
+  return 0;
+}
+
 // key Listener
 function checkKeyPressed(e) {
   if (e.keyCode == "32") { // 32 is spacebar
@@ -69,7 +79,9 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
   switch (type){
     case 'ranged':
       const weaponsStats =  searchStatsOfWeapon(who.details.rangedWeapons[attackNumber], 'ranged');
+      console.log('shooting with: ', weaponsStats.nombre);
       let attacks;
+      const rangeToTarget = distanceCheck(who.location, to.location);
       
       // check how many attacks the weapon has:
       if (weaponsStats.attacks === 'd6'){
@@ -84,9 +96,14 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
       
       let totalAttacks = attacks * who.quantity;
       
+      // rapidfire bonus:
+      if(rangeToTarget < weaponsStats.range / 2 && weaponsStats.type === 'rapid'){
+        totalAttacks = totalAttacks * 2;
+        console.log('rapid fire doubles attacks: ', totalAttacks);
+      }
+      
       // attack with all attacks:
       for (let i = 0; i < totalAttacks; i++){
-        const rangeToTarget = distanceCheck(who.location, to.location);
         
         if (rangeToTarget <= weaponsStats.range){
           console.log('range ok', rangeToTarget, weaponsStats.range);
@@ -109,7 +126,7 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
             if (difference + woundDice >= 4){
               console.log('wounded: s, t, dice', weaponsStats.str, to.details.stats.t, woundDice);
               const saveDice = callDice(6);  
-              console.log('roll for save: save, needed', saveDice, to.details.stats.sv);
+              console.log('roll for save: save, needed', saveDice, to.details.stats.sv + weaponsStats.ap);
         
               if (saveDice - weaponsStats.ap >= to.details.stats.sv){
                 console.log('attack saved! dice, ap, sv', saveDice, weaponsStats.ap, to.details.stats.sv);
