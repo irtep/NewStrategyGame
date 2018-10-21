@@ -64,6 +64,7 @@ function howerOut(who, whichPlayer){
 function createUnitButtons(){
   const p1units = document.getElementById('p1units');
   const p2units = document.getElementById('p2units');
+  console.log('creating buttons go', gameObject);
   
   for (let i = 0; i < gameObject.army1.length; i++) {
     const nameOfTarget = gameObject.army1[i].unit
