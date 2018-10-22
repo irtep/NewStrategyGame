@@ -45,10 +45,10 @@ function drawUnits(canvas,ctx) {
     ctx.fillText(shortDesc, unit.location.x-40, unit.location.y);
     ctx.fillText(actionDesc, unit.location.x-40, unit.location.y +13);  
     // paint firing lines:
-    if (unit.firing === true && unit.target !== null){
+    if (unit.firing === true){
       ctx.beginPath();
       ctx.moveTo(unit.location.x, unit.location.y);
-      ctx.lineTo(unit.target.location.x, unit.target.location.y);
+      ctx.lineTo(unit.firingAt.location.x, unit.firingAt.location.y);
       ctx.stroke();
       ctx.fillStyle = 'red';
       ctx.fillText('firing!', unit.location.x-40, unit.location.y +33);
@@ -101,10 +101,10 @@ function drawUnits(canvas,ctx) {
     ctx.fillText(shortDesc, unit.location.x-40, unit.location.y);
     ctx.fillText(actionDesc, unit.location.x-40, unit.location.y +13);    
     // paint firing lines:
-    if (unit.firing === true && unit.target !== null){
+    if (unit.firing === true){
       ctx.beginPath();
       ctx.moveTo(unit.location.x, unit.location.y);
-      ctx.lineTo(unit.target.location.x, unit.target.location.y);
+      ctx.lineTo(unit.firingAt.location.x, unit.firingAt.location.y);
       ctx.stroke();
       ctx.fillStyle = 'red';
       ctx.fillText('firing!', unit.location.x-40, unit.location.y +33);

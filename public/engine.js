@@ -1,6 +1,6 @@
 
 let pause = true; // starts as true
-const gameLooper = setInterval(roundExecutor, 1500); // execute orders
+const gameLooper = setInterval(roundExecutor, 2000); // execute orders
 
 // Event listeners
 const listenPause = document.getElementById('pauseButton').addEventListener("click", pauseGame);
@@ -19,11 +19,22 @@ function roundExecutor(){
     
     allUnits.sort(compare); // sort to initiative order
     
+    // remove all firing lines:
+    for (let i = 0; i < gameObject.army1.length; i++){
+      gameObject.army1[i].firing = false;
+      gameObject.army1[i].firingAt = null;
+    }
+    for (let i = 0; i < gameObject.army2.length; i++){
+      gameObject.army2[i].firing = false;
+      gameObject.army2[i].firingAt = null;
+    }
+    
     setTimeout(() => { 
-      console.log('move order executions', gameObject); 
+      console.log('move order executions'); 
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
+        // MOVE 
         if (unitInAction.order === 'move' && unitInAction.engaged.yes === false) {
           for (let iii = 0; iii < unitInAction.details.stats.m; iii++){
             const moveAttempt = moveUnit(unitInAction, unitInAction.target);
@@ -31,8 +42,37 @@ function roundExecutor(){
             } else {
               unitInAction.location = moveAttempt;
             }
+          }
+          // find someone to shoot while moving:
+          let opponent = gameObject.army2;
+          let foundTarget = null;
+          
+          if (unitInAction.commander === 'army2') {
+            console.log('army2 unit');
+            opponent = gameObject.army1;  
+          }
+          
+          for (let i = 0; i < opponent.length; i++){
+            const weapon = searchStatsOfWeapon(unitInAction.details.rangedWeapons[0], 'ranged');
+            const distance = distanceCheck(unitInAction.location, opponent[i].location);
+            
+            if (weapon.range >= distance && foundTarget === null) {
+              const checkLos = losCheck(unitInAction.location, opponent[i].location);
+              if (checkLos === 'los ok'){
+                foundTarget = opponent[i];
+              }  
+            }
+          }
+          
+          // Shoot if someone was in range:
+          console.log('foundTarget: ', foundTarget);
+          if (foundTarget !== null){
+            unitInAction.firingAt = foundTarget;
+            const shoot = shootTarget(unitInAction, foundTarget);
           }  
         }
+        
+        // RUN
         if (unitInAction.order === 'run' && unitInAction.engaged.yes === false) {
           const runSpeed = unitInAction.details.stats.m * 2;
           
@@ -47,27 +87,51 @@ function roundExecutor(){
       }
     }, 350);
     setTimeout(() => { 
-      console.log('shoot/melee order executions', gameObject); 
+      console.log('shoot/melee order executions'); 
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
+        // SHOOT TO TARGET
         if (unitInAction.order === 'shoot' && unitInAction.engaged.yes === false) {
+          unitInAction.firingAt = unitInAction.target; // for line painting
           const shootAttempt = shootTarget(unitInAction, unitInAction.target);
         }  
+        
+        // STANDBY
         if (unitInAction.order === 'standby' && unitInAction.engaged.yes === false) {
-          const closestList = searchClosestOpponent(unitInAction);
-          console.log('closest list: ', closestList);
+          // find someone to shoot while waiting more orders:
+          let opponent = gameObject.army2;
+          let foundTarget = null;
+          
+          if (unitInAction.commander === 'army2') {
+            console.log('army2 unit');
+            opponent = gameObject.army1;  
+          }
+          
+          for (let i = 0; i < opponent.length; i++){
+            const weapon = searchStatsOfWeapon(unitInAction.details.rangedWeapons[0], 'ranged');
+            const distance = distanceCheck(unitInAction.location, opponent[i].location);
+            
+            if (weapon.range >= distance && foundTarget === null) {
+              const checkLos = losCheck(unitInAction.location, opponent[i].location);
+              if (checkLos === 'los ok'){
+                foundTarget = opponent[i];
+              }  
+            }
+          }
+          
+          // Shoot if someone was in range:
+          console.log('foundTarget: ', foundTarget);
+          if (foundTarget !== null){
+            unitInAction.firingAt = foundTarget;
+            const shoot = shootTarget(unitInAction, foundTarget);
+          }  
         }  
+        
+        // MELEE ORDER
         if (unitInAction.order === 'melee') {
         
-        }
-          
-        if (unitInAction.order === 'standby' && unitInAction.engaged.yes === false) {
-        
-        }
-        if (unitInAction.order === 'move' && unitInAction.engaged.yes === false) {
-            
-        }        
+        }       
       }
       
     }, 650);
