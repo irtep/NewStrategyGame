@@ -172,6 +172,7 @@ function shootTarget(who, to){
   
   if (who.order === 'move') {
     console.log('shooting while moving');
+    modAttack++; // harder to hit while moving.
   }
   
   console.log('los check: ', losAndR);
@@ -179,9 +180,7 @@ function shootTarget(who, to){
   if (losAndR === 'los ok') {
     for (let i = 0; i < who.details.rangedWeapons.length; i++){
       who.firing = true;
-      setTimeout(() => {
-        who.firing = false;  
-      }, 900);
+      draw();
       executeAttack('ranged', who, to, modAttack, i);
     }  
   }

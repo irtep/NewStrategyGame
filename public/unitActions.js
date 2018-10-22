@@ -118,7 +118,6 @@ function losCheck(fromWhere, toWhere){
   const forCheckUnits1 = gameObject.army1.concat([]);
   const forCheckUnits2 = gameObject.army2.concat([]);
   const allUnits = forCheckUnits1.concat(forCheckUnits2);
-  console.log('los check start: ', deWhere, aWhere);
     
   // delete active unit from forCheckUnits1 or 2.
   for (let ii = 0; ii < allUnits.length; ii++) {
@@ -153,7 +152,6 @@ function losCheck(fromWhere, toWhere){
       let collisionResult = collisionDetect(whereNow, 1, allUnits[ix].location, radiusOfTarget);
 
       if (collisionResult === 'collision'){
-        console.log('collision with unit: ', allUnits[ix].unit);
         losBlocked = true;  
       }
       if (losBlocked === true){
@@ -182,7 +180,6 @@ function losCheck(fromWhere, toWhere){
         
           if (collisionResult === 'collision') { // check if forest broke LoS
             let lossOfLosTest = callDice(100);
-            console.log('in forest test launched at', whereNow, ' result: ', lossOfLosTest);
             if (lossOfLosTest < 11) {
               console.log('los blocked by forest');
               return 'losBlocked'; 
