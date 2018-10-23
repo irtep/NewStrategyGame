@@ -7,6 +7,8 @@ function drawUnits(canvas,ctx) {
       actionDesc = 'order: ' + unit.order;    
     } else if (unit.order === 'shoot'){ // need to make owns for shooting and moving
       actionDesc = 'order: ' + unit.order + ' at ' + unit.target.unit;
+    } else if (unit.order === 'melee'){ // need to make owns for shooting and moving
+      actionDesc = 'order: ' + unit.order;
     } else {
       actionDesc = 'order: ' + unit.order + ' at ' + unit.target;
     }
