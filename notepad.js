@@ -1,6 +1,6 @@
 /*
 Next:
 
-melee combat next
+melee combat ready, but untested
 
 */

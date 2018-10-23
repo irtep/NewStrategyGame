@@ -15,7 +15,7 @@ function checkKeyPressed(e) {
 }
 
 // lethal wound dealer:
-function lethalWound(to, who){
+function lethalWound(to, who, isMelee){
   const p1units = document.getElementById('p1units');
   const p2units = document.getElementById('p2units');
   let armyNumber;
@@ -38,17 +38,34 @@ function lethalWound(to, who){
     case 1:
       gameObject.army1[indexOfDead].quantity--;
       if (gameObject.army1[indexOfDead].quantity < 1){
+        // if (isMelee === false){
         who.order = 'standby';
         who.target = null;
+        if (isMelee) {
+          who.engaged.withWho.splice(0);
+          if (who.engaged.withWho.length > 0){
+            who.order = 'melee';
+          }
+        }
         gameObject.army1.splice(indexOfDead, 1);
+        
+        // }
       }  
     break;
     case 2:
       gameObject.army2[indexOfDead].quantity--;
       if (gameObject.army2[indexOfDead].quantity < 1){
+        // if (isMelee === false){
         who.order = 'standby';
         who.target = null;
+        if (isMelee) {
+          who.engaged.withWho.splice(0);
+          if (who.engaged.withWho.length > 0){
+            who.order = 'melee';
+          }
+        }
         gameObject.army2.splice(indexOfDead, 1);
+        // }  
       }
     break;
     default: console.log('armynumber not found');  
@@ -66,6 +83,7 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
       const weaponsStats =  searchStatsOfWeapon(who.details.rangedWeapons[attackNumber], 'ranged');
       let attacks;
       const rangeToTarget = distanceCheck(who.location, to.location);
+      let attackSummary = {attacker: who.unit, weapon: weaponsStats.nombre, attacks: 0, hits: 0, wounds: 0, saved: 0};
       
       // check how many attacks the weapon has:
       if (weaponsStats.attacks === 'd6'){
@@ -98,14 +116,18 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
           const attackMods = who.details.stats.bs + modAttack + to.details.stats.defMods; 
           
           if (attackDice >= attackMods || attackDice === 6){
+            // hit
             const woundDice = callDice(6);
             const difference = weaponsStats.str - to.details.stats.t;
-        
+            attackSummary.hits++;
+            
             if (difference + woundDice >= 4){
-              const saveDice = callDice(6);  
-        
+              // toughness passed
+              const saveDice = callDice(6);
+              
               if (saveDice - weaponsStats.ap >= to.details.stats.sv){
-              } else { // wound
+                attackSummary.saved++;
+              } else { // armour pierced
                 let wounds;
             
                 if (weaponsStats.wounds === 'd6'){
@@ -117,16 +139,20 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
                 else {
                   wounds = weaponsStats.wounds;
                 }
+                attackSummary.wounds = wounds;
+                
                 if (wounds < to.details.stats.w) {
                   to.details.stats.w = to.details.stats.w - wounds;
                 } else {
-                  lethalWound(to, who)
+                  lethalWound(to, who, false); // false for melee attack
                 }
               } // wound ends  
             } else {console.log('not wounded: dice, strength, toughness: ', woundDice, weaponsStats.str, to.details.stats.t)}//
           } // attack hits
         } else {console.log('not in range, wRange, oRange', rangeToTarget, weaponsStats.range)}
+        attackSummary.attacks = totalAttacks;
       } // attack with attacks
+      console.log('attack summary: ', attackSummary);
     break;
     case 'melee':
       
