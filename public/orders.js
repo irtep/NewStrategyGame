@@ -189,19 +189,20 @@ function shootTarget(who, to){
 
 // melee attack
 function meleeAttack(who, to){
-  for (let i = 0; i < who.details.stats.meleeWeapons.length; i++){
-    const meleeWeapon = searchStatsOfWeapon(who.details.stats.meleeWeapons[0], 'melee');
-    const totalAttacks = who.details.stats.attacks + meleeWeapon.attacks;
+  for (let i = 0; i < who.details.meleeWeapons.length; i++){
+    const meleeWeapon = searchStatsOfWeapon(who.details.meleeWeapons[0], 'melee');
+    const totalAttacks = (who.details.stats.a + meleeWeapon.attacks) * who.quantity;
     let attackSummary = {attacker: who.unit, weapon: meleeWeapon.nombre, attacks: totalAttacks, hits: 0, wounds: 0, saved: 0};
     
     for (let ii = 0; ii < totalAttacks; ii++){
-      const attackValue = callDice(6) + who.details.stats.ws;
+      const attackDice = callDice(6);
+      const attackValue = attackDice + who.details.stats.ws;
       const defenceValue = callDice(6) + who.details.stats.ws;
       
-      if (attackValue >= defenceValue || attackValue - who.details.stats.ws === 6){
+      if (attackValue >= defenceValue || attackDice === 6){
         // hit
         const woundDice = callDice(6);
-        const difference = meleeWeapon.str - to.details.stats.t;
+        const difference = (meleeWeapon.str + who.details.stats.s ) - to.details.stats.t;
         attackSummary.hits++;
             
         if (difference + woundDice >= 4){

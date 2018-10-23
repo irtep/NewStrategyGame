@@ -34,7 +34,7 @@ function roundExecutor(){
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
-        // MOVE 
+        // ------- MOVE ---------- 
         if (unitInAction.order === 'move' && unitInAction.engaged.yes === false) {
           for (let iii = 0; iii < unitInAction.details.stats.m; iii++){
             const moveAttempt = moveUnit(unitInAction, unitInAction.target);
@@ -71,7 +71,7 @@ function roundExecutor(){
           }  
         }
         
-        // RUN
+        // ------   RUN   ------------
         if (unitInAction.order === 'run' && unitInAction.engaged.yes === false) {
           const runSpeed = unitInAction.details.stats.m * 2;
           
@@ -90,13 +90,13 @@ function roundExecutor(){
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
-        // SHOOT TO TARGET
+        // ------  SHOOT TO TARGET  --------
         if (unitInAction.order === 'shoot' && unitInAction.engaged.yes === false) {
           unitInAction.firingAt = unitInAction.target; // for line painting
           const shootAttempt = shootTarget(unitInAction, unitInAction.target);
         }  
         
-        // STANDBY
+        // --------  STANDBY  ---------
         if (unitInAction.order === 'standby' && unitInAction.engaged.yes === false) {
           // find someone to shoot while waiting more orders:
           let opponent = gameObject.army2;
@@ -125,10 +125,10 @@ function roundExecutor(){
           }  
         }  
         
-        // MELEE ORDER
+        // -----   MELEE ORDER  ---------
         if (unitInAction.order === 'melee') {
           // apply melee attack:
-          const meleeAttackAttempt = meleeAttack(who, who.engaged.withWho[0]);
+          const meleeAttackAttempt = meleeAttack(unitInAction, unitInAction.engaged.withWho[0]);
         }       
       }
       
@@ -141,6 +141,7 @@ function startGame(){
   // complete gameObject with unit stats
   const arm1 = gameObject.army1;
   const arm2 = gameObject.army2;
+  let activeArmy = gameObject.army1;
   
   for (let ind = 0; ind < arm1.length; ind++){
     const foundUnit = searchUnitByName(arm1[ind].unit, gameObject.factions[0]);
@@ -151,8 +152,39 @@ function startGame(){
     arm2[ind2].details = foundUnit;
   }
   
+  // set x and y and id for all:
+  function setStartLocations(activeArmy){
+    for (let i = 0; i < activeArmy.length; i++) {
+      if (activeArmy === arm1){  // army 1
+        if (i === 0){
+          activeArmy[i].location.x = 100;
+          activeArmy[i].location.y = 25;
+          activeArmy[i].id = 1;
+        } else {
+          const lastUnit = i - 1;
+          activeArmy[i].location.x = activeArmy[lastUnit].location.x + 130;
+          activeArmy[i].location.y = 25;
+          activeArmy[i].id = activeArmy[lastUnit].id + 1;
+        }
+      } else {  // army 2
+        if (i === 0){
+          activeArmy[i].location.x = 100;
+          activeArmy[i].location.y = 550;
+          activeArmy[i].id = 20;
+        } else {
+          const lastUnit = i - 1;
+          activeArmy[i].location.x = activeArmy[lastUnit].location.x + 130;
+          activeArmy[i].location.y = 550;
+          activeArmy[i].id = activeArmy[lastUnit].id + 1;
+        }
+      }
+    }  
+  }
+  setStartLocations(arm1);
+  setStartLocations(arm2);
   draw();
   createUnitButtons();
+  console.log('start game ready: ', gameObject);
 }
 
 // Calls:
