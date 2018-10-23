@@ -184,7 +184,6 @@ function losCheck(fromWhere, toWhere){
         const testResult = RectCircleColliding(circle,rect); // returns true if collision
         
         if (testResult === true){
-          console.log('los blocked by building: ', gameObject.terrain[iix]);
           return 'losBlocked';
         }
       }  
@@ -195,7 +194,6 @@ function losCheck(fromWhere, toWhere){
           if (collisionResult === 'collision') { // check if forest broke LoS
             let lossOfLosTest = callDice(100);
             if (lossOfLosTest < 11) {
-              console.log('los blocked by forest');
               return 'losBlocked'; 
             }
           }  

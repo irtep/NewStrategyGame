@@ -127,7 +127,8 @@ function roundExecutor(){
         
         // MELEE ORDER
         if (unitInAction.order === 'melee') {
-        
+          // apply melee attack:
+          const meleeAttackAttempt = meleeAttack(who, who.engaged.withWho[0]);
         }       
       }
       
