@@ -168,7 +168,7 @@ function moveUnit(who, to, mode){
 function shootTarget(who, to){
   let modAttack = 0;
  // const weaponsStats =  searchStatsOfWeapon(who.details.rangedWeapons[attackNumber], 'ranged');
-  const losAndR = losCheck(who.location, to.location);
+  const losAndR = lineOfSight(who.location, to.location);
   
   if (who.order === 'move') {
     console.log('shooting while moving');

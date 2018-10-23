@@ -4,6 +4,20 @@
   const testTo = {x: 100, y: 508};
   losAndRangeCheck(testWhere, testTo, gameObject);
 */
+
+// double line of sight from both directions as a propably
+// temporal bug fix to bug that allows los more easily from north.
+function lineOfSight(fromWhere, toWhere){
+  const check1 = losCheck(fromWhere, toWhere);
+  const check2 = losCheck(toWhere, fromWhere);
+  
+  if (check1 === 'losBlocked'|| check2 === 'losBlocked'){
+    return 'losBlocked';
+  } else {
+    return 'los ok';
+  }
+}
+
 function callDice(max){
     const result =  1 + Math.floor(Math.random() * max);
     return result;

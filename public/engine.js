@@ -48,7 +48,6 @@ function roundExecutor(){
           let foundTarget = null;
           
           if (unitInAction.commander === 'army2') {
-            console.log('army2 unit');
             opponent = gameObject.army1;  
           }
           
@@ -57,7 +56,7 @@ function roundExecutor(){
             const distance = distanceCheck(unitInAction.location, opponent[i].location);
             
             if (weapon.range >= distance && foundTarget === null) {
-              const checkLos = losCheck(unitInAction.location, opponent[i].location);
+              const checkLos = lineOfSight(unitInAction.location, opponent[i].location);
               if (checkLos === 'los ok'){
                 foundTarget = opponent[i];
               }  
@@ -104,7 +103,6 @@ function roundExecutor(){
           let foundTarget = null;
           
           if (unitInAction.commander === 'army2') {
-            console.log('army2 unit');
             opponent = gameObject.army1;  
           }
           
@@ -113,7 +111,7 @@ function roundExecutor(){
             const distance = distanceCheck(unitInAction.location, opponent[i].location);
             
             if (weapon.range >= distance && foundTarget === null) {
-              const checkLos = losCheck(unitInAction.location, opponent[i].location);
+              const checkLos = lineOfSight(unitInAction.location, opponent[i].location);
               if (checkLos === 'los ok'){
                 foundTarget = opponent[i];
               }  
@@ -121,7 +119,6 @@ function roundExecutor(){
           }
           
           // Shoot if someone was in range:
-          console.log('foundTarget: ', foundTarget);
           if (foundTarget !== null){
             unitInAction.firingAt = foundTarget;
             const shoot = shootTarget(unitInAction, foundTarget);
