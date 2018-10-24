@@ -152,7 +152,7 @@ function startGame(){
     arm2[ind2].details = foundUnit;
   }
   
-  // set x and y and id for all:
+  // set x and y, commander and id for all:
   function setStartLocations(activeArmy){
     for (let i = 0; i < activeArmy.length; i++) {
       if (activeArmy === arm1){  // army 1
@@ -160,22 +160,26 @@ function startGame(){
           activeArmy[i].location.x = 100;
           activeArmy[i].location.y = 25;
           activeArmy[i].id = 1;
+          activeArmy[i].commander = 'army1';
         } else {
           const lastUnit = i - 1;
           activeArmy[i].location.x = activeArmy[lastUnit].location.x + 130;
           activeArmy[i].location.y = 25;
           activeArmy[i].id = activeArmy[lastUnit].id + 1;
+          activeArmy[i].commander = 'army1';
         }
       } else {  // army 2
         if (i === 0){
           activeArmy[i].location.x = 100;
           activeArmy[i].location.y = 550;
           activeArmy[i].id = 20;
+          activeArmy[i].commander = 'army2';
         } else {
           const lastUnit = i - 1;
           activeArmy[i].location.x = activeArmy[lastUnit].location.x + 130;
           activeArmy[i].location.y = 550;
           activeArmy[i].id = activeArmy[lastUnit].id + 1;
+          activeArmy[i].commander = 'army2';
         }
       }
     }  
