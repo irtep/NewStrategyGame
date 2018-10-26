@@ -47,6 +47,7 @@ function moveUnit(who, to, mode){
     let collisionResult = collisionDetect(newLocation, size, targetLoc, targetSize);
     
     if (collisionResult === 'collision'){
+      console.log('collision with unit: ', allUnits[ix]);
       if (who.commander !== allUnits[ix].commander){
         let whoDubli = false;
         let allUnitDubli = false;
@@ -100,7 +101,7 @@ function moveUnit(who, to, mode){
   // detect wall collision:
   switch (to){
       case 'n': 
-        if (newLocation.y === -1 + (size)) { // n
+        if (newLocation.y === -1 + (size)) { // n 
           collision = true;
         }
       break;

@@ -162,7 +162,7 @@ function losCheck(fromWhere, toWhere){
     // Check collision with units:
     for (let ix = 0; ix < allUnits.length; ix++) {
       const foundUnit = searchUnitByName(allUnits[ix].unit, gameObject.factions[0]);
-      const radiusOfTarget = foundUnit.size * allUnits[ix].quantity;
+      const radiusOfTarget = allUnits[ix].details.size * allUnits[ix].quantity;
       let collisionResult = collisionDetect(whereNow, 1, allUnits[ix].location, radiusOfTarget);
 
       if (collisionResult === 'collision'){
