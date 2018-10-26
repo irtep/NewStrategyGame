@@ -10,7 +10,6 @@ const keyListeners = window.addEventListener("keydown", checkKeyPressed, false);
 function roundExecutor(){
   draw();
   if (pause === false){ 
-    console.log('executing game round:');
     draw();
     // gather all units:
     const forCheckUnits1 = gameObject.army1.concat([]);
@@ -30,7 +29,6 @@ function roundExecutor(){
     }
     
     setTimeout(() => { 
-      console.log('move order executions'); 
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
@@ -41,6 +39,7 @@ function roundExecutor(){
             if (moveAttempt === 'collision'){
             } else {
               unitInAction.location = moveAttempt;
+              draw();
             }
           }
           // find someone to shoot while moving:
@@ -64,7 +63,6 @@ function roundExecutor(){
           }
           
           // Shoot if someone was in range:
-          console.log('foundTarget: ', foundTarget);
           if (foundTarget !== null){
             unitInAction.firingAt = foundTarget;
             const shoot = shootTarget(unitInAction, foundTarget);
@@ -80,13 +78,13 @@ function roundExecutor(){
             if (moveAttempt === 'collision'){
             } else {
               unitInAction.location = moveAttempt;
+              draw();
             }
           }  
         }
       }
     }, 350);
     setTimeout(() => { 
-      console.log('shoot/melee order executions'); 
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
@@ -137,6 +135,7 @@ function roundExecutor(){
   }  
 }
 
+// Prepare game:
 function startGame(){
   // complete gameObject with unit stats
   const arm1 = gameObject.army1;
@@ -154,30 +153,53 @@ function startGame(){
   
   // set x and y, commander and id for all:
   function setStartLocations(activeArmy){
+    var currentFile = 18;
+    var currentFile2 = 580
+    
     for (let i = 0; i < activeArmy.length; i++) {
-      if (activeArmy === arm1){  // army 1
+      if (activeArmy === arm1){  // army 1    
         if (i === 0){
-          activeArmy[i].location.x = 100;
-          activeArmy[i].location.y = 25;
+          activeArmy[i].location.x = 50;
+          activeArmy[i].location.y = currentFile;
           activeArmy[i].id = 1;
           activeArmy[i].commander = 'army1';
         } else {
           const lastUnit = i - 1;
-          activeArmy[i].location.x = activeArmy[lastUnit].location.x + 130;
-          activeArmy[i].location.y = 25;
+          
+          switch (i) {  // for line breaks:
+            case 4: currentFile = currentFile + 35; activeArmy[i].location.x = 50;
+            break;
+            case 8: currentFile = currentFile + 35; activeArmy[i].location.x = 50;
+            break;
+            case 12: currentFile = currentFile + 35; activeArmy[i].location.x = 50;
+            break;
+            default: activeArmy[i].location.x = activeArmy[lastUnit].location.x + 130;
+          }
+          
+          activeArmy[i].location.y = currentFile;
           activeArmy[i].id = activeArmy[lastUnit].id + 1;
           activeArmy[i].commander = 'army1';
         }
       } else {  // army 2
         if (i === 0){
-          activeArmy[i].location.x = 100;
-          activeArmy[i].location.y = 550;
+          activeArmy[i].location.x = 890;
+          activeArmy[i].location.y = currentFile2;
           activeArmy[i].id = 20;
           activeArmy[i].commander = 'army2';
         } else {
           const lastUnit = i - 1;
-          activeArmy[i].location.x = activeArmy[lastUnit].location.x + 130;
-          activeArmy[i].location.y = 550;
+          
+          switch (i) {  // for line breaks:
+            case 4: currentFile2 = currentFile - 35; activeArmy[i].location.x = 50;
+            break;
+            case 8: currentFile2 = currentFile - 35; activeArmy[i].location.x = 50;
+            break;
+            case 12: currentFile2 = currentFile - 35; activeArmy[i].location.x = 50;
+            break;
+            default: activeArmy[i].location.x = activeArmy[lastUnit].location.x - 130;
+          }
+          
+          activeArmy[i].location.y = currentFile2;
           activeArmy[i].id = activeArmy[lastUnit].id + 1;
           activeArmy[i].commander = 'army2';
         }

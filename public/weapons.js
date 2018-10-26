@@ -6,11 +6,13 @@ const rangedWeapons = [           //r           a  s   ap  w
   new weapon('sniper rifle', 450, 'rifle',      1, 4,  0,  1, false),
   new weapon('heavy machinegun', 450, 'heavy',  3, 5,  1,  1, false),
   new weapon('battlecannon', 600, 'heavy',    'd6',8,  3, 'd6', false),
-  new weapon('meteor cannon', 600, 'heavy',   'd6',9,  4,  5, false)
+  new weapon('meteor cannon', 600, 'heavy',   'd6',9,  4,  5, false),
+  new weapon('laser cannon', 500, 'heavy',      1, 9,  3, 'd6', false)
 ];
 const meleeWeapons = [
   new weapon('unarmed', 0, 'melee', 0, 0, 0, 1, false),
   new weapon('crash', 0, 'melee', 0, 0, 4, 3, false), // basic tank attack
   new weapon('bayonet', 0, 'melee', 0, 0, 0, 1, false),
-  new weapon('chainsword', 0, 'melee', 1, 0, 0, 1, false) 
+  new weapon('chainsword', 0, 'melee', 1, 0, 0, 1, false),
+  new weapon('combat gauntlet', 0, 'melee', 0, 5, 3, 3, false)
 ];

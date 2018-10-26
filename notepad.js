@@ -1,6 +1,5 @@
 /*
-Next:
-
-beta 1 ready...need to test
+ranger unit can not move...
+bug with shooting at knight units..
 
 */
