@@ -35,6 +35,7 @@ function drawUnits(canvas,ctx) {
         ctx.font = '15px serif';
         ctx.fillStyle = 'gold';
         ctx.fillText('main weapon range', unit.location.x-40, unit.location.y +33); 
+        ctx.fillText(unit.details.desc, unit.location.x-40, unit.location.y +53); 
       }
     } else { // if no ranged weapon:
       ctx.arc(unit.location.x, unit.location.y, 0, 0, 2 * Math.PI); 
@@ -90,7 +91,8 @@ function drawUnits(canvas,ctx) {
         // text:
         ctx.font = '15px serif';
         ctx.fillStyle = 'purple';
-        ctx.fillText('main weapon range', unit.location.x-40, unit.location.y +33); 
+        ctx.fillText('main weapon range', unit.location.x-40, unit.location.y +33);
+        ctx.fillText(unit.details.desc, unit.location.x-40, unit.location.y +53);  
       }
     } else { // if no ranged weapon:
       ctx.arc(unit.location.x, unit.location.y, 0, 0, 2 * Math.PI); 

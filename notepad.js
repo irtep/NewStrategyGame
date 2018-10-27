@@ -1,5 +1,5 @@
 /*
-ranger unit can not move...
-bug with shooting at knight units..
+
+beta ready... need to make missions etc.
 
 */
