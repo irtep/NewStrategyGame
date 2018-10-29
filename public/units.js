@@ -60,6 +60,10 @@ const kingdom = [
   ['dagger'], ['crossbow'],
   {m: 5, s: 3, t: 3, ws: 2, bs: 4, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 3}, 1,  'kingdom'),
   new gameUnit(
+  'Longbowman', 'infantry', 'It takes lots of training to be a good archer, like these guys are.', 
+  ['dagger'], ['longbow'],
+  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 4}, 1,  'kingdom'),
+  new gameUnit(
   'Peasant', 'infantry', 'These guys are not really fighters, but sometimes quantity overwhelmes quality.', 
   ['spear'], ['no weapon'],
   {m: 4, s: 3, t: 3, ws: 2, bs: 5, a: 1, w: 1, i: 3, ld: 7, sv: 6, defMods: 0, pointCost: 1}, 1,  'kingdom')
@@ -82,4 +86,8 @@ const elves = [
   'Elven archer', 'infantry', 'Longbow is very deadly ranged weapon and these guys are best archers around.', 
   ['dagger'], ['elven longbow'],
   {m: 5, s: 3, t: 3, ws: 3, bs: 2, a: 1, w: 1, i: 4, ld: 8, sv: 5, defMods: 0, pointCost: 4}, 1,  'elves'),
+  new gameUnit(
+  'Elf rider', 'cavalry', 'Riding fast horse these elves like to ride around enemies while peppering them with deadly accuracy with their bows.', 
+  ['longsword'], ['elven shortbow'],
+  {m: 9, s: 3, t: 3, ws: 4, bs: 3, a: 1, w: 2, i: 4, ld: 8, sv: 4, defMods: 1, pointCost: 5}, 1,  'elves'),
 ];

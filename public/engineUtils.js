@@ -139,7 +139,7 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
                 else {
                   wounds = weaponsStats.wounds;
                 }
-                attackSummary.wounds = wounds;
+                attackSummary.wounds = attackSummary.wounds + wounds;
                 
                 if (wounds < to.details.stats.w) {
                   to.details.stats.w = to.details.stats.w - wounds;

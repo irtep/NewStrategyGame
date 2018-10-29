@@ -57,7 +57,7 @@ const armies =
   engaged: {yes: false, withWho: []}, joinedCharacters: [], highlighted: false, commander: 'army1', details: null,
   firing: false, firingAt: null},
   
-  {unit: 'Crossbowman', id: 3, location: {x: 360, y: 25, z: 0}, quantity: 7, order: 'standby', target: null, 
+  {unit: 'Crossbowman', id: 3, location: {x: 360, y: 25, z: 0}, quantity: 10, order: 'standby', target: null, 
   engaged: {yes: false, withWho: []}, joinedCharacters: [], highlighted: false, commander: 'army1', details: null,
   firing: false, firingAt: null},
   
@@ -78,7 +78,7 @@ const armies =
   engaged: {yes: false, withWho: []}, joinedCharacters: [], highlighted: false, commander: 'army1', details: null,
   firing: false, firingAt: null},
   
-  {unit: 'Elven archer', id: 3, location: {x: 360, y: 25, z: 0}, quantity: 7, order: 'standby', target: null, 
+  {unit: 'Elven archer', id: 3, location: {x: 360, y: 25, z: 0}, quantity: 10, order: 'standby', target: null, 
   engaged: {yes: false, withWho: []}, joinedCharacters: [], highlighted: false, commander: 'army1', details: null,
   firing: false, firingAt: null},
   

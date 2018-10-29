@@ -11,7 +11,8 @@ const rangedWeapons = [           //r           a  s   ap  w
   new weapon('laser cannon', 500, 'heavy',      1, 9,  3, 'd6', false),
   // FA-BA
   new weapon('no weapon', 0, 'nothing',         0, 0, 0, 0, false),
-  new weapon('elven longbow', 300, 'bow',       2, 4, 1, 1, false),,
+  new weapon('elven longbow', 300, 'bow',       2, 4, 1, 1, false),
+  new weapon('longbow', 250, 'bow',             2, 3, 1, 1, false),
   new weapon('elven shortbow', 200, 'bow',      2, 3, 0, 1, false),
   new weapon('crossbow', 300, 'bow',            1, 4, 1, 1, false),
   new weapon('dragonfire', 100, 'heavy',     'd6', 9, 3, 1, false)
