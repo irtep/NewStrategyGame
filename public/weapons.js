@@ -32,5 +32,6 @@ const meleeWeapons = [           //r        a  s  ap w
   new weapon('dagger', 0, 'melee',          2, 0, 0, 1, false),
   new weapon('warhammer', 0, 'melee',       0, 2, 2, 1, false),
   new weapon('teeth and claws', 0, 'melee', 0, 0, 4, 'd6', false),
-  new weapon('enhanced sword', 0, 'melee',  1, 2, 2, 2, false)
+  new weapon('enhanced sword', 0, 'melee',  1, 2, 2, 2, false),
+  new weapon('nodachi', 0, 'melee',         0, 2, 2, 2, false)
 ];

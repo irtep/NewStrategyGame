@@ -50,7 +50,7 @@ const kingdom = [
   new gameUnit(
   'Knight', 'cavalry','Tough elite unit mounted on warhorses. Well armed with lances and armoured with excellent plate armours',
   ['lance'], ['no weapon'],
-  {m: 8, s: 3, t: 3, ws: 4, bs: 4, a: 1, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 10}, 2, 'kingdom'),
+  {m: 8, s: 3, t: 3, ws: 4, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 10}, 2, 'kingdom'),
   new gameUnit(
   'Swordsman', 'infantry', 'Infantryman of human kingdoms. Well trained. Armed with sword and shield.', 
   ['longsword'], ['no weapon'],
@@ -90,4 +90,8 @@ const elves = [
   'Elf rider', 'cavalry', 'Riding fast horse these elves like to ride around enemies while peppering them with deadly accuracy with their bows.', 
   ['longsword'], ['elven shortbow'],
   {m: 9, s: 3, t: 3, ws: 4, bs: 3, a: 1, w: 2, i: 4, ld: 8, sv: 4, defMods: 1, pointCost: 5}, 1,  'elves'),
+  new gameUnit(
+  'Swordmaster', 'infantry', 'Most of the elves love their bows but in some cases they decide to dedicate to join the swordmaster brotherhood to dedicate their life to train fighting with swords.', 
+  ['nodachi'], ['no weapon'],
+  {m: 5, s: 3, t: 3, ws: 6, bs: 3, a: 2, w: 1, i: 5, ld: 8, sv: 4, defMods: 1, pointCost: 5}, 1,  'elves')
 ];

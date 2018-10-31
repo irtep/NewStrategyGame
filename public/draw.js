@@ -15,7 +15,7 @@ function drawUnits(canvas,ctx) {
     // paint units circle
     ctx.beginPath();  
     ctx.fillStyle = 'black';
-    if (unit.details.type === 'infantry'){  
+    if (unit.details.type === 'infantry' || unit.details.type === 'cavalry' || unit.details.type === 'commander'){  
       const totalSize = unit.details.size * unit.quantity;
       ctx.arc(unit.location.x, unit.location.y, totalSize, 0, 2 * Math.PI);
     } else {
@@ -72,7 +72,7 @@ function drawUnits(canvas,ctx) {
     // paint units circle
     ctx.beginPath();  
     ctx.fillStyle = 'black';
-    if (unit.details.type === 'infantry'){  
+    if (unit.details.type === 'infantry' || unit.details.type === 'cavalry' || unit.details.type === 'commander'){  
       const totalSize = unit.details.size * unit.quantity;
       ctx.arc(unit.location.x, unit.location.y, totalSize, 0, 2 * Math.PI);
     } else {
