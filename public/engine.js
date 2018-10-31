@@ -10,6 +10,9 @@ const keyListeners = window.addEventListener("keydown", checkKeyPressed, false);
 function roundExecutor(){
   draw();
   if (pause === false){ 
+    
+    // ai chooses commands.
+    zunSu('orders'); 
     draw();
     // gather all units:
     const forCheckUnits1 = gameObject.army1.concat([]);
@@ -83,6 +86,7 @@ function roundExecutor(){
           }  
         }
       }
+      //zunsu('checks');
     }, 350);
     setTimeout(() => { 
       for (let i = 0; i < allUnits.length; i++) {
