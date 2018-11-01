@@ -33,11 +33,12 @@ function zunSu(actions){
   if (actions === 'orders'){
     // save field to history to compare if something has moved
     const round = {army1: [], army2: []};
-
+    // Army 1
     for (let i = 0; i < gameObject.army1.length; i++){
       const newLoc = Object.assign({}, gameObject.army1[i].location);
       round.army1.push(newLoc);
     }
+    // Army 2
     for (let i = 0; i < gameObject.army2.length; i++){
       const rangedWeapon = searchStatsOfWeapon(gameObject.army2[i].details.rangedWeapons[0], 'ranged');
       const newLoc = Object.assign({}, gameObject.army2[i].location);
@@ -46,7 +47,8 @@ function zunSu(actions){
       let closestEnemy = {number: null, distance: 5000, where: null};
 
       round.army2.push(newLoc);
-          // check closest opponent
+
+      // check closest opponent
       for (let ii = 0; ii < enemyArmy.length; ii++) {
         const distance = distanceCheck(unitInAction.location, enemyArmy[ii].location);
 
@@ -56,11 +58,11 @@ function zunSu(actions){
           closestEnemy.where = findDirection(unitInAction.location, enemyArmy[ii].location);
         }  
       }
+      
       // -SET ORDERS-:
       if (unitInAction.order !== 'melee'){ // if not in melee
         // -if ranged unit-
         if (unitInAction.details.stats.bs <= 3) {
-          console.log('unit is ranged unit');
 
           // if target unit in range
           if (closestEnemy.distance <= rangedWeapon.range){
@@ -95,7 +97,6 @@ function zunSu(actions){
 
         // if monster
         if (unitInAction.details.type === 'monster') {
-          console.log('monster, closest: ', closestEnemy);
           // if outside of ranged:
           if (closestEnemy.distance > rangedWeapon.range) {
             unitInAction.order = 'run';
@@ -120,11 +121,66 @@ function zunSu(actions){
           }
         }
       } // if not in melee ends
+      // check if building or something is blocking the way:
+      if (unitInAction.order === 'move' || unitInAction.order === 'run') {
+        const directions = ['n','ne','e','se','s','sw','w', 'nw'];
+        const substitutions = [['w','e'],['n','e','w'],['n','s'],['s','e', 'n'],['w','e'],['s','w','e'],['n','s'],['n','w','e']];
+        let whereTo = Object.assign({}, unitInAction.location);
+        let destinationNow;
+        let finalDestination = unitInAction.target;
+        let forCheckDir = unitInAction.target;
+        let destChanged = false;
+        
+        switch (forCheckDir) {
+          case 'n': whereTo.x = whereTo.x; whereTo.y = whereTo.y -15; break;
+          case 'ne': whereTo.x = whereTo.x + 15; whereTo.y = whereTo.y - 15; break; 
+          case 'e': whereTo.x = whereTo.x + 15; whereTo.y = whereTo.y; break; 
+          case 'se': whereTo.x = whereTo.x + 15; whereTo.y = whereTo.y + 15; break; 
+          case 's': whereTo.x = whereTo.x; whereTo.y = whereTo.y + 15; break; 
+          case 'sw': whereTo.x = whereTo.x - 15; whereTo.y = whereTo.y + 15; break; 
+          case 'w': whereTo.x = whereTo.x - 15; whereTo.y = whereTo.y; break; 
+          case 'nw': whereTo.x = whereTo.x - 15; whereTo.y = whereTo.y - 15; break;   
+        }
+        
+        const checkDir = lineOfSight(unitInAction.location, whereTo);
+
+        if (checkDir === 'losBlocked' || unitInAction.notMoved === true) {
+          for (let xx = 0; xx < directions.length; xx++) {
+            if (directions[xx] === unitInAction.target) {
+              destinationNow = xx;
+              console.log('los blocked to wanted dir. tried dir was: ', xx);
+            }
+          } // for 1 ends
+          for (let yy = 0; yy < substitutions[destinationNow].length; yy++) {
+            whereTo = Object.assign({}, unitInAction.location); // reset this
+            forCheckDir = substitutions[destinationNow][yy];
+            switch (forCheckDir) {
+              case 'n': whereTo.x = whereTo.x; whereTo.y = whereTo.y -15; break;
+               case 'ne': whereTo.x = whereTo.x + 15; whereTo.y = whereTo.y - 15; break; 
+               case 'e': whereTo.x = whereTo.x + 15; whereTo.y = whereTo.y; break; 
+               case 'se': whereTo.x = whereTo.x + 15; whereTo.y = whereTo.y + 15; break; 
+               case 's': whereTo.x = whereTo.x; whereTo.y = whereTo.y + 15; break; 
+               case 'sw': whereTo.x = whereTo.x - 15; whereTo.y = whereTo.y + 15; break; 
+               case 'w': whereTo.x = whereTo.x - 15; whereTo.y = whereTo.y; break; 
+               case 'nw': whereTo.x = whereTo.x - 15; whereTo.y = whereTo.y - 15; break;   
+            }
+            const alternativeDirCheck = lineOfSight(unitInAction.location, whereTo);
+            if (alternativeDirCheck !== 'losBlocked' && destChanged === false) {
+              finalDestination = substitutions[destinationNow][yy];
+              destChanged = true;
+              console.log('found alternative: ', finalDestination);
+            }
+          }
+          unitInAction.target = finalDestination;
+          console.log('unit target changed to: ', unitInAction.target);
+        } // if blocked ends
+      } // check if blocked
     } // army2 loop ends  
-
     history.push(round);
-    console.log('history: ',history);
-
+    if (history.length > 40) {
+      history.splice(0, 1);
+    }
+    console.log('history: ', history);
     // analyze situation
     // commands: losCheck(fromWhere, toWhere) , distanceCheck(fromWhere, toWhere), findDirection(dirFrom, dirTo, distance)
 

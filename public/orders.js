@@ -20,6 +20,8 @@ function moveUnit(who, to, mode){
   let wallOnWay = false;
   const size = who.details.size * who.quantity;
   const adjustedSize = Math.round(size * 0.75);
+  const oldLoc = Object.assign({}, who.location);
+  who.lastLocation = oldLoc; // save last place
   
   // delete active unit from forCheckUnits1 or 2.
   for (let ii = 0; ii < allUnits.length; ii++) {
