@@ -40,8 +40,10 @@ function roundExecutor(){
           for (let iii = 0; iii < unitInAction.details.stats.m; iii++){
             const moveAttempt = moveUnit(unitInAction, unitInAction.target);
             if (moveAttempt === 'collision'){
+              unitInAction.notMoved = true;
             } else {
               unitInAction.location = moveAttempt;
+              unitInAction.notMoved = false;
               draw();
             }
           }
@@ -79,8 +81,10 @@ function roundExecutor(){
           for (let iii = 0; iii < runSpeed; iii++){
             const moveAttempt = moveUnit(unitInAction, unitInAction.target);
             if (moveAttempt === 'collision'){
+              unitInAction.notMoved = true;
             } else {
               unitInAction.location = moveAttempt;
+              unitInAction.notMoved = false;
               draw();
             }
           }  

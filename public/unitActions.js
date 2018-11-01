@@ -1,9 +1,3 @@
-/*
-  // Los and range example:
-  const testWhere = {x: 250, y: 100};
-  const testTo = {x: 100, y: 508};
-  losAndRangeCheck(testWhere, testTo, gameObject);
-*/
 
 // double line of sight from both directions as a propably
 // temporal bug fix to bug that allows los more easily from north.
@@ -166,6 +160,7 @@ function losCheck(fromWhere, toWhere){
       let collisionResult = collisionDetect(whereNow, 1, allUnits[ix].location, radiusOfTarget);
 
       if (collisionResult === 'collision'){
+        //console.log('collision with unit: ', allUnits[ix]);
         losBlocked = true;  
       }
       if (losBlocked === true){
@@ -184,6 +179,7 @@ function losCheck(fromWhere, toWhere){
         const testResult = RectCircleColliding(circle,rect); // returns true if collision
         
         if (testResult === true){
+          // console.log('building collision');
           return 'losBlocked';
         }
       }  
