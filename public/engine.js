@@ -36,7 +36,7 @@ function roundExecutor(){
         const unitInAction = allUnits[i];
         
         // ------- MOVE ---------- 
-        if (unitInAction.order === 'move' && unitInAction.engaged.yes === false) {
+        if (unitInAction.order === 'move' /*&& unitInAction.engaged.yes === false*/) {
           for (let iii = 0; iii < unitInAction.details.stats.m; iii++){
             const moveAttempt = moveUnit(unitInAction, unitInAction.target);
             if (moveAttempt === 'collision'){
@@ -75,7 +75,7 @@ function roundExecutor(){
         }
         
         // ------   RUN   ------------
-        if (unitInAction.order === 'run' && unitInAction.engaged.yes === false) {
+        if (unitInAction.order === 'run'/* && unitInAction.engaged.yes === false*/) {
           const runSpeed = unitInAction.details.stats.m * 2;
           
           for (let iii = 0; iii < runSpeed; iii++){
