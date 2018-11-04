@@ -124,7 +124,7 @@ function zunSu(actions){
       // check if building or something is blocking the way:
       if (unitInAction.order === 'move' || unitInAction.order === 'run') {
         const directions = ['n','ne','e','se','s','sw','w', 'nw'];
-        const substitutions = [['w','e'],['n','e','w'],['n','s'],['s','e', 'n'],['w','e'],['s','w','e'],['n','s'],['n','w','e']];
+        const substitutions = [['w','sw', 'nw', 'e'],['n','e','w'],['e','ne'],['s','e', 'n'],['se','e'],['s','w','e'],['sw','s'],['n','e', 'w']];
         let whereTo = Object.assign({}, unitInAction.location);
         let destinationNow;
         let finalDestination = unitInAction.target;
@@ -142,13 +142,16 @@ function zunSu(actions){
           case 'nw': whereTo.x = whereTo.x - 15; whereTo.y = whereTo.y - 15; break;   
         }
         
-        const checkDir = lineOfSight(unitInAction.location, whereTo);
+        const checkDir = moveUnit(unitInAction, unitInAction.target);
+        // change this above to collision test
+        /*
+        moveUnit(unitInAction, whereTo);
+        */
 
-        if (checkDir === 'losBlocked' || unitInAction.notMoved === true) {
+        if (checkDir === 'collision' || unitInAction.notMoved === true) {
           for (let xx = 0; xx < directions.length; xx++) {
             if (directions[xx] === unitInAction.target) {
               destinationNow = xx;
-              console.log('los blocked to wanted dir. tried dir was: ', xx);
             }
           } // for 1 ends
           for (let yy = 0; yy < substitutions[destinationNow].length; yy++) {
@@ -164,8 +167,8 @@ function zunSu(actions){
                case 'w': whereTo.x = whereTo.x - 15; whereTo.y = whereTo.y; break; 
                case 'nw': whereTo.x = whereTo.x - 15; whereTo.y = whereTo.y - 15; break;   
             }
-            const alternativeDirCheck = lineOfSight(unitInAction.location, whereTo);
-            if (alternativeDirCheck !== 'losBlocked' && destChanged === false) {
+            const alternativeDirCheck = moveUnit(unitInAction, forCheckDir);
+            if (alternativeDirCheck !== 'collision' && destChanged === false) {
               finalDestination = substitutions[destinationNow][yy];
               destChanged = true;
               console.log('found alternative: ', finalDestination);
