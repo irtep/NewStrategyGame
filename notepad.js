@@ -1,8 +1,5 @@
 /*
 
-Started working on AI.
-
-Ai get stuck on buildings when moving directly to N (possible to south too), when target is NW (NE)
-
-Unit got stuck after winning cc... possible that melee gets stuck...
+beta version ready... need to test and create maps, units and armies.
+add: same to ranged attack as to melee: wound dice 6 wounds and armour saves come before wound.
 */
