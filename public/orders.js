@@ -202,45 +202,44 @@ function meleeAttack(who, to){
       const attackValue = attackDice + who.details.stats.ws;
       const defenceValue = callDice(6) + who.details.stats.ws;
       
-      if (attackValue >= defenceValue || attackDice === 6){
+      if (attackValue >= defenceValue || attackDice === 6){ // attack hits
         // hit
         const woundDice = callDice(6);
+        const saveDice = callDice(6);
         const difference = (meleeWeapon.str + who.details.stats.s ) - to.details.stats.t;
         attackSummary.hits++;
-            
-        if (difference + woundDice >= 4){
-          // toughness passed
-          const saveDice = callDice(6);
-              
-          if (saveDice - meleeWeapon.ap >= to.details.stats.sv){
-            attackSummary.saved++;
-            } else { // armour pierced
-                let wounds;
-            
-                if (meleeWeapon.wounds === 'd6'){
-                  wounds = callDice(6);
-                }
-                else if (meleeWeapon.wounds === 'd3'){
-                  wounds = callDice(3);
-                }
-                else {
-                  wounds = meleeWeapon.wounds;
-                }
-                attackSummary.wounds = wounds;
-                
-                if (wounds < to.details.stats.w) {
-                  to.details.stats.w = to.details.stats.w - wounds;
-                } else {
-                  lethalWound(to, who, true); // true for melee attack
-                }
-              } // wound ends  
-            } else {console.log('not enough lethal wound')}
         
-      } // hit
-    } // attacks with weapon
-    console.log('melee attack summary; ', attackSummary);
-  }
-}
+        // armour save throw:
+        if (saveDice - meleeWeapon.ap >= to.details.stats.sv){
+            attackSummary.saved++;
+        } else { // armour pierced
+        
+          if (difference + woundDice >= 4 || woundDice === 6){
+            // toughness passed 
+            let wounds;
+            
+            if (meleeWeapon.wounds === 'd6'){
+              wounds = callDice(6);
+            }
+              else if (meleeWeapon.wounds === 'd3'){
+                wounds = callDice(3);
+              }
+              else {
+                wounds = meleeWeapon.wounds;
+              }
+              attackSummary.wounds = wounds;
+                
+              if (wounds < to.details.stats.w) {
+                to.details.stats.w = to.details.stats.w - wounds;
+              } else {
+                lethalWound(to, who, true); // true for melee attack
+              }
+            } // wound ends
+        } // armour pierced ends
+      } // attacks with weapon ends
+    } console.log('melee attack summary; ', attackSummary);
+  } // attack with weapons end
+} // melee attack ends
 
 // standby (do not move, but shoot closest enemy in LOS and in range)
   // check range of weapon(s), then if any enemies around
