@@ -83,7 +83,7 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
       const weaponsStats =  searchStatsOfWeapon(who.details.rangedWeapons[attackNumber], 'ranged');
       let attacks;
       const rangeToTarget = distanceCheck(who.location, to.location);
-      let attackSummary = {attacker: who.unit, weapon: weaponsStats.nombre, attacks: 0, hits: 0, wounds: 0, saved: 0};
+      let attackSummary = {attacker: who.unit, target: to.unit, weapon: weaponsStats.nombre, attacks: 0, hits: 0, wounds: 0, saved: 0};
       
       // check how many attacks the weapon has:
       if (weaponsStats.attacks === 'd6'){
@@ -95,7 +95,6 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
       else {
         attacks = weaponsStats.attacks;
       }
-      
       let totalAttacks = attacks * who.quantity;
       
       // rapidfire bonus:
@@ -105,29 +104,26 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
       
       // attack with all attacks:
       for (let i = 0; i < totalAttacks; i++){
-        
         if (rangeToTarget <= weaponsStats.range){
-          
           if (to.engaged.yes === true){
             modAttack = modAttack + 2;
           }
-          
+          /*  DICES START FROM HERE */
           const attackDice = callDice(6);
           const attackMods = who.details.stats.bs + modAttack + to.details.stats.defMods; 
+          const woundDice = callDice(6);
+          const saveDice = callDice(6);
           
           if (attackDice >= attackMods || attackDice === 6){
-            // hit
-            const woundDice = callDice(6);
+            // hit  
             const difference = weaponsStats.str - to.details.stats.t;
             attackSummary.hits++;
             
-            if (difference + woundDice >= 4){
+            if (saveDice - weaponsStats.ap >= to.details.stats.sv){
+              attackSummary.saved++;
+            } else { // armour pierced
+            if (difference + woundDice >= 4 || woundDice === 6){
               // toughness passed
-              const saveDice = callDice(6);
-              
-              if (saveDice - weaponsStats.ap >= to.details.stats.sv){
-                attackSummary.saved++;
-              } else { // armour pierced
                 let wounds;
             
                 if (weaponsStats.wounds === 'd6'){
@@ -147,7 +143,7 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
                   lethalWound(to, who, false); // false for melee attack
                 }
               } // wound ends  
-            } else {console.log('not wounded: dice, strength, toughness: ', woundDice, weaponsStats.str, to.details.stats.t)}//
+            } // armour pierced ends
           } // attack hits
         } else {console.log('not in range, wRange, oRange', rangeToTarget, weaponsStats.range)}
         attackSummary.attacks = totalAttacks;
@@ -155,9 +151,8 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
       console.log('attack summary: ', attackSummary);
     break;
     case 'melee':
-      
+      // at the moment melee is handled in 'orders' section
     break;
-    
     default: console.log('attack type not found.');
   }
 }

@@ -46,11 +46,11 @@ const kingdom = [
   new gameUnit(
   'Knight commander', 'commander','Battlegroup commander, heavily armed and armoured, mounted on powerful warhorse', 
   ['lance'], ['crossbow'],
-  {m: 8, s: 3, t: 3, ws: 5, bs: 2, a: 3, w: 3, i: 5, ld: 10, sv: 2, defMods: 0, pointCost: 0}, 2, 'kingdom'),
+  {m: 8, s: 4, t: 4, ws: 5, bs: 2, a: 3, w: 3, i: 5, ld: 10, sv: 2, defMods: 0, pointCost: 0}, 2, 'kingdom'),
   new gameUnit(
   'Knight', 'cavalry','Tough elite unit mounted on warhorses. Well armed with lances and armoured with excellent plate armours',
   ['lance'], ['no weapon'],
-  {m: 8, s: 3, t: 3, ws: 4, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 10}, 2, 'kingdom'),
+  {m: 8, s: 4, t: 4, ws: 4, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 10}, 2, 'kingdom'),
   new gameUnit(
   'Swordsman', 'infantry', 'Infantryman of human kingdoms. Well trained. Armed with sword and shield.', 
   ['longsword'], ['no weapon'],
@@ -58,7 +58,7 @@ const kingdom = [
   new gameUnit(
   'Crossbowman', 'infantry', 'Good and cheap ranged unit. Crossbows are deadly and easy to use.', 
   ['dagger'], ['crossbow'],
-  {m: 5, s: 3, t: 3, ws: 2, bs: 4, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 3}, 1,  'kingdom'),
+  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 3}, 1,  'kingdom'),
   new gameUnit(
   'Longbowman', 'infantry', 'It takes lots of training to be a good archer, like these guys are.', 
   ['dagger'], ['longbow'],
@@ -77,7 +77,7 @@ const elves = [
   new gameUnit(
   'Green dragon', 'monster','Huge winged monster that burns everything, except those that it will rip to parts.',
   ['teeth and claws'], ['dragonfire'],
-  {m: 8, s: 6, t: 7, ws: 4, bs: 4, a: 5, w: 7, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 30}, 10, 'elves'),
+  {m: 8, s: 6, t: 7, ws: 4, bs: 4, a: 5, w: 10, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 30}, 10, 'elves'),
   new gameUnit(
   'Elf ranger', 'infantry', 'Excellent scout unit that can fight both ranged and melee.', 
   ['longsword'], ['elven shortbow'],
