@@ -1,5 +1,14 @@
 /*
 
 beta version ready... need to test and create maps, units and armies.
-add: same to ranged attack as to melee: wound dice 6 wounds and armour saves come before wound.
+
+to fix:
+ai units sometimes choose command Shoot, even if no los.
+los sometimes doesnt see, even if should... need to investigate
+
+compare elven and human longbowmen, elves should be better.
+*/
+
+/*
+
 */

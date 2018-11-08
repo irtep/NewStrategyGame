@@ -195,7 +195,7 @@ function meleeAttack(who, to){
   for (let i = 0; i < who.details.meleeWeapons.length; i++){
     const meleeWeapon = searchStatsOfWeapon(who.details.meleeWeapons[0], 'melee');
     const totalAttacks = (who.details.stats.a + meleeWeapon.attacks) * who.quantity;
-    let attackSummary = {attacker: who.unit, weapon: meleeWeapon.nombre, attacks: totalAttacks, hits: 0, wounds: 0, saved: 0};
+    let attackSummary = {attacker: who.unit, target: to.unit, weapon: meleeWeapon.nombre, attacks: totalAttacks, hits: 0, wounds: 0, saved: 0};
     
     for (let ii = 0; ii < totalAttacks; ii++){
       const attackDice = callDice(6);
