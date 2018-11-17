@@ -117,7 +117,7 @@ function drawUnits(canvas,ctx) {
 }
 
 function drawTerrain(canvas,ctx) {
-  gameObject.terrain.forEach((unit) => { // draw terrain  
+  gameObject.terrain.terrain.forEach((unit) => { // draw terrain  
     
     if (unit.type === 'building'){
       const x = unit.location.x;

@@ -71,6 +71,12 @@ function zunSu(actions){
             if (closestEnemy.distance > thirdOfRange) {
               unitInAction.order = 'shoot';
               unitInAction.target = enemyArmy[closestEnemy.number];
+              // check los:
+              const losCheck = lineOfSight(unitInAction.location, enemyArmy[closestEnemy.number].location);
+              if (losCheck === 'losBlocked'){
+                unitInAction.order = 'move';
+                unitInAction.target = closestEnemy.where;
+              }
             } else {  // if closer
               let escapeDir;
 
@@ -106,6 +112,7 @@ function zunSu(actions){
             unitInAction.order = 'move';
             unitInAction.target = closestEnemy.where;
           }
+          // something too that he doesnt charge solo...
         } // monster ends
 
         // if melee guys

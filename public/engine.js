@@ -21,14 +21,26 @@ function roundExecutor(){
     
     allUnits.sort(compare); // sort to initiative order
     
-    // remove all firing lines:
+    // remove all firing lines and shoot orders to dead targets:
     for (let i = 0; i < gameObject.army1.length; i++){
-      gameObject.army1[i].firing = false;
-      gameObject.army1[i].firingAt = null;
+      const inTurn = gameObject.army1[i];
+      
+      inTurn.firing = false;
+      inTurn.firingAt = null;
+      if (inTurn.order === 'shoot' && inTurn.target.quantity <= 0){
+        console.log('trying to shoot dead. changed to standby');
+        inTurn.order = 'standby';
+      }
     }
     for (let i = 0; i < gameObject.army2.length; i++){
-      gameObject.army2[i].firing = false;
-      gameObject.army2[i].firingAt = null;
+      const inTurn = gameObject.army2[i];
+      
+      inTurn.firing = false;
+      inTurn.firingAt = null;
+      if (inTurn.order === 'shoot' && inTurn.target.quantity <= 0){
+        console.log('trying to shoot dead. changed to standby');
+        inTurn.order = 'standby';
+      }    
     }
     
     setTimeout(() => { 
@@ -167,7 +179,7 @@ function startGame(){
     for (let i = 0; i < activeArmy.length; i++) {
       if (activeArmy === arm1){  // army 1    
         if (i === 0){
-          activeArmy[i].location.x = 50;
+          activeArmy[i].location.x = gameObject.terrain.deploymentZone1.x;
           activeArmy[i].location.y = currentFile;
           activeArmy[i].id = 1;
           activeArmy[i].commander = 'army1';
@@ -190,7 +202,7 @@ function startGame(){
         }
       } else {  // army 2
         if (i === 0){
-          activeArmy[i].location.x = 890;
+          activeArmy[i].location.x = gameObject.terrain.deploymentZone2.x;
           activeArmy[i].location.y = currentFile2;
           activeArmy[i].id = 20;
           activeArmy[i].commander = 'army2';

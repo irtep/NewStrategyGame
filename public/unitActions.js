@@ -169,8 +169,8 @@ function losCheck(fromWhere, toWhere){
     }
     
     // check collision with buildings:
-    for (let iix = 0; iix < gameObject.terrain.length; iix++) {
-      const terrainInTurn = gameObject.terrain[iix];
+    for (let iix = 0; iix < gameObject.terrain.terrain.length; iix++) {
+      const terrainInTurn = gameObject.terrain.terrain[iix];
       
       if (terrainInTurn.type === 'building'){
         const circle = {x: whereNow.x, y: whereNow.y, r: 1};

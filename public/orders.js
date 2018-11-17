@@ -89,11 +89,11 @@ function moveUnit(who, to, mode){
   }
   
   // detect collision with terrain (buildings, true if collision):
-  for (let iix = 0; iix < gameObject.terrain.length; iix++) {
-    if (gameObject.terrain[iix].type === 'building'){
+  for (let iix = 0; iix < gameObject.terrain.terrain.length; iix++) {
+    if (gameObject.terrain.terrain[iix].type === 'building'){
       const circle = {x: newLocation.x, y: newLocation.y, r: size};
-      const rect = {x: gameObject.terrain[iix].location.x, y: gameObject.terrain[iix].location.y, 
-                    w: gameObject.terrain[iix].size.width, h: gameObject.terrain[iix].size.height};
+      const rect = {x: gameObject.terrain.terrain[iix].location.x, y: gameObject.terrain.terrain[iix].location.y, 
+                    w: gameObject.terrain.terrain[iix].size.width, h: gameObject.terrain.terrain[iix].size.height};
       const testResult = RectCircleColliding(circle,rect); // returns true if collision
       if (testResult === true){
         collision = true;
