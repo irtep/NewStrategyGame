@@ -1,5 +1,5 @@
 function gameUnit(nombre, type, desc, meleeWeapons, rangedWeapons,
-                       stats, size, army) {
+                       stats, size, army, longDesc) {
   this.nombre = nombre;
   this.type = type;
   this.desc = desc;
@@ -8,6 +8,7 @@ function gameUnit(nombre, type, desc, meleeWeapons, rangedWeapons,
   this.stats = stats;
   this.size = size;
   this.army = army; 
+  this.longDesc = longDesc;
 }
 
 function weapon(nombre, range, type, attacks, str, ap, wounds, barrage){

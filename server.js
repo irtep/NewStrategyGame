@@ -14,6 +14,13 @@ app.get("/", (request, response) => {
 
 });
 
+app.get("/start", (request, response) => {
+
+  console.log("get received");
+  response.sendFile(__dirname + '/views/start.html');
+
+});
+
 // ----------------- HANDLE GETS END ---------------------
 // --------------------- LISTEN PORT ---------------------
 var listener = app.listen(process.env.PORT, () => {
