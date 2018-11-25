@@ -10,14 +10,14 @@ app.use(express.static('public'));
 app.get("/", (request, response) => {
 
   console.log("get received");
-  response.sendFile(__dirname + '/views/index.html');
+  response.sendFile(__dirname + '/views/start.html');
 
 });
 
-app.get("/start", (request, response) => {
+app.get("/combat", (request, response) => {
 
   console.log("get received");
-  response.sendFile(__dirname + '/views/start.html');
+  response.sendFile(__dirname + '/views/index.html');
 
 });
 
