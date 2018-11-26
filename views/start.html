@@ -8,16 +8,13 @@
   <body>
     <div id= "player1">
       <h2>
-        Choose army: 
+        Choose army for player 1: 
       </h2>
       <article>
         <section id= "army1">
+          Points left: <span id= "p1PointsLeft"></span><br>
           <form name= "armySelectForm1">
             <p id= "army1section"></p>
-             <!--  MAKE A DYNAMIC THING THAT LOOPS armies here:
-            <input type= "radio" name= "army1" value= "humans"/> Human State Defence Forces.  
-            <input type= "radio" name= "army1" value= "elves"/> Elven Kingdom Guardians.
-             -->
           </form>
         </section>
         <section>
@@ -28,7 +25,22 @@
       </article>
     </div>
     <div id= "player2">
-      
+      <h2>
+        Choose army for player 2: 
+      </h2>
+      <article>
+        <section id= "army2">
+          Points left: <span id= "p2PointsLeft"></span><br>
+          <form name= "armySelectForm2">
+            <p id= "army2section"></p>
+          </form>
+        </section>
+        <section>
+          <p id= "unit2section">
+          <!-- MAKE A DYNAMIC THING THAT LOOPS units here: -->
+          </p>
+        </section>
+      </article>  
     </div> 
     <script src="/constructors.js"></script>
     <script src="/worlds.js"></script>
@@ -36,6 +48,7 @@
     <script src="/units.js"></script>
     <script src="/weapons.js"></script>
     <script src="/terrain.js"></script>
+    <script src="../start/setupFunctions.js"></script>
     <script src="../start/setup.js"></script>
   </body>
 </html>    
