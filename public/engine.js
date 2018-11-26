@@ -233,5 +233,7 @@ function startGame(){
   console.log('start game ready: ', gameObject);
 }
 
-// Calls:
-startGame();
+//  -------- ONLOAD:  ------------
+window.onload = ()=> {
+  startGame();
+};
