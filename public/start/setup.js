@@ -3,8 +3,8 @@
 
 // selections:
 const selected = {
-army1: {chosenArmy: 'default', pointsLeft: 200},
-army2: {chosenArmy: 'default', pointsLeft: 200}
+army1: {chosenArmy: 'default', pointsLeft: 200, units: []},
+army2: {chosenArmy: 'default', pointsLeft: 200, units: []}
 }
 
 // armies:

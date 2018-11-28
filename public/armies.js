@@ -71,6 +71,10 @@ const armies =
   
   {unit: 'Longbowman', id: 3, location: {x: 0, y: 0, z: 0}, quantity: 10, order: 'standby', target: null, 
   engaged: {yes: false, withWho: []}, joinedCharacters: [], highlighted: false, commander: 'army1', details: null,
+  firing: false, firingAt: null, notMoved: false},
+  
+  {unit: 'Longbowman', id: 3, location: {x: 0, y: 0, z: 0}, quantity: 10, order: 'standby', target: null, 
+  engaged: {yes: false, withWho: []}, joinedCharacters: [], highlighted: false, commander: 'army1', details: null,
   firing: false, firingAt: null, notMoved: false}
 ],
 [   // 3 .   Elven army
