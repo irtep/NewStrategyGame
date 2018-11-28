@@ -1,9 +1,8 @@
 /*
 
-beta version ready... need to test and create maps, units and armies.
+Continue with setup.js
+AddUnit function
 
-to fix:
-add limits to all. after long desc
 */
 
 /*
