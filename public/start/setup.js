@@ -22,7 +22,6 @@ for (let i = 0; i < availArmies.length; i++) {
 }
 
 // event listener for radio button above:
-
 const selector1 = document.armySelectForm1.army1;
 let clickedArmy; // placeholder for clicked radio button
 
@@ -49,9 +48,11 @@ for (let i = 0; i < selector1.length; i++) {
     let buttons = [];
     for (let i = 0; i < clickedArmy.length; i++) {
       let forAdd;
+      const theArmy = 'army1';
+      
       forAdd = '<strong>' + clickedArmy[i].unitSize + ' x ' + clickedArmy[i].nombre + '</strong><br>' +
       'Point cost: ' + clickedArmy[i].stats.pointCost * clickedArmy[i].unitSize + '. Limit per army: '+ clickedArmy[i].limit +'<br>' +
-      clickedArmy[i].longDesc + '<br><input type= "button" class= "hire" name= "'+ clickedArmy[i].nombre +'" value= "Add this unit."><br>';
+      clickedArmy[i].longDesc + '<br><input type= "button" class= "adder" name= "army1" id= "'+ clickedArmy[i].nombre +'" value= "Add this unit." onclick = "addUnit(this.name, this.id, '+clickedArmy[i].unitSize+')"><br>';
       buttons.push(forAdd); 
     }
         document.getElementById('unit1section').innerHTML = buttons.join('<br>');
