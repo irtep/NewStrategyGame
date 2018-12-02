@@ -62,7 +62,7 @@ for (let i = 0; i < selector1.length; i++) {
       const totalPointCost = clickedArmy[i].stats.pointCost * clickedArmy[i].unitSize;
       
       forAdd = '<strong>' + clickedArmy[i].unitSize + ' x ' + clickedArmy[i].nombre + '</strong><br>' +
-      'Point cost: ' + totalPointCost + '. Limit per army: '+ clickedArmy[i].limit +'<br>' +
+      'Point cost: ' + totalPointCost + '.<br>' +
       clickedArmy[i].longDesc + '<br><input type= "button" class= "adder" name= "army1" id= "'+ clickedArmy[i].nombre +'" value= "Add this unit." onclick = "addUnit(this.name, this.id, '+clickedArmy[i].unitSize+', '+totalPointCost+')"><br>';
       buttons.push(forAdd); 
     }
