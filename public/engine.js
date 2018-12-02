@@ -157,10 +157,19 @@ function roundExecutor(){
 
 // Prepare game:
 function startGame(){
+  // load selected armies from localStorage:
+  const selected = JSON.parse(localStorage.getItem('Go'));
+  console.log('selected: ', selected);
+  // update gameObject with info from selected:
+  gameObject.army1 = selected.army1.units; gameObject.army2 = selected.army2.units;
+  gameObject.factions[0] = selected.army1.chosenArmy; gameObject.factions[1] = selected.army2.chosenArmy;
+  console.log('gameO: ', gameObject);
   // complete gameObject with unit stats
   const arm1 = gameObject.army1;
   const arm2 = gameObject.army2;
   let activeArmy = gameObject.army1;
+  const copyOfOld = Object.assign({}, gameObject);
+  console.log('old go: ', copyOfOld);
   
   for (let ind = 0; ind < arm1.length; ind++){
     const foundUnit = searchUnitByName(arm1[ind].unit, gameObject.factions[0]);
@@ -187,11 +196,11 @@ function startGame(){
           const lastUnit = i - 1;
           
           switch (i) {  // for line breaks:
-            case 4: currentFile = currentFile + 35; activeArmy[i].location.x = 50;
+            case 4: currentFile = currentFile + 35; activeArmy[i].location.x = gameObject.terrain.deploymentZone1.x;
             break;
-            case 8: currentFile = currentFile + 35; activeArmy[i].location.x = 50;
+            case 8: currentFile = currentFile + 35; activeArmy[i].location.x = gameObject.terrain.deploymentZone1.x;
             break;
-            case 12: currentFile = currentFile + 35; activeArmy[i].location.x = 50;
+            case 12: currentFile = currentFile + 35; activeArmy[i].location.x = gameObject.terrain.deploymentZone1.x;
             break;
             default: activeArmy[i].location.x = activeArmy[lastUnit].location.x + 130;
           }
@@ -210,12 +219,13 @@ function startGame(){
           const lastUnit = i - 1;
           
           switch (i) {  // for line breaks:
-            case 4: currentFile2 = currentFile - 35; activeArmy[i].location.x = 50;
+            case 4: currentFile2 = currentFile2 - 35; activeArmy[i].location.x = gameObject.terrain.deploymentZone2.x;
             break;
-            case 8: currentFile2 = currentFile - 35; activeArmy[i].location.x = 50;
+            case 8: currentFile2 = currentFile2 - 35; activeArmy[i].location.x = gameObject.terrain.deploymentZone2.x;
             break;
-            case 12: currentFile2 = currentFile - 35; activeArmy[i].location.x = 50;
+            case 12: currentFile2 = currentFile2 - 35; activeArmy[i].location.x = gameObject.terrain.deploymentZone2.x;
             break;
+              console.log('using default to set x and y for a2');
             default: activeArmy[i].location.x = activeArmy[lastUnit].location.x - 130;
           }
           
