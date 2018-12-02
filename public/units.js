@@ -10,7 +10,7 @@
 const imperials = [
   new gameUnit(
   'Command tank', 'commander', 'communications tank with commander inside', ['crash'], ['heavy machinegun', 'heavy machinegun'],
-  {m: 8, s: 5, t: 6, ws: 2, bs: 4, a: 2, w: 7, i: 2, ld: 8, sv: 2, defMods: -1, pointCost: 20}, 9,  'imperials', 1,
+  {m: 8, s: 5, t: 6, ws: 2, bs: 4, a: 2, w: 7, i: 2, ld: 8, sv: 2, defMods: -1, pointCost: 25}, 9,  'imperials', 1,
   'Tank of commander. Modificated command tank of Lizard light tank design. Armed with twin heavy machine gun.', 1),
   new gameUnit(
   'Guardsman', 'infantry','human imperial soldiers. ok shooters, bad in melee', ['bayonet'], ['assault rifle mk3'],
@@ -37,7 +37,7 @@ const imperials = [
 const royalGuard = [
   new gameUnit(
   'Knight commander', 'commander','battlegroup commander, heavily armed and armoured', ['chainsword'], ['laser rifle'],
-  {m: 6, s: 4, t: 4, ws: 5, bs: 2, a: 3, w: 3, i: 5, ld: 10, sv: 2, defMods: 0, pointCost: 10}, 2, 'royalGuard', 1,
+  {m: 6, s: 4, t: 4, ws: 5, bs: 2, a: 3, w: 3, i: 5, ld: 10, sv: 2, defMods: 0, pointCost: 15}, 2, 'royalGuard', 1,
   'Knight commander is super soldiers amongst the super soldiers. You need decades of service to raise the rank of a Knight Commander. Deadly in melee and ranged combat.', 1),
   new gameUnit(
   'Knight', 'infantry','wearing heavy armour, jetpack and rifle. fast and tough elite unit', ['combat gauntlet'], ['laser rifle'],
@@ -60,7 +60,7 @@ const kingdom = [
   new gameUnit(
   'Knight', 'cavalry','Tough elite unit mounted on warhorses. Well armed with lances and armoured with excellent plate armours',
   ['lance', 'shield'], ['no weapon'],
-  {m: 8, s: 4, t: 4, ws: 4, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 10}, 2, 'kingdom', 5,
+  {m: 8, s: 4, t: 4, ws: 4, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 7}, 2, 'kingdom', 5,
   'Tough elite unit mounted on warhorses. Well armed with lances, shields and armoured with excellent plate armours', 5),
   new gameUnit(
   'Swordsman', 'infantry', 'Infantryman of human kingdoms. Well trained. Armed with sword and shield.', 
@@ -70,12 +70,12 @@ const kingdom = [
   new gameUnit(
   'Crossbowman', 'infantry', 'Good and cheap ranged unit. Crossbows are deadly and easy to use.', 
   ['dagger'], ['crossbow'],
-  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 3}, 1,  'kingdom', 10,
+  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 5}, 1,  'kingdom', 10,
   'Usually not that trained, but using crossbows with deadly accuration doesnt need that much training. Mostly considered as unfair weapon as most unworthy rookie soldier can kill a noble life-time of trained knight with one shot.', 6),
   new gameUnit(
   'Longbowman', 'infantry', 'It takes lots of training to be a good archer, like these guys are.', 
   ['dagger'], ['longbow'],
-  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 4}, 1,  'kingdom', 10,
+  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 7}, 1,  'kingdom', 10,
   'I takes a lot of training to be a good archer, like these guys are. Absolutely deadly fire rate. Usually against most of the units it is one volley that all it takes to destroy the unit', 5),
   new gameUnit(
   'Peasant', 'infantry', 'These guys are not really fighters, but sometimes quantity overwhelmes quality.', 
@@ -88,7 +88,7 @@ const elves = [
   new gameUnit(
   'Elven lord', 'commander','Elven lords are very dangerous, both melee and ranged combat.', 
   ['enhanced sword'], ['elven longbow'],
-  {m: 5, s: 3, t: 3, ws: 5, bs: 2, a: 3, w: 3, i: 6, ld: 10, sv: 2, defMods: 0, pointCost: 10}, 1, 'elves', 1,
+  {m: 5, s: 3, t: 3, ws: 5, bs: 2, a: 3, w: 3, i: 6, ld: 10, sv: 2, defMods: 0, pointCost: 15}, 1, 'elves', 1,
     'Elven lords are very dangerous, both melee and ranged combat.', 1),
   new gameUnit(
   'Green dragon', 'monster','Huge winged monster that burns everything, except those that it will rip to parts.',
@@ -103,12 +103,12 @@ const elves = [
   new gameUnit(
   'Elven archer', 'infantry', 'Longbow is very deadly ranged weapon and these guys are best archers around.', 
   ['dagger'], ['elven longbow'],
-  {m: 5, s: 3, t: 3, ws: 3, bs: 2, a: 1, w: 1, i: 4, ld: 8, sv: 5, defMods: 0, pointCost: 4}, 1,  'elves', 10,
+  {m: 5, s: 3, t: 3, ws: 3, bs: 2, a: 1, w: 1, i: 4, ld: 8, sv: 5, defMods: 0, pointCost: 10}, 1,  'elves', 10,
   'Longbow is very deadly ranged weapon and these guys are the best archers around.', 5),
   new gameUnit(
   'Elf rider', 'cavalry', 'Riding fast horse these elves like to ride around enemies while peppering them with deadly accuracy with their bows.', 
-  ['longsword'], ['elven shortbow'],
-  {m: 9, s: 3, t: 3, ws: 4, bs: 3, a: 1, w: 2, i: 4, ld: 8, sv: 4, defMods: 1, pointCost: 5}, 1,  'elves', 5,
+  ['longsword'], ['elven longbow'],
+  {m: 9, s: 3, t: 3, ws: 4, bs: 3, a: 1, w: 2, i: 4, ld: 8, sv: 4, defMods: 1, pointCost: 8}, 1,  'elves', 5,
   'Riding fast horse these elves like to ride around enemies while peppering them with deadly accuracy with their bows.', 5),
   new gameUnit(
   'Swordmaster', 'infantry', 'Most of the elves love their bows but in some cases they decide to dedicate to join the swordmaster brotherhood to dedicate their life to train fighting with swords.', 
@@ -126,7 +126,7 @@ const dwarves = [
   new gameUnit(
   'Dwarf warchief', 'commander','Battlegroup commander, heavily armed and armoured, veteran of hundreads of battles', 
   ['runic axe', 'shield'], ['no weapon'],
-  {m: 4, s: 4, t: 4, ws: 6, bs: 2, a: 3, w: 4, i: 3, ld: 10, sv: 1, defMods: 1, pointCost: 10}, 1, 'dwarves', 1,
+  {m: 4, s: 4, t: 4, ws: 6, bs: 2, a: 3, w: 4, i: 3, ld: 10, sv: 1, defMods: 1, pointCost: 25}, 1, 'dwarves', 1,
   'Battlegroup commander, heavily armed and armoured, veteran of hundreads of battles', 1),
   new gameUnit(
   'Dwarf infantry', 'infantry','Tough and well armed, but somewhat slow.',
@@ -136,7 +136,7 @@ const dwarves = [
   new gameUnit(
   'Mountain guardian', 'infantry', 'Elite infantry of dwarves. If you are opponent, watch out for these guys!', 
   ['halberd', 'shield'], ['no weapon'],
-  {m: 4, s: 4, t: 5, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 1, defMods: 0, pointCost: 5}, 1,  'dwarves', 10,
+  {m: 4, s: 4, t: 5, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 1, defMods: 0, pointCost: 10}, 1,  'dwarves', 10,
   'Unlike normal dwarf infantry, these elite infantry are professionals. If you are opponent, watch out for these guys!', 6),
   new gameUnit(
   'Steel golem', 'monster', 'Steam-powered monstrosity. Controlled by dwarf warchief to punish enemies', 
@@ -146,6 +146,6 @@ const dwarves = [
   new gameUnit(
   'Steamtank', 'monster', 'Steam-powered battlewagon. hard to break and causes damage with powerful catapult', 
   ['crash'], ['catapult'],
-  {m: 5, s: 5, t: 8, ws: 3, bs: 4, a: 2, w: 10, i: 2, ld: 10, sv: 2, defMods: 0, pointCost: 50}, 13,  'dwarves', 1,
+  {m: 5, s: 5, t: 8, ws: 3, bs: 4, a: 2, w: 10, i: 2, ld: 10, sv: 2, defMods: 0, pointCost: 90}, 13,  'dwarves', 1,
   'Steam-powered battlewagon. hard to break and causes damage with powerful catapult. Humans have tried to copy these, but so far they havent been able to get realiable and powerful enough steam engine made.', 3)
 ]
