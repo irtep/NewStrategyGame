@@ -93,7 +93,7 @@ const elves = [
   new gameUnit(
   'Green dragon', 'monster','Huge winged monster that burns everything, except those that it will rip to parts.',
   ['teeth and claws'], ['dragonfire'],
-  {m: 8, s: 6, t: 7, ws: 4, bs: 4, a: 5, w: 10, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 30}, 10, 'elves', 1,
+  {m: 8, s: 6, t: 7, ws: 4, bs: 4, a: 5, w: 10, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 60}, 10, 'elves', 1,
   'Huge winged monster that burns everything, except those that it will rip to parts.', 2),
   new gameUnit(
   'Elf ranger', 'infantry', 'Excellent scout unit that can fight both ranged and melee.', 
@@ -141,11 +141,11 @@ const dwarves = [
   new gameUnit(
   'Steel golem', 'monster', 'Steam-powered monstrosity. Controlled by dwarf warchief to punish enemies', 
   ['steel fists'], ['auto crossbow'],
-  {m: 5, s: 6, t: 7, ws: 4, bs: 4, a: 3, w: 7, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 25}, 3,  'dwarves', 1,
+  {m: 5, s: 6, t: 7, ws: 4, bs: 4, a: 3, w: 7, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 35}, 3,  'dwarves', 1,
   'Steam-powered monstrosity. Controlled by dwarf warchief with mystical psionic stones of elven origin. Only dwarves possess information how to construct these metallic monsters.', 3),
   new gameUnit(
   'Steamtank', 'monster', 'Steam-powered battlewagon. hard to break and causes damage with powerful catapult', 
   ['crash'], ['catapult'],
-  {m: 5, s: 5, t: 8, ws: 3, bs: 4, a: 2, w: 10, i: 2, ld: 10, sv: 2, defMods: 0, pointCost: 25}, 13,  'dwarves', 1,
+  {m: 5, s: 5, t: 8, ws: 3, bs: 4, a: 2, w: 10, i: 2, ld: 10, sv: 2, defMods: 0, pointCost: 50}, 13,  'dwarves', 1,
   'Steam-powered battlewagon. hard to break and causes damage with powerful catapult. Humans have tried to copy these, but so far they havent been able to get realiable and powerful enough steam engine made.', 3)
 ]

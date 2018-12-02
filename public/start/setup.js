@@ -3,8 +3,8 @@
 
 // selections:
 const selected = {
-army1: {chosenArmy: 'default', pointsLeft: 200, units: []},
-army2: {chosenArmy: 'default', pointsLeft: 200, units: []}
+army1: {chosenArmy: null, pointsLeft: 200, units: [], ready: false},
+army2: {chosenArmy: null, pointsLeft: 200, units: [], ready: false}
 }
 
 // armies:
@@ -13,18 +13,25 @@ const availArmies = ['Humans', 'Elves', 'Dwarves'];
 // make army selection radiobuttons:
 for (let i = 0; i < availArmies.length; i++) {
   const a1s = document.getElementById('army1section');
+  const a2s = document.getElementById('army2section');
   
   if (i === 0) {
     a1s.innerHTML = '<input type= "radio" name= "army1" value="'+ availArmies[i] +'"/>'+availArmies[i]+'<br>';
+    a2s.innerHTML = '<input type= "radio" name= "army2" value="'+ availArmies[i] +'"/>'+availArmies[i]+'<br>';
   } else {
     a1s.innerHTML = a1s.innerHTML + '<input type= "radio" name= "army1" value="'+ availArmies[i] +'"/>'+availArmies[i]+'<br>';
+    a2s.innerHTML = a2s.innerHTML + '<input type= "radio" name= "army2" value="'+ availArmies[i] +'"/>'+availArmies[i]+'<br>';
   }
 }
 
-// event listener for radio button above:
+// event listener for radio buttons above:
 const selector1 = document.armySelectForm1.army1;
-let clickedArmy; // placeholder for clicked radio button
+const selector2 = document.armySelectForm2.army2;
+// placeholders for clicked radio buttons
+let clickedArmy;
+let clickedArmy2;
 
+// Army 1:
 for (let i = 0; i < selector1.length; i++) {
   selector1[i].addEventListener('change', () => { 
     selected.army1.chosenArmy = selector1[i].value;
@@ -33,12 +40,15 @@ for (let i = 0; i < selector1.length; i++) {
     switch (selected.army1.chosenArmy){
       case 'Humans':
         clickedArmy = kingdom;
+        selected.army1.chosenArmy = kingdom;
       break;
       case 'Elves':
         clickedArmy = elves;
+        selected.army1.chosenArmy = elves;
       break;
       case 'Dwarves':
         clickedArmy = dwarves;
+        selected.army1.chosenArmy = dwarves;
       break;
       default: console.log/(' army1 chosenArmy not found!');        
     }
@@ -49,13 +59,53 @@ for (let i = 0; i < selector1.length; i++) {
     for (let i = 0; i < clickedArmy.length; i++) {
       let forAdd;
       const theArmy = 'army1';
+      const totalPointCost = clickedArmy[i].stats.pointCost * clickedArmy[i].unitSize;
       
       forAdd = '<strong>' + clickedArmy[i].unitSize + ' x ' + clickedArmy[i].nombre + '</strong><br>' +
-      'Point cost: ' + clickedArmy[i].stats.pointCost * clickedArmy[i].unitSize + '. Limit per army: '+ clickedArmy[i].limit +'<br>' +
-      clickedArmy[i].longDesc + '<br><input type= "button" class= "adder" name= "army1" id= "'+ clickedArmy[i].nombre +'" value= "Add this unit." onclick = "addUnit(this.name, this.id, '+clickedArmy[i].unitSize+')"><br>';
+      'Point cost: ' + totalPointCost + '. Limit per army: '+ clickedArmy[i].limit +'<br>' +
+      clickedArmy[i].longDesc + '<br><input type= "button" class= "adder" name= "army1" id= "'+ clickedArmy[i].nombre +'" value= "Add this unit." onclick = "addUnit(this.name, this.id, '+clickedArmy[i].unitSize+', '+totalPointCost+')"><br>';
       buttons.push(forAdd); 
     }
         document.getElementById('unit1section').innerHTML = buttons.join('<br>');
+  });
+}
+
+// Army 2:
+for (let i = 0; i < selector2.length; i++) {
+  selector2[i].addEventListener('change', () => { 
+    selected.army2.chosenArmy = selector2[i].value;
+    
+    // make list of choosable units:
+    switch (selected.army2.chosenArmy){
+      case 'Humans':
+        clickedArmy2 = kingdom;
+        selected.army2.chosenArmy = kingdom;
+      break;
+      case 'Elves':
+        clickedArmy2 = elves;
+        selected.army2.chosenArmy = elves;
+      break;
+      case 'Dwarves':
+        clickedArmy2 = dwarves;
+        selected.army2.chosenArmy = dwarves;
+      break;
+      default: console.log/(' army2 chosenArmy not found!');        
+    }
+    // clear unit2section:
+    document.getElementById('unit2section').innerHTML = '';
+    // make a hire buttons:
+    let buttons = [];
+    for (let i = 0; i < clickedArmy2.length; i++) {
+      let forAdd;
+      const theArmy = 'army2';
+      const totalPointCost = clickedArmy2[i].stats.pointCost * clickedArmy2[i].unitSize;
+      
+      forAdd = '<strong>' + clickedArmy2[i].unitSize + ' x ' + clickedArmy2[i].nombre + '</strong><br>' +
+      'Point cost: ' + totalPointCost + '. Limit per army: '+ clickedArmy2[i].limit +'<br>' +
+      clickedArmy2[i].longDesc + '<br><input type= "button" class= "adder" name= "army2" id= "'+ clickedArmy2[i].nombre +'" value= "Add this unit." onclick = "addUnit(this.name, this.id, '+clickedArmy2[i].unitSize+', '+totalPointCost+')"><br>';
+      buttons.push(forAdd); 
+    }
+        document.getElementById('unit2section').innerHTML = buttons.join('<br>');
   });
 }
 

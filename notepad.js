@@ -1,7 +1,8 @@
 /*
 
 Continue with setup.js
-AddUnit function
+AddUnit function:
+Need to add point calculator to that.
 
 */
 
