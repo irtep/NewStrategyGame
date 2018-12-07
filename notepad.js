@@ -1,8 +1,8 @@
 /*
 
-Continue with setup.js
-AddUnit function:
-Need to add point calculator to that.
+Start to look good.
+To add: more maps, more armies. More test.
+Better and clearer user interface.
 
 */
 
