@@ -30,3 +30,11 @@
   background-color: navy;
   color: white;
 }
+.smaller {
+  color: green;
+  font-size: 75%;
+}
+.informal {
+  color: crimson;
+  font-weight: bold;
+}
