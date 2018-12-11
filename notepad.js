@@ -4,6 +4,7 @@ Start to look good.
 To add: 
 - more maps, more armies. More test.
 - Better and clearer user interface.  ... this next i think.
+(on works.... bugs atm. on setting orders.)
 - campaign tool.
 */
 
@@ -32,3 +33,4 @@ consiq: free city, but conflict with dwarves.
 query 5: peasants ask some money as they are forced to fight, instead of work. pay, but less than ask? pay what they ask? dont pay?
 consiq: peasant revolt if you dont pay what they ask: you lose all peasant units and 3 of your lands are attacked by peasant armies.
 */
+

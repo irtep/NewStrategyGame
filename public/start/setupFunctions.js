@@ -1,3 +1,13 @@
+function randomArmies() {  // not very random atm. but allows quick setup for ua-test.
+  
+  selected.army1.chosenArmy = kingdom; // selected object is at public/start/setup.js
+  selected.army2.chosenArmy = kingdom;
+  addUnit('army1', 'Knight commander', 1, 10);
+  addUnit('army2', 'Knight commander', 1, 10);
+  extraButtonHandler('ready1');
+  extraButtonHandler('ready2');
+}
+
 function extraButtonHandler(buttonId) {
   switch (buttonId) {
     case 'clear1':
@@ -57,7 +67,7 @@ function updateArmies() {
  }  
 }
 
-function addUnit(targetArmy, targetUnit, unitSize, pointCost){ 
+function addUnit(targetArmy, targetUnit, unitSize, pointCost){
   const whoIsIt = targetArmy; // army1 or army2
   let armyInCase; let infoBoxInCase;
   const newUnit = {unit: targetUnit, id: null, location: {x: 0, y: 0, z: 0}, quantity: unitSize, order: 'standby', target: null, 

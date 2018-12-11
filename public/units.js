@@ -5,50 +5,6 @@
 // defMods: +1 is better to defend, -1 is less to defend
 // ballistic skill: lower is better.  weapon skill: higher is better!
 
-// SCI-FI:
-
-const imperials = [
-  new gameUnit(
-  'Command tank', 'commander', 'communications tank with commander inside', ['crash'], ['heavy machinegun', 'heavy machinegun'],
-  {m: 8, s: 5, t: 6, ws: 2, bs: 4, a: 2, w: 7, i: 2, ld: 8, sv: 2, defMods: -1, pointCost: 25}, 9,  'imperials', 1,
-  'Tank of commander. Modificated command tank of Lizard light tank design. Armed with twin heavy machine gun.', 1),
-  new gameUnit(
-  'Guardsman', 'infantry','human imperial soldiers. ok shooters, bad in melee', ['bayonet'], ['assault rifle mk3'],
-  {m: 6, s: 3, t: 3, ws: 3, bs: 4, a: 1, w: 1, i: 3, ld: 8, sv: 5, defMods: 0, pointCost: 1}, 1, 'imperials', 10,
-  'Well trained and equipped professional soldiers. Backbone of imperial army. Breastplates can save the day and mk3 assault rifle will save a day!', 5),
-  new gameUnit(
-  'Grizzly battletank', 'vehicle', 'excellent medium battletank', ['crash'], ['battlecannon', 'heavy machinegun'],
-  {m: 6, s: 6, t: 7, ws: 2, bs: 4, a: 2, w: 10, i: 2, ld: 8, sv: 3, defMods: -1, pointCost: 30}, 10,  'imperials', 1,
-  'Legendary grizzly main battle tank really doesn not need any introduction. Excellent firepower with battle cannon and heavy machine gun, combined with powerful engine and strong armour. ', 3), 
-  new gameUnit(
-  'Lizard light tank', 'carrier', 'light tank that can carry soldiers', ['crash'], ['heavy machinegun'],
-  {m: 9, s: 5, t: 6, ws: 2, bs: 4, a: 2, w: 7, i: 2, ld: 8, sv: 3, defMods: -1, pointCost: 20}, 9,  'imperials', 1,
-  'Lizard light tank is fast armoured troop carrier. Equipped with heavy machine gun.', 5),
-  new gameUnit(
-  'Ranger', 'infantry', 'elite imperial soldier', ['bayonet'], ['sniper rifle',],
-  {m: 7, s: 3, t: 3, ws: 3, bs: 3, a: 1, w: 1, i: 4, ld: 8, sv: 5, defMods: 1, pointCost: 4}, 1,  'imperials', 5,
-  'Imperial elite soldiers. Expert marksmen, armed with powerful sniper rifles can kill enemy infantry from far.', 5),
-  new gameUnit(
-  'Elephant artillery', 'vehicle', 'heavy self-propelled cannon', ['crash'], ['meteor cannon'],
-  {m: 2, s: 6, t: 6, ws: 2, bs: 4, a: 1, w: 7, i: 2, ld: 8, sv: 3, defMods: -2, pointCost: 28}, 10,  'imperials', 1,
-  'Slow artillery unit with light armour. Equipped with devastating meteor cannon. Good for destroying, well... everything', 3)
-];
-
-const royalGuard = [
-  new gameUnit(
-  'Knight commander', 'commander','battlegroup commander, heavily armed and armoured', ['chainsword'], ['laser rifle'],
-  {m: 6, s: 4, t: 4, ws: 5, bs: 2, a: 3, w: 3, i: 5, ld: 10, sv: 2, defMods: 0, pointCost: 15}, 2, 'royalGuard', 1,
-  'Knight commander is super soldiers amongst the super soldiers. You need decades of service to raise the rank of a Knight Commander. Deadly in melee and ranged combat.', 1),
-  new gameUnit(
-  'Knight', 'infantry','wearing heavy armour, jetpack and rifle. fast and tough elite unit', ['combat gauntlet'], ['laser rifle'],
-  {m: 8, s: 4, t: 4, ws: 4, bs: 3, a: 1, w: 1, i: 4, ld: 9, sv: 3, defMods: 0, pointCost: 10}, 1, 'royalGuard', 8,
-  'Knight infantrymen move fast with jetpack, hit hard with combat gauntlets and shoot deadly with laser rifles. Nuff said.', 5),
-  new gameUnit(
-  'Masticore tank', 'vehicle', 'royal guard heavy tank', ['crash'], ['laser cannon', 'laser cannon', 'heavy machinegun', 'heavy machinegun'],
-  {m: 5, s: 7, t: 8, ws: 2, bs: 3, a: 1, w: 12, i: 3, ld: 9, sv: 2, defMods: -2, pointCost: 50}, 12,  'royalGuard', 1,
-  'Very heavy tank. With very heavy armour and firepower. Rips armoured units with two laser cannons and infantry with two heavy machine guns.', 3)
-];
-
 // FA-BA:
 
 const kingdom = [
@@ -60,7 +16,7 @@ const kingdom = [
   new gameUnit(
   'Knight', 'cavalry','Tough elite unit mounted on warhorses. Well armed with lances and armoured with excellent plate armours',
   ['lance', 'shield'], ['no weapon'],
-  {m: 8, s: 4, t: 4, ws: 4, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 7}, 2, 'kingdom', 5,
+  {m: 8, s: 4, t: 4, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 7}, 2, 'kingdom', 5,
   'Tough elite unit mounted on warhorses. Well armed with lances, shields and armoured with excellent plate armours', 5),
   new gameUnit(
   'Swordsman', 'infantry', 'Infantryman of human kingdoms. Well trained. Armed with sword and shield.', 
@@ -148,4 +104,49 @@ const dwarves = [
   ['crash'], ['catapult'],
   {m: 5, s: 5, t: 8, ws: 3, bs: 4, a: 2, w: 10, i: 2, ld: 10, sv: 2, defMods: 0, pointCost: 90}, 13,  'dwarves', 1,
   'Steam-powered battlewagon. hard to break and causes damage with powerful catapult. Humans have tried to copy these, but so far they havent been able to get realiable and powerful enough steam engine made.', 3)
-]
+];
+
+
+// SCI-FI:
+
+const imperials = [
+  new gameUnit(
+  'Command tank', 'commander', 'communications tank with commander inside', ['crash'], ['heavy machinegun', 'heavy machinegun'],
+  {m: 8, s: 5, t: 6, ws: 2, bs: 4, a: 2, w: 7, i: 2, ld: 8, sv: 2, defMods: -1, pointCost: 25}, 9,  'imperials', 1,
+  'Tank of commander. Modificated command tank of Lizard light tank design. Armed with twin heavy machine gun.', 1),
+  new gameUnit(
+  'Guardsman', 'infantry','human imperial soldiers. ok shooters, bad in melee', ['bayonet'], ['assault rifle mk3'],
+  {m: 6, s: 3, t: 3, ws: 3, bs: 4, a: 1, w: 1, i: 3, ld: 8, sv: 5, defMods: 0, pointCost: 1}, 1, 'imperials', 10,
+  'Well trained and equipped professional soldiers. Backbone of imperial army. Breastplates can save the day and mk3 assault rifle will save a day!', 5),
+  new gameUnit(
+  'Grizzly battletank', 'vehicle', 'excellent medium battletank', ['crash'], ['battlecannon', 'heavy machinegun'],
+  {m: 6, s: 6, t: 7, ws: 2, bs: 4, a: 2, w: 10, i: 2, ld: 8, sv: 3, defMods: -1, pointCost: 30}, 10,  'imperials', 1,
+  'Legendary grizzly main battle tank really doesn not need any introduction. Excellent firepower with battle cannon and heavy machine gun, combined with powerful engine and strong armour. ', 3), 
+  new gameUnit(
+  'Lizard light tank', 'carrier', 'light tank that can carry soldiers', ['crash'], ['heavy machinegun'],
+  {m: 9, s: 5, t: 6, ws: 2, bs: 4, a: 2, w: 7, i: 2, ld: 8, sv: 3, defMods: -1, pointCost: 20}, 9,  'imperials', 1,
+  'Lizard light tank is fast armoured troop carrier. Equipped with heavy machine gun.', 5),
+  new gameUnit(
+  'Ranger', 'infantry', 'elite imperial soldier', ['bayonet'], ['sniper rifle',],
+  {m: 7, s: 3, t: 3, ws: 3, bs: 3, a: 1, w: 1, i: 4, ld: 8, sv: 5, defMods: 1, pointCost: 4}, 1,  'imperials', 5,
+  'Imperial elite soldiers. Expert marksmen, armed with powerful sniper rifles can kill enemy infantry from far.', 5),
+  new gameUnit(
+  'Elephant artillery', 'vehicle', 'heavy self-propelled cannon', ['crash'], ['meteor cannon'],
+  {m: 2, s: 6, t: 6, ws: 2, bs: 4, a: 1, w: 7, i: 2, ld: 8, sv: 3, defMods: -2, pointCost: 28}, 10,  'imperials', 1,
+  'Slow artillery unit with light armour. Equipped with devastating meteor cannon. Good for destroying, well... everything', 3)
+];
+
+const royalGuard = [
+  new gameUnit(
+  'Knight commander', 'commander','battlegroup commander, heavily armed and armoured', ['chainsword'], ['laser rifle'],
+  {m: 6, s: 4, t: 4, ws: 5, bs: 2, a: 3, w: 3, i: 5, ld: 10, sv: 2, defMods: 0, pointCost: 15}, 2, 'royalGuard', 1,
+  'Knight commander is super soldiers amongst the super soldiers. You need decades of service to raise the rank of a Knight Commander. Deadly in melee and ranged combat.', 1),
+  new gameUnit(
+  'Knight', 'infantry','wearing heavy armour, jetpack and rifle. fast and tough elite unit', ['combat gauntlet'], ['laser rifle'],
+  {m: 8, s: 4, t: 4, ws: 4, bs: 3, a: 1, w: 1, i: 4, ld: 9, sv: 3, defMods: 0, pointCost: 10}, 1, 'royalGuard', 8,
+  'Knight infantrymen move fast with jetpack, hit hard with combat gauntlets and shoot deadly with laser rifles. Nuff said.', 5),
+  new gameUnit(
+  'Masticore tank', 'vehicle', 'royal guard heavy tank', ['crash'], ['laser cannon', 'laser cannon', 'heavy machinegun', 'heavy machinegun'],
+  {m: 5, s: 7, t: 8, ws: 2, bs: 3, a: 1, w: 12, i: 3, ld: 9, sv: 2, defMods: -2, pointCost: 50}, 12,  'royalGuard', 1,
+  'Very heavy tank. With very heavy armour and firepower. Rips armoured units with two laser cannons and infantry with two heavy machine guns.', 3)
+];

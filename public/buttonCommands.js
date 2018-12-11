@@ -1,7 +1,18 @@
+// nicknames for views/index.html elements
+const infoBoxi = document.getElementById('infoBox');
+const directions = document.getElementById('moveTargets');
+const availCommands = document.getElementById('availCommands');
 
-function pauseGame(){
-  const pButton = document.getElementById('pauseButton');
-  if (pause === true){
+// placeholder for selected command:
+let selectedCommand;
+
+function commandAll() {
+  console.log('command all');
+}
+
+function pauseGame(){ // pauses or continues the game
+  const pButton = document.getElementById('pauseButton'); // at index.html
+  if (pause === true){ // pause at public/start/engine.js
     pause = false;
     pButton.value = 'Pause game';
     console.log('pause off: ', pause);
@@ -12,27 +23,57 @@ function pauseGame(){
   }
 }
 
-function setCommand(command){
-  const selectedUnit = gameObject.selectedUnits.player1;
-  const targetedNumber = gameObject.targetedUnits.player1;
-  const ifNan = isNaN(targetedNumber);
-  let targetedUnit;
-  if (ifNan === true) {
-    targetedUnit = targetedNumber;
-  } else {
-    targetedUnit = gameObject.army2[targetedNumber];
-  }
+function setCommand(command){ // sets selected command
+  selectedCommand = command;
   
-  gameObject.army1[selectedUnit].order = command;
-  gameObject.army1[selectedUnit].target = targetedUnit;
+  if (command === 'move' || command === 'run') {
+    availCommands.innerHTML = '';
+    infoBoxi.innerHTML = 'Select direction:'
+    directions.innerHTML = '<input type="button" id= "nw" class= "moveTargets" value= "nw" onclick= "clickedUnit2(this.value)">'+
+      '<input type="button" id= "n" class= "moveTargets" value= "n" onclick= "clickedUnit2(this.value)">'+
+      '<input type="button" id= "ne" class= "moveTargets" value= "ne" onclick= "clickedUnit2(this.value)"><br>'+
+      '<input type="button" id= "w" class= "moveTargets" value= "w" onclick= "clickedUnit2(this.value)">'+
+      '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
+      '<input type="button" id= "e" class= "moveTargets" value= "e" onclick= "clickedUnit2(this.value)"><br>'+
+      '<input type="button" id= "sw" class= "moveTargets" value= "sw" onclick= "clickedUnit2(this.value)">'+
+      '<input type="button" id= "s" class= "moveTargets" value= "s" onclick= "clickedUnit2(this.value)">'+
+      '<input type="button" id= "se" class= "moveTargets" value= "se" onclick= "clickedUnit2(this.value)"><br>'
+  } 
+  if (command === 'shoot'){
+    infoBoxi.innerHTML = 'select target:';
+    directions.innerHTML = '';
+  }
+  if (command === 'standby') {
+    const selectedUnit = gameObject.selectedUnits.player1;
+    gameObject.army1[selectedUnit].order = selectedCommand;
+    availCommands.innerHTML = '';
+    infoBoxi.innerHTML = '';
+    directions.innerHTML = '';
+  }
 }
 
-function clickedUnit1(who){
+function clickedUnit1(who){ // selected unit to be ordened
   gameObject.selectedUnits.player1 = who;
+  infoBoxi.innerHTML = 'Select command:';
+// action buttons
+  for (let i = 0; i < orders.length; i++){
+    const currentName = orders[i];
+    availCommands.innerHTML = availCommands.innerHTML + '<input type = "button" value='+currentName+ ' class= "commands" onclick="setCommand(this.value)" >' + '</input>'
+    + '<br>'; 
+  }  
 }
 
-function clickedUnit2(who){
+function clickedUnit2(who){ // selected target
+  const selectedUnit = gameObject.selectedUnits.player1; // public/gameObject.js
   gameObject.targetedUnits.player1 = who;
+  const targetedNumber = gameObject.targetedUnits.player1;
+  gameObject.army1[selectedUnit].order = selectedCommand;
+
+  if (selectedCommand === 'run' || selectedCommand === 'move'){
+    gameObject.army1[selectedUnit].target = who;
+  } else { // in case of shooting.
+    gameObject.army1[selectedUnit].target = gameObject.army2[targetedNumber];
+  }
 }
 
 function howerInPlayer1(who){
@@ -78,10 +119,4 @@ function createUnitButtons(){
     'onmouseover= howerInPlayer2('+ i +')>'
   }  
 }
-// action buttons
-for (let i = 0; i < orders.length; i++){
-  const availCommands = document.getElementById('availCommands');
-  const currentName = orders[i];
-  availCommands.innerHTML = availCommands.innerHTML + '<input type = "button" value='+currentName+ ' class= "commands" onclick="setCommand(this.value)" >' + '</input>'
-  + '<br>'; 
-}
+
