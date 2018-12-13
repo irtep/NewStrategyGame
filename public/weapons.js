@@ -24,7 +24,7 @@ const meleeWeapons = [           //r        a  s  ap w
   new weapon('unarmed', 0, 'melee',         0, 0, 0, 1, false),
   new weapon('crash', 0, 'melee',           0, 0, 4, 3, false), // basic tank attack, in fa-ba too
   new weapon('bayonet', 0, 'melee',         0, 0, 0, 1, false),
-  new weapon('shield', 0, 'melee',          0, 0, 0, 1, false),
+  new weapon('shield', 0, 'melee',          0, 0, -1, 1, false),
   new weapon('chainsword', 0, 'melee',      1, 0, 0, 1, false),
   new weapon('combat gauntlet', 0, 'melee', 0, 5, 3, 3, false),
   // FA-BA

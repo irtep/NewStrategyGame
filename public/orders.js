@@ -5,6 +5,8 @@ const orders = [
   'shoot',  // shootTarget(who, to)
   'run'     // meleeAttack(who, to)
 ];
+const logScreen = document.getElementById('logi'); // views/index.html
+let historyForLog; // to check that no duplicated msg are sent
 
 function moveUnit(who, to, mode){
   const cWidth = 950;
@@ -46,7 +48,7 @@ function moveUnit(who, to, mode){
   for (let ix = 0; ix < allUnits.length; ix++){
     const targetLoc = allUnits[ix].location;
     const targetSize = allUnits[ix].details.size * allUnits[ix].quantity;
-    let collisionResult = collisionDetect(newLocation, size, targetLoc, targetSize);
+    let collisionResult = collisionDetect(newLocation, size, targetLoc, targetSize); // at public/unitActions.js
     
     if (collisionResult === 'collision'){
       console.log('collision with unit: ', allUnits[ix]);
@@ -81,8 +83,13 @@ function moveUnit(who, to, mode){
         if (whoDubli === false) {
           allUnits[ix].engaged.withWho.push(who);
           allUnits[ix].order = 'melee';
-        }  
-        console.log('added close combat: ', gameObject);
+        }
+        const forLog = '<br>' + allUnits[ix].unit +' and '+ who.unit + 'in melee combat!'
+        
+        if (historyForLog !== forLog) {
+          logScreen.innerHTML = logScreen.innerHTML + forLog;
+          historyForLog = forLog;
+        } 
       }
       collision = true;
     }
@@ -185,7 +192,7 @@ function shootTarget(who, to){
     for (let i = 0; i < who.details.rangedWeapons.length; i++){
       who.firing = true;
       draw();
-      executeAttack('ranged', who, to, modAttack, i);
+      executeAttack('ranged', who, to, modAttack, i); // public/engineUtils.js
     }  
   }
 }

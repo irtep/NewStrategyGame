@@ -20,6 +20,10 @@ function lethalWound(to, who, isMelee){
   const p2units = document.getElementById('p2units');
   let armyNumber;
   let indexOfDead;
+  // for log screen:
+  const logScreen = document.getElementById('logi'); // views/index.html
+  let forLog;
+  
   // to find the dead unit
   for (let i = 0; i < gameObject.army1.length; i++){
     if (to == gameObject.army1[i]){
@@ -36,6 +40,9 @@ function lethalWound(to, who, isMelee){
   // and delete it
   switch (armyNumber){
     case 1:
+      forLog = gameObject.army1[indexOfDead].unit + ' is destroyed!';  
+      logScreen.innerHTML = logScreen.innerHTML + forLog;
+      
       gameObject.army1[indexOfDead].quantity--;
       if (gameObject.army1[indexOfDead].quantity < 1){
         // if (isMelee === false){
@@ -53,6 +60,9 @@ function lethalWound(to, who, isMelee){
       }  
     break;
     case 2:
+      forLog = gameObject.army2[indexOfDead].unit + ' is destroyed!';  
+      logScreen.innerHTML = logScreen.innerHTML + forLog;
+      
       gameObject.army2[indexOfDead].quantity--;
       if (gameObject.army2[indexOfDead].quantity < 1){
         // if (isMelee === false){

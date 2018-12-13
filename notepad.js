@@ -3,8 +3,7 @@
 Start to look good.
 To add: 
 - more maps, more armies. More test.
-- Better and clearer user interface.  ... this next i think.
-(on works.... bugs atm. on setting orders.)
+- Better and clearer user interface.  ... on it working on log screen...
 - campaign tool.
 */
 
@@ -34,3 +33,18 @@ query 5: peasants ask some money as they are forced to fight, instead of work. p
 consiq: peasant revolt if you dont pay what they ask: you lose all peasant units and 3 of your lands are attacked by peasant armies.
 */
 
+/*  for Log:
+const logScreen = document.getElementById('logi'); // views/index.html
+let historyForLog; // to check that no duplicated msg are sent
+        
+        const forLog = '<br>' + allUnits[ix].unit +' and '+ who.unit + 'in melee combat!'
+        
+        if (historyForLog !== forLog) {
+          logScreen.innerHTML = logScreen.innerHTML + forLog;
+          historyForLog = forLog;
+        }
+        
+        for execute attack:
+        let attackSummary = {attacker: who.unit, target: to.unit, weapon: weaponsStats.nombre, attacks: 0, hits: 0, wounds: 0, saved: 0};
+        make log next...
+*/

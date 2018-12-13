@@ -3,11 +3,66 @@ const infoBoxi = document.getElementById('infoBox');
 const directions = document.getElementById('moveTargets');
 const availCommands = document.getElementById('availCommands');
 
+// directions buttons:
+const directionsButtons = '<input type="button" id= "nw" class= "moveTargets" value= "nw" onclick= "clickedUnit2(this.value)">'+
+      '<input type="button" id= "n" class= "moveTargets" value= "n" onclick= "clickedUnit2(this.value)">'+
+      '<input type="button" id= "ne" class= "moveTargets" value= "ne" onclick= "clickedUnit2(this.value)"><br>'+
+      '<input type="button" id= "w" class= "moveTargets" value= "w" onclick= "clickedUnit2(this.value)">'+
+      '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
+      '<input type="button" id= "e" class= "moveTargets" value= "e" onclick= "clickedUnit2(this.value)"><br>'+
+      '<input type="button" id= "sw" class= "moveTargets" value= "sw" onclick= "clickedUnit2(this.value)">'+
+      '<input type="button" id= "s" class= "moveTargets" value= "s" onclick= "clickedUnit2(this.value)">'+
+      '<input type="button" id= "se" class= "moveTargets" value= "se" onclick= "clickedUnit2(this.value)"><br>';
+
 // placeholder for selected command:
 let selectedCommand;
+// if the order is suppose to go all
+let multiCommand = false; 
 
+function executeAllCommand(whatCommand) {
+  let commandForAll; // placeholder
+  
+  multiCommand = true;
+  infoBoxi.innerHTML = '';
+  availCommands.innerHTML = '';
+  
+  switch (whatCommand) {
+    case 'All move':
+      commandForAll = 'move';      
+      infoBoxi.innerHTML = 'Select direction:'
+      directions.innerHTML = directionsButtons;
+    break;  
+    case 'All run':
+      commandForAll = 'run';      
+      infoBoxi.innerHTML = 'Select direction:'
+      directions.innerHTML = directionsButtons;  
+    break;  
+    case 'All standby':
+      commandForAll = 'standby';
+      infoBoxi.innerHTML = '';
+      multiCommand = false; 
+    break; 
+    default: console.log('whatCommand not found in executeAllCommand');  
+  }
+  
+  selectedCommand = commandForAll;
+  
+  if (selectedCommand === 'standby'){
+    for (let i = 0; i < gameObject.army1.length; i++) {
+      gameObject.army1[i].order = commandForAll;
+    }
+  }
+}
+
+// if player chooses to command all units at the same time
 function commandAll() {
   console.log('command all');
+  // clear fields:
+  infoBoxi.innerHTML = 'Select command:';
+  directions.innerHTML = '';
+  availCommands.innerHTML = '<input type= "button" value= "All move" onclick= "executeAllCommand(this.value)"><br>'+
+                            '<input type= "button" value= "All run" onclick= "executeAllCommand(this.value)"><br>'+
+                            '<input type= "button" value= "All standby" onclick= "executeAllCommand(this.value)">';
 }
 
 function pauseGame(){ // pauses or continues the game
@@ -29,15 +84,7 @@ function setCommand(command){ // sets selected command
   if (command === 'move' || command === 'run') {
     availCommands.innerHTML = '';
     infoBoxi.innerHTML = 'Select direction:'
-    directions.innerHTML = '<input type="button" id= "nw" class= "moveTargets" value= "nw" onclick= "clickedUnit2(this.value)">'+
-      '<input type="button" id= "n" class= "moveTargets" value= "n" onclick= "clickedUnit2(this.value)">'+
-      '<input type="button" id= "ne" class= "moveTargets" value= "ne" onclick= "clickedUnit2(this.value)"><br>'+
-      '<input type="button" id= "w" class= "moveTargets" value= "w" onclick= "clickedUnit2(this.value)">'+
-      '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
-      '<input type="button" id= "e" class= "moveTargets" value= "e" onclick= "clickedUnit2(this.value)"><br>'+
-      '<input type="button" id= "sw" class= "moveTargets" value= "sw" onclick= "clickedUnit2(this.value)">'+
-      '<input type="button" id= "s" class= "moveTargets" value= "s" onclick= "clickedUnit2(this.value)">'+
-      '<input type="button" id= "se" class= "moveTargets" value= "se" onclick= "clickedUnit2(this.value)"><br>'
+    directions.innerHTML = directionsButtons;
   } 
   if (command === 'shoot'){
     infoBoxi.innerHTML = 'select target:';
@@ -53,8 +100,10 @@ function setCommand(command){ // sets selected command
 }
 
 function clickedUnit1(who){ // selected unit to be ordened
+  multiCommand = false;
   gameObject.selectedUnits.player1 = who;
   infoBoxi.innerHTML = 'Select command:';
+  availCommands.innerHTML = '';
 // action buttons
   for (let i = 0; i < orders.length; i++){
     const currentName = orders[i];
@@ -65,21 +114,33 @@ function clickedUnit1(who){ // selected unit to be ordened
 
 function clickedUnit2(who){ // selected target
   const selectedUnit = gameObject.selectedUnits.player1; // public/gameObject.js
-  gameObject.targetedUnits.player1 = who;
   const targetedNumber = gameObject.targetedUnits.player1;
-  gameObject.army1[selectedUnit].order = selectedCommand;
-
-  if (selectedCommand === 'run' || selectedCommand === 'move'){
-    gameObject.army1[selectedUnit].target = who;
-  } else { // in case of shooting.
-    gameObject.army1[selectedUnit].target = gameObject.army2[targetedNumber];
+  
+  if (multiCommand === false){
+    gameObject.targetedUnits.player1 = who;
+    gameObject.army1[selectedUnit].order = selectedCommand;
+    
+    if (selectedCommand === 'run' || selectedCommand === 'move'){
+      gameObject.army1[selectedUnit].target = who;
+    } else { // in case of shooting.
+      gameObject.army1[selectedUnit].target = gameObject.army2[targetedNumber];
+   }
+  } else { // if multiCommand === true
+    for (let i = 0; i < gameObject.army1.length; i++){
+      gameObject.army1[i].order = selectedCommand;
+      if (selectedCommand === 'run' || selectedCommand === 'move'){
+        gameObject.army1[i].target = who;
+      } else { // in case of shooting.
+        gameObject.army1[i].target = gameObject.army2[targetedNumber];
+      }
+    }
   }
 }
 
 function howerInPlayer1(who){
   gameObject.army1[who].highlighted = true;
   howerOut(who, 1);
-  draw();
+  draw(); // at public/draw.js
 }
 
 function howerInPlayer2(who){

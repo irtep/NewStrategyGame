@@ -3,6 +3,8 @@ function randomArmies() {  // not very random atm. but allows quick setup for ua
   selected.army1.chosenArmy = kingdom; // selected object is at public/start/setup.js
   selected.army2.chosenArmy = kingdom;
   addUnit('army1', 'Knight commander', 1, 10);
+  addUnit('army1', 'Knight commander', 1, 10);
+  addUnit('army2', 'Knight commander', 1, 10);
   addUnit('army2', 'Knight commander', 1, 10);
   extraButtonHandler('ready1');
   extraButtonHandler('ready2');
