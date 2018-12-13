@@ -8,7 +8,7 @@
   </head>
   
   <body>
-    <canvas id="kanveesi" width="950" height="600" style="border:1px solid #000000;">
+    <canvas id="kanveesi" width="950" height="600">
        Your browser does not support canvas.
     </canvas>
     <div id= "console1">
@@ -19,10 +19,14 @@
       <div id="p1units"></div>
       <input type= "button" class= "commandButton" value= "Command to all" onclick= "commandAll()"/><br>
       <span id = "infoBox" class= "informal"></span>
-      <div id="availCommands"></div><br>      
-      <div id="moveTargets"></div>
+      <div id= "availCommands"></div><br>      
+      <div id= "moveTargets"></div>
       <br>Player two units:<br>
-      <div id="p2units"></div><br>
+      <div id= "p2units"></div><br>
+      battlelog:
+      <div id= "battleLog">
+        <span id= "logi"></span>
+      </div>
     </div> 
     <script src="/constructors.js"></script>
     <script src="/worlds.js"></script>
