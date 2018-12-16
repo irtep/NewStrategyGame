@@ -1,4 +1,12 @@
-  
+* {
+  font-family: 'Ubuntu', sans-serif;
+} 
+body {
+  background: navy;
+  background: linear-gradient(black, navy, DarkGreen);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 #kanveesi {
   padding: 0;
   margin: auto;
@@ -19,16 +27,18 @@
 }
 .commands {
   background-color: gray;
+  font-weight: bold;
   color: RGB(73, 251, 53);
-  width: 100%;
+  width: 80%;
   height: 110%;
 }
 .units {
   background-color: yellow;
 }
 .moveTargets {
-  background-color: navy;
-  color: white;
+  background-color: white;
+  color: navy;
+  font-weight: bold;
 }
 .smaller {
   color: green;
@@ -37,10 +47,31 @@
 .informal {
   color: crimson;
   font-weight: bold;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 #battleLog {
+  color: black;
   width: 280px;
   height: 260px;
-  background-color: darkgray;
+  background: darkGray;
+  background: linear-gradient(darkGray, white);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   border: 4px solid #000000;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 2px;
+  text-shadow: 2px 2px gold;
+  border-radius: 3px;
+}
+.commandButton {
+ background-color: white;
+}
+.logs {
+  background-color: darkgray;
+  font-size: 90%;
+}
+.whiteText {
+  color: white;
 }
