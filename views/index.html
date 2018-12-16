@@ -4,6 +4,8 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="/style.css">
+    <!-- Special fonts: -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <title></title>
   </head>
   
@@ -13,19 +15,18 @@
     </canvas>
     <div id= "console1">
       <input type= "button" id= "pauseButton" class= "commands" value= "Continue game">
-      <br>
-      <br>Player one units:<br>
+      <br><span class= "whiteText">Player one units:</span><br>
       <span class= "smaller">(click unit to give an order)</span>
       <div id="p1units"></div>
       <input type= "button" class= "commandButton" value= "Command to all" onclick= "commandAll()"/><br>
       <span id = "infoBox" class= "informal"></span>
       <div id= "availCommands"></div><br>      
       <div id= "moveTargets"></div>
-      <br>Player two units:<br>
+      <br><span class= "whiteText">Player two units:</span><br>
       <div id= "p2units"></div><br>
       battlelog:
-      <div id= "battleLog">
-        <span id= "logi"></span>
+      <div id= "battleLog" class= "logs">
+        <span id= "logi" class= "logs"></span>
       </div>
     </div> 
     <script src="/constructors.js"></script>

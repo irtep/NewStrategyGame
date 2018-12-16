@@ -60,9 +60,9 @@ function commandAll() {
   // clear fields:
   infoBoxi.innerHTML = 'Select command:';
   directions.innerHTML = '';
-  availCommands.innerHTML = '<input type= "button" value= "All move" onclick= "executeAllCommand(this.value)"><br>'+
-                            '<input type= "button" value= "All run" onclick= "executeAllCommand(this.value)"><br>'+
-                            '<input type= "button" value= "All standby" onclick= "executeAllCommand(this.value)">';
+  availCommands.innerHTML = '<input type= "button" value= "All move" class= "commands" onclick= "executeAllCommand(this.value)"><br>'+
+                            '<input type= "button" value= "All run" class= "commands" onclick= "executeAllCommand(this.value)"><br>'+
+                            '<input type= "button" value= "All standby" class= "commands" onclick= "executeAllCommand(this.value)">';
 }
 
 function pauseGame(){ // pauses or continues the game

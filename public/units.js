@@ -92,12 +92,12 @@ const dwarves = [
   new gameUnit(
   'Mountain guardian', 'infantry', 'Elite infantry of dwarves. If you are opponent, watch out for these guys!', 
   ['halberd', 'shield'], ['no weapon'],
-  {m: 4, s: 4, t: 5, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 1, defMods: 0, pointCost: 10}, 1,  'dwarves', 10,
+  {m: 4, s: 4, t: 5, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 1, defMods: 0, pointCost: 8}, 1,  'dwarves', 10,
   'Unlike normal dwarf infantry, these elite infantry are professionals. If you are opponent, watch out for these guys!', 6),
   new gameUnit(
   'Steel golem', 'monster', 'Steam-powered monstrosity. Controlled by dwarf warchief to punish enemies', 
   ['steel fists'], ['auto crossbow'],
-  {m: 5, s: 6, t: 7, ws: 4, bs: 4, a: 3, w: 7, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 35}, 3,  'dwarves', 1,
+  {m: 5, s: 6, t: 7, ws: 4, bs: 4, a: 3, w: 7, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 30}, 3,  'dwarves', 1,
   'Steam-powered monstrosity. Controlled by dwarf warchief with mystical psionic stones of elven origin. Only dwarves possess information how to construct these metallic monsters.', 3),
   new gameUnit(
   'Steamtank', 'monster', 'Steam-powered battlewagon. hard to break and causes damage with powerful catapult', 

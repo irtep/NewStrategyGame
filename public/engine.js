@@ -1,5 +1,6 @@
 
 let pause = true; // starts as true
+const bLog = document.getElementById('battleLog');
 const gameLooper = setInterval(roundExecutor, 2000); // execute orders
 
 // Event listeners
@@ -21,7 +22,7 @@ function roundExecutor(){
     
     allUnits.sort(compare); // sort to initiative order
     
-    // remove all firing lines and shoot orders to dead targets:
+    // remove all firing lines and shoot orders to dead targets and meleeing to directions:
     for (let i = 0; i < gameObject.army1.length; i++){
       const inTurn = gameObject.army1[i];
       
@@ -30,6 +31,14 @@ function roundExecutor(){
       if (inTurn.order === 'shoot' && inTurn.target.quantity <= 0){
         console.log('trying to shoot dead. changed to standby');
         inTurn.order = 'standby';
+      }
+      // to fix as sometimes units might melee directions...
+      const allDirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w']
+      for (let ii = 0; ii < allDirs.length; ii++) {
+        if (inTurn.order === 'melee' && inTurn.target === allDirs[ii]){
+          console.log('trying to melee a direction. changed to standby');
+          inTurn.order = 'standby';
+        }
       }
     }
     for (let i = 0; i < gameObject.army2.length; i++){
@@ -40,7 +49,15 @@ function roundExecutor(){
       if (inTurn.order === 'shoot' && inTurn.target.quantity <= 0){
         console.log('trying to shoot dead. changed to standby');
         inTurn.order = 'standby';
-      }    
+      }
+      // to fix as sometimes units might melee directions...
+      const allDirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w']
+      for (let ii = 0; ii < allDirs.length; ii++) {
+        if (inTurn.order === 'melee' && inTurn.target === allDirs[ii]){
+          console.log('trying to melee a direction. changed to standby');
+          inTurn.order = 'standby';
+        }
+      }
     }
     
     setTimeout(() => { 
@@ -152,6 +169,8 @@ function roundExecutor(){
       
     }, 650);
     draw();
+    // scroll battlelog:
+    bLog.scrollTop = bLog.scrollHeight;
   }  
 }
 

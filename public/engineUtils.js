@@ -1,3 +1,4 @@
+
 // to sort in initiative order
 function compare(a,b) {
   if (a.details.stats.i < b.details.stats.i)
@@ -40,7 +41,7 @@ function lethalWound(to, who, isMelee){
   // and delete it
   switch (armyNumber){
     case 1:
-      forLog = gameObject.army1[indexOfDead].unit + ' is destroyed!';  
+      forLog = '<br> ' + gameObject.army1[indexOfDead].unit + 'is destroyed!';  
       logScreen.innerHTML = logScreen.innerHTML + forLog;
       
       gameObject.army1[indexOfDead].quantity--;
@@ -60,7 +61,7 @@ function lethalWound(to, who, isMelee){
       }  
     break;
     case 2:
-      forLog = gameObject.army2[indexOfDead].unit + ' is destroyed!';  
+      forLog = '<br> ' + gameObject.army2[indexOfDead].unit + ' is destroyed!';  
       logScreen.innerHTML = logScreen.innerHTML + forLog;
       
       gameObject.army2[indexOfDead].quantity--;
@@ -147,15 +148,31 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
                 }
                 attackSummary.wounds = attackSummary.wounds + wounds;
                 
-                if (wounds < to.details.stats.w) {
+                if (wounds < to.details.stats.w) {  // only hurts
+                  let woundStatus;
                   to.details.stats.w = to.details.stats.w - wounds;
-                } else {
+                  if (to.details.stats.w < 2) {
+                    woundStatus = 'in very bad shape.';
+                  } else if (to.details.stats.w > 1 && to.details.stats.w < 5) {
+                    woundStatus = 'in battered condition';           
+                  } else if (to.details.stats.w > 4) {
+                    woundStatus = 'just slightly damaged.'           
+                  }
+                  const forLog = '<br>' + who.unit +' attacks '+ to.unit + ' with ' + weaponsStats.nombre + ' causing ' + attackSummary.wounds+
+                  ' wounds <br>' + to.unit + ' is '+ woundStatus + '.';
+                   logScreen.innerHTML = logScreen.innerHTML + forLog;
+                } else { // kills
+                  const forLog = '<br>' + who.unit +' attacks '+ to.unit + ' with ' + weaponsStats.nombre + ' causing ' + attackSummary.wounds+
+                  ' wounds.';
+                   logScreen.innerHTML = logScreen.innerHTML + forLog;
                   lethalWound(to, who, false); // false for melee attack
                 }
               } // wound ends  
             } // armour pierced ends
           } // attack hits
-        } else {console.log('not in range, wRange, oRange', rangeToTarget, weaponsStats.range)}
+        } else {
+          console.log('not in range, wRange, oRange', rangeToTarget, weaponsStats.range)
+        }
         attackSummary.attacks = totalAttacks;
       } // attack with attacks
       console.log('attack summary: ', attackSummary);

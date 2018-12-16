@@ -84,7 +84,7 @@ function moveUnit(who, to, mode){
           allUnits[ix].engaged.withWho.push(who);
           allUnits[ix].order = 'melee';
         }
-        const forLog = '<br>' + allUnits[ix].unit +' and '+ who.unit + 'in melee combat!'
+        const forLog = '<br>' + allUnits[ix].unit +' and '+ who.unit + ' in melee combat!'
         
         if (historyForLog !== forLog) {
           logScreen.innerHTML = logScreen.innerHTML + forLog;
@@ -236,9 +236,23 @@ function meleeAttack(who, to){
               }
               attackSummary.wounds = wounds;
                 
-              if (wounds < to.details.stats.w) {
+              if (wounds < to.details.stats.w) {                  
+                let woundStatus;
                 to.details.stats.w = to.details.stats.w - wounds;
-              } else {
+                if (to.details.stats.w < 2) {
+                  woundStatus = 'in very bad shape.';
+                } else if (to.details.stats.w > 1 && to.details.stats.w < 5) {
+                  woundStatus = 'in battered condition';           
+                } else if (to.details.stats.w > 4) {
+                  woundStatus = 'just slightly damaged.'           
+                }
+                const forLog = '<br>' + who.unit +' attacks '+ to.unit + ' with ' + weaponsStats.nombre + ' causing ' + attackSummary.wounds+
+                ' wounds <br>' + to.unit + ' is '+ woundStatus + '.';
+                logScreen.innerHTML = logScreen.innerHTML + forLog;
+                } else { // kills
+                const forLog = '<br>' + who.unit +' attacks '+ to.unit + ' with ' + weaponsStats.nombre + ' causing ' + attackSummary.wounds+
+                ' wounds.';
+                logScreen.innerHTML = logScreen.innerHTML + forLog;
                 lethalWound(to, who, true); // true for melee attack
               }
             } // wound ends
