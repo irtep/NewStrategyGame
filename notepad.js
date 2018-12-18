@@ -46,6 +46,7 @@ consiq: free city, but conflict with dwarves.
 query 5: peasants ask some money as they are forced to fight, instead of work. pay, but less than ask? pay what they ask? dont pay?
 consiq: peasant revolt if you dont pay what they ask: you lose all peasant units and 3 of your lands are attacked by peasant armies.
 
+Event: civil war. rebel general takes over half of your troops... damn...
 */
 /* Quests:
 - Slay Ancient dragon

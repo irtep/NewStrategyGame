@@ -1,3 +1,4 @@
+/*  CSS FOR COMBAT SCREEN */
 * {
   font-family: 'Ubuntu', sans-serif;
 } 
@@ -6,6 +7,9 @@ body {
   background: linear-gradient(black, navy, DarkGreen);
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+input[type=button] {
+  border-radius: 4px;
 }
 #kanveesi {
   padding: 0;
@@ -26,9 +30,10 @@ body {
 	float: left;
 }
 .commands {
-  background-color: gray;
+  background: linear-gradient(darkGray, white);
   font-weight: bold;
-  color: RGB(73, 251, 53);
+  text-shadow: 2px 0 0 darkGray, -2px 0 0 darkGray, 0 2px 0 darkGray, 0 -2px 0 darkGray, 1px 1px darkGray, -1px -1px 0 darkGray, 1px -1px 0 darkGray, -1px 1px 0 darkGray;
+  color: gold;
   width: 80%;
   height: 110%;
 }
@@ -37,7 +42,8 @@ body {
 }
 .moveTargets {
   background-color: white;
-  color: navy;
+  text-shadow: 2px 0 0 darkGray, -2px 0 0 darkGray, 0 2px 0 darkGray, 0 -2px 0 darkGray, 1px 1px darkGray, -1px -1px 0 darkGray, 1px -1px 0 darkGray, -1px 1px 0 darkGray;
+  color: gold;
   font-weight: bold;
 }
 .smaller {
@@ -69,7 +75,6 @@ body {
  background-color: white;
 }
 .logs {
-  background-color: darkgray;
   font-size: 90%;
 }
 .whiteText {

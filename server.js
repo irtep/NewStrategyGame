@@ -12,11 +12,18 @@ app.get("/", (request, response) => {
 });
 
 app.get("/combat", (request, response) => {
-  console.log("get received");
+  console.log("get received for combat");
   response.sendFile(__dirname + '/views/index.html');
 });
+
+app.get("/menu", (request, response) => {
+  console.log("get received for menu");
+  response.sendFile(__dirname + '/views/menu.html');
+});
 // ----------------- HANDLE GETS END ---------------------
+
 // --------------------- LISTEN PORT ---------------------
+
 const listener = app.listen(process.env.PORT, () => {
   console.log('listening on port ' + listener.address().port);
 });
