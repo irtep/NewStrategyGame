@@ -41,7 +41,7 @@ function lethalWound(to, who, isMelee){
   // and delete it
   switch (armyNumber){
     case 1:
-      forLog = '<br> ' + gameObject.army1[indexOfDead].unit + 'is destroyed!';  
+      forLog = '<br> ' + gameObject.army1[indexOfDead].unit + ' is destroyed!';  
       logScreen.innerHTML = logScreen.innerHTML + forLog;
       
       gameObject.army1[indexOfDead].quantity--;
