@@ -7,6 +7,7 @@ To add:
 - campaign tool.
 - Better highlight system.
 - Start page: new campaign, continue campaign, skirmish.
+- campaign map.
 */
 /*
 BUG at Melee: melee order target can be NW. came after killing something in combat i think...or was attacked.
