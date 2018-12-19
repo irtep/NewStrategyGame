@@ -8,7 +8,7 @@ app.use(express.static('public'));
 
 app.get("/", (request, response) => {
   console.log("get received");
-  response.sendFile(__dirname + '/views/start.html');
+  response.sendFile(__dirname + '/views/menu.html');
 });
 
 app.get("/combat", (request, response) => {
@@ -16,9 +16,9 @@ app.get("/combat", (request, response) => {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("/menu", (request, response) => {
+app.get("/skirmish", (request, response) => {
   console.log("get received for menu");
-  response.sendFile(__dirname + '/views/menu.html');
+  response.sendFile(__dirname + '/views/start.html');
 });
 // ----------------- HANDLE GETS END ---------------------
 
