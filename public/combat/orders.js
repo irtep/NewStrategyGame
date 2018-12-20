@@ -246,11 +246,11 @@ function meleeAttack(who, to){
                 } else if (to.details.stats.w > 4) {
                   woundStatus = 'just slightly damaged.'           
                 }
-                const forLog = '<br>' + who.unit +' attacks '+ to.unit + ' with ' + weaponsStats.nombre + ' causing ' + attackSummary.wounds+
+                const forLog = '<br>' + who.unit +' attacks '+ to.unit + ' with ' + meleeWeapon.nombre + ' causing ' + attackSummary.wounds+
                 ' wounds <br>' + to.unit + ' is '+ woundStatus + '.';
                 logScreen.innerHTML = logScreen.innerHTML + forLog;
                 } else { // kills
-                const forLog = '<br>' + who.unit +' attacks '+ to.unit + ' with ' + weaponsStats.nombre + ' causing ' + attackSummary.wounds+
+                const forLog = '<br>' + who.unit +' attacks '+ to.unit + ' with ' + meleeWeapon.nombre + ' causing ' + attackSummary.wounds+
                 ' wounds.';
                 logScreen.innerHTML = logScreen.innerHTML + forLog;
                 lethalWound(to, who, true); // true for melee attack

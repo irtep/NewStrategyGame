@@ -1,5 +1,5 @@
 // this page is not really needed i think, as skirmish screen is ready to use, and campaign gets armies elsewhere... however i dont
-// delete this for now....
+// delete this for now....as maybe i need it as a reference at some point.
 
 // armies, need to fill: unit and quantity. everything else to default
 

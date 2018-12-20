@@ -32,7 +32,7 @@ input[type=button] {
 .commands {
   background: linear-gradient(darkGray, white);
   font-weight: bold;
-  text-shadow: 2px 0 0 darkGray, -2px 0 0 darkGray, 0 2px 0 darkGray, 0 -2px 0 darkGray, 1px 1px darkGray, -1px -1px 0 darkGray, 1px -1px 0 darkGray, -1px 1px 0 darkGray;
+  text-shadow: 2px 0 0 navy, -2px 0 0 navy, 0 2px 0 navy, 0 -2px 0 navy, 1px 1px navy, -1px -1px 0 navy, 1px -1px 0 navy, -1px 1px 0 navy;
   color: gold;
   width: 80%;
   height: 110%;
@@ -42,7 +42,7 @@ input[type=button] {
 }
 .moveTargets {
   background-color: white;
-  text-shadow: 2px 0 0 darkGray, -2px 0 0 darkGray, 0 2px 0 darkGray, 0 -2px 0 darkGray, 1px 1px darkGray, -1px -1px 0 darkGray, 1px -1px 0 darkGray, -1px 1px 0 darkGray;
+  text-shadow: 2px 0 0 navy, -2px 0 0 navy, 0 2px 0 navy, 0 -2px 0 navy, 1px 1px navy, -1px -1px 0 navy, 1px -1px 0 navy, -1px 1px 0 navy;
   color: gold;
   font-weight: bold;
 }
