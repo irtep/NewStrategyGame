@@ -20,6 +20,11 @@ app.get("/skirmish", (request, response) => {
   console.log("get received for menu");
   response.sendFile(__dirname + '/views/start.html');
 });
+
+app.get("/mapscreen", (request, response) => {
+  console.log("get received for menu");
+  response.sendFile(__dirname + '/views/mapscreen.html');
+});
 // ----------------- HANDLE GETS END ---------------------
 
 // --------------------- LISTEN PORT ---------------------

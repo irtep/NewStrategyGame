@@ -1,7 +1,4 @@
-const deployments = [
-                      // small village:  left top corner and right down corner
-                       
-                    ];                
+               
 const worlds = [ // AREA: a farm
               {terrain: 
               [  // buildings:
