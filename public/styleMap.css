@@ -1,17 +1,38 @@
-/*
-#campaignMap { 
-  position: relative;
+
+:root {
+  --sizeOfBox: 86px; 
 }
-*/
 #theMap {
   position: absolute;
   left: 20%;
   right: 20%;
 }
-
-#mapCanvas {
+.grid-container {
+  width: 950px;
+  heigth: 700px;
   position: absolute;
-  border:4px solid gold; /* temporary, just to see where this is.*/
   left: 20%;
   right: 20%;
+  display: grid;
+  grid-gap: 0px 0px;
+  grid-template-columns: var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) 
+    var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox);
+}
+.grid-container > div {
+  text-align: center;
+  font-size: 30px;
+  width: var(--sizeOfBox);
+  height: var(--sizeOfBox);
+}
+.topBorder {
+  border-top: 1px solid crimson;
+}
+.rightBorder {
+  border-right: 1px solid crimson;
+}
+.bottomBorder {
+  border-bottom: 1px solid crimson;
+}
+.leftBorder {
+  border-left: 1px solid crimson;
 }
