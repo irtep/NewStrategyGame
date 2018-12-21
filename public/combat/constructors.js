@@ -36,3 +36,15 @@ function forest(nombre, trees, radiuses, locations){
   this.radiuses = radiuses;
   this.locations = locations;
 }
+
+function city(nombre, income, shortDesc, longDesc, zones, controlledBy, unitsByControlled, unitsByInvaded, exits){
+  this.nombre = nombre;
+  this.shortDesc = shortDesc;
+  this.longDesc = longDesc;
+  this.zones = zones;
+  this.controlledBy = controlledBy;
+  this.unitsByControlled = unitsByControlled;
+  this.unitsByInvaded = unitsByInvaded;
+  this.income = income;
+  this.exits = exits;
+}
