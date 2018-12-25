@@ -1,6 +1,8 @@
 
 :root {
-  --sizeOfBox: 86px; 
+  --sizeOfBox: 50px;
+  --widthOfBox: 50px;
+  --heightOfBox: 48px;  
 }
 #theMap {
   position: absolute;
@@ -16,14 +18,24 @@
   display: grid;
   grid-gap: 0px 0px;
   grid-template-columns: var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) 
-    var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox);
+    var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox)
+    var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox);
 }
 .grid-container > div {
   text-align: center;
-  font-size: 30px;
-  width: var(--sizeOfBox);
-  height: var(--sizeOfBox);
+  font-size: 10px;
+  color: white;
+  width: var(--widthOfBox);
+  height: var(--heightOfBox);
 }
+.borders {
+  border: 1px solid crimson;
+}
+.cityName {
+  font-size: 14px;
+  color: gold;
+}
+/*
 .topBorder {
   border-top: 1px solid crimson;
 }
@@ -36,3 +48,4 @@
 .leftBorder {
   border-left: 1px solid crimson;
 }
+*/
