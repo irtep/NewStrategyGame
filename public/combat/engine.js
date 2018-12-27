@@ -69,10 +69,10 @@ function roundExecutor(){
           for (let iii = 0; iii < unitInAction.details.stats.m; iii++){
             const moveAttempt = moveUnit(unitInAction, unitInAction.target);
             if (moveAttempt === 'collision'){
-              unitInAction.notMoved = true;
+              unitInAction.notMovedInCombat = true;
             } else {
               unitInAction.location = moveAttempt;
-              unitInAction.notMoved = false;
+              unitInAction.notMovedInCombat = false;
               draw();
             }
           }
@@ -110,10 +110,10 @@ function roundExecutor(){
           for (let iii = 0; iii < runSpeed; iii++){
             const moveAttempt = moveUnit(unitInAction, unitInAction.target);
             if (moveAttempt === 'collision'){
-              unitInAction.notMoved = true;
+              unitInAction.notMovedInCombat = true;
             } else {
               unitInAction.location = moveAttempt;
-              unitInAction.notMoved = false;
+              unitInAction.notMovedInCombat = false;
               draw();
             }
           }  
@@ -172,6 +172,7 @@ function roundExecutor(){
     // scroll battlelog:
     bLog.scrollTop = bLog.scrollHeight;
   }  
+  // CHECK VICTORY CONDITIONS
 }
 
 // Prepare game:

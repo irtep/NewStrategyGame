@@ -155,7 +155,7 @@ function zunSu(actions){
         moveUnit(unitInAction, whereTo);
         */
 
-        if (checkDir === 'collision' || unitInAction.notMoved === true) {
+        if (checkDir === 'collision' || unitInAction.notMovedInCombat === true) {
           for (let xx = 0; xx < directions.length; xx++) {
             if (directions[xx] === unitInAction.target) {
               destinationNow = xx;

@@ -6,12 +6,12 @@ To add:
 - Better and clearer user interface.
 - campaign tool.
 - Better highlight system.
-- Start page: new campaign, continue campaign, skirmish.
-- campaign map.
+
+Continue: Campaign map page with campaignEngine.js
 */
 /*
-BUG at Melee: melee order target can be NW. came after killing something in combat i think...or was attacked.
-FIX battle log screen needs margin bottom, and doesnt auto-scroll.
+Known bugs:
+
 */
 
 /*

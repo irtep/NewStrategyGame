@@ -74,8 +74,8 @@ for (let i = 0; i < selector1.length; i++) {
     // make list of choosable units and convert to real army names:
     switch (selected.army1.chosenArmy){
       case 'Humans':
-        clickedArmy = kingdom;
-        selected.army1.chosenArmy = kingdom;
+        clickedArmy = humans;
+        selected.army1.chosenArmy = humans;
       break;
       case 'Elves':
         clickedArmy = elves;
@@ -113,8 +113,8 @@ for (let i = 0; i < selector2.length; i++) {
     // make list of choosable units:
     switch (selected.army2.chosenArmy){
       case 'Humans':
-        clickedArmy2 = kingdom;
-        selected.army2.chosenArmy = kingdom;
+        clickedArmy2 = humans;
+        selected.army2.chosenArmy = humans;
       break;
       case 'Elves':
         clickedArmy2 = elves;

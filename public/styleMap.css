@@ -49,3 +49,9 @@
   border-left: 1px solid crimson;
 }
 */
+#console1 {				
+  position: fixed;
+	top: 5%;
+	left: 1px;  
+	float: left;
+}
