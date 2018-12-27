@@ -1,7 +1,7 @@
 function randomArmies() {  // not very random atm. but allows quick setup for ua-test.
   
-  selected.army1.chosenArmy = kingdom; // selected object is at public/start/setup.js
-  selected.army2.chosenArmy = kingdom;
+  selected.army1.chosenArmy = humans; // selected object is at public/start/setup.js
+  selected.army2.chosenArmy = humans;
   addUnit('army1', 'Knight commander', 1, 10);
   addUnit('army1', 'Knight commander', 1, 10);
   addUnit('army2', 'Knight commander', 1, 10);
