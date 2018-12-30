@@ -9,11 +9,11 @@
     targetedUnits: {player2: null, player2: null},
     // CAMPAIGN:
     campaignArmies: {
-      humans: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false},
-      elves: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false},
-      dwarves: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false},
-      vampires: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false},
-      savages: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false}
+      humans: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false, nombre: 'humans'},
+      elves: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false, nombre: 'elves'},
+      dwarves: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false, nombre: 'dwarves'},
+      vampires: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false, nombre: 'vampires'},
+      savages: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false, nombre: 'savages'}
     },
     turn: 1
   };

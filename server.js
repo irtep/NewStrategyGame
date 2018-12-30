@@ -8,17 +8,17 @@ app.use(express.static('public'));
 
 app.get("/", (request, response) => {
   console.log("get received");
-  response.sendFile(__dirname + '/views/menu.html');
+  response.sendFile(__dirname + '/views/index.html');
 });
 
 app.get("/combat", (request, response) => {
   console.log("get received for combat");
-  response.sendFile(__dirname + '/views/index.html');
+  response.sendFile(__dirname + '/views/combat.html');
 });
 
 app.get("/skirmish", (request, response) => {
   console.log("get received for menu");
-  response.sendFile(__dirname + '/views/start.html');
+  response.sendFile(__dirname + '/views/skirmishMenu.html');
 });
 
 app.get("/mapscreen", (request, response) => {
