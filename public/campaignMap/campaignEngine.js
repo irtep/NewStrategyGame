@@ -1,40 +1,28 @@
-/*
-Listen clicks of cities:
 
-If city is hovered:
-Show who is in city.
-
-If city is clicked:
-
-If city is controlled by you. Give list of units as in combat and control buttons:
-Control buttons:
-move unit from here -> select target, then: paint legal moves. and give list of legal moves.
-hire units -> where -> who
-End turn button, when doesnt want to move or hire anymore.
-
-*/
 // GLOBALS:
-let factions = []; // factions that are not knocked out, allocated at startCampaign
+// factions and cities globals are at mapScreen.js
 let player; // who is human player, allocated at startCampaign
 
 // FUNCTIONS: 
-function checkPlayer(){ // returns index number of players faction.
-  for (let i = 0; i < factions.length; i++){
-    if (player === factions[i].nombre){
-      return i;
-    }
-  }
-}
 
-function countFactionUpkeep(army){
-  let totalCount = 0;
-  console.log('a ', army);
-  for (let i = 0; i < army.length; i++){
-    console.log('counting: q * p', army[i].quantity, army[i].details.stats.pointCost);
-    totalCount = totalCount + army[i].quantity * army[i].details.stats.pointCost;
-  }
+function showDetails(who){
+  // checks who is player and his faction
+  const chosenFaction = factions[checkPlayer()].nombre;
+  let getDetails;
   
-  return totalCount;
+  switch (chosenFaction){
+    case 'humans':
+      getDetails = searchUnitByName(who, humans);
+    break;
+    case 'elves':
+      getDetails = searchUnitByName(who, elves);
+    break;
+    case 'dwarves':
+      getDetails = searchUnitByName(who, dwarves);
+    break;  
+    default: console.log('cant find chosenFaction at showDetails');  
+  }  
+  document.getElementById('infoScreen').innerHTML = getDetails.longDesc;
 }
 
 function turnEngine(){
@@ -47,7 +35,6 @@ function clickControl(clickedButton){
 
 function callUpdate(){  
   const playersFaction = factions[checkPlayer()];
-  console.log('factions: ', factions);
   
   // check all units by all factions and pushes them to cities arrays
   for (let i = 0; i < cities.length; i++) {
@@ -64,11 +51,12 @@ function callUpdate(){
       }
     }
   }  
-  // reset incomes:
+  // reset incomes and controls:
   for (let y = 0; y < factions.length; y++) {
     factions[y].points = 0;    
+    factions[y].controlling = [];
   }
-  // check controller of cities and give income:
+  // check controller of cities and give income and add to controlled array:
   for (let yy = 0; yy < cities.length; yy++) {
     cities[yy].controlledBy = 'neutral'; // reset
     if (cities[yy].unitsByInvaded.length < 1 && cities[yy].unitsByControlled.length > 0) {
@@ -76,56 +64,37 @@ function callUpdate(){
       for (let ind = 0; ind < factions.length; ind++){
         if (factions[ind].nombre === cities[yy].controlledBy){
           factions[ind].points = factions[ind].points + cities[yy].income;
+          factions[ind].controlling.push(cities[yy]);
           console.log('points from ', cities[yy].nombre, ' to ', factions[ind].nombre);
         }
       }
     }
   }
   fillGrids(); // from public/campaignMap/mapScreen.js. Fills the map screen with grids
-  // fill to side panel "console1", "YourIncome" and "YourArmy"
+  
+  // fill to side panel "console1", "YourIncome" 
   document.getElementById('yourIncome').innerHTML = playersFaction.points + '<br> Upkeep cost of your army: <br>'+
   countFactionUpkeep(factions[checkPlayer()].army);
-} // callUpdate() ends
-
-  // check who you are
-  
-  // check how much is your income and write it to element: 'yourIncome'
-  
-  // make a list of your units and write them to element: 'yourArmy'
-  // when unit is hovered show long desc and upkeep cost... maybe more info.
-
-function addUnit(targetArmy, targetUnit, unitSize, location){
-  let chosenArmy;
-  let newDetails;
-  const newUnit = {unit: targetUnit, id: null, location: {x: 0, y: 0, z: 0}, quantity: unitSize, order: 'standby', target: null, 
-  engaged: {yes: false, withWho: []}, joinedCharacters: [], highlighted: false, commander: targetArmy, details: null,
-  firing: false, firingAt: null, notMovedInCombat: false, location: location, moved: false}; // army, unit, location and quantity... all else to default
-  
-  // set chosenArmy:
-  switch (targetArmy){
-    case 'humans':
-      chosenArmy = gameObject.campaignArmies.humans.army;
-      newDetails = searchUnitByName(targetUnit, humans);
-    break;
-    case 'elves':
-      chosenArmy = gameObject.campaignArmies.elves.army;
-      newDetails = searchUnitByName(targetUnit, elves);
-    break;
-    case 'dwarves':
-      chosenArmy = gameObject.campaignArmies.dwarves.army;
-      newDetails = searchUnitByName(targetUnit, dwarves);
-    break;  
-    default: console.log('cant find targetArmy at addUnit');  
+  // fill  "YourArmy"
+  let activeArmy = [];
+  for (let i4 = 0; i4 < factions[checkPlayer()].army.length; i4++) {
+    let forAdd;
+    let unitInTurn = factions[checkPlayer()].army[i4];
+    const totalPointCost = unitInTurn.details.stats.pointCost * unitInTurn.quantity;
+      
+    forAdd = '<strong><span id= "'+unitInTurn.unit+'" onmouseover= "showDetails(this.id)" onmouseout = "clearDetails()">' +
+      unitInTurn.quantity + ' x ' + unitInTurn.unit+ '</strong></span><br>' + 'upkeep cost: ' + 
+      totalPointCost + '<br>'+ 'at '+ unitInTurn.location + '<br>';
+    activeArmy.push(forAdd); 
   }
-  newUnit.details = newDetails;
-  chosenArmy.push(newUnit);
+  document.getElementById('yourArmy').innerHTML = activeArmy.join('<br>');
 }
 
 function startCampaign(){
   // load selected army from localStorage:
   const selected = JSON.parse(localStorage.getItem('Go'));
   
-  // create armies for all players and allocate them to cities.
+  // create armies for all players and allocate them to cities. at mapScreen.js
   addUnit('humans', 'Knight commander', 1, 'Crossroads');
   addUnit('humans', 'Crossbowman', 10, 'Riversend');
   addUnit('humans', 'Peasant', 20, 'Northfield');
@@ -138,25 +107,29 @@ function startCampaign(){
   
   addUnit('dwarves', 'Dwarf warchief', 1, 'Ironhall');
   addUnit('dwarves', 'Dwarf infantry', 10, 'Steelhammer');
-  addUnit('dwarves', 'Dwarf infantry', 20, 'Southdig');
-  addUnit('dwarves', 'Dwarf infantry', 20, 'Southdig');  
+  addUnit('dwarves', 'Steel golem', 1, 'Southdig');
   // set chosen army as player in gameObject  
   // set playerIs:
   switch (selected){
     case 'humans':
       gameObject.campaignArmies.humans.player = true;
+      gameObject.campaignArmies.armyOfPlayer = humans;
     break;
     case 'elves':
       gameObject.campaignArmies.elves.player = true;
+      gameObject.campaignArmies.armyOfPlayer = elves;
     break;
     case 'dwarves':
       gameObject.campaignArmies.dwarves.player = true;
+      gameObject.campaignArmies.armyOfPlayer = dwarves;
     break;  
     case 'vampires':
       gameObject.campaignArmies.vampires.player = true;
+      gameObject.campaignArmies.armyOfPlayer = vampires;
     break; 
     case 'savages':
       gameObject.campaignArmies.savages.player = true;
+      gameObject.campaignArmies.armyOfPlayer = savages;
     break; 
     default: console.log('cant find selected at addUnit');  
   }
