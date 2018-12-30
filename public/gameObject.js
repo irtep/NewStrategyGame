@@ -13,7 +13,9 @@
       elves: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false, nombre: 'elves'},
       dwarves: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false, nombre: 'dwarves'},
       vampires: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false, nombre: 'vampires'},
-      savages: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false, nombre: 'savages'}
+      savages: {army: [], points: 0, controlling: [], victoryPoints: 0, achievements: [], player: false, nombre: 'savages'},
+      armyOfPlayer: null,
+      shoppingCart: null
     },
     turn: 1
   };

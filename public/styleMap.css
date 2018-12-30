@@ -7,14 +7,12 @@
 #theMap {
   position: absolute;
   left: 20%;
-  right: 20%;
 }
 .grid-container {
   width: 950px;
   heigth: 700px;
   position: absolute;
   left: 20%;
-  right: 20%;
   display: grid;
   grid-gap: 0px 0px;
   grid-template-columns: var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) var(--sizeOfBox) 
@@ -28,12 +26,27 @@
   width: var(--widthOfBox);
   height: var(--heightOfBox);
 }
-.borders {
-  border: 1px solid crimson;
-}
 .cityName {
-  font-size: 14px;
+  font-size: 17px;
   color: gold;
+} /* borders for regions: */
+.neutral {
+  border: 2px solid gray;
+}
+.humans {
+  border: 2px solid blue;
+}
+.elves {
+  border: 2px solid green;
+}
+.dwarves {
+  border: 2px solid white;
+}
+.vampires {
+  border: 2px solid black;
+}
+.savages {
+  border: 2px solid gold;
 }
 /*
 .topBorder {
@@ -49,9 +62,31 @@
   border-left: 1px solid crimson;
 }
 */
-#console1 {				
+#console1 {			
+  font-size: 10px;
   position: fixed;
 	top: 5%;
 	left: 1px;  
 	float: left;
+}
+#infoLog {
+  color: black;
+  width: 240px;
+  height: 280px;
+  background: darkGray;
+  background: linear-gradient(darkGray, white);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  border: 4px solid #000000;
+  border-radius: 3px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 2px;
+  text-shadow: 2px 2px gold;
+}
+.commandButton {
+ background-color: white;
+}
+.logs {
+  font-size: 90%;
 }

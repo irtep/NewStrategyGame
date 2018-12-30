@@ -12,7 +12,7 @@
   <body>
     <center>
     <div id= "campaignMap">
-      <img id= "theMap" src= "https://cdn.glitch.com/025cf530-1fd5-47cb-bdde-6124aa0e2469%2Fthemap2.jpg?1545329467519"
+      <img id= "theMap" src= "https://cdn.glitch.com/025cf530-1fd5-47cb-bdde-6124aa0e2469%2Fthemap.jpg?1546206461789"
             width="950" height="656">
       <!--
       <canvas id="mapCanvas" width="950" height="710"></canvas>
@@ -22,15 +22,17 @@
     </div>
     </center>
     <div id= "console1">
-      <input type= "button" id= "hireUnits" value= "Hire units"><br>
-      <input type= "button" id= "moveUnits" value= "Move units"><br>
-      <input type= "button" id= "endOfTurn" value= "End Turn"> 
+      <input type= "button" id= "hireUnits" value= "Hire units" onclick= "controlButtons(this.id)"><br>
+      <input type= "button" id= "moveUnits" value= "Move units" onclick= "controlButtons(this.id)"><br>
+      <input type= "button" id= "endOfTurn" value= "End Turn" onclick= "controlButtons(this.id)"> 
       <br><br>
       Income from your lands:
       <div id= "yourIncome"></div>
       Your army:<br><br>
       <div id= "yourArmy"></div>
-      
+      <div id= "infoLog" class= "logs">
+        <span id= "infoScreen" class= "logs"></span>
+      </div>
     </div>
     <script src="../combat/constructors.js"></script>
     <script src="../combat/searchFuncs.js"></script>

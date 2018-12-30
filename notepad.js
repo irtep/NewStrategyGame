@@ -7,7 +7,7 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: Campaign map page with campaignEngine.js
+Continue: With mapScreen.js. At buttonControl and "shopping"
 */
 /*
 Known bugs:
@@ -18,6 +18,12 @@ Known bugs:
 Usefull about mouse coordinates:
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button
 */
+
+  /* classes to elements:
+  element.style.backgroundColor = "red";
+  document.getElementsByTagName("H1")[0].setAttribute("class", "democlass");
+  .topBorder
+  */
 
 /*
 for campaign:
