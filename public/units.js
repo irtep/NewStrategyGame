@@ -1,6 +1,7 @@
 // imperial guard:
 // seq: nombre, type, desc, meleeWeapons, rangedWeapons,
-//stats, size, army, unitSize, longDesc, limit
+//stats, size, army, unitSize, longDesc, limit,
+
 // move, strength, toughness, weaponSkill, ballisticSkill, attacks, wounds, initiative, leadership, armourSave
 // defMods: +1 is better to defend, -1 is less to defend
 // ballistic skill: lower is better.  weapon skill: higher is better!

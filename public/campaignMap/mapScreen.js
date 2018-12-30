@@ -40,10 +40,7 @@ const cities = [
   
 ];
 
-console.log('cities: ', cities);
-
 function hoverOnGrid(idOfPiece){
-  console.log('hovered: ', idOfPiece);
   const pieceToShow = document.getElementById(idOfPiece);
   /*
   element.style.backgroundColor = "red";
@@ -53,7 +50,6 @@ function hoverOnGrid(idOfPiece){
 }
 
 function hoverOffGrid(idOfPiece){
-  console.log('hovered out: ', idOfPiece);
   const pieceToShow = document.getElementById(idOfPiece);
 }
 
@@ -85,5 +81,3 @@ function fillGrids(){
     }
   }
 }
-
-fillGrids();
