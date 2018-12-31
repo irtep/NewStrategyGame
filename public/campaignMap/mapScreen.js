@@ -42,6 +42,86 @@ const cities = [
   
 ];
 
+function showDetails(who){
+  // checks who is player and his faction
+  const chosenFaction = factions[checkPlayer()].nombre;
+  let getDetails;
+  
+  switch (chosenFaction){
+    case 'humans':
+      getDetails = searchUnitByName(who, humans);
+    break;
+    case 'elves':
+      getDetails = searchUnitByName(who, elves);
+    break;
+    case 'dwarves':
+      getDetails = searchUnitByName(who, dwarves);
+    break;  
+    default: console.log('cant find chosenFaction at showDetails');  
+  }  
+  document.getElementById('infoScreen').innerHTML = getDetails.longDesc;
+}
+
+function callUpdate(){  
+  const playersFaction = factions[checkPlayer()];
+  // reset cities unit arrays and
+  // check all units by all factions and pushes them to cities arrays
+  for (let i = 0; i < cities.length; i++) {
+    cities[i].unitsByControlled = [];
+    cities[i].unitsByinvaded = [];
+    for (let ii = 0; ii < factions.length; ii++) {
+      for (let iii = 0; iii < factions[ii].army.length; iii++){ // units at factions
+        if (cities[i].nombre === factions[ii].army[iii].location){
+          // if entering friendly or not guarded city
+          if (cities[i].unitsByControlled.length < 1 || cities[i].unitsByControlled[0].commander === factions[ii].army[iii].commander){
+            cities[i].unitsByControlled.push(factions[ii].army[iii]);
+          } else { // if invader
+            cities[i].unitsByInvaded.push(factions[ii].army[iii]);
+          }  
+        }
+      }
+    }
+  }  
+  // reset incomes and controls:
+  for (let y = 0; y < factions.length; y++) {
+    factions[y].points = 0;    
+    factions[y].controlling = [];
+  }
+  // check controller of cities and give income and add to controlled array:
+  for (let yy = 0; yy < cities.length; yy++) {
+    cities[yy].controlledBy = 'neutral'; // reset
+    if (cities[yy].unitsByInvaded.length < 1 && cities[yy].unitsByControlled.length > 0) {
+      cities[yy].controlledBy = cities[yy].unitsByControlled[0].commander;
+      for (let ind = 0; ind < factions.length; ind++){
+        if (factions[ind].nombre === cities[yy].controlledBy){
+          factions[ind].points = factions[ind].points + cities[yy].income;
+          factions[ind].controlling.push(cities[yy]);
+          //console.log('points from ', cities[yy].nombre, ' to ', factions[ind].nombre);
+        }
+      }
+    }
+  }
+  fillGrids(); // from public/campaignMap/mapScreen.js. Fills the map screen with grids
+  
+  // fill to side panel "console1", "YourIncome" 
+  document.getElementById('yourIncome').innerHTML = playersFaction.points + '<br> Upkeep cost of your army: <br>'+
+  countFactionUpkeep(factions[checkPlayer()].army);
+  // fill  "YourArmy"
+  let activeArmy = [];
+  for (let i4 = 0; i4 < factions[checkPlayer()].army.length; i4++) {
+    let forAdd;
+    let unitInTurn = factions[checkPlayer()].army[i4];
+    const totalPointCost = unitInTurn.details.stats.pointCost * unitInTurn.quantity;
+      
+    forAdd = '<strong><span id= "'+unitInTurn.unit+'" onmouseover= "showDetails(this.id)" onmouseout = "clearDetails()">' +
+      unitInTurn.quantity + ' x ' + unitInTurn.unit+ '</strong></span><br>' + 'upkeep cost: ' + 
+      totalPointCost + '<br>'+ 'at '+ unitInTurn.location + '<br>';
+    activeArmy.push(forAdd); 
+  }
+  document.getElementById('yourArmy').innerHTML = activeArmy.join('<br>');
+}
+
+
 // use this like this: countFactionUpkeep(factions[checkPlayer()].army);
 function countFactionUpkeep(army){
   let totalCount = 0;
@@ -64,6 +144,7 @@ function clearDetails(){
 }
 
 function addUnit(targetArmy, targetUnit, unitSize, location){
+  //console.log('adding: ', targetArmy, targetUnit, unitSize, location);
   let chosenArmy;
   let newDetails;
   const newUnit = {unit: targetUnit, id: null, location: {x: 0, y: 0, z: 0}, quantity: unitSize, order: 'standby', target: null, 
@@ -92,8 +173,14 @@ function addUnit(targetArmy, targetUnit, unitSize, location){
 
 function controlButtons(pushedButton, par2, par3, par4){
   switch (pushedButton){
+    case 'bought':
+      let shoppingCart = gameObject.campaignArmies.shoppingCart;
+      
+      addUnit(factions[checkPlayer()].nombre, shoppingCart[2], shoppingCart[0], par2);
+      clearDetails();
+      callUpdate();
+    break;  
     case 'hireUnits':
-
       const armyInChase = gameObject.campaignArmies.armyOfPlayer;
       let buttons = [];
       
@@ -113,15 +200,20 @@ function controlButtons(pushedButton, par2, par3, par4){
     case 'endOfTurn':
     break;
     case 'shopping':
-      console.log('shopping: ', par2, par3, par4);
       // check if you have money for this selection:
       const currentCost = countFactionUpkeep(factions[checkPlayer()].army);
       const thisWouldCost = par3;
-      const incomesNow = factions[checkPlayer()].income;
+      const incomesNow = factions[checkPlayer()].points;
       const looseMoney = incomesNow - currentCost;
-      console.log(looseMoney);  // BUG HERE! SAYS THAT IT IS NOT A NUMBER
-      if (looseMoney <= thisWouldCost) {
+      
+      if (looseMoney >= thisWouldCost) {
         infoScreen.innerHTML = 'Ok. Hired. Choose deployment area: ';
+        console.log('f', factions);
+        for (let i = 0; i < factions[checkPlayer()].controlling.length; i++) {
+          infoScreen.innerHTML = infoScreen.innerHTML + '<br>' + 
+          '<input name = "'+factions[checkPlayer()].controlling[i].nombre+'" id= "bought" value = "'+
+          factions[checkPlayer()].controlling[i].nombre+'" onclick= "controlButtons(this.id, this.value)" class= "shopping">'; 
+        }
         gameObject.campaignArmies.shoppingCart = [par2, par3, par4];
       } else {
         infoScreen.innerHTML = 'You can not afford this unit';
