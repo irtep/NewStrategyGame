@@ -7,7 +7,7 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: With mapScreen.js. At buttonControl and "shopping"
+Continue: With mapScreen.js. At move units function
 */
 /*
 Known bugs:
