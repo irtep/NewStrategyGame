@@ -15,9 +15,11 @@ const rangedWeapons = [           //r           a  s   ap  w
   new weapon('longbow', 250, 'bow',             2, 3, 1, 1, false),
   new weapon('elven shortbow', 200, 'bow',      2, 3, 0, 1, false),
   new weapon('crossbow', 300, 'bow',            1, 4, 1, 1, false),
+  new weapon('heavy crossbow', 300, 'bow',      1, 5, 2, 2, false),
   new weapon('dragonfire', 100, 'heavy',     'd6', 9, 3, 1, false),
   new weapon('auto crossbow', 300, 'bow',       3, 4, 1, 1, false),
-  new weapon('catapult', 600, 'heavy',       'd6',8,  3, 'd6', false)
+  new weapon('catapult', 600, 'heavy',       'd6',8,  3, 'd6', false),
+  new weapon('fireball', 150, 'magic',       'd6',5,  2, 'd6', false)
 ];
 const meleeWeapons = [           //r        a  s  ap w
   // SCI-FI
@@ -40,5 +42,7 @@ const meleeWeapons = [           //r        a  s  ap w
   new weapon('unicorn horn', 0, 'melee',    0, 1, 2, 1, false),
   new weapon('runic axe', 0, 'melee',       1, 2, 3, 2, false),
   new weapon('halberd', 0, 'melee',         0, 2, 3, 2, false),
-  new weapon('steel fists', 0, 'melee',     0, 0, 2, 'd6', false)
+  new weapon('gigantic sword', 0, 'melee',  0, 2, 4, 'd6', false),
+  new weapon('steel fists', 0, 'melee',     0, 0, 2, 'd6', false),
+  new weapon('treetrunk', 0, 'melee',       0, 0, 3, 'd6', false)
 ];

@@ -32,6 +32,14 @@ function startCampaign(){
   addUnit('dwarves', 'Dwarf warchief', 1, 'Ironhall');
   addUnit('dwarves', 'Dwarf infantry', 10, 'Steelhammer');
   addUnit('dwarves', 'Steel golem', 1, 'Southdig');
+  
+  addUnit('savages', 'Giant warchief', 1, 'Tumbes');
+  addUnit('savages', 'Hill giant', 1, 'Tumbes');
+  addUnit('savages', 'Viking raider', 10, 'Tumbes');
+  
+  addUnit('vampires', 'Vampire lord', 1, 'Arequipa');
+  addUnit('vampires', 'Zombie', 30, 'Arequipa');
+  addUnit('vampires', 'Vampire rider', 5, 'Arequipa');
   // set chosen army as player in gameObject  
   // set playerIs:
   switch (selected){
@@ -62,9 +70,9 @@ function startCampaign(){
   // push factions with units to: factions array
   factions.push(gameObject.campaignArmies.humans);
   factions.push(gameObject.campaignArmies.elves);
-  factions.push(gameObject.campaignArmies.dwarves); /*
+  factions.push(gameObject.campaignArmies.dwarves); 
   factions.push(gameObject.campaignArmies.vampires);
-  factions.push(gameObject.campaignArmies.savages); */
+  factions.push(gameObject.campaignArmies.savages);
   
   callUpdate();
 }
