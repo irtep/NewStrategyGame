@@ -107,6 +107,66 @@ const dwarves = [
   'Steam-powered battlewagon. hard to break and causes damage with powerful catapult. Humans have tried to copy these, but so far they havent been able to get realiable and powerful enough steam engine made.', 3)
 ];
 
+const savages = [
+  new gameUnit(
+  'Giant warchief', 'commander','Huge armoured giant with giant sized sword...RUN!', 
+  ['gigantic sword', 'shield'], ['no weapon'],
+  {m: 5, s: 7, t: 7, ws: 4, bs: 2, a: 3, w: 9, i: 2, ld: 10, sv: 1, defMods: 0, pointCost: 50}, 10, 'savages', 1,
+  'Giants are terrifying, but this giant is bit smarter than normal giant and is _armoured_ and instead of some treetrunk he as managed to get a real huge sword.', 1),
+  new gameUnit(
+  'Red dragon', 'monster','Huge winged monster that burns everything, except those that it will rip to parts.',
+  ['teeth and claws'], ['dragonfire'],
+  {m: 8, s: 5, t: 7, ws: 4, bs: 3, a: 4, w: 10, i: 4, ld: 10, sv: 2, defMods: 0, pointCost: 55}, 10, 'savages', 1,
+  'Huge winged monster that burns everything. Red dragons are more dangerous with their fire, than their green cousins. But greens are bit better in melee.', 2),
+  new gameUnit(
+  'Viking raider', 'infantry', 'Elite infantry. Fearless and relentless!', 
+  ['battleaxe', 'battleaxe'], ['no weapon'],
+  {m: 6, s: 4, t: 4, ws: 5, bs: 4, a: 2, w: 1, i: 5, ld: 9, sv: 4, defMods: 0, pointCost: 4}, 1,  'savages', 10,
+  'Viking tribe humans devout themselves to war and raid. Very skillfull fighters, well armed usually, but they are not that heavily armoured, as they prefer speed over armour.', 6),
+  new gameUnit(
+  'Hill giant', 'monster', 'Huge, Strong, Dumb, but absolutely deadly', 
+  ['treetrunk'], ['no weapon'],
+  {m: 5, s: 7, t: 7, ws: 4, bs: 4, a: 3, w: 8, i: 2, ld: 10, sv: 4, defMods: 0, pointCost: 45}, 10,  'savages', 1,
+  'Hill giants are 5 meters tall strong, but quite dumb humanoids. Every warlords dream soldiers.', 3),
+  new gameUnit(
+  'Ogre merc', 'infantry', 'Ogre mercenaries are strong and quite well equipped big humanoids.',  
+  ['halberd'], ['heavy crossbow'],
+  {m: 5, s: 5, t: 5, ws: 4, bs: 4, a: 2, w: 3, i: 2, ld: 10, sv: 3, defMods: 0, pointCost: 7}, 3,  'savages', 5,
+  'Ogre mercenaries are strong and quite well equipped humanoids. That are very brutal melee warriors and with deadly heavy crossbows.', 3)
+];
+
+const vampires = [
+  new gameUnit(
+  'Vampire lord', 'commander','Strong sorcerer that can fight in melee too.', 
+  ['enhanced sword'], ['fireball'],
+  {m: 5, s: 5, t: 4, ws: 5, bs: 2, a: 4, w: 6, i: 7, ld: 10, sv: 2, defMods: 0, pointCost: 65}, 1, 'elves', 1,
+    'Strong sorcerer that can fight in melee too. Ancient vampire counts are maybe the most dangerous inviduals one can find', 1),
+  new gameUnit(
+  'Zombie', 'infantry', 'These walking deads are not really good for anything, but they are cheap.', 
+  ['spear'], ['no weapon'],
+  {m: 3, s: 3, t: 3, ws: 2, bs: 5, a: 1, w: 1, i: 2, ld: 7, sv: 6, defMods: 0, pointCost: 1}, 1,  'vampires', 30,
+  'Cheap... you can try to overwhelm your enemy with these..maybe', 10),
+  new gameUnit(
+  'Skeleton archer', 'infantry', 'Longbow is very deadly ranged weapon. They are not as good shooters as living archers, but still quite good.', 
+  ['dagger'], ['longbow'],
+  {m: 3, s: 3, t: 3, ws: 2, bs: 4, a: 1, w: 1, i: 2, ld: 8, sv: 6, defMods: 0, pointCost: 6}, 1,  'vampires', 10,
+  'Longbow is very deadly ranged weapon. They are not as good shooters as living archers, but still quite good.', 5),
+  new gameUnit(
+  'Vampire rider', 'cavalry', 'Riding fast dire wolves or other monsters make them fast and deadly melee warriors.', 
+  ['longsword'], ['no weapon'],
+  {m: 9, s: 5, t: 4, ws: 4, bs: 3, a: 2, w: 3, i: 7, ld: 8, sv: 2, defMods: 1, pointCost: 20}, 1,  'vampires', 5,
+  'Riding fast dire wolves or other monsters make them fast and deadly melee warriors. Very well armoured.', 5),
+  new gameUnit(
+  'Necromancer', 'infantry', 'Can not really fight in melee. But devastating short range fireball launcher.', 
+  ['dagger'], ['fireball'],
+  {m: 4, s: 3, t: 3, ws: 4, bs: 3, a: 2, w: 1, i: 3, ld: 8, sv: 4, defMods: 1, pointCost: 10}, 1,  'vampires', 1,
+  'Can not really fight in melee. But devastating short range fireball launcher.', 3),
+  new gameUnit(
+  'Black unicorn', 'monster', 'Mythical horselike creature, that can stick you with his magical horn. Fast but not very armoured.', 
+  ['unicorn horn'], ['no weapon'],
+  {m: 9, s: 4, t: 4, ws: 4, bs: 3, a: 2, w: 2, i: 5, ld: 8, sv: 5, defMods: 1, pointCost: 5}, 1,  'vampires', 5,
+  'Mythical horselike creature, that can stick you with his magical horn. Fast but they as they are not armoured, they can not take that much punishment.', 2)
+];
 
 // SCI-FI:
 

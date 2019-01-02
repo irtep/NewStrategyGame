@@ -57,6 +57,12 @@ function showDetails(who){
     case 'dwarves':
       getDetails = searchUnitByName(who, dwarves);
     break;  
+    case 'savages':
+      getDetails = searchUnitByName(who, savages);
+    break; 
+    case 'vampires':
+      getDetails = searchUnitByName(who, vampires);
+    break; 
     default: console.log('cant find chosenFaction at showDetails');  
   }  
   document.getElementById('infoScreen').innerHTML = getDetails.longDesc;
@@ -164,7 +170,15 @@ function addUnit(targetArmy, targetUnit, unitSize, location){
     case 'dwarves':
       chosenArmy = gameObject.campaignArmies.dwarves.army;
       newDetails = searchUnitByName(targetUnit, dwarves);
+    break;
+    case 'savages':
+      chosenArmy = gameObject.campaignArmies.savages.army;
+      newDetails = searchUnitByName(targetUnit, savages);
     break;  
+    case 'vampires':
+      chosenArmy = gameObject.campaignArmies.vampires.army;
+      newDetails = searchUnitByName(targetUnit, vampires);
+    break;    
     default: console.log('cant find targetArmy at addUnit');  
   }
   newUnit.details = newDetails;
@@ -173,7 +187,7 @@ function addUnit(targetArmy, targetUnit, unitSize, location){
 
 function controlButtons(pushedButton, par2, par3, par4){
   switch (pushedButton){
-    case 'bought':
+    case 'bought': // confirmation button for hire, after choosing deployment place
       let shoppingCart = gameObject.campaignArmies.shoppingCart;
       
       addUnit(factions[checkPlayer()].nombre, shoppingCart[2], shoppingCart[0], par2);
@@ -196,10 +210,23 @@ function controlButtons(pushedButton, par2, par3, par4){
       infoScreen.innerHTML = buttons.join('<br>');      
     break;
     case 'moveUnits':
+      const armyInC = factions[checkPlayer()].army;  // CONTINUE HERE!!
+      let buttons1 = [];
+      infoScreen.innerHTML = 'Choose unit you want to move: <br>';
+      console.log('aic0' , armyInC);
+      for (let i = 0; i < armyInC.length; i++) {
+        let forAdd;
+      
+        forAdd = '<strong>' + armyInC[i].quantity + ' x ' + armyInC[i].unit + '</strong><br>' +
+        'located: ' + armyInC[i].location + 
+        '<br><input type= "button" name ="'+armyInC[i].unit+'" class= "adder" id= "mover" value= "Move this unit." onclick = "controlButtons(this.id, '+ i + ')"><br>';
+        buttons1.push(forAdd);
+      }
+      infoScreen.innerHTML = infoScreen.innerHTML + buttons1.join('<br>');        
     break;
     case 'endOfTurn':
     break;
-    case 'shopping':
+    case 'shopping': // buttons that appear, when player clicks "hire units"
       // check if you have money for this selection:
       const currentCost = countFactionUpkeep(factions[checkPlayer()].army);
       const thisWouldCost = par3;
@@ -219,6 +246,21 @@ function controlButtons(pushedButton, par2, par3, par4){
         infoScreen.innerHTML = 'You can not afford this unit';
       }
     break;
+    case 'mover': // when player chooses unit that he wants to move, he comes here. gets index number of unit.
+      console.log('moving click: ', pushedButton, par2, par3, par4); // move 1
+      console.log('options: ', factions[checkPlayer()].army[par2]);
+      const who = factions[checkPlayer()].army[par2];
+      let locAtm =;
+      let exits = [];
+      
+      // find city where unit is to find out exits
+      
+      // push exits of that city to exits. strings are ok.
+      
+      // make exit buttons
+      infoScreen.innerHTML = 'Where do you want to move this: ';
+      
+    break;   
     default: console.log('pushedButton not found at controlBottons!')  
   }
 }

@@ -5,7 +5,7 @@ const info1 = document.getElementById('information1');
 let lockInfo1 = false;
 let selectedArmy; // here comes the selected army if starts campaign.
 // armies:
-const availArmies = ['Humans', 'Elves', 'Dwarves'];
+const availArmies = ['Humans', 'Elves', 'Dwarves', 'Savages', 'Vampires'];
 
 function menuClick(clickedButton){
   // lock info1 element:
@@ -44,6 +44,12 @@ function menuClick(clickedButton){
           break;
           case 'Dwarves':
             selectedArmy = 'dwarves';
+          break;
+          case 'Savages':
+            selectedArmy = 'savages';
+          break;
+          case 'Vampires':
+            selectedArmy = 'vampires';
           break;
           default: console.log/(' army1 chosenArmy not found!');        
         }

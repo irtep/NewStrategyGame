@@ -10,7 +10,7 @@ field: worlds[0] // defaulted to 0
 // playfields
 const availFields = ['small farm','forest','village']; // 0, 1, 2
 // armies:
-const availArmies = ['Humans', 'Elves', 'Dwarves'];
+const availArmies = ['Humans', 'Elves', 'Dwarves', 'Savages', 'Vampires'];
 
 // make field selection radiobuttons:
 for (let i = 0; i < availFields.length; i++) {
@@ -85,6 +85,14 @@ for (let i = 0; i < selector1.length; i++) {
         clickedArmy = dwarves;
         selected.army1.chosenArmy = dwarves;
       break;
+      case 'Savages':
+        clickedArmy = savages;
+        selected.army1.chosenArmy = savages;
+      break;
+      case 'Vampires':
+        clickedArmy = vampires;
+        selected.army1.chosenArmy = vampires;
+      break;
       default: console.log/(' army1 chosenArmy not found!');        
     }
     // clear unit1section:
@@ -123,6 +131,14 @@ for (let i = 0; i < selector2.length; i++) {
       case 'Dwarves':
         clickedArmy2 = dwarves;
         selected.army2.chosenArmy = dwarves;
+      break;
+      case 'Savages':
+        clickedArmy2 = savages;
+        selected.army2.chosenArmy = savages;
+      break;
+      case 'Vampires':
+        clickedArmy2 = vampires;
+        selected.army2.chosenArmy = vampires;
       break;
       default: console.log/(' army2 chosenArmy not found!');        
     }
