@@ -209,8 +209,8 @@ function controlButtons(pushedButton, par2, par3, par4){
       }
       infoScreen.innerHTML = buttons.join('<br>');      
     break;
-    case 'moveUnits':
-      const armyInC = factions[checkPlayer()].army;  // CONTINUE HERE!!
+    case 'moveUnits': // button at console. for moving units.
+      const armyInC = factions[checkPlayer()].army;  
       let buttons1 = [];
       infoScreen.innerHTML = 'Choose unit you want to move: <br>';
       console.log('aic0' , armyInC);
@@ -227,7 +227,6 @@ function controlButtons(pushedButton, par2, par3, par4){
     case 'endOfTurn':
     break;
     case 'shopping': // buttons that appear, when player clicks "hire units"
-      // check if you have money for this selection:
       const currentCost = countFactionUpkeep(factions[checkPlayer()].army);
       const thisWouldCost = par3;
       const incomesNow = factions[checkPlayer()].points;
@@ -250,19 +249,32 @@ function controlButtons(pushedButton, par2, par3, par4){
       console.log('moving click: ', pushedButton, par2, par3, par4); // move 1
       console.log('options: ', factions[checkPlayer()].army[par2]);
       const who = factions[checkPlayer()].army[par2];
-      let locAtm =;
+      let locAtm; // index number of city
       let exits = [];
       
       // find city where unit is to find out exits
-      
-      // push exits of that city to exits. strings are ok.
-      
+      for (let i = 0; i < cities.length; i++) {
+        if (who.location === cities[i].nombre){
+          for (let ii = 0; ii < cities[i].exits.length; ii++){
+            let newBut = '<input type= "button" id = "'+par2+'" value= "'+cities[i].exits[ii]+
+            '" onclick = "moveTarget(this.id, this.value)" class= "shopping"'+ '<br>';
+            exits.push(newBut);
+          }
+        }
+      }
       // make exit buttons
-      infoScreen.innerHTML = 'Where do you want to move this: ';
+      infoScreen.innerHTML = 'Where do you want to move this: <br>'+ exits;
       
-    break;   
+    break;
     default: console.log('pushedButton not found at controlBottons!')  
   }
+}  // controlButtons end.
+
+function moveTarget(who, where){
+  const whoIs = factions[checkPlayer()].army[who];
+  console.log('move target called: ', who, where);
+  whoIs.location = where;  // Atm. so, but will be so that adds unit "marching"
+  callUpdate();
 }
 
 function hoverOnGrid(idOfPiece){
@@ -284,7 +296,7 @@ function hoverOnGrid(idOfPiece){
           
           forAdd = '<strong>' + unitInTurn.quantity + ' x ' + unitInTurn.unit+ '</strong></span>' + 
           '(cost: ' + totalPointCost + ')';
-          activeArmy.push(forAdd); console.log('pushed: ', activeArmy);
+          activeArmy.push(forAdd);
         }
         infoScreen.innerHTML = infoScreen.innerHTML + activeArmy + '<br> Connected to:<br> '+ cityInTurn.exits;           
       }  
