@@ -7,11 +7,11 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: With mapScreen.js. At move units!
+Continue: With mapScreen.js. At move units! Change moving so, that they spend the moving action and then go "marching" state.
 */
 /*
 Known bugs:
-
+  If big army it is impossible to see in command console all!
 */
 
 /*
