@@ -22,8 +22,13 @@ app.get("/skirmish", (request, response) => {
 });
 
 app.get("/mapscreen", (request, response) => {
-  console.log("get received for menu");
+  console.log("get received for map");
   response.sendFile(__dirname + '/views/mapscreen.html');
+});
+
+app.get("/endTurn", (request, response) => {
+  console.log("get received for endTurn");
+  response.sendFile(__dirname + '/views/endTurn.html');
 });
 // ----------------- HANDLE GETS END ---------------------
 

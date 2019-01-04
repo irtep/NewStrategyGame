@@ -68,19 +68,49 @@ function showDetails(who){
   document.getElementById('infoScreen').innerHTML = getDetails.longDesc;
 }
 
-function callUpdate(){  
+function consoleUpdate(resetMoves){
+  // fill  "YourArmy"
+  let activeArmy = [];
+  
+  for (let i4 = 0; i4 < factions[checkPlayer()].army.length; i4++) {
+    let forAdd;
+    let unitInTurn = factions[checkPlayer()].army[i4];
+    const totalPointCost = unitInTurn.details.stats.pointCost * unitInTurn.quantity;
+    let werbNeeded;
+    
+    if (resetMoves) {
+      unitInTurn.moved = false;
+    }
+    
+    if (unitInTurn.moved === false){ werbNeeded = ' at '} else { werbNeeded = ' is marching to '}; 
+      
+    forAdd = '<strong><span id= "'+unitInTurn.unit+'" onmouseover= "showDetails(this.id)" onmouseout = "clearDetails()">' +
+      unitInTurn.quantity + ' x ' + unitInTurn.unit+ '</strong></span><br>' + 'upkeep cost: ' + 
+      totalPointCost + '<br>'+ werbNeeded + unitInTurn.location + '<br>';
+    activeArmy.push(forAdd); 
+  }
+  document.getElementById('yourArmy').innerHTML = activeArmy.join('<br>');
+}
+
+function callUpdate(){  // updates cities, map, console.
   const playersFaction = factions[checkPlayer()];
+  
   // reset cities unit arrays and
   // check all units by all factions and pushes them to cities arrays
   for (let i = 0; i < cities.length; i++) {
     cities[i].unitsByControlled = [];
     cities[i].unitsByinvaded = [];
+    
     for (let ii = 0; ii < factions.length; ii++) {
+      
       for (let iii = 0; iii < factions[ii].army.length; iii++){ // units at factions
+        
         if (cities[i].nombre === factions[ii].army[iii].location){
+          
           // if entering friendly or not guarded city
           if (cities[i].unitsByControlled.length < 1 || cities[i].unitsByControlled[0].commander === factions[ii].army[iii].commander){
             cities[i].unitsByControlled.push(factions[ii].army[iii]);
+            
           } else { // if invader
             cities[i].unitsByInvaded.push(factions[ii].army[iii]);
           }  
@@ -93,12 +123,16 @@ function callUpdate(){
     factions[y].points = 0;    
     factions[y].controlling = [];
   }
+  
   // check controller of cities and give income and add to controlled array:
   for (let yy = 0; yy < cities.length; yy++) {
     cities[yy].controlledBy = 'neutral'; // reset
+    
     if (cities[yy].unitsByInvaded.length < 1 && cities[yy].unitsByControlled.length > 0) {
       cities[yy].controlledBy = cities[yy].unitsByControlled[0].commander;
+      
       for (let ind = 0; ind < factions.length; ind++){
+        
         if (factions[ind].nombre === cities[yy].controlledBy){
           factions[ind].points = factions[ind].points + cities[yy].income;
           factions[ind].controlling.push(cities[yy]);
@@ -112,25 +146,17 @@ function callUpdate(){
   // fill to side panel "console1", "YourIncome" 
   document.getElementById('yourIncome').innerHTML = playersFaction.points + '<br> Upkeep cost of your army: <br>'+
   countFactionUpkeep(factions[checkPlayer()].army);
-  // fill  "YourArmy"
-  let activeArmy = [];
-  for (let i4 = 0; i4 < factions[checkPlayer()].army.length; i4++) {
-    let forAdd;
-    let unitInTurn = factions[checkPlayer()].army[i4];
-    const totalPointCost = unitInTurn.details.stats.pointCost * unitInTurn.quantity;
-      
-    forAdd = '<strong><span id= "'+unitInTurn.unit+'" onmouseover= "showDetails(this.id)" onmouseout = "clearDetails()">' +
-      unitInTurn.quantity + ' x ' + unitInTurn.unit+ '</strong></span><br>' + 'upkeep cost: ' + 
-      totalPointCost + '<br>'+ 'at '+ unitInTurn.location + '<br>';
-    activeArmy.push(forAdd); 
-  }
-  document.getElementById('yourArmy').innerHTML = activeArmy.join('<br>');
-}
+  
+  // fill  "YourArmy"  need to reset .moved too.
+  consoleUpdate(true);
+  
+} // callUpdate() ends
 
 
 // use this like this: countFactionUpkeep(factions[checkPlayer()].army);
 function countFactionUpkeep(army){
   let totalCount = 0;
+  
   for (let i = 0; i < army.length; i++){
     totalCount = totalCount + army[i].quantity * army[i].details.stats.pointCost;
   }
@@ -139,7 +165,9 @@ function countFactionUpkeep(army){
 }
 
 function checkPlayer(){ // returns index number of players faction.
+  
   for (let i = 0; i < factions.length; i++){
+    
     if (player === factions[i].nombre){
       return i;
     }
@@ -225,6 +253,9 @@ function controlButtons(pushedButton, par2, par3, par4){
       infoScreen.innerHTML = infoScreen.innerHTML + buttons1.join('<br>');        
     break;
     case 'endOfTurn':
+      callUpdate();
+      // check if fights
+      // check victory conditions...
     break;
     case 'shopping': // buttons that appear, when player clicks "hire units"
       const currentCost = countFactionUpkeep(factions[checkPlayer()].army);
@@ -246,15 +277,15 @@ function controlButtons(pushedButton, par2, par3, par4){
       }
     break;
     case 'mover': // when player chooses unit that he wants to move, he comes here. gets index number of unit.
-      console.log('moving click: ', pushedButton, par2, par3, par4); // move 1
-      console.log('options: ', factions[checkPlayer()].army[par2]);
       const who = factions[checkPlayer()].army[par2];
       let locAtm; // index number of city
       let exits = [];
       
       // find city where unit is to find out exits
       for (let i = 0; i < cities.length; i++) {
+        
         if (who.location === cities[i].nombre){
+          
           for (let ii = 0; ii < cities[i].exits.length; ii++){
             let newBut = '<input type= "button" id = "'+par2+'" value= "'+cities[i].exits[ii]+
             '" onclick = "moveTarget(this.id, this.value)" class= "shopping"'+ '<br>';
@@ -272,14 +303,20 @@ function controlButtons(pushedButton, par2, par3, par4){
 
 function moveTarget(who, where){
   const whoIs = factions[checkPlayer()].army[who];
-  console.log('move target called: ', who, where);
+  
+  infoScreen.innerHTML = 'Ok. Unit is now marching there.'
+  whoIs.moved = true;
   whoIs.location = where;  // Atm. so, but will be so that adds unit "marching"
-  callUpdate();
+  consoleUpdate(false); // false as we dont want .move reset.
+  console.log('factions, ', factions);
 }
 
 function hoverOnGrid(idOfPiece){
+  
   for (let i = 0; i < cities.length; i++) {
+    
     for (let ii = 0; ii < cities[i].zones.length; ii++) {
+      
       if (cities[i].zones[ii] === idOfPiece){
         const cityInTurn = cities[i];
         
@@ -305,6 +342,7 @@ function hoverOnGrid(idOfPiece){
 }
 
 function hoverOffGrid(idOfPiece){
+  // add so that only if there is city it will clear details!
   clearDetails();
 }
 
@@ -322,9 +360,12 @@ function fillGrids(){
     
       // paint city borders if this piece contains a city: 
     for (let ii = 0; ii < cities.length; ii++) {
+      
       for (let iii = 0; iii < cities[ii].zones.length; iii++) {
+        
         if (pieceInTurn === cities[ii].zones[iii]) {
           document.getElementById(pieceInTurn).setAttribute('class', cities[ii].controlledBy);
+          
           // write label and other info:
           if (iii === 0) {
             // income, shortDesc, longDesc, zones, controlledBy, unitsByControlled, unitsByInvaded, exits
