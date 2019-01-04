@@ -132,7 +132,12 @@ const savages = [
   'Ogre merc', 'infantry', 'Ogre mercenaries are strong and quite well equipped big humanoids.',  
   ['halberd'], ['heavy crossbow'],
   {m: 5, s: 5, t: 5, ws: 4, bs: 4, a: 2, w: 3, i: 2, ld: 10, sv: 3, defMods: 0, pointCost: 7}, 3,  'savages', 5,
-  'Ogre mercenaries are strong and quite well equipped humanoids. That are very brutal melee warriors and with deadly heavy crossbows.', 3)
+  'Ogre mercenaries are strong and quite well equipped humanoids. That are very brutal melee warriors and with deadly heavy crossbows.', 3),
+  new gameUnit(
+  'Peasant rebel', 'infantry', 'These guys are not really fighters, but sometimes quantity overwhelmes quality.', 
+  ['spear'], ['no weapon'],
+  {m: 5, s: 3, t: 3, ws: 2, bs: 5, a: 1, w: 1, i: 3, ld: 7, sv: 6, defMods: 0, pointCost: 1}, 1,  'savages', 20,
+  'These guys are excellent farmers... but in battlefield not worth much. However sometimes quantity overwhelmes quality', 10)
 ];
 
 const vampires = [

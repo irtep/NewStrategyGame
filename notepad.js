@@ -7,11 +7,11 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: With mapScreen.js. At move units! Change moving so, that they spend the moving action and then go "marching" state.
+Continue: With mapScreen.js. End turn and close combat setup and from there link to close combat and back.
 */
 /*
 Known bugs:
-  If big army it is impossible to see in command console all!
+  
 */
 
 /*

@@ -36,10 +36,12 @@ function startCampaign(){
   addUnit('savages', 'Giant warchief', 1, 'Tumbes');
   addUnit('savages', 'Hill giant', 1, 'Tumbes');
   addUnit('savages', 'Viking raider', 10, 'Tumbes');
+  addUnit('savages', 'Peasant rebel', 20, 'Tumbes');
   
   addUnit('vampires', 'Vampire lord', 1, 'Arequipa');
   addUnit('vampires', 'Zombie', 30, 'Arequipa');
   addUnit('vampires', 'Vampire rider', 5, 'Arequipa');
+  addUnit('vampires', 'Zombie', 30, 'Arequipa');
   // set chosen army as player in gameObject  
   // set playerIs:
   switch (selected){
