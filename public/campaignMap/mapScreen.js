@@ -1,46 +1,8 @@
 // Campaign map screen js.
-let factions = []; // factions that are not knocked out, allocated and mostly handled at startCampaign
+const factions = gameObject.campaignArmies.factions; // factions that are not knocked out, allocated and mostly handled at startCampaign
 const infoScreen = document.getElementById('infoScreen');
 // Zones:
-const cities = [
-// constructor:  public/combat/contructors.js
-  // human start cities: city(nombre, income, shortDesc, longDesc, zones, controlledBy, unitsByControlled, unitsByInvaded, exits
-  new city('Crossroads', 100, 'Busy city in good strategic location', 'to be added..', 
-           ['piece162', 'piece163', 'piece164'], 'human', [], [], 
-           ['Centerwoods', 'Lurin', 'Arequipa', 'Lima']),
-  new city('Riversend', 120, 'Wealthy port city. Good location', 'to be added..', ['piece136', 'piece137', 'piece155', 'piece156'], 'human', [], [],
-          ['Lima', 'Seagarden', 'Centerwoods', 'Tumbes']),
-  new city('Northfield', 90, 'Human northern city. Good connections', 'to be added..', ['piece88'], 'human', [], [],
-          ['Centerwoods', 'Cajamarca', 'Lurin', 'Whitetower', 'Quito']),
-  // elf cities:
-  new city('Centerwoods', 100, 'Elf city in great center forest.', 'to be added..', ['piece104'], 'elf', [], [],
-          ['Tumbes', 'Cajamarca', 'Northfield', 'Lurin', 'Crossroads', '<br>Riversend']),
-  new city('Whitetower', 100, 'Old elven capital at tropical east forest.', 'to be added..', ['piece131', 'piece132', 'piece150', 'piece151'], 'elf', [], [],
-          ['Quito', 'Arequipa', 'Lurin', 'Northfield']),
-  new city('Seagarden', 110, 'Wealthy elven city.', 'to be added..', ['piece215', 'piece234'], 'elf', [], [],
-          ['Riversend', 'Arequipa', 'Lima', 'Southdig']),
-  // dwarf cities:
-  new city('Ironhall', 100, 'Important dwarf stronghold in center north.', 'to be added..', ['piece8', 'piece27', 'piece28', 'piece9'], 'dwarf', [], [],
-          ['Tumbes', 'Cajamarca', 'Steelhammer']),
-  new city('Steelhammer', 100, 'Northeastern dwarf stronghold.', 'to be added..', ['piece15', 'piece16'], 'dwarf', [], [],
-          ['Ironhall', 'Cajamarca', 'Quito']),
-  new city('Southdig', 110, 'Southern rich dwarf city.', 'to be added..', ['piece242', 'piece243'], 'dwarf', [], [],
-          ['Seagarden', 'Arequipa', 'Lima']),
-  // neutral towns
-  new city('Tumbes', 35, 'Bit remote location. But climate is nice and cool', 'to be added..', ['piece41'], 'neutral', [], [],
-          ['Riversend', 'Centerwoods', 'Ironhall', 'Cajamarca']),
-  new city('Cajamarca', 35, 'Northern neutral stronghold. good strategical location', 'to be added..', ['piece67'], 'neutral', [], [],
-          ['Tumbes', 'Northfield', 'Centerwoods', 'Ironhall', '<br>Steelhammer']),
-  new city('Quito', 35, 'Somewhat remote location, but must have if you want to control northeast.', 'to be added..', ['piece74'], 'neutral', [], [],
-          ['Steelhammer', 'Northfield', 'Whitetower']),
-  new city('Lurin', 135, 'Important neutral stronghold in center north.', 'to be added..', ['piece145'], 'neutral', [], [],
-          ['Crossroads', 'Northfield', 'Centerwoods', 'Whitetower']),
-  new city('Lima', 35, 'Who controls this can strike prettymuch everywhere in south.', 'to be added..', ['piece179'], 'neutral', [], [],
-          ['Arequipa', 'Riversend', 'Crossroads', 'Seagarden']),
-  new city('Arequipa', 35, 'Southern neutral stronghold. lots of roads from here.', 'to be added..', ['piece204'], 'neutral', [], [],
-          ['Crossroads', 'Whitetower', 'Seagarden', 'Southdig', 'Lima'])
-  
-];
+const cities = gameObject.campaignArmies.cities; // cities
 
 function showDetails(who){
   // checks who is player and his faction
@@ -98,8 +60,8 @@ function callUpdate(){  // updates cities, map, console.
   // reset cities unit arrays and
   // check all units by all factions and pushes them to cities arrays
   for (let i = 0; i < cities.length; i++) {
-    cities[i].unitsByControlled = [];
-    cities[i].unitsByinvaded = [];
+    cities[i].unitsByControlled = []; 
+    cities[i].unitsByInvaded = [];
     
     for (let ii = 0; ii < factions.length; ii++) {
       
@@ -126,9 +88,11 @@ function callUpdate(){  // updates cities, map, console.
   
   // check controller of cities and give income and add to controlled array:
   for (let yy = 0; yy < cities.length; yy++) {
-    cities[yy].controlledBy = 'neutral'; // reset
+    // set who has defenders advantage:
+    cities[yy].defender = cities[yy].controlledBy;
+    cities[yy].controlledBy = 'contested' // reset all to contested...
     
-    if (cities[yy].unitsByInvaded.length < 1 && cities[yy].unitsByControlled.length > 0) {
+    if (cities[yy].unitsByInvaded.length < 1 && cities[yy].unitsByControlled.length > 0) { // if controlled
       cities[yy].controlledBy = cities[yy].unitsByControlled[0].commander;
       
       for (let ind = 0; ind < factions.length; ind++){
@@ -138,7 +102,10 @@ function callUpdate(){  // updates cities, map, console.
           factions[ind].controlling.push(cities[yy]);
           //console.log('points from ', cities[yy].nombre, ' to ', factions[ind].nombre);
         }
-      }
+      } // if empty, set as neutral:
+      
+    } else if (cities[yy].unitsByInvaded.length < 1 && cities[yy].unitsByControlled.length < 1) {
+      cities[yy].controlledBy = 'neutral';
     }
   }
   fillGrids(); // from public/campaignMap/mapScreen.js. Fills the map screen with grids
@@ -253,7 +220,27 @@ function controlButtons(pushedButton, par2, par3, par4){
       infoScreen.innerHTML = infoScreen.innerHTML + buttons1.join('<br>');        
     break;
     case 'endOfTurn':
+      // check if any city is contested.
       callUpdate();
+      const contestedCities = [];
+      
+      for (let i = 0; i < cities.length; i++){
+        
+        if (cities[i].controlledBy === 'contested') {
+          contestedCities.push(cities[i]);
+        }
+      }
+      // if any is contested, lets go to settle them at endTurn
+      if (contestedCities.length > 0){
+        // save 'selected' to localStorage
+        localStorage.setItem('Go', JSON.stringify(gameObject));
+        window.location = "https://thenewgame.glitch.me/endTurn"; 
+      } else {
+        gameObject.turn++;
+        infoScreen.innerHTML = ' Turn: ' + gameObject.turn;
+      }
+      
+      console.log('cities, contested cities: ', cities, contestedCities, contestedCities.length);
       // check if fights
       // check victory conditions...
     break;

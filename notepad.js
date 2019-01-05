@@ -7,7 +7,8 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: With mapScreen.js. End turn and close combat setup and from there link to close combat and back.
+Continue: Need to add so, that if someone is marching, he can not march from destination to somewhere.
+          do that, or continue with endTurn.js. Should setUp fights and after that combats should come back to endTurn.js          
 */
 /*
 Known bugs:
