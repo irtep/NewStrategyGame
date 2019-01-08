@@ -1,10 +1,15 @@
 // check contested cities push them to contested:
 const battles = document.getElementById('battles');
-const contested = [];
+const contested = gameObject.campaignArmies.contested;
+
+function startBattles() {
+ console.log('start battles');
+  // i think it can go directly to combat.html as startGame() there should recognize this is campaign play....
+}
 
 window.onload = ()=> {
   // load gameObject from localStorage:
-  const gameObject = JSON.parse(localStorage.getItem('Go'));
+  gameObject = JSON.parse(localStorage.getItem('Go'));
   console.log('endTurn', gameObject.campaignArmies.cities);
   
   for (let i = 0; i < gameObject.campaignArmies.cities.length; i++) {
@@ -16,6 +21,8 @@ window.onload = ()=> {
   for (let i = 0; i < contested.length; i++) {
     const defenders = [];
     const invaders = [];
+    let defenderList = '';
+    let invaderList = '';
     
     // sort defenders and invaders:
     for (let ii = 0; ii < contested[i].unitsByControlled.length; ii++) {
@@ -32,11 +39,30 @@ window.onload = ()=> {
       } else {
         invaders.push(contested[i].unitsByInvaded[ii]); 
       }
-    }      
+    }   
+    
+    // make defender list
+    for (let ii = 0; ii < defenders.length; ii++) {
+      let commaDot = ', ';
+      
+      if (defenders.length - ii === 1){ commaDot = '.'}
+      
+      defenderList = defenderList + defenders[ii].unit + commaDot;
+    }
+    
+    // make invader list
+    for (let ii = 0; ii < invaders.length; ii++) {
+      let commaDot = ', ';
+      
+      if (invaders.length - ii === 1){ commaDot = '.'}
+      
+      invaderList = invaderList + invaders[ii].unit + commaDot;
+    }    
     
     battles.innerHTML = battles.innerHTML + 
-    '<br> Contested area: ' + contested[i].nombre + ' of ' + contested[i].defender + '<br>'; /* +
-    'Area held by: ' + contested[i] */
+    '<br> Contested area: ' + contested[i].nombre + ' of ' + contested[i].defender + '<br>' +
+    'Area held by: ' + defenderList + '<br>' +
+    'Invaders: ' + invaderList + '<br>';
     
     console.log('d y i, ', defenders, invaders);
   }

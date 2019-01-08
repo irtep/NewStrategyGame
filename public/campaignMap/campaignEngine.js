@@ -15,6 +15,8 @@ function clickControl(clickedButton){
 }
 
 function startCampaign(){
+  // mark this as campaign play:
+  gameObject.campaignPlay = true;
   // load selected army from localStorage:
   const selected = JSON.parse(localStorage.getItem('Go'));
   

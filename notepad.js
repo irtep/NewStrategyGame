@@ -7,12 +7,11 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: Need to add so, that if someone is marching, he can not march from destination to somewhere.
-          do that, or continue with endTurn.js. Should setUp fights and after that combats should come back to endTurn.js          
+Continue: continue with endTurn.js. Should setUp fights and after that combats should come back to endTurn.js          
 */
 /*
 Known bugs:
-  
+  Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js i think
 */
 
 /*
