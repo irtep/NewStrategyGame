@@ -123,7 +123,7 @@ function zunSu(actions){
         
         // if commander, chill out a bit first
         if (unitInAction.details.type === 'commander'){
-          if (history.length < 15) {
+          if (history.length < 4) {
             unitInAction.order = 'standby';
           }
         }

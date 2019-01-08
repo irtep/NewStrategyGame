@@ -1,6 +1,7 @@
-  const gameObject = { // seq: nombre, location, type, desc, meleeWeapons, rangedWeapons,
+  var gameObject = { // seq: nombre, location, type, desc, meleeWeapons, rangedWeapons,
                        //stats, size, army, order, targeted, quantity
     // MELEE:
+    gameMode: null, // 'skirmish' or 'melee', as from here it is checked what happens after fight.
     factions: [humans, elves], // player 1: 0 player 2: 1.
     army1: armies[2], // 0 ig, 1 sm, 2 kingd, 3 elves
     army2: armies[3],  // but start will overwrite
@@ -41,22 +42,24 @@
   new city('Southdig', 110, 'Southern rich dwarf city.', 'to be added..', ['piece242', 'piece243'], 'dwarf', [], [],
           ['Seagarden', 'Arequipa', 'Lima'], null),
   // neutral towns
-  new city('Tumbes', 35, 'Bit remote location. But climate is nice and cool', 'to be added..', ['piece41'], 'neutral', [], [],
+  new city('Tumbes', 55, 'Bit remote location. But climate is nice and cool. Also access to coast brings some extra income in.', 'to be added..', ['piece41'], 'neutral', [], [],
           ['Riversend', 'Centerwoods', 'Ironhall', 'Cajamarca'], null),
   new city('Cajamarca', 35, 'Northern neutral stronghold. good strategical location', 'to be added..', ['piece67'], 'neutral', [], [],
           ['Tumbes', 'Northfield', 'Centerwoods', 'Ironhall', 'Steelhammer'], null),
-  new city('Quito', 35, 'Somewhat remote location, but must have if you want to control northeast.', 'to be added..', ['piece74'], 'neutral', [], [],
+  new city('Quito', 35, 'Somewhat remote location, but must have if you want to control east.', 'to be added..', ['piece74'], 'neutral', [], [],
           ['Steelhammer', 'Northfield', 'Whitetower'], null),
-  new city('Lurin', 135, 'Important neutral stronghold in center north.', 'to be added..', ['piece145'], 'neutral', [], [],
+  new city('Lurin', 35, 'Important neutral stronghold in center north.', 'to be added..', ['piece145'], 'neutral', [], [],
           ['Crossroads', 'Northfield', 'Centerwoods', 'Whitetower'], null),
-  new city('Lima', 35, 'Who controls this can strike prettymuch everywhere in south.', 'to be added..', ['piece179'], 'neutral', [], [],
+  new city('Lima', 35, 'Link between big time citadels Seagarden, Riversend and Crossroads.', 'to be added..', ['piece179'], 'neutral', [], [],
           ['Arequipa', 'Riversend', 'Crossroads', 'Seagarden'], null),
-  new city('Arequipa', 35, 'Southern neutral stronghold. lots of roads from here.', 'to be added..', ['piece204'], 'neutral', [], [],
+  new city('Arequipa', 35, 'Southern neutral stronghold. Who controls this can strike prettymuch everywhere in south', 'to be added..', ['piece204'], 'neutral', [], [],
           ['Crossroads', 'Whitetower', 'Seagarden', 'Southdig', 'Lima'], null)
       ],
-      factions: [] // do not confuse with factions of melee part!!
+      factions: [], // do not confuse with factions of melee part!!
+      contested: [] // here are the contested cities.
     },
-    turn: 1
+    turn: 1,
+    campaignPlay: false // tells in combat what to do after fight.
   };
               
               

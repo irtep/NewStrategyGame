@@ -177,6 +177,7 @@ function roundExecutor(){
 
 // Prepare game:
 function startGame(){
+  // Set so that this will be done if gameObject.campaignPlay === false:
   // load selected armies from localStorage:
   const selected = JSON.parse(localStorage.getItem('Go'));
   console.log('selected: ', selected);
@@ -185,6 +186,9 @@ function startGame(){
   gameObject.factions[0] = selected.army1.chosenArmy; gameObject.factions[1] = selected.army2.chosenArmy;
   gameObject.terrain = selected.field;
   console.log('gameO: ', gameObject);
+  
+  // until this, if go.campaignPlay === true then lets take the armies from gameObject.campaignArmies....
+  
   // complete gameObject with unit stats
   const arm1 = gameObject.army1;
   const arm2 = gameObject.army2;

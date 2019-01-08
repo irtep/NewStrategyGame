@@ -211,11 +211,13 @@ function controlButtons(pushedButton, par2, par3, par4){
       console.log('aic0' , armyInC);
       for (let i = 0; i < armyInC.length; i++) {
         let forAdd;
-      
-        forAdd = '<strong>' + armyInC[i].quantity + ' x ' + armyInC[i].unit + '</strong><br>' +
-        'located: ' + armyInC[i].location + 
-        '<br><input type= "button" name ="'+armyInC[i].unit+'" class= "adder" id= "mover" value= "Move this unit." onclick = "controlButtons(this.id, '+ i + ')"><br>';
-        buttons1.push(forAdd);
+        
+        if (armyInC[i].moved === false) {
+          forAdd = '<strong>' + armyInC[i].quantity + ' x ' + armyInC[i].unit + '</strong><br>' +
+          'located: ' + armyInC[i].location + 
+          '<br><input type= "button" name ="'+armyInC[i].unit+'" class= "adder" id= "mover" value= "Move this unit." onclick = "controlButtons(this.id, '+ i + ')"><br>';
+          buttons1.push(forAdd);
+        }  
       }
       infoScreen.innerHTML = infoScreen.innerHTML + buttons1.join('<br>');        
     break;
@@ -275,7 +277,7 @@ function controlButtons(pushedButton, par2, par3, par4){
           
           for (let ii = 0; ii < cities[i].exits.length; ii++){
             let newBut = '<input type= "button" id = "'+par2+'" value= "'+cities[i].exits[ii]+
-            '" onclick = "moveTarget(this.id, this.value)" class= "shopping"'+ '<br>';
+            '" onclick = "moveTarget(this.id, this.value)">'+ '<br>';
             exits.push(newBut);
           }
         }
