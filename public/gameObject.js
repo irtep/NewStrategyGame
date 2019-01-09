@@ -56,10 +56,22 @@
           ['Crossroads', 'Whitetower', 'Seagarden', 'Southdig', 'Lima'], null)
       ],
       factions: [], // do not confuse with factions of melee part!!
-      contested: [] // here are the contested cities.
+      contested: [], // here are the contested cities.
+      selected : { // this is to setup combat in campaign:
+        army1: {chosenArmy: null, units: []},
+        army2: {chosenArmy: null, units: []},
+        field: null // can be used like this: worlds[0] 
+    }
     },
     turn: 1,
     campaignPlay: false // tells in combat what to do after fight.
   };
               
               
+/* this is how it is in setup of skirmish
+selected : {
+army1: {chosenArmy: null, pointsLeft: 200, units: [], ready: false},
+army2: {chosenArmy: null, pointsLeft: 200, units: [], ready: false},
+field: worlds[0] // defaulted to 0
+}
+*/
