@@ -1,9 +1,31 @@
 // check contested cities push them to contested:
 const battles = document.getElementById('battles');
 const contested = gameObject.campaignArmies.contested;
+const combats = []; // here comes unsolved battles..
+
+/*
+      selected : { // this is to setup combat in campaign:
+        army1: {chosenArmy: null, units: []},
+        army2: {chosenArmy: null, units: []},
+        field: null // can be used like this: worlds[0] 
+    }
+*/
+/*
+battles look like this:
+
+Contested area: Seagarden of elves
+Area held by: Elf ranger.
+Invaders: Steel golem.
+
+Contested area: Tumbes of savages
+Area held by: Giant warchief, Hill giant, Viking raider, Peasant rebel.
+Invaders: Dwarf warchief.
+*/
 
 function startBattles() {
  console.log('start battles');
+  // sort out combats like pushing ready "selected"-stuffs in "combats" array... from where first combats go to play first..
+  // first combat is always if invaders are 
   // i think it can go directly to combat.html as startGame() there should recognize this is campaign play....
 }
 
@@ -57,8 +79,11 @@ window.onload = ()=> {
       if (invaders.length - ii === 1){ commaDot = '.'}
       
       invaderList = invaderList + invaders[ii].unit + commaDot;
-    }    
+    }
     
+    // make fight in combats array... maybe so that 0 is defender and others 1, 2 etc...
+    
+    // show contested areas in web element:
     battles.innerHTML = battles.innerHTML + 
     '<br> Contested area: ' + contested[i].nombre + ' of ' + contested[i].defender + '<br>' +
     'Area held by: ' + defenderList + '<br>' +
