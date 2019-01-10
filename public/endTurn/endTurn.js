@@ -2,14 +2,6 @@
 const battles = document.getElementById('battles');
 const contested = gameObject.campaignArmies.contested;
 const combats = []; // here comes unsolved battles..
-
-/*
-      selected : { // this is to setup combat in campaign:
-        army1: {chosenArmy: null, units: []},
-        army2: {chosenArmy: null, units: []},
-        field: null // can be used like this: worlds[0] 
-    }
-*/
 /*
 battles look like this:
 
@@ -26,6 +18,13 @@ function startBattles() {
  console.log('start battles');
   // sort out combats like pushing ready "selected"-stuffs in "combats" array... from where first combats go to play first..
   // first combat is always if invaders are 
+/*
+      selected : { // this is to setup combat in campaign:
+        army1: {chosenArmy: null, units: []},
+        army2: {chosenArmy: null, units: []},
+        field: null // can be used like this: worlds[0] 
+    }
+*/
   // i think it can go directly to combat.html as startGame() there should recognize this is campaign play....
 }
 
@@ -82,6 +81,8 @@ window.onload = ()=> {
     }
     
     // make fight in combats array... maybe so that 0 is defender and others 1, 2 etc...
+    combats.push(defenders);
+    combats.push(invaders);
     
     // show contested areas in web element:
     battles.innerHTML = battles.innerHTML + 
@@ -89,6 +90,32 @@ window.onload = ()=> {
     'Area held by: ' + defenderList + '<br>' +
     'Invaders: ' + invaderList + '<br>';
     
-    console.log('d y i, ', defenders, invaders);
+    console.log('d y i, combats ', defenders, invaders, combats);
+  }
+  // separate different teams at invader place
+  /*
+   --> cant test yet as campaign ai is not ready yet so lots of untested stuff:
+  */
+  for (let i = 0; i < combats.length; i++){
+    const temps = [[],[],[],[]];
+    
+    for (let ii = 0; ii < combats[ii].length; ii++){
+      const compareTo = ii - 1;
+      
+      if (compareTo >= 0) {
+        
+        if (combats[i][ii].details.commander !== combats[i][compareTo].details.commander) {
+          console.log('different.');
+        
+          for (let iii = 0; iii < temps.length; iii++) {
+            
+            if (temps[iii].lenght === 0 || temps[iii][0].details.commander === combats[i][ii].details.commander) {
+              temps[iii].push(combats[i][ii]);
+              const removed = combats[i].splice(ii, 1);
+            }
+          }
+        }
+      } 
+    }
   }
 }
