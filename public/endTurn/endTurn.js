@@ -1,7 +1,7 @@
 // check contested cities push them to contested:
 const battles = document.getElementById('battles');
 const contested = gameObject.campaignArmies.contested;
-const combats = []; // here comes unsolved battles..
+const combats = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]; // here comes unsolved battles..
 /*
 battles look like this:
 
@@ -43,7 +43,7 @@ window.onload = ()=> {
     const defenders = [];
     const invaders = [];
     let defenderList = '';
-    let invaderList = '';
+    let invaderList = ''; 
     
     // sort defenders and invaders:
     for (let ii = 0; ii < contested[i].unitsByControlled.length; ii++) {
@@ -81,8 +81,8 @@ window.onload = ()=> {
     }
     
     // make fight in combats array... maybe so that 0 is defender and others 1, 2 etc...
-    combats.push(defenders);
-    combats.push(invaders);
+    combats[i].push(defenders);
+    combats[i].push(invaders);
     
     // show contested areas in web element:
     battles.innerHTML = battles.innerHTML + 
@@ -91,31 +91,35 @@ window.onload = ()=> {
     'Invaders: ' + invaderList + '<br>';
     
     console.log('d y i, combats ', defenders, invaders, combats);
-  }
-  // separate different teams at invader place
-  /*
-   --> cant test yet as campaign ai is not ready yet so lots of untested stuff:
-  */
-  for (let i = 0; i < combats.length; i++){
-    const temps = [[],[],[],[]];
     
-    for (let ii = 0; ii < combats[ii].length; ii++){
-      const compareTo = ii - 1;
+    // separate invaders if they are from several armies...
+    // this code cant be checked yet, as ai for campaign play is not made....
+    for (let i = 0; i < invaders.length;) {
+      const tempFile = [[],[],[],[]];
       
-      if (compareTo >= 0) {
+      if (invaders[0].details.commander !== invaders[i].details.commander){
+        console.log('found different');
+        tempFile[0].push(invaders[i]);
+        const removed = invaders.splice(i, 1);
+      }
+      i++
+      // when ready, check tempFile
+      if (i === invaders.length) {
         
-        if (combats[i][ii].details.commander !== combats[i][compareTo].details.commander) {
-          console.log('different.');
-        
-          for (let iii = 0; iii < temps.length; iii++) {
-            
-            if (temps[iii].lenght === 0 || temps[iii][0].details.commander === combats[i][ii].details.commander) {
-              temps[iii].push(combats[i][ii]);
-              const removed = combats[i].splice(ii, 1);
+        for (let ix = 0; ix < tempFile.length; ix++) {
+          if (tempFile[ix].length > 0){
+            for (let ix2 = 0; ix2 < tempFile[ix][ix2].length; ix2++) {
+              // if found different team, push to next... 
+              if (tempFile[ix][0].details.commander !== tempFile[ix][ix2].details.commander){
+                const plusOne = ix2 + 1;
+                tempFile[ix][plusOne].push(tempFile[ix][ix2]);
+                const removedx = tempFile[ix].splice(ix2, 1);
+              }
             }
           }
-        }
-      } 
+        }    //
+      }
     }
   }
+  console.log('combats: ', combats);
 }

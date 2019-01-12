@@ -11,7 +11,7 @@ Continue: continue with endTurn.js. Should setUp fights and after that combats s
 */
 /*
 Known bugs:
-  Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js i think
+  Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
 */
 
 /*
