@@ -11,7 +11,7 @@ Continue: continue with endTurn.js. Should setUp fights and after that combats s
 */
 /*
 Known bugs:
-  Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js i think
+  Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
 */
 
 /*
@@ -62,4 +62,16 @@ Event: civil war. rebel general takes over half of your troops... damn...
 - Raid north
 - Raid dwarf stronghold
 */
+
+// just to store simple move from array to array.. maybe i should make a function for it as i always forget this :)
+  /*
+  const testFolder = ['fo1', 'fo12'];
+  const testFolder2 = ['fo 2', 'fo 3'];
+  console.log('t1 t2', testFolder, testFolder2);
+  const new1 = testFolder.concat([]);
+  const new2 = testFolder2.concat([]);
+  new1.push(new2[0]);
+  const removed = new2.splice(0, 1);
+  console.log('t1 t2 now ', new1, new2);
+  */
 
