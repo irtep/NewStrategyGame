@@ -119,6 +119,7 @@ window.onload = ()=> {
           }
         }    //
       }
+      // Make pushes to invaders from tempFile.........or maybe should pick to selected directly...
     }
   }
   console.log('combats: ', combats);
