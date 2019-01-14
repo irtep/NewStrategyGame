@@ -177,24 +177,27 @@ function roundExecutor(){
 
 // Prepare game:
 function startGame(){
-  // Set so that this will be done if gameObject.campaignPlay === false:
   // load selected armies from localStorage:
   const selected = JSON.parse(localStorage.getItem('Go'));
-  console.log('selected: ', selected);
-  // update gameObject with info from selected:
-  gameObject.army1 = selected.army1.units; gameObject.army2 = selected.army2.units;
-  gameObject.factions[0] = selected.army1.chosenArmy; gameObject.factions[1] = selected.army2.chosenArmy;
-  gameObject.terrain = selected.field;
-  console.log('gameO: ', gameObject);
   
-  // until this, if go.campaignPlay === true then lets take the armies from gameObject.campaignArmies....
+  if (selected.campaignPlay === true) {
+    console.log('campaign detected');
+    gameObject = selected;    
+    console.log('go after load:  ', gameObject);
+  } else { // Skirmish game:
+    console.log('skirmish detected');
+    gameObject.army1 = selected.army1.units; gameObject.army2 = selected.army2.units;
+    gameObject.factions[0] = selected.army1.chosenArmy; gameObject.factions[1] = selected.army2.chosenArmy;
+    gameObject.terrain = selected.field;    
+  
+  // Campaign game:
+  } 
   
   // complete gameObject with unit stats
   const arm1 = gameObject.army1;
   const arm2 = gameObject.army2;
   let activeArmy = gameObject.army1;
   const copyOfOld = Object.assign({}, gameObject);
-  console.log('old go: ', copyOfOld);
   
   for (let ind = 0; ind < arm1.length; ind++){
     const foundUnit = searchUnitByName(arm1[ind].unit, gameObject.factions[0]);

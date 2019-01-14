@@ -1,5 +1,5 @@
                
-const worlds = [ // AREA: a farm
+const worlds = [ // AREA: a farm  -------------------------
               {terrain: 
               [  // buildings:
               {building: 'small building', location: {x: 250, y: 222}, size: {width: 45, height: 45}, type: 'building'},
@@ -10,7 +10,7 @@ const worlds = [ // AREA: a farm
                trees: 4, radiuses: [25, 54, 48, 27], type: 'forest'}
              ],
              deploymentZone1: {x: 50, y: 18}, deploymentZone2: {x: 890, y: 580} 
-             },  // AREA:  forest
+             },  // AREA:  forest  -------------------------
               {terrain: 
               [  // buildings:
                // forests:
@@ -27,7 +27,7 @@ const worlds = [ // AREA: a farm
                trees: 4, radiuses: [35, 64, 58, 37], type: 'forest'}
              ],
              deploymentZone1: {x: 50, y: 18}, deploymentZone2: {x: 890, y: 580} 
-             },// AREA: village
+             },// AREA: village  -------------------------
               {terrain: 
               [  // buildings:
               {building: 'small building', location: {x: 250, y: 222}, size: {width: 45, height: 45}, type: 'building'},
