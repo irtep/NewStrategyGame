@@ -7,7 +7,7 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: continue with endTurn.js. Should setUp fights and after that combats should come back to endTurn.js          
+Continue: continue with endTurn.js and combat... for some reason doesnt fill details when coming from campaign...       
 */
 /*
 Known bugs:
