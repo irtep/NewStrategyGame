@@ -14,20 +14,43 @@ Contested area: Tumbes of savages
 Area held by: Giant warchief, Hill giant, Viking raider, Peasant rebel.
 Invaders: Dwarf warchief.
 */
+
+function getArmyList(whatString){
+  let returning;  
+  
+  switch (whatString){
+    case 'humans':
+      returning = humans;
+    break;
+    case 'elves':
+      returning = elves;
+    break;
+    case 'dwarves':
+      returning = dwarves;
+    break;
+    case 'savages':
+      returning = savages;
+    break;
+    case 'vampires':
+      returning = vampires;
+    break;
+    default: console.log/(' whatString not found!');        
+  }
+  return returning;
+}
+
 function callDice(max){
     const result =  1 + Math.floor(Math.random() * max);
     return result;
 }  
 
 function startBattles() {
- console.log('1 start battles');
   var fightBetweenInvaders = false;
   var indexOfRivalInvader;
   var indexOfCombat;
   
   // find combat in turn:
   for (let i = 0; i < combats.length; i++) {
-    console.log('checking combats.. ', combats);
     //var zero = false;
     var one = false;
     /*
@@ -55,7 +78,6 @@ function startBattles() {
     }
     
   }
-  console.log('goes here?');
   let a1;
   let a2;
   
@@ -66,8 +88,8 @@ function startBattles() {
     a1 = combats[indexOfCombat][1][0];
     a2 = combats[indexOfCombat][1][indexOfRivalInvader];
     
-    gameObject.factions[0] = a1.commander;
-    gameObject.factions[1] = a2.commander;
+    gameObject.factions[0] = getArmyList(a1.commander);
+    gameObject.factions[1] = getArmyList(a2.commander);
     
     for (let ix = 0; ix < combats[indexOfCombat][1].length; ix++) {
       
@@ -81,12 +103,11 @@ function startBattles() {
     }  
     
   } else { // if only one invader army
-    console.log('3b only one invader');
     a1 = combats[indexOfCombat][0];
     a2 = combats[indexOfCombat][1];
 
-    gameObject.factions[0] = a1[0].commander;
-    gameObject.factions[1] = a2[0].commander;
+    gameObject.factions[0] = getArmyList(a1[0].commander);
+    gameObject.factions[1] = getArmyList(a2[0].commander);
     
     gameObject.army1 = a1;
     gameObject.army2 = a2;
@@ -215,5 +236,5 @@ window.onload = ()=> {
       // Make pushes to invaders from tempFile.........or maybe should pick to selected directly...
     } */
   }
-  console.log('combats: ', combats);
+  console.log('go : ', gameObject);
 }

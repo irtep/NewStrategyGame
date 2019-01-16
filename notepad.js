@@ -7,7 +7,8 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: continue with endTurn.js and combat... for some reason doesnt fill details when coming from campaign...       
+Continue: continue with engine.js so that city will go to location.city and create to location: x y and z.
+          Also army1 and army2 should be reversed.
 */
 /*
 Known bugs:

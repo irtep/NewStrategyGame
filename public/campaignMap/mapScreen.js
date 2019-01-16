@@ -150,7 +150,7 @@ function addUnit(targetArmy, targetUnit, unitSize, location){
   let newDetails;
   const newUnit = {unit: targetUnit, id: null, location: {x: 0, y: 0, z: 0}, quantity: unitSize, order: 'standby', target: null, 
   engaged: {yes: false, withWho: []}, joinedCharacters: [], highlighted: false, commander: targetArmy, details: null,
-  firing: false, firingAt: null, notMovedInCombat: false, location: location, moved: false}; // army, unit, location and quantity... all else to default
+  firing: false, firingAt: null, notMovedInCombat: false, location: location,  moved: false}; // army, unit, location and quantity... all else to default
   
   // set chosenArmy:
   switch (targetArmy){

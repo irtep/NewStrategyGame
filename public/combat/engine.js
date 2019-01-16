@@ -179,6 +179,7 @@ function roundExecutor(){
 function startGame(){
   // load selected armies from localStorage:
   const selected = JSON.parse(localStorage.getItem('Go'));
+  console.log('selected: ', selected);
   
   if (selected.campaignPlay === true) {
     console.log('campaign detected');
@@ -198,9 +199,13 @@ function startGame(){
   const arm2 = gameObject.army2;
   let activeArmy = gameObject.army1;
   const copyOfOld = Object.assign({}, gameObject);
+  console.log('fill details: aA copyOfOLd ', activeArmy, copyOfOld);
   
   for (let ind = 0; ind < arm1.length; ind++){
     const foundUnit = searchUnitByName(arm1[ind].unit, gameObject.factions[0]);
+    console.log('pars for foundUnit: ', arm1[ind].unit, gameObject.factions[0]);
+    console.log('par 2: ', gameObject.factions[0]);
+    console.log('found: ', foundUnit);
     arm1[ind].details = foundUnit;
   }  
   for (let ind2 = 0; ind2 < arm2.length; ind2++){
