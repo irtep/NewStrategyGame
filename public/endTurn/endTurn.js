@@ -53,13 +53,7 @@ function startBattles() {
   for (let i = 0; i < combats.length; i++) {
     //var zero = false;
     var one = false;
-    /*
-    if (typeof combats[i][0] !== 'undefined') {
-      
-      if (combats[i][0].length > 0) {
-        zero = true;  // found defenders
-      }      
-    }*/
+
     if (typeof combats[i][1] !== 'undefined' && one === false) {
       
       if (combats[i][1].length > 0) {
@@ -80,6 +74,10 @@ function startBattles() {
   }
   let a1;
   let a2;
+  let a1list;
+  let a2list;
+  let firstDeploy;
+  let secondDeploy;
   
   // untested as ai of campaign game is not yet done.
   // if more than one invading army
@@ -87,17 +85,25 @@ function startBattles() {
     console.log('3a fight between invaders ');
     a1 = combats[indexOfCombat][1][0];
     a2 = combats[indexOfCombat][1][indexOfRivalInvader];
+
+    // deploys players army first as combat console excepts that:
+    if (a1[0].commander === gameObject.campaignArmies.armyOfPlayer[0].army) {
+      firstDeploy = a2;
+      secondDeploy = a1;
+    } else {
+      firstDeploy = a2; secondDeploy = a1;
+    }    
     
-    gameObject.factions[0] = getArmyList(a1.commander);
-    gameObject.factions[1] = getArmyList(a2.commander);
+    gameObject.factions[0] = getArmyList(firstDeploy.commander);
+    gameObject.factions[1] = getArmyList(secondDeploy.commander);
     
     for (let ix = 0; ix < combats[indexOfCombat][1].length; ix++) {
       
-      if (combats[indexOfCombat][1][ix].commander === a1.commander){  
+      if (combats[indexOfCombat][1][ix].commander === firstDeploy.commander){  
         gameObject.army1.push(combats[indexOfCombat][1][ix]);
       }
       
-      if (combats[indexOfCombat][1][ix].commander === a2.commander){  
+      if (combats[indexOfCombat][1][ix].commander === secondDeploy.commander){  
         gameObject.army2.push(combats[indexOfCombat][1][ix]);
       }      
     }  
@@ -105,24 +111,28 @@ function startBattles() {
   } else { // if only one invader army
     a1 = combats[indexOfCombat][0];
     a2 = combats[indexOfCombat][1];
-
-    gameObject.factions[0] = getArmyList(a1[0].commander);
-    gameObject.factions[1] = getArmyList(a2[0].commander);
+    a1list = getArmyList(a1[0].commander);
+    a2list = getArmyList(a2[0].commander);
     
-    gameObject.army1 = a1;
-    gameObject.army2 = a2;
+    // deploys players army first as combat console excepts that:
+    if (a1[0].commander === gameObject.campaignArmies.armyOfPlayer[0].army) {
+      firstDeploy = a2;
+      secondDeploy = a1;
+    } else {
+      firstDeploy = a2; secondDeploy = a1;
+    }
     
-    /*
-    gameObject.army1 = selected.army1.units; gameObject.army2 = selected.army2.units;
-    gameObject.factions[0] = selected.army1.chosenArmy; gameObject.factions[1] = selected.army2.chosenArmy;
-    gameObject.terrain = selected.field; 
-    */     
+    gameObject.factions[0] = getArmyList(firstDeploy[0].commander);
+    gameObject.factions[1] = getArmyList(secondDeploy[0].commander);
+    
+    gameObject.army1 = firstDeploy;
+    gameObject.army2 = secondDeploy;    
   }
   console.log('4 randomizing field, saving and moving...');
-  // randomize field:
+  // randomize field, if more areas are added, need to make that callDice param bigger:
   const fieldRandom = callDice(3) - 1;
   gameObject.terrain = worlds[fieldRandom];
-
+  
   // save 'selected' to localStorage
   localStorage.setItem('Go', JSON.stringify(gameObject));
   // lets do the fight.
