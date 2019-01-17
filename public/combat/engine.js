@@ -1,7 +1,8 @@
 
 let pause = true; // starts as true
 const bLog = document.getElementById('battleLog');
-const gameLooper = setInterval(roundExecutor, 2000); // execute orders
+const gameLooper = setInterval(roundExecutor, 1000); // execute orders
+const speedOfRound = 500 // how fast come sub rounds
 
 // Event listeners
 const listenPause = document.getElementById('pauseButton').addEventListener("click", pauseGame);
@@ -120,7 +121,7 @@ function roundExecutor(){
         }
       }
       //zunsu('checks');
-    }, 350);
+    }, speedOfRound/2);
     setTimeout(() => { 
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
@@ -167,7 +168,7 @@ function roundExecutor(){
         }       
       }
       
-    }, 650);
+    }, speedOfRound);
     draw();
     // scroll battlelog:
     bLog.scrollTop = bLog.scrollHeight;
@@ -181,17 +182,16 @@ function startGame(){
   const selected = JSON.parse(localStorage.getItem('Go'));
   console.log('selected: ', selected);
   
+  // Campaign game:
   if (selected.campaignPlay === true) {
     console.log('campaign detected');
-    gameObject = selected;    
+    gameObject = selected;
     console.log('go after load:  ', gameObject);
   } else { // Skirmish game:
     console.log('skirmish detected');
     gameObject.army1 = selected.army1.units; gameObject.army2 = selected.army2.units;
     gameObject.factions[0] = selected.army1.chosenArmy; gameObject.factions[1] = selected.army2.chosenArmy;
     gameObject.terrain = selected.field;    
-  
-  // Campaign game:
   } 
   
   // complete gameObject with unit stats
@@ -220,6 +220,12 @@ function startGame(){
     
     for (let i = 0; i < activeArmy.length; i++) {
       if (activeArmy === arm1){  // army 1    
+        
+        // set location to have x y and z as in campaign play they are not
+        if (gameObject.campaignPlay === true) {
+          const tempStore = activeArmy[i].location.concat([]);
+          activeArmy[i].location = {x: null, y: null, z: null, city: tempStore};
+        }
         if (i === 0){
           activeArmy[i].location.x = gameObject.terrain.deploymentZone1.x;
           activeArmy[i].location.y = currentFile;
@@ -243,6 +249,11 @@ function startGame(){
           activeArmy[i].commander = 'army1';
         }
       } else {  // army 2
+        
+        if (gameObject.campaignPlay === true) {
+          const tempStore = activeArmy[i].location.concat([]);
+          activeArmy[i].location = {x: null, y: null, z: null, city: tempStore};
+        }
         if (i === 0){
           activeArmy[i].location.x = gameObject.terrain.deploymentZone2.x;
           activeArmy[i].location.y = currentFile2;

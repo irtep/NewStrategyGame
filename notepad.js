@@ -7,8 +7,7 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: continue with engine.js so that city will go to location.city and create to location: x y and z.
-          Also army1 and army2 should be reversed.
+Continue: engine.js victory conditions and that after combat it checks if any more contested places... same thing as in "end turn" button
 */
 /*
 Known bugs:
