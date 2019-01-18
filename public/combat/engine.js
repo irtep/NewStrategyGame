@@ -1,6 +1,6 @@
 
 let pause = true; // starts as true
-const bLog = document.getElementById('battleLog');
+const bLog = document.getElementById('battleLog'); // views/combat.html
 const gameLooper = setInterval(roundExecutor, 1000); // execute orders
 const speedOfRound = 500 // how fast come sub rounds
 
@@ -33,7 +33,7 @@ function roundExecutor(){
         console.log('trying to shoot dead. changed to standby');
         inTurn.order = 'standby';
       }
-      // to fix as sometimes units might melee directions...
+      // to fix as sometimes units might melee directions...this might cause "standby in melee problem"
       const allDirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w']
       for (let ii = 0; ii < allDirs.length; ii++) {
         if (inTurn.order === 'melee' && inTurn.target === allDirs[ii]){
@@ -174,6 +174,20 @@ function roundExecutor(){
     bLog.scrollTop = bLog.scrollHeight;
   }  
   // CHECK VICTORY CONDITIONS
+  console.log('vc 1 2 ', gameObject.army1, gameObject.army2);
+  if (gameObject.army1.length < 1 || gameObject.army2.length < 1) {
+    let winner;
+    pause = true; 
+    
+    if (gameObject.army1.length < 1) { winner = 'Player 2'} else { winner = 'Player 1'}
+      logScreen.innerHTML = logScreen.innerHTML + '<br>battle is over. '+ winner + ' wins!';
+    
+    // scroll battlelog:
+    bLog.scrollTop = bLog.scrollHeight;
+    
+    pause = true;
+    clearInterval(gameLooper);
+  }
 }
 
 // Prepare game:

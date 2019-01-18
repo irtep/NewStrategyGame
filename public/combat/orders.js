@@ -5,7 +5,7 @@ const orders = [
   'shoot',  // shootTarget(who, to)
   'run'     // meleeAttack(who, to)
 ];
-const logScreen = document.getElementById('logi'); // views/index.html
+const logScreen = document.getElementById('logi'); // views/combat.html
 let historyForLog; // to check that no duplicated msg are sent
 
 function moveUnit(who, to, mode){
