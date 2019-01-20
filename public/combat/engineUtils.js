@@ -1,3 +1,11 @@
+function endBattle(){
+  console.log('end battle');
+  gameObject.comingFromFight = true;
+  // save gameObject
+  localStorage.setItem('Go', JSON.stringify(gameObject));  
+  // go to map screen.
+  window.location = "https://thenewgame.glitch.me/mapscreen";
+}
 
 // to sort in initiative order
 function compare(a,b) {
@@ -10,8 +18,8 @@ function compare(a,b) {
 
 // key Listener
 function checkKeyPressed(e) {
-  if (e.keyCode == "32") { // 32 is spacebar
-    pauseGame();    
+  if (e.keyCode == "32") { // 32 is spacebar..should maybe change to 'p' and do more of these...
+    pauseGame();    // at commands/buttonCommands.js
   }
 }
 

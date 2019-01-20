@@ -64,7 +64,8 @@
     }
     },
     turn: 1,
-    campaignPlay: false // tells in combat what to do after fight.
+    campaignPlay: false, // tells if combat is on.
+    comingFromFight: false
   };
               
               

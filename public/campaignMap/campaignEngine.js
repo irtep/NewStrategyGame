@@ -82,7 +82,23 @@ function startCampaign(){
 }
 //  -------- ONLOAD:  ------------
 window.onload = ()=> {
-  startCampaign();
+  
+  if (gameObject.turn > 1){
+
+    // load gameObject from localStorage:
+    gameObject = JSON.parse(localStorage.getItem('Go'));
+    
+    if (gameObject.comingFromCombat === true) {
+      gameObject.comingFromCombat = false;
+      controlButtons('endOfTurn');    
+    }
+    gameObject.turn++;
+  }
+  
+  if (gameObject.turn === 1) {
+    gameObject.turn++;
+    startCampaign();
+  }
   //console.log('gO; ', gameObject);
   //console.log('cities ', cities);
 };

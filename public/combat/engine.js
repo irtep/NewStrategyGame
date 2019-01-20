@@ -174,13 +174,15 @@ function roundExecutor(){
     bLog.scrollTop = bLog.scrollHeight;
   }  
   // CHECK VICTORY CONDITIONS
-  console.log('vc 1 2 ', gameObject.army1, gameObject.army2);
   if (gameObject.army1.length < 1 || gameObject.army2.length < 1) {
     let winner;
     pause = true; 
     
     if (gameObject.army1.length < 1) { winner = 'Player 2'} else { winner = 'Player 1'}
-      logScreen.innerHTML = logScreen.innerHTML + '<br>battle is over. '+ winner + ' wins!';
+    
+    logScreen.innerHTML = logScreen.innerHTML + '<br>battle is over. '+ winner + ' wins!';
+    logScreen.innerHTML = logScreen.innerHTML + '<br><input type= "button" class= "endBattle" '+
+    'value= "Continue game" onclick= "endBattle()">';
     
     // scroll battlelog:
     bLog.scrollTop = bLog.scrollHeight;

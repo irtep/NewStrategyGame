@@ -7,7 +7,7 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: engine.js victory conditions and that after combat it checks if any more contested places... same thing as in "end turn" button
+Continue: after battle doesnt work the transition to map screen, it goes there, but armys are not updated etc...need to investigate and fix
 */
 /*
 Known bugs:
