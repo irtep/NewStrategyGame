@@ -1,5 +1,5 @@
 // Campaign map screen js.
-const factions = gameObject.campaignArmies.factions; // factions that are not knocked out, allocated and mostly handled at startCampaign
+ // factions that are not knocked out, allocated and mostly handled at startCampaign
 const infoScreen = document.getElementById('infoScreen');
 // Zones:
 const cities = gameObject.campaignArmies.cities; // cities
@@ -33,6 +33,7 @@ function showDetails(who){
 function consoleUpdate(resetMoves){
   // fill  "YourArmy"
   let activeArmy = [];
+  const factions = gameObject.campaignArmies.factions;
   
   for (let i4 = 0; i4 < factions[checkPlayer()].army.length; i4++) {
     let forAdd;
@@ -55,6 +56,9 @@ function consoleUpdate(resetMoves){
 }
 
 function callUpdate(){  // updates cities, map, console.
+  const factions = gameObject.campaignArmies.factions;
+  const gameObjectCopy = Object.assign({}, gameObject);
+  console.log('update call, goCpy: ', gameObjectCopy);
   const playersFaction = factions[checkPlayer()];
   
   // reset cities unit arrays and
@@ -110,7 +114,9 @@ function callUpdate(){  // updates cities, map, console.
   }
   fillGrids(); // from public/campaignMap/mapScreen.js. Fills the map screen with grids
   
-  // fill to side panel "console1", "YourIncome" 
+  // fill to side panel "console1", "YourIncome"
+  console.log('factions: ', factions);
+  console.log('playersFaction: ', playersFaction);
   document.getElementById('yourIncome').innerHTML = playersFaction.points + '<br> Upkeep cost of your army: <br>'+
   countFactionUpkeep(factions[checkPlayer()].army);
   
@@ -132,12 +138,15 @@ function countFactionUpkeep(army){
 }
 
 function checkPlayer(){ // returns index number of players faction.
+  const factions = gameObject.campaignArmies.factions;
   
   for (let i = 0; i < factions.length; i++){
-    
-    if (player === factions[i].nombre){
+ 
+    if (factions[i].player === true){
+      console.log('player found: ', i);
       return i;
-    }
+    }    
+    
   }
 }
 function clearDetails(){
@@ -181,6 +190,8 @@ function addUnit(targetArmy, targetUnit, unitSize, location){
 }
 
 function controlButtons(pushedButton, par2, par3, par4){
+  const factions = gameObject.campaignArmies.factions;
+  
   switch (pushedButton){
     case 'bought': // confirmation button for hire, after choosing deployment place
       let shoppingCart = gameObject.campaignArmies.shoppingCart;
@@ -291,6 +302,7 @@ function controlButtons(pushedButton, par2, par3, par4){
 }  // controlButtons end.
 
 function moveTarget(who, where){
+  const factions = gameObject.campaignArmies.factions;
   const whoIs = factions[checkPlayer()].army[who];
   
   infoScreen.innerHTML = 'Ok. Unit is now marching there.'

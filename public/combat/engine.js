@@ -174,6 +174,7 @@ function roundExecutor(){
     bLog.scrollTop = bLog.scrollHeight;
   }  
   // CHECK VICTORY CONDITIONS
+  // need to make its own function that is more frequently checked, to avoid problem that i have now.
   if (gameObject.army1.length < 1 || gameObject.army2.length < 1) {
     let winner;
     pause = true; 
@@ -189,6 +190,7 @@ function roundExecutor(){
     
     pause = true;
     clearInterval(gameLooper);
+    console.log('battle over, go: ', gameObject);
   }
 }
 
@@ -196,15 +198,11 @@ function roundExecutor(){
 function startGame(){
   // load selected armies from localStorage:
   const selected = JSON.parse(localStorage.getItem('Go'));
-  console.log('selected: ', selected);
   
   // Campaign game:
   if (selected.campaignPlay === true) {
-    console.log('campaign detected');
     gameObject = selected;
-    console.log('go after load:  ', gameObject);
   } else { // Skirmish game:
-    console.log('skirmish detected');
     gameObject.army1 = selected.army1.units; gameObject.army2 = selected.army2.units;
     gameObject.factions[0] = selected.army1.chosenArmy; gameObject.factions[1] = selected.army2.chosenArmy;
     gameObject.terrain = selected.field;    
@@ -215,13 +213,9 @@ function startGame(){
   const arm2 = gameObject.army2;
   let activeArmy = gameObject.army1;
   const copyOfOld = Object.assign({}, gameObject);
-  console.log('fill details: aA copyOfOLd ', activeArmy, copyOfOld);
   
   for (let ind = 0; ind < arm1.length; ind++){
     const foundUnit = searchUnitByName(arm1[ind].unit, gameObject.factions[0]);
-    console.log('pars for foundUnit: ', arm1[ind].unit, gameObject.factions[0]);
-    console.log('par 2: ', gameObject.factions[0]);
-    console.log('found: ', foundUnit);
     arm1[ind].details = foundUnit;
   }  
   for (let ind2 = 0; ind2 < arm2.length; ind2++){
@@ -285,7 +279,6 @@ function startGame(){
             break;
             case 12: currentFile2 = currentFile2 - 40; activeArmy[i].location.x = gameObject.terrain.deploymentZone2.x;
             break;
-              console.log('using default to set x and y for a2');
             default: activeArmy[i].location.x = activeArmy[lastUnit].location.x - 130;
           }
           
@@ -300,7 +293,7 @@ function startGame(){
   setStartLocations(arm2);
   draw();
   createUnitButtons();
-  console.log('start game ready: ', gameObject);
+  console.log('start game ready, go: ', gameObject);
 }
 
 //  -------- ONLOAD:  ------------

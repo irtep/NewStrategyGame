@@ -178,11 +178,9 @@ function zunSu(actions){
             if (alternativeDirCheck !== 'collision' && destChanged === false) {
               finalDestination = substitutions[destinationNow][yy];
               destChanged = true;
-              console.log('found alternative: ', finalDestination);
             }
           }
           unitInAction.target = finalDestination;
-          console.log('unit target changed to: ', unitInAction.target);
         } // if blocked ends
       } // check if blocked
     } // army2 loop ends  
@@ -190,7 +188,6 @@ function zunSu(actions){
     if (history.length > 40) {
       history.splice(0, 1);
     }
-    console.log('history: ', history);
     // analyze situation
     // commands: losCheck(fromWhere, toWhere) , distanceCheck(fromWhere, toWhere), findDirection(dirFrom, dirTo, distance)
 
