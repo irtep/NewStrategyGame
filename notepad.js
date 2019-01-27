@@ -7,11 +7,15 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: after battle doesnt work the transition to map screen, it goes there, but armys are not updated etc...need to investigate and fix
+Continue: when killing in combat, doesnt update at armies. Maybe should update directly after kill? Like having a 
+indexnumber maybe?
+
 */
 /*
 Known bugs:
   Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
+  
+  kills in fights will not be updated in campaignArmies...
 */
 
 /*

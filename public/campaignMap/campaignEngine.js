@@ -15,6 +15,8 @@ function clickControl(clickedButton){
 }
 
 function startCampaign(){
+  const factions = gameObject.campaignArmies.factions;
+  console.log('start campaign fired.');
   // mark this as campaign play:
   gameObject.campaignPlay = true;
   // load selected army from localStorage:
@@ -83,22 +85,30 @@ function startCampaign(){
 //  -------- ONLOAD:  ------------
 window.onload = ()=> {
   
-  if (gameObject.turn > 1){
-
-    // load gameObject from localStorage:
-    gameObject = JSON.parse(localStorage.getItem('Go'));
-    
-    if (gameObject.comingFromCombat === true) {
-      gameObject.comingFromCombat = false;
-      controlButtons('endOfTurn');    
-    }
-    gameObject.turn++;
-  }
+  // load gameObject from localStorage:
+  //gameObject = JSON.parse(localStorage.getItem('Go'));
+  checki = JSON.parse(localStorage.getItem('Go'));
+  console.log('checki ', checki);
   
-  if (gameObject.turn === 1) {
+  // if first turn then saved localStorage item indicates the chosen race.
+  if (checki === 'humans' ||
+     checki === 'elves' ||
+      checki === 'dwarves' ||
+      checki === 'savages' ||
+      checki === 'vampires'
+     ) {
     gameObject.turn++;
     startCampaign();
+  } else { // but if not, then campaign is going on.
+  // load gameObject from localStorage:
+    console.log('not first turn.'); // goes here, but problem...
+    // atleast the killed unit was not removed from gameObject...
+    // ... but basicly nothing else works either...need to investigate...
+    gameObject = JSON.parse(localStorage.getItem('Go'));  
+    callUpdate();
+    controlButtons('endOfTurn'); 
   }
   //console.log('gO; ', gameObject);
   //console.log('cities ', cities);
 };
+//
