@@ -5,6 +5,7 @@ const infoScreen = document.getElementById('infoScreen');
 const cities = gameObject.campaignArmies.cities; // cities
 
 function showDetails(who){
+  const factions = gameObject.campaignArmies.factions;
   // checks who is player and his faction
   const chosenFaction = factions[checkPlayer()].nombre;
   let getDetails;
