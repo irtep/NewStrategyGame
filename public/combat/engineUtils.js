@@ -29,6 +29,9 @@ function lethalWound(to, who, isMelee){
   const p2units = document.getElementById('p2units');
   let armyNumber;
   let indexOfDead;
+  let sourceUnit;
+  let sourcesIndex;
+  let sourcesArmyIndex;
   // for log screen:
   const logScreen = document.getElementById('logi'); // views/index.html
   let forLog;
@@ -46,6 +49,36 @@ function lethalWound(to, who, isMelee){
       armyNumber = 2;
     }
   }
+  
+  // if in campaign, find the source of unit that takes damage
+  // Campaign game:
+  if (gameObject.campaignPlay === true) {
+    let selectedFaction;
+    
+    for (let i = 0; i < gameObject.campaignArmies.factions.length; i++) {
+      
+      for (let ii = 0; ii < gameObject.campaignArmies.factions[i].army.length; ii++) {
+        let unitToCheckFrom;
+        let unitToCompare = gameObject.campaignArmies.factions[i].army[ii];
+        
+        if (armyNumber === 1){ 
+          unitToCheckFrom = gameObject.army1[indexOfDead];  
+        } else {
+          unitToCheckFrom = gameObject.army2[indexOfDead];
+        }
+      
+        if (unitToCheckFrom.details.nombre === unitToCompare.unit &&
+           unitToCheckFrom.location.city === unitToCompare.location && // might need location.city...
+           unitToCheckFrom.quantity === unitToCompare.quantity) {
+          
+          console.log('found unit to be killed from source', unitToCompare);
+          sourceUnit = unitToCompare;
+          sourcesArmyIndex = i;
+          sourcesIndex = ii;
+        }
+      }
+    }
+  }
   // and delete it
   switch (armyNumber){
     case 1:
@@ -53,6 +86,9 @@ function lethalWound(to, who, isMelee){
       logScreen.innerHTML = logScreen.innerHTML + forLog;
       
       gameObject.army1[indexOfDead].quantity--;
+      if (gameObject.campaignPlay === true) {
+        sourceUnit.quantity--; // deducts from source too
+      }
       if (gameObject.army1[indexOfDead].quantity < 1){
         // if (isMelee === false){
         who.order = 'standby';
@@ -64,7 +100,9 @@ function lethalWound(to, who, isMelee){
           }
         }
         gameObject.army1.splice(indexOfDead, 1);
-        
+        if (gameObject.campaignPlay === true) {
+          gameObject.campaignArmies.factions[sourcesArmyIndex].army.splice(sourcesIndex, 1); // removes from source too
+        }  
         // }
       }  
     break;
@@ -73,6 +111,10 @@ function lethalWound(to, who, isMelee){
       logScreen.innerHTML = logScreen.innerHTML + forLog;
       
       gameObject.army2[indexOfDead].quantity--;
+      if (gameObject.campaignPlay === true) {
+        sourceUnit.quantity--;
+      }
+        
       if (gameObject.army2[indexOfDead].quantity < 1){
         // if (isMelee === false){
         who.order = 'standby';
@@ -84,6 +126,9 @@ function lethalWound(to, who, isMelee){
           }
         }
         gameObject.army2.splice(indexOfDead, 1);
+        if (gameObject.campaignPlay === true) {
+          gameObject.campaignArmies.factions[sourcesArmyIndex].army.splice(sourcesIndex, 1); // removes from source too
+        }  
         // }  
       }
     break;
@@ -93,6 +138,7 @@ function lethalWound(to, who, isMelee){
   p1units.innerHTML = '';
   p2units.innerHTML = '';
   createUnitButtons();
+  console.log('gameObject after lethal wound: ', gameObject);
 }
 
 // attack executor.   Mod attack: the bigger is, the harder is to hit

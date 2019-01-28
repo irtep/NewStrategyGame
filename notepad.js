@@ -7,15 +7,15 @@ To add:
 - campaign tool.
 - Better highlight system.
 
-Continue: when killing in combat, doesnt update at armies. Maybe should update directly after kill? Like having a 
-indexnumber maybe?
-
+Continue: after combat it seems to update everything. However, when going to new battle after that it somehow resets...
+ enturn seems to have an old gameOBject... i think... maybe doesnt save at somepoint before that or gets it from somewhere else?
 */
 /*
 Known bugs:
   Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
   
-  kills in fights will not be updated in campaignArmies...
+  after combat it seems to update everything. However, when going to new battle after that it somehow resets
+  
 */
 
 /*
