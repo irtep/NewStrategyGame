@@ -12,9 +12,13 @@ Continue: after combat it seems to update everything. However, when going to new
 */
 /*
 Known bugs:
-  Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
+  criticals:
+    Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
   
-  after combat it seems to update everything. However, when going to new battle after that it somehow resets
+    after combat it seems to update everything. However, when going to new battle after that it somehow resets
+  
+  minors:
+    Shoots dead if simultaneous shooting and target already dead.
   
 */
 

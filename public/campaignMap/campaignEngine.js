@@ -99,14 +99,13 @@ window.onload = ()=> {
      ) {
     gameObject.turn++;
     startCampaign();
-  } else { // but if not, then campaign is going on.
-  // load gameObject from localStorage:
-    console.log('not first turn.'); // goes here, but problem...
-    // atleast the killed unit was not removed from gameObject...
-    // ... but basicly nothing else works either...need to investigate...
+  } 
+  else { // but if not, then campaign is going on.
+    console.log('not first turn.'); 
     gameObject = JSON.parse(localStorage.getItem('Go'));  
     callUpdate();
-    controlButtons('endOfTurn'); 
+    console.log('gO, after 1st combat: ', gameObject);
+    //controlButtons('endOfTurn'); 
   }
   //console.log('gO; ', gameObject);
   //console.log('cities ', cities);
