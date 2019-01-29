@@ -122,6 +122,8 @@ function startBattles() {
   
   // save 'selected' to localStorage
   localStorage.setItem('Go', JSON.stringify(gameObject));
+  // clear this fight from combats:
+  combats.splice(0, 1); 
   // lets do the fight.
   window.location = "https://thenewgame.glitch.me/combat";   
   // sort out combats like pushing ready "selected"-stuffs in "combats" array... from where first combats go to play first..
@@ -131,14 +133,15 @@ function startBattles() {
 }
 
 window.onload = ()=> {
+  // load gameObject from localStorage:
+  gameObject = JSON.parse(localStorage.getItem('Go'));  
   // check contested cities push them to contested:
   const battles = document.getElementById('battles');
   const contested = gameObject.campaignArmies.contested;
   const selected = gameObject.campaignArmies.selected;
-  const combats = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]; // here comes unsolved battles..
-  // load gameObject from localStorage:
-  gameObject = JSON.parse(localStorage.getItem('Go'));
-  console.log('endTurn starts: ', gameObject);
+  var combats;
+  combats = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];// here comes unsolved battles..
+  console.log('endTurn starts: ', gameObject, combats);
   
   for (let i = 0; i < gameObject.campaignArmies.cities.length; i++) {
     if (gameObject.campaignArmies.cities[i].controlledBy === 'contested') {
