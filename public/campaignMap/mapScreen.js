@@ -57,9 +57,9 @@ function consoleUpdate(resetMoves){
 }
 
 function callUpdate(){  // updates cities, map, console.
-  const factions = gameObject.campaignArmies.factions;
-  const gameObjectCopy = Object.assign({}, gameObject);
-  console.log('update call, goCpy: ', gameObjectCopy);
+  const factions = gameObject.campaignArmies.factions; /*
+  const gameObjectCopy = Object.assign({}, gameObject); was here just to check what gO looked like at this point.
+  console.log('update call, goCpy: ', gameObjectCopy);*/
   const playersFaction = factions[checkPlayer()];
   
   // reset cities unit arrays and
@@ -116,8 +116,8 @@ function callUpdate(){  // updates cities, map, console.
   fillGrids(); // from public/campaignMap/mapScreen.js. Fills the map screen with grids
   
   // fill to side panel "console1", "YourIncome"
-  console.log('factions: ', factions);
-  console.log('playersFaction: ', playersFaction);
+  //console.log('factions: ', factions);
+  //console.log('playersFaction: ', playersFaction);
   document.getElementById('yourIncome').innerHTML = playersFaction.points + '<br> Upkeep cost of your army: <br>'+
   countFactionUpkeep(factions[checkPlayer()].army);
   
@@ -192,6 +192,7 @@ function addUnit(targetArmy, targetUnit, unitSize, location){
 
 function controlButtons(pushedButton, par2, par3, par4){
   const factions = gameObject.campaignArmies.factions;
+  console.log('button clicked, gO before: ', gameObject);
   
   switch (pushedButton){
     case 'bought': // confirmation button for hire, after choosing deployment place
@@ -310,7 +311,7 @@ function moveTarget(who, where){
   whoIs.moved = true;
   whoIs.location = where;  // Atm. so, but will be so that adds unit "marching"
   consoleUpdate(false); // false as we dont want .move reset.
-  console.log('factions, ', factions);
+  console.log('move target clicked go, ', gameObject);
 }
 
 function hoverOnGrid(idOfPiece){

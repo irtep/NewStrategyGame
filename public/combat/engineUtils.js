@@ -1,6 +1,12 @@
 function endBattle(){
   console.log('end battle');
   gameObject.comingFromFight = true;
+  // clear army1 and army2
+  gameObject.army1 = [];
+  gameObject.arym2 = [];
+  // refresh factions of close combat
+  
+  // refresh factions of campaign armies
   // save gameObject
   localStorage.setItem('Go', JSON.stringify(gameObject));  
   // go to map screen.
@@ -29,9 +35,11 @@ function lethalWound(to, who, isMelee){
   const p2units = document.getElementById('p2units');
   let armyNumber;
   let indexOfDead;
-  let sourceUnit;
+  let sourceUnit; // factions place at gameObject
   let sourcesIndex;
   let sourcesArmyIndex;
+  let rootArmy; // humans, elves etc.
+  let rootsIndex;
   // for log screen:
   const logScreen = document.getElementById('logi'); // views/index.html
   let forLog;
@@ -68,16 +76,40 @@ function lethalWound(to, who, isMelee){
         }
       
         if (unitToCheckFrom.details.nombre === unitToCompare.unit &&
-           unitToCheckFrom.location.city === unitToCompare.location && // might need location.city...
+           unitToCheckFrom.location.city === unitToCompare.location && 
            unitToCheckFrom.quantity === unitToCompare.quantity) {
           
           console.log('found unit to be killed from source', unitToCompare);
           sourceUnit = unitToCompare;
           sourcesArmyIndex = i;
-          sourcesIndex = ii;
+          sourcesIndex = ii; 
+          rootsIndex = ii;
+          
+          // find rootUnit
+          console.log('compare for root: ', gameObject.campaignArmies.factions[i], gameObject.campaignArmies.humans);
+          if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.humans.nombre) {
+            rootArmy = gameObject.campaignArmies.humans;
+            console.log('root h');
+          }
+          if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.elves.nombre) {
+            rootArmy = gameObject.campaignArmies.elves;
+            console.log('root e');
+          }
+          if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.dwarves.nombre) {
+            rootArmy = gameObject.campaignArmies.dwarves;
+            console.log('root d');
+          }
+          if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.savages.nombre) {
+            rootArmy = gameObject.campaignArmies.savages;
+            console.log('root s');
+          }
+          if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.vampires.nombre) {
+            rootArmy = gameObject.campaignArmies.vampires;
+            console.log('root v');
+          }
         }
       }
-    }
+    } 
   }
   // and delete it
   switch (armyNumber){
@@ -88,6 +120,7 @@ function lethalWound(to, who, isMelee){
       gameObject.army1[indexOfDead].quantity--;
       if (gameObject.campaignPlay === true) {
         sourceUnit.quantity--; // deducts from source too
+        rootArmy.army[rootsIndex].quantity--; // and from root
       }
       if (gameObject.army1[indexOfDead].quantity < 1){
         // if (isMelee === false){
@@ -102,6 +135,7 @@ function lethalWound(to, who, isMelee){
         gameObject.army1.splice(indexOfDead, 1);
         if (gameObject.campaignPlay === true) {
           gameObject.campaignArmies.factions[sourcesArmyIndex].army.splice(sourcesIndex, 1); // removes from source too
+          rootArmy.army.splice(rootsIndex, 1);
         }  
         // }
       }  
@@ -113,6 +147,7 @@ function lethalWound(to, who, isMelee){
       gameObject.army2[indexOfDead].quantity--;
       if (gameObject.campaignPlay === true) {
         sourceUnit.quantity--;
+        rootArmy.army[rootsIndex].quantity--; // and from root
       }
         
       if (gameObject.army2[indexOfDead].quantity < 1){
@@ -128,7 +163,9 @@ function lethalWound(to, who, isMelee){
         gameObject.army2.splice(indexOfDead, 1);
         if (gameObject.campaignPlay === true) {
           gameObject.campaignArmies.factions[sourcesArmyIndex].army.splice(sourcesIndex, 1); // removes from source too
-        }  
+          rootArmy.army.splice(rootsIndex, 1);
+        }
+        console.log('gameObject after kill: ', gameObject);
         // }  
       }
     break;

@@ -1,8 +1,4 @@
-// check contested cities push them to contested:
-const battles = document.getElementById('battles');
-const contested = gameObject.campaignArmies.contested;
-const selected = gameObject.campaignArmies.selected;
-const combats = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]; // here comes unsolved battles..
+// this .js is when someone ends turn in campaign and there are contested cities.
 
 function getArmyList(whatString){
   let returning;  
@@ -23,7 +19,7 @@ function getArmyList(whatString){
     case 'vampires':
       returning = vampires;
     break;
-    default: console.log/(' whatString not found!');        
+    default: console.log(' whatString not found!');        
   }
   return returning;
 }
@@ -34,6 +30,8 @@ function callDice(max){
 }  
 
 function startBattles() {
+  
+  const combats = JSON.parse(sessionStorage.getItem('combatList'));
   var fightBetweenInvaders = false;
   var indexOfRivalInvader;
   var indexOfCombat;
@@ -126,7 +124,6 @@ function startBattles() {
   localStorage.setItem('Go', JSON.stringify(gameObject));
   // lets do the fight.
   window.location = "https://thenewgame.glitch.me/combat";   
-  console.log('5 should have moved by now..'); 
   // sort out combats like pushing ready "selected"-stuffs in "combats" array... from where first combats go to play first..
   // first combat is always if invaders are 
 
@@ -134,9 +131,14 @@ function startBattles() {
 }
 
 window.onload = ()=> {
+  // check contested cities push them to contested:
+  const battles = document.getElementById('battles');
+  const contested = gameObject.campaignArmies.contested;
+  const selected = gameObject.campaignArmies.selected;
+  const combats = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]; // here comes unsolved battles..
   // load gameObject from localStorage:
   gameObject = JSON.parse(localStorage.getItem('Go'));
-  console.log('endTurn', gameObject);
+  console.log('endTurn starts: ', gameObject);
   
   for (let i = 0; i < gameObject.campaignArmies.cities.length; i++) {
     if (gameObject.campaignArmies.cities[i].controlledBy === 'contested') {
@@ -195,7 +197,6 @@ window.onload = ()=> {
     'Area held by: ' + defenderList + '<br>' +
     'Invaders: ' + invaderList + '<br>';
     
-    console.log('d y i, combats ', defenders, invaders, combats);
     
     // separate invaders if they are from several armies...
     // this code cant be checked yet, as ai for campaign play is not made....
@@ -229,5 +230,7 @@ window.onload = ()=> {
       // Make pushes to invaders from tempFile.........or maybe should pick to selected directly...
     } */
   }
-  console.log('go : ', gameObject);
+  // save combats array for use in start battle function
+  sessionStorage.setItem('combatList', JSON.stringify(combats));
+  console.log('end turn ready : ', gameObject);
 }
