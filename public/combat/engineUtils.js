@@ -3,7 +3,14 @@ function endBattle(){
   gameObject.comingFromFight = true;
   // clear army1 and army2
   gameObject.army1 = [];
-  gameObject.arym2 = [];
+  gameObject.army2 = [];
+  // clear all cities from troops:
+  for (let i = 0; i < gameObject.campaignArmies.cities.length; i++){
+    gameObject.campaignArmies.cities[i].unitsByControlled.splice(0, gameObject.campaignArmies.cities[i].unitsByControlled.length);
+    gameObject.campaignArmies.cities[i].unitsByInvaded.splice (0, gameObject.campaignArmies.cities[i].unitsByInvaded.length);
+  }
+  // clear contesteds:
+  gameObject.campaignArmies.contested.splice(0, gameObject.campaignArmies.contested.length);
   // refresh factions of close combat
   
   // refresh factions of campaign armies
@@ -89,23 +96,18 @@ function lethalWound(to, who, isMelee){
           console.log('compare for root: ', gameObject.campaignArmies.factions[i], gameObject.campaignArmies.humans);
           if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.humans.nombre) {
             rootArmy = gameObject.campaignArmies.humans;
-            console.log('root h');
           }
           if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.elves.nombre) {
             rootArmy = gameObject.campaignArmies.elves;
-            console.log('root e');
           }
           if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.dwarves.nombre) {
             rootArmy = gameObject.campaignArmies.dwarves;
-            console.log('root d');
           }
           if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.savages.nombre) {
             rootArmy = gameObject.campaignArmies.savages;
-            console.log('root s');
           }
           if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.vampires.nombre) {
             rootArmy = gameObject.campaignArmies.vampires;
-            console.log('root v');
           }
         }
       }
@@ -120,6 +122,7 @@ function lethalWound(to, who, isMelee){
       gameObject.army1[indexOfDead].quantity--;
       if (gameObject.campaignPlay === true) {
         sourceUnit.quantity--; // deducts from source too
+        console.log('deducting from: ', rootArmy.army[rootsIndex]);
         rootArmy.army[rootsIndex].quantity--; // and from root
       }
       if (gameObject.army1[indexOfDead].quantity < 1){
@@ -147,6 +150,7 @@ function lethalWound(to, who, isMelee){
       gameObject.army2[indexOfDead].quantity--;
       if (gameObject.campaignPlay === true) {
         sourceUnit.quantity--;
+        console.log('deducting from: ', rootArmy.army[rootsIndex]);
         rootArmy.army[rootsIndex].quantity--; // and from root
       }
         

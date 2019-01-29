@@ -4,6 +4,20 @@ const infoScreen = document.getElementById('infoScreen');
 // Zones:
 const cities = gameObject.campaignArmies.cities; // cities
 
+// to refresh factions array, where all armies are nicely piled up.
+function updateFactions(){
+  const factions = gameObject.campaignArmies.factions;
+  
+  // clear + fill:
+  factions.splice(0, factions.length);
+  
+  factions.push(gameObject.campaignArmies.humans);
+  factions.push(gameObject.campaignArmies.elves);
+  factions.push(gameObject.campaignArmies.dwarves); 
+  factions.push(gameObject.campaignArmies.vampires);
+  factions.push(gameObject.campaignArmies.savages);
+}
+
 function showDetails(who){
   const factions = gameObject.campaignArmies.factions;
   // checks who is player and his faction
@@ -121,6 +135,7 @@ function callUpdate(){  // updates cities, map, console.
   document.getElementById('yourIncome').innerHTML = playersFaction.points + '<br> Upkeep cost of your army: <br>'+
   countFactionUpkeep(factions[checkPlayer()].army);
   
+  updateFactions();
   // fill  "YourArmy"  need to reset .moved too.
   consoleUpdate(true);
   
@@ -192,6 +207,7 @@ function addUnit(targetArmy, targetUnit, unitSize, location){
 
 function controlButtons(pushedButton, par2, par3, par4){
   const factions = gameObject.campaignArmies.factions;
+  updateFactions();
   console.log('button clicked, gO before: ', gameObject);
   
   switch (pushedButton){
@@ -255,7 +271,6 @@ function controlButtons(pushedButton, par2, par3, par4){
         infoScreen.innerHTML = ' Turn: ' + gameObject.turn;
       }
       
-      console.log('cities, contested cities: ', cities, contestedCities, contestedCities.length);
       // check if fights
       // check victory conditions...
     break;
