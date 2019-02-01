@@ -65,7 +65,7 @@ const elves = [
   new gameUnit(
   'Elf rider', 'cavalry', 'Riding fast horse these elves like to ride around enemies while peppering them with deadly accuracy with their bows.', 
   ['longsword'], ['elven longbow'],
-  {m: 9, s: 3, t: 3, ws: 4, bs: 3, a: 1, w: 2, i: 4, ld: 8, sv: 4, defMods: 1, pointCost: 8}, 1,  'elves', 5,
+  {m: 9, s: 3, t: 3, ws: 4, bs: 3, a: 1, w: 2, i: 4, ld: 8, sv: 4, defMods: 1, pointCost: 8}, 2,  'elves', 5,
   'Riding fast horse these elves like to ride around enemies while peppering them with deadly accuracy with their bows.', 5),
   new gameUnit(
   'Swordmaster', 'infantry', 'Most of the elves love their bows but in some cases they decide to dedicate to join the swordmaster brotherhood to dedicate their life to train fighting with swords.', 
@@ -75,7 +75,7 @@ const elves = [
   new gameUnit(
   'Unicorn', 'monster', 'Mythical horselike creature, that can stick you with his magical horn. Fast but not very armoured.', 
   ['unicorn horn'], ['no weapon'],
-  {m: 9, s: 4, t: 4, ws: 4, bs: 3, a: 2, w: 2, i: 5, ld: 8, sv: 5, defMods: 1, pointCost: 5}, 1,  'elves', 5,
+  {m: 9, s: 4, t: 4, ws: 4, bs: 3, a: 2, w: 2, i: 5, ld: 8, sv: 5, defMods: 1, pointCost: 5}, 2,  'elves', 5,
   'Mythical horselike creature, that can stick you with his magical horn. Fast but they as they are not armoured, they can not take that much punishment.', 2)
 ];
 
@@ -98,7 +98,7 @@ const dwarves = [
   new gameUnit(
   'Steel golem', 'monster', 'Steam-powered monstrosity. Controlled by dwarf warchief to punish enemies', 
   ['steel fists'], ['auto crossbow'],
-  {m: 5, s: 6, t: 7, ws: 4, bs: 4, a: 3, w: 7, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 30}, 3,  'dwarves', 1,
+  {m: 5, s: 6, t: 7, ws: 4, bs: 4, a: 3, w: 7, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 30}, 4,  'dwarves', 1,
   'Steam-powered monstrosity. Controlled by dwarf warchief with mystical psionic stones of elven origin. Only dwarves possess information how to construct these metallic monsters.', 3),
   new gameUnit(
   'Steamtank', 'monster', 'Steam-powered battlewagon. hard to break and causes damage with powerful catapult', 
@@ -159,7 +159,7 @@ const vampires = [
   new gameUnit(
   'Vampire rider', 'cavalry', 'Riding fast dire wolves or other monsters make them fast and deadly melee warriors.', 
   ['longsword'], ['no weapon'],
-  {m: 9, s: 5, t: 4, ws: 4, bs: 3, a: 2, w: 3, i: 7, ld: 8, sv: 2, defMods: 1, pointCost: 20}, 1,  'vampires', 5,
+  {m: 9, s: 5, t: 4, ws: 4, bs: 3, a: 2, w: 3, i: 7, ld: 8, sv: 2, defMods: 1, pointCost: 10}, 2,  'vampires', 5,
   'Riding fast dire wolves or other monsters make them fast and deadly melee warriors. Very well armoured.', 5),
   new gameUnit(
   'Necromancer', 'infantry', 'Can not really fight in melee. But devastating short range fireball launcher.', 
@@ -169,7 +169,7 @@ const vampires = [
   new gameUnit(
   'Black unicorn', 'monster', 'Mythical horselike creature, that can stick you with his magical horn. Fast but not very armoured.', 
   ['unicorn horn'], ['no weapon'],
-  {m: 9, s: 4, t: 4, ws: 4, bs: 3, a: 2, w: 2, i: 5, ld: 8, sv: 5, defMods: 1, pointCost: 5}, 1,  'vampires', 5,
+  {m: 9, s: 4, t: 4, ws: 4, bs: 3, a: 2, w: 2, i: 5, ld: 8, sv: 5, defMods: 1, pointCost: 5}, 2,  'vampires', 5,
   'Mythical horselike creature, that can stick you with his magical horn. Fast but they as they are not armoured, they can not take that much punishment.', 2)
 ];
 

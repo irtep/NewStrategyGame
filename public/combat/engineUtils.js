@@ -4,20 +4,18 @@ function endBattle(){
   // clear army1 and army2
   gameObject.army1 = [];
   gameObject.army2 = [];
-  // clear all cities from troops:
-  for (let i = 0; i < gameObject.campaignArmies.cities.length; i++){
-    gameObject.campaignArmies.cities[i].unitsByControlled.splice(0, gameObject.campaignArmies.cities[i].unitsByControlled.length);
-    gameObject.campaignArmies.cities[i].unitsByInvaded.splice (0, gameObject.campaignArmies.cities[i].unitsByInvaded.length);
-  }
-  // clear contesteds:
-  gameObject.campaignArmies.contested.splice(0, gameObject.campaignArmies.contested.length);
-  // refresh factions of close combat
+  if (gameObject.campaignPlay === true) {
+    // clear contesteds:
+    gameObject.campaignArmies.contested.splice(0, gameObject.campaignArmies.contested.length);
   
-  // refresh factions of campaign armies
-  // save gameObject
-  localStorage.setItem('Go', JSON.stringify(gameObject));  
-  // go to map screen.
-  window.location = "https://thenewgame.glitch.me/mapscreen";
+    // save gameObject
+    localStorage.setItem('Go', JSON.stringify(gameObject));  
+  
+    // go to map screen.
+    window.location = "https://thenewgame.glitch.me/mapscreen";
+  } else {
+    window.location = "https://thenewgame.glitch.me/";
+  }  
 }
 
 // to sort in initiative order

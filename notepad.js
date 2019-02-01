@@ -2,24 +2,27 @@
 
 Start to look good.
 To add: 
-- more maps, more armies. More test.
+- More test.
 - Better and clearer user interface.
 - campaign tool.
 - Better highlight system.
+- Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
 
-Continue: after combat it seems to update everything. However, when going to new battle after that it somehow resets...
- enturn seems to have an old gameOBject... i think... maybe doesnt save at somepoint before that or gets it from somewhere else?
+  Next: add ai system for campaign play.. so need slots for ai to make buys and moves. etc.
+
 */
 /*
 Known bugs:
   criticals:
     Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
-  
-    after combat it seems to update everything. However, when going to new battle after that it somehow resets
+      -possible fix: automatic aggroes to closest after fight, instead of standby. Maybe move action to allow shooting.
   
   minors:
     Shoots dead if simultaneous shooting and target already dead.
-  
+
+     Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
+
+    map doesnt show most southern towns completely with texts, atleast with this laptop.
 */
 
 /*

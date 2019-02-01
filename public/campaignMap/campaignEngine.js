@@ -1,20 +1,11 @@
 
-// GLOBALS:
-// factions and cities globals are at mapScreen.js
 // most of commands are there too.
 let player; // who is human player, allocated at startCampaign
 
 // FUNCTIONS: 
 
-function turnEngine(){
-
-}
-
-function clickControl(clickedButton){
-  // by value of button make actions
-}
-
 function startCampaign(){
+  const cities = gameObject.campaignArmies.cities; // cities
   const factions = gameObject.campaignArmies.factions;
   console.log('start campaign fired.');
   // mark this as campaign play:
