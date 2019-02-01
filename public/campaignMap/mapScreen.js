@@ -2,7 +2,7 @@
  // factions that are not knocked out, allocated and mostly handled at startCampaign
 const infoScreen = document.getElementById('infoScreen');
 // Zones:
-const cities = gameObject.campaignArmies.cities; // cities
+
 
 // to refresh factions array, where all armies are nicely piled up.
 function updateFactions(){
@@ -71,16 +71,20 @@ function consoleUpdate(resetMoves){
 }
 
 function callUpdate(){  // updates cities, map, console.
+  const cities = gameObject.campaignArmies.cities; // cities
   const factions = gameObject.campaignArmies.factions; /*
   const gameObjectCopy = Object.assign({}, gameObject); was here just to check what gO looked like at this point.
   console.log('update call, goCpy: ', gameObjectCopy);*/
   const playersFaction = factions[checkPlayer()];
   
   // reset cities unit arrays and
+  // first factions array need to be up to date
+  updateFactions();
+  console.log('factions after update: ', factions);
   // check all units by all factions and pushes them to cities arrays
   for (let i = 0; i < cities.length; i++) {
-    cities[i].unitsByControlled = []; 
-    cities[i].unitsByInvaded = [];
+    gameObject.campaignArmies.cities[i].unitsByControlled.splice(0, gameObject.campaignArmies.cities[i].unitsByControlled.length);
+    gameObject.campaignArmies.cities[i].unitsByInvaded.splice (0, gameObject.campaignArmies.cities[i].unitsByInvaded.length);
     
     for (let ii = 0; ii < factions.length; ii++) {
       
@@ -91,9 +95,10 @@ function callUpdate(){  // updates cities, map, console.
           // if entering friendly or not guarded city
           if (cities[i].unitsByControlled.length < 1 || cities[i].unitsByControlled[0].commander === factions[ii].army[iii].commander){
             cities[i].unitsByControlled.push(factions[ii].army[iii]);
-            
+            console.log('found city: ', cities[i].nombre, factions[ii].army[iii]);
           } else { // if invader
             cities[i].unitsByInvaded.push(factions[ii].army[iii]);
+            console.log('found city: ', cities[i].nombre, factions[ii].army[iii]);
           }  
         }
       }
@@ -134,8 +139,7 @@ function callUpdate(){  // updates cities, map, console.
   //console.log('playersFaction: ', playersFaction);
   document.getElementById('yourIncome').innerHTML = playersFaction.points + '<br> Upkeep cost of your army: <br>'+
   countFactionUpkeep(factions[checkPlayer()].army);
-  
-  updateFactions();
+
   // fill  "YourArmy"  need to reset .moved too.
   consoleUpdate(true);
   
@@ -159,7 +163,6 @@ function checkPlayer(){ // returns index number of players faction.
   for (let i = 0; i < factions.length; i++){
  
     if (factions[i].player === true){
-      console.log('player found: ', i);
       return i;
     }    
     
@@ -207,6 +210,8 @@ function addUnit(targetArmy, targetUnit, unitSize, location){
 
 function controlButtons(pushedButton, par2, par3, par4){
   const factions = gameObject.campaignArmies.factions;
+  const cities = gameObject.campaignArmies.cities;
+  
   updateFactions();
   console.log('button clicked, gO before: ', gameObject);
   
@@ -330,6 +335,7 @@ function moveTarget(who, where){
 }
 
 function hoverOnGrid(idOfPiece){
+  const cities = gameObject.campaignArmies.cities; // cities
   
   for (let i = 0; i < cities.length; i++) {
     
@@ -368,6 +374,7 @@ function hoverOffGrid(idOfPiece){
 function fillGrids(){
   const maxElements = 247;
   const gridContainer = document.getElementById('gridContainer');
+  const cities = gameObject.campaignArmies.cities; // cities
   
   for (let i = 0; i < maxElements; i++){
     let pieceInTurn;
