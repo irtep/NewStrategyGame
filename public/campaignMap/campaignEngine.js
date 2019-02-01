@@ -98,6 +98,8 @@ window.onload = ()=> {
     console.log('gO, after 1st combat: ', gameObject);
     //controlButtons('endOfTurn'); 
   }
+  // AI decides purchases
+  // AI decides moves
   //console.log('gO; ', gameObject);
   //console.log('cities ', cities);
 };

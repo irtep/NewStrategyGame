@@ -195,7 +195,30 @@ function zunSu(actions){
 
     // choose commands
   } // actions ends    
+
   if (actions === 'checks'){
     console.log('ZunSu checks');
   }
+
+  if (actions === 'buy') {
+    console.log('ZunSu buys');
+    
+    // loop or factions that have cities and that are not human controlled
+    
+    // check the most expensive unit you can buy and buy it, until no more points
+    
+    // then add it to some shopping cart of that faction
+    
+  }  
+  
+  if (actions === 'moves') {
+    console.log('ZunSu moves');
+    
+    // loop or factions that have cities and that are not human controlled
+    
+    // check badly guarded cities and gather army there
+    
+    // then add it to some shopping cart of moves of that faction
+    
+  }    
 }

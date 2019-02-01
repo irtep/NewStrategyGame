@@ -13,7 +13,7 @@ To add:
 */
 /*
 Known bugs:
-  criticals:
+  serious:
     Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
       -possible fix: automatic aggroes to closest after fight, instead of standby. Maybe move action to allow shooting.
   
