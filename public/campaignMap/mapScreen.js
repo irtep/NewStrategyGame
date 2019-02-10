@@ -80,7 +80,6 @@ function callUpdate(){  // updates cities, map, console.
   // reset cities unit arrays and
   // first factions array need to be up to date
   updateFactions();
-  console.log('factions after update: ', factions);
   // check all units by all factions and pushes them to cities arrays
   for (let i = 0; i < cities.length; i++) {
     gameObject.campaignArmies.cities[i].unitsByControlled.splice(0, gameObject.campaignArmies.cities[i].unitsByControlled.length);
@@ -95,10 +94,8 @@ function callUpdate(){  // updates cities, map, console.
           // if entering friendly or not guarded city
           if (cities[i].unitsByControlled.length < 1 || cities[i].unitsByControlled[0].commander === factions[ii].army[iii].commander){
             cities[i].unitsByControlled.push(factions[ii].army[iii]);
-            console.log('found city: ', cities[i].nombre, factions[ii].army[iii]);
           } else { // if invader
             cities[i].unitsByInvaded.push(factions[ii].army[iii]);
-            console.log('found city: ', cities[i].nombre, factions[ii].army[iii]);
           }  
         }
       }
