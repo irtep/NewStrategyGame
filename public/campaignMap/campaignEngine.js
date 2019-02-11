@@ -96,77 +96,11 @@ window.onload = ()=> {
     gameObject = JSON.parse(localStorage.getItem('Go'));  
     callUpdate();
     console.log('gO, after 1st combat: ', gameObject);
-    //controlButtons('endOfTurn'); 
   }
-  // AI actions... i do them here, as atleast at this point, they will be more random than thinking. Maybe
-  // later some machine learning and or more complicated code at different place:
   
   // AI decides purchases
-  
-  if (gameObject.campaignArmies.humans.player === false){
-    const armyInCase = gameObject.campaignArmies.humans.army;
-    let upkeepATM = countFactionUpkeep(armyInCase);
-    let totalPoints = gameObject.campaignArmies.humans.points;
-    let pointsToSpent = totalPoints - upkeepATM;
-    // check how many free points:
-    // gameObject.campaignArmies.humans.points == total points
-    /*
-    // use this like this: countFactionUpkeep(factions[checkPlayer()].army);
-    */
-    console.log('humans, used points: ', upkeepATM);
-  }  
-  if (gameObject.campaignArmies.elves.player === false){
-    const armyInCase = gameObject.campaignArmies.elves.army;
-    let upkeepATM = countFactionUpkeep(armyInCase);
-    let totalPoints = gameObject.campaignArmies.elves.points;
-    let pointsToSpent = totalPoints - upkeepATM;
-    // check how many free points:
-    // gameObject.campaignArmies.humans.points == total points
-    /*
-    // use this like this: countFactionUpkeep(factions[checkPlayer()].army);
-    */
-    console.log('elf, used points: ', upkeepATM);
-  
-  }  
-  if (gameObject.campaignArmies.dwarves.player === false){
-    const armyInCase = gameObject.campaignArmies.dwarves.army;
-    let upkeepATM = countFactionUpkeep(armyInCase);
-    let totalPoints = gameObject.campaignArmies.dwarves.points;
-    let pointsToSpent = totalPoints - upkeepATM;
-    // check how many free points:
-    // gameObject.campaignArmies.humans.points == total points
-    /*
-    // use this like this: countFactionUpkeep(factions[checkPlayer()].army);
-    */
-    console.log('dwarfs, used points: ', upkeepATM);
-  
-  }  
-  if (gameObject.campaignArmies.savages.player === false){
-    const armyInCase = gameObject.campaignArmies.savages.army;
-    let upkeepATM = countFactionUpkeep(armyInCase);
-    let totalPoints = gameObject.campaignArmies.savages.points;
-    let pointsToSpent = totalPoints - upkeepATM;
-    // check how many free points:
-    // gameObject.campaignArmies.humans.points == total points
-    /*
-    // use this like this: countFactionUpkeep(factions[checkPlayer()].army);
-    */
-    console.log('savs, used points: ', upkeepATM);
-  
-  }  
-  if (gameObject.campaignArmies.vampires.player === false){
-    const armyInCase = gameObject.campaignArmies.vampires.army;
-    let upkeepATM = countFactionUpkeep(armyInCase);
-    let totalPoints = gameObject.campaignArmies.vampires.points;
-    let pointsToSpent = totalPoints - upkeepATM;
-    // check how many free points
-    // gameObject.campaignArmies.humans.points == total points
-    /*
-    // use this like this: countFactionUpkeep(factions[checkPlayer()].army);
-    */
-    console.log('vamps, used points: ', upkeepATM);
-  
-  }
+  computerPurchases();
+  callUpdate();
   
   // AI decides moves at endTurn!
   
