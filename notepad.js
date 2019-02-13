@@ -9,7 +9,6 @@ To add:
 - Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
 
   Next: add ai system for campaign play.. moves next after that ai vs ai combat.
-  Check if the upkeep ATM is really updates when making buys!
 
 */
 /*

@@ -18,13 +18,21 @@ function cityChecker(whatArmyIsThis){
 
 // buys random stuff for faction, to random city.
 function randomBuys(targetArmy, myCities, whatArmyIsThis, pointsToSpent){
-    
+  let pointsInBank = pointsToSpent;  
+  
   for (let i2 = 0; i2 < targetArmy.length; i2++ ) {
       const totalPointCost = targetArmy[i2].stats.pointCost * targetArmy[i2].unitSize;
       
-      if (pointsToSpent >= totalPointCost) {
+      if (pointsInBank >= totalPointCost) {
         const randomDice = callDice(myCities.length) - 1; // -1 to allow zero 
         addUnit(whatArmyIsThis, targetArmy[i2].nombre, targetArmy[i2].unitSize, myCities[randomDice]);
+        pointsInBank = pointsInBank - totalPointCost;
+        
+        // to make sure, that this will not stop if there are still points to spend
+        let nextI2 = i2 +1;
+        if (nextI2 === targetArmy.length) {
+          i2 = 0; // reset to check all units again.  
+        }
       }
     }
 }
@@ -47,7 +55,7 @@ function computerPurchases(){
     // buys random stuff: 
     randomBuys(targetArmy, myCities, whatArmyIsThis, pointsToSpent);
     
-    console.log('humans, used points: ', upkeepATM);
+    console.log('humans, used points: ', countFactionUpkeep(armyInCase));
   }  
   // ELVES
   if (gameObject.campaignArmies.elves.player === false){
@@ -66,7 +74,7 @@ function computerPurchases(){
     // buys random stuff:  
     randomBuys(targetArmy, myCities, whatArmyIsThis, pointsToSpent);
     
-    console.log('elf, used points: ', upkeepATM);
+    console.log('elf, used points: ', countFactionUpkeep(armyInCase));
   }  
   // DWARVES
   if (gameObject.campaignArmies.dwarves.player === false){
@@ -85,7 +93,7 @@ function computerPurchases(){
     // buys random stuff:
     randomBuys(targetArmy, myCities, whatArmyIsThis, pointsToSpent);
     
-    console.log('dwarfs, used points: ', upkeepATM);
+    console.log('dwarfs, used points: ', countFactionUpkeep(armyInCase));
   }  
   // SAVAGES
   if (gameObject.campaignArmies.savages.player === false){
@@ -104,7 +112,7 @@ function computerPurchases(){
     // buys random stuff:
     randomBuys(targetArmy, myCities, whatArmyIsThis, pointsToSpent);
     
-    console.log('savs, used points: ', upkeepATM);
+    console.log('savs, used points: ', countFactionUpkeep(armyInCase));
   }  
   // VAMPIRES
   if (gameObject.campaignArmies.vampires.player === false){
@@ -123,15 +131,32 @@ function computerPurchases(){
     // buys random stuff:
     randomBuys(targetArmy, myCities, whatArmyIsThis, pointsToSpent);
     
-    console.log('vamps, used points: ', upkeepATM);
+    console.log('vamps, used points: ', countFactionUpkeep(armyInCase));
   }
 }
 
 // AI Moves. Moves of AI wants to make
 function aiMoves(){
   
+  // HUMANS
   if (gameObject.campaignArmies.humans.player === false){
+    // randomize mode:
+    const currentModeDice = callDice(3);
+    const whatArmyIsThis = 'humans';
+    let currentMode;
+    
+    switch (currentModeDice) {
+      case 1: currentMode = 'aggressive'; break;
+      case 2: currentMode = 'normal'; break;
+      case 3: currentMode = 'defensive'; break;
+      default: console.log('modedice not found: ', currentModeDice, whatArmyIsThis);  
+    }
 
+    // check how many guys are in each cities
+    // if aggro. Leave only one unit to each city and attack to all enemy cities
+    // if normal. Attack neutral cities with 50% force of nearest city/cities. And if guys, one/two enemy city
+    // if defensive. Attack neutral with minimum and reinforce weaker cities if possible.
+    
   }
   
   if (gameObject.campaignArmies.elves.player === false){
