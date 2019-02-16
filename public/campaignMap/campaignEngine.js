@@ -99,7 +99,7 @@ window.onload = ()=> {
   }
   
   // AI decides purchases
-  computerPurchases();
+  computerPurchases(); // at public/ai/aiCommands.js
   callUpdate();
   
   // AI decides moves at endTurn!

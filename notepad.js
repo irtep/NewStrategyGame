@@ -8,20 +8,30 @@ To add:
 - Better highlight system.
 - Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
 
-  Next: add ai system for campaign play.. moves next after that ai vs ai combat.
+  Next: add ai system for campaign play.. moves next after that ai vs ai combat. check serious bug #2 too
 
 */
 /*
 Known bugs:
   serious:
+    #1
     Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
       -possible fix: automatic aggroes to closest after fight, instead of standby. Maybe move action to allow shooting.
   
+    #2
+    When bought x2 longbowman to northfield, moved them to centerwoods, then bought 1x crossbow man:
+      - longbowmen still appeared in "move" options
+      Also:
+      When then went to combat, couldnt start as got endTurn.js i think line: 101: cant read commander of undefined
+      And both armies where at defenders slots.
+  
   minors:
+    #1
     Shoots dead if simultaneous shooting and target already dead.
 
-     Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
-
+    -> Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
+    
+    #2
     map doesnt show most southern towns completely with texts, atleast with this laptop.
 */
 
