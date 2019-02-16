@@ -1,5 +1,4 @@
 // commands for Campaign map AI place:
-
 // function that checks what city is controlled by this faction
 function cityChecker(whatArmyIsThis){
   
@@ -143,7 +142,25 @@ function aiMoves(){
     // randomize mode:
     const currentModeDice = callDice(3);
     const whatArmyIsThis = 'humans';
+    const armyInAction = gameObject.campaignArmies.humans;
     let currentMode;
+    let forcesInCities = [
+      {nombre: 'Lima', forces: 0},
+      {nombre: 'Lurin', forces: 0},
+      {nombre: 'Quito', forces: 0},
+      {nombre: 'Arequipa', forces: 0},
+      {nombre: 'Tumbes', forces: 0},
+      {nombre: 'Cajamarca', forces: 0},
+      {nombre: 'Northfield', forces: 0},
+      {nombre: 'Crossroads', forces: 0},
+      {nombre: 'Riversend', forces: 0},
+      {nombre: 'Ironhall', forces: 0},
+      {nombre: 'Steelhammer', forces: 0},
+      {nombre: 'Southdig', forces: 0},
+      {nombre: 'Centerwoods', forces: 0},
+      {nombre: 'Seagarden', forces: 0},
+      {nombre: 'Whitetower', forces: 0}
+    ];
     
     switch (currentModeDice) {
       case 1: currentMode = 'aggressive'; break;
@@ -151,7 +168,17 @@ function aiMoves(){
       case 3: currentMode = 'defensive'; break;
       default: console.log('modedice not found: ', currentModeDice, whatArmyIsThis);  
     }
-
+    
+    for (let i = 0; i < armyInAction.army.length; i++) {
+      
+      // check city..and add +1 to city
+      for (let i2 = 0; i2 < forcesInCities.length; i2++) {
+       /* if (armyInAction[i].) {
+            
+        } */ 
+      }
+      
+    }
     // check how many guys are in each cities
     // if aggro. Leave only one unit to each city and attack to all enemy cities
     // if normal. Attack neutral cities with 50% force of nearest city/cities. And if guys, one/two enemy city
