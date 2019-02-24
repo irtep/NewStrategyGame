@@ -136,7 +136,7 @@ function computerPurchases(){
 
 // AI Moves. Moves of AI wants to make
 function aiMoves(){
-  
+  console.log('ai moves');
   // HUMANS
   if (gameObject.campaignArmies.humans.player === false){
     // randomize mode:
@@ -169,20 +169,29 @@ function aiMoves(){
       default: console.log('modedice not found: ', currentModeDice, whatArmyIsThis);  
     }
     
+    // check how many guys are in each cities
     for (let i = 0; i < armyInAction.army.length; i++) {
       
       // check city..and add +1 to city
       for (let i2 = 0; i2 < forcesInCities.length; i2++) {
-       /* if (armyInAction[i].) {
-            
-        } */ 
+        
+        if (armyInAction.army[i].location === forcesInCities[i2].nombre) {
+          forcesInCities[i2].forces++;
+        }
       }
-      
     }
-    // check how many guys are in each cities
+   
+    switch (currentMode) {
+      case 'aggressive': 
     // if aggro. Leave only one unit to each city and attack to all enemy cities
+      break;  
+      case 'normal':
     // if normal. Attack neutral cities with 50% force of nearest city/cities. And if guys, one/two enemy city
+      break;  
+      case 'defensive':
     // if defensive. Attack neutral with minimum and reinforce weaker cities if possible.
+      break;  
+    }
     
   }
   

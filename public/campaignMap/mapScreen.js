@@ -256,7 +256,7 @@ function controlButtons(pushedButton, par2, par3, par4){
     case 'endOfTurn':
       
       // AI Moves:
-      
+      aiMoves();
       
       // check if any city is contested.
       callUpdate();
@@ -272,7 +272,7 @@ function controlButtons(pushedButton, par2, par3, par4){
       if (contestedCities.length > 0){
         // save 'selected' to localStorage
         localStorage.setItem('Go', JSON.stringify(gameObject));
-        window.location = "https://thenewgame.glitch.me/endTurn"; 
+        // window.location = "https://thenewgame.glitch.me/endTurn";  disabled as i want to see log
       } else {
         gameObject.turn++;
         infoScreen.innerHTML = ' Turn: ' + gameObject.turn;
