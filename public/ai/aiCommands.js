@@ -144,6 +144,7 @@ function aiMoves(){
     const whatArmyIsThis = 'humans';
     const armyInAction = gameObject.campaignArmies.humans;
     let currentMode;
+    const factions = gameObject.campaignArmies.factions;
     let forcesInCities = [
       {nombre: 'Lima', forces: 0},
       {nombre: 'Lurin', forces: 0},
@@ -161,6 +162,23 @@ function aiMoves(){
       {nombre: 'Seagarden', forces: 0},
       {nombre: 'Whitetower', forces: 0}
     ];
+    let enemyForces = [
+      {nombre: 'Lima', forces: 0},
+      {nombre: 'Lurin', forces: 0},
+      {nombre: 'Quito', forces: 0},
+      {nombre: 'Arequipa', forces: 0},
+      {nombre: 'Tumbes', forces: 0},
+      {nombre: 'Cajamarca', forces: 0},
+      {nombre: 'Northfield', forces: 0},
+      {nombre: 'Crossroads', forces: 0},
+      {nombre: 'Riversend', forces: 0},
+      {nombre: 'Ironhall', forces: 0},
+      {nombre: 'Steelhammer', forces: 0},
+      {nombre: 'Southdig', forces: 0},
+      {nombre: 'Centerwoods', forces: 0},
+      {nombre: 'Seagarden', forces: 0},
+      {nombre: 'Whitetower', forces: 0}    
+    ];
     
     switch (currentModeDice) {
       case 1: currentMode = 'aggressive'; break;
@@ -169,9 +187,9 @@ function aiMoves(){
       default: console.log('modedice not found: ', currentModeDice, whatArmyIsThis);  
     }
     
-    // check how many guys are in each cities
+    // check how many own guys are in each cities
     for (let i = 0; i < armyInAction.army.length; i++) {
-      
+
       // check city..and add +1 to city
       for (let i2 = 0; i2 < forcesInCities.length; i2++) {
         
@@ -180,20 +198,42 @@ function aiMoves(){
         }
       }
     }
-   
+    // check how many enemy guys are in each cities
+    for (let ix = 0; ix < factions.length; ix++) {
+      let armyToCheck = factions[ix];
+      
+      for (let i = 0; i < armyToCheck.army.length; i++) {
+      
+        // check city..and add +1 to city
+        for (let i2 = 0; i2 < enemyForces.length; i2++) {
+        
+          if (armyToCheck.army[i].location === enemyForces[i2].nombre) {
+            enemyForces[i2].forces++;
+          }
+        }
+      }        
+    }
+    
+    // take own cities out from enemyForces list:
+    
+    
     switch (currentMode) {
       case 'aggressive': 
+        console.log('agromode');
     // if aggro. Leave only one unit to each city and attack to all enemy cities
       break;  
       case 'normal':
+        console.log('normalmode');
     // if normal. Attack neutral cities with 50% force of nearest city/cities. And if guys, one/two enemy city
       break;  
       case 'defensive':
+        console.log('deffumode');
     // if defensive. Attack neutral with minimum and reinforce weaker cities if possible.
       break;  
     }
     
-  }
+    console.log('own: ', forcesInCities, 'opponent: ', enemyForces);
+  }  // human ends
   
   if (gameObject.campaignArmies.elves.player === false){
 
