@@ -146,38 +146,38 @@ function aiMoves(){
     let currentMode;
     const factions = gameObject.campaignArmies.factions;
     let forcesInCities = [
-      {nombre: 'Lima', forces: 0},
-      {nombre: 'Lurin', forces: 0},
-      {nombre: 'Quito', forces: 0},
-      {nombre: 'Arequipa', forces: 0},
-      {nombre: 'Tumbes', forces: 0},
-      {nombre: 'Cajamarca', forces: 0},
-      {nombre: 'Northfield', forces: 0},
-      {nombre: 'Crossroads', forces: 0},
-      {nombre: 'Riversend', forces: 0},
-      {nombre: 'Ironhall', forces: 0},
-      {nombre: 'Steelhammer', forces: 0},
-      {nombre: 'Southdig', forces: 0},
-      {nombre: 'Centerwoods', forces: 0},
-      {nombre: 'Seagarden', forces: 0},
-      {nombre: 'Whitetower', forces: 0}
+      {nombre: 'Lima', forces: 0, power: 0},
+      {nombre: 'Lurin', forces: 0, power: 0},
+      {nombre: 'Quito', forces: 0, power: 0},
+      {nombre: 'Arequipa', forces: 0, power: 0},
+      {nombre: 'Tumbes', forces: 0, power: 0},
+      {nombre: 'Cajamarca', forces: 0, power: 0},
+      {nombre: 'Northfield', forces: 0, power: 0},
+      {nombre: 'Crossroads', forces: 0, power: 0},
+      {nombre: 'Riversend', forces: 0, power: 0},
+      {nombre: 'Ironhall', forces: 0, power: 0},
+      {nombre: 'Steelhammer', forces: 0, power: 0},
+      {nombre: 'Southdig', forces: 0, power: 0},
+      {nombre: 'Centerwoods', forces: 0, power: 0},
+      {nombre: 'Seagarden', forces: 0, power: 0},
+      {nombre: 'Whitetower', forces: 0, power: 0}
     ];
     let enemyForces = [
-      {nombre: 'Lima', forces: 0},
-      {nombre: 'Lurin', forces: 0},
-      {nombre: 'Quito', forces: 0},
-      {nombre: 'Arequipa', forces: 0},
-      {nombre: 'Tumbes', forces: 0},
-      {nombre: 'Cajamarca', forces: 0},
-      {nombre: 'Northfield', forces: 0},
-      {nombre: 'Crossroads', forces: 0},
-      {nombre: 'Riversend', forces: 0},
-      {nombre: 'Ironhall', forces: 0},
-      {nombre: 'Steelhammer', forces: 0},
-      {nombre: 'Southdig', forces: 0},
-      {nombre: 'Centerwoods', forces: 0},
-      {nombre: 'Seagarden', forces: 0},
-      {nombre: 'Whitetower', forces: 0}    
+      {nombre: 'Lima', forces: 0, power: 0},
+      {nombre: 'Lurin', forces: 0, power: 0},
+      {nombre: 'Quito', forces: 0, power: 0},
+      {nombre: 'Arequipa', forces: 0, power: 0},
+      {nombre: 'Tumbes', forces: 0, power: 0},
+      {nombre: 'Cajamarca', forces: 0, power: 0},
+      {nombre: 'Northfield', forces: 0, power: 0},
+      {nombre: 'Crossroads', forces: 0, power: 0},
+      {nombre: 'Riversend', forces: 0, power: 0},
+      {nombre: 'Ironhall', forces: 0, power: 0},
+      {nombre: 'Steelhammer', forces: 0, power: 0},
+      {nombre: 'Southdig', forces: 0, power: 0},
+      {nombre: 'Centerwoods', forces: 0, power: 0},
+      {nombre: 'Seagarden', forces: 0, power: 0},
+      {nombre: 'Whitetower', forces: 0, power: 0}    
     ];
     
     switch (currentModeDice) {
@@ -194,13 +194,17 @@ function aiMoves(){
       for (let i2 = 0; i2 < forcesInCities.length; i2++) {
         
         if (armyInAction.army[i].location === forcesInCities[i2].nombre) {
+          // +1 to forces:
           forcesInCities[i2].forces++;
+          // to power rating the point cost:
+          const totalPointCost = armyInAction.army[i].details.stats.pointCost * armyInAction.army[i].quantity;
+          forcesInCities[i2].power = forcesInCities[i2].power + totalPointCost;
         }
       }
     }
     // check how many enemy guys are in each cities
     for (let ix = 0; ix < factions.length; ix++) {
-      let armyToCheck = factions[ix];
+      let armyToCheck = factions[ix];  
       
       for (let i = 0; i < armyToCheck.army.length; i++) {
       
@@ -208,7 +212,11 @@ function aiMoves(){
         for (let i2 = 0; i2 < enemyForces.length; i2++) {
         
           if (armyToCheck.army[i].location === enemyForces[i2].nombre) {
+            // +1 to forces:
             enemyForces[i2].forces++;
+            // to power rating the point cost:
+            const totalPointCost = armyToCheck.army[i].details.stats.pointCost * armyToCheck.army[i].quantity;
+            enemyForces[i2].power = enemyForces[i2].power + totalPointCost;
           }
         }
       }        

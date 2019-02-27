@@ -9,6 +9,8 @@ To add:
 - Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
 
   Next: add ai system for campaign play.. moves next after that ai vs ai combat. check serious bug #2 too
+  Add phases to counter serious bug #2 and to make clearer ai-buy and move
+  
   PLEASE NOTE: moving to End Turn is disabled at MapScreen as i need console.log for aiMoves
 
 */
