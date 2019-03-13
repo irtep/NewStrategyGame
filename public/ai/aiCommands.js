@@ -257,6 +257,7 @@ function aiMoves(){
                           
                             if (typeof anyoneThere !== "undefined") {
                               // lets go! 
+                              armyInAction.army[xix].location = enemyForces[xix4].nombre; // not tested yet.
                               console.log('find neutral city: from, to ', armyInAction.army[xix].nombre, enemyForces[xix4].nombre);
                             }
                           
