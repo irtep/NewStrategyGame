@@ -227,6 +227,7 @@ function aiMoves(){
       case 'aggressive': 
         console.log('agromode');
         // beta aggressive attack mode script:
+        
         // if aggro. Leave only one unit to each city and attack to all enemy cities
         for (let xix = 0; xix < armyInAction.army.length; xix++) {
           // in what city is this guy
@@ -235,7 +236,7 @@ function aiMoves(){
             // check if enemies in that neighbouring city:
             for (let xix4 = 0; xix4 < enemyForces.length; xix4++) {
               
-              // if enemyforces in city, launch attack.
+              // found city
               if (armyInAction.army[xix].location == forcesInCities[xix2].nombre &&
                  forcesInCities[xix2].forces > 1) { // more than 1 in same city.
                   
@@ -243,12 +244,13 @@ function aiMoves(){
                 for (let xix3 = 0; xix3 < gameObject.campaignArmies.cities.length; xix3++) {
                   
                   if (gameObject.campaignArmies.cities[xix3].nombre == armyInAction.army[xix].location) {
+                    
                     // check neighbours to find enemy or neutral:
                     for (let xix5 = 0; xix5 < gameObject.campaignArmies.cities[xix3].exits.length; xix5++) {
                       
                       if (gameObject.campaignArmies.cities[xix3].exits[xix5] == enemyForces[xix4].nombre) {
                         
-                        // if nobody there, lets check that it is not our own..
+                        // Neutral city:
                         if (enemyForces[xix4].forces < 1) {
                           let someoneDetected = false;
                           const anyoneThere = armyInAction.army.filter( (loc) => {
@@ -257,10 +259,20 @@ function aiMoves(){
                           
                             if (typeof anyoneThere !== "undefined") {
                               // lets go! 
-                              armyInAction.army[xix].location = enemyForces[xix4].nombre; // not tested yet.
-                              console.log('find neutral city: from, to ', armyInAction.army[xix].nombre, enemyForces[xix4].nombre);
+                              armyInAction.army[xix].location = enemyForces[xix4].nombre;
+                              
+                              // update forcesInCities
+                              forcesInCities[xix2].forces--;
                             }
-                          
+                        }
+                        
+                        // Enemy city:
+                        if (enemyForces[xix4].forces > 0) {
+                          // lets go! 
+                          armyInAction.army[xix].location = enemyForces[xix4].nombre;
+                              
+                          // update forcesInCities
+                          forcesInCities[xix2].forces--;  
                         }
                       }
                     }
