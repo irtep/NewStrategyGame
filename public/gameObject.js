@@ -64,6 +64,7 @@
     }
     },
     turn: 1,
+    phaze: 'hire',
     campaignPlay: false, // tells if combat is on.
     comingFromFight: false
   };

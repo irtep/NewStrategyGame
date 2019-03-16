@@ -8,6 +8,24 @@ function callDice(max){
     return result;
 }  
 
+function makeButtons(phaze){
+  const buttonPlace = document.getElementById('buttonPlace');
+
+  switch (phaze) {
+    case 'hire':
+      buttonPlace.innerHTML = '<input type= "button" id= "hireUnits" value= "Hire units" onclick= "controlButtons(this.id)"><br>'+
+      '<input type= "button" id= "endOfTurn" value= "End phase" onclick= "controlButtons(this.id)"><br><br>'; 
+    break;
+      
+    case 'move':
+      buttonPlace.innerHTML = '<input type= "button" id= "moveUnits" value= "Move units" onclick= "controlButtons(this.id)"><br>'+
+      '<input type= "button" id= "endOfTurn" value= "End phase" onclick= "controlButtons(this.id)"><br><br>'; 
+    break;
+      
+    default: console.log('phaze not found in makeButtons');  
+  }
+}
+
 // to refresh factions array, where all armies are nicely piled up.
 function updateFactions(){
   const factions = gameObject.campaignArmies.factions;
@@ -211,7 +229,6 @@ function controlButtons(pushedButton, par2, par3, par4){
   const cities = gameObject.campaignArmies.cities;
   
   updateFactions();
-  console.log('button clicked, gO before: ', gameObject);
   
   switch (pushedButton){
     case 'bought': // confirmation button for hire, after choosing deployment place
@@ -255,29 +272,38 @@ function controlButtons(pushedButton, par2, par3, par4){
     break;
     case 'endOfTurn':
       
-      // AI Moves:
-      aiMoves();
-      
-      // check if any city is contested.
-      callUpdate();
-      const contestedCities = [];
-      
-      for (let i = 0; i < cities.length; i++){
+      if (gameObject.phaze === 'hire'){
+        gameObject.phaze = 'move';
         
-        if (cities[i].controlledBy === 'contested') {
-          contestedCities.push(cities[i]);
+        // AI decides purchases
+        computerPurchases(); // at public/ai/aiCommands.js
+        callUpdate();
+        makeButtons(gameObject.phaze);
+      } else {
+      
+        // AI Moves:
+        aiMoves();
+      
+        // check if any city is contested.
+        callUpdate();
+        const contestedCities = [];
+      
+        for (let i = 0; i < cities.length; i++){
+        
+          if (cities[i].controlledBy === 'contested') {
+            contestedCities.push(cities[i]);
+          }
+        }
+        // if any is contested, lets go to settle them at endTurn
+        if (contestedCities.length > 0){
+          // save 'selected' to localStorage
+          localStorage.setItem('Go', JSON.stringify(gameObject));
+          window.location = "https://thenewgame.glitch.me/endTurn";
+        } else {
+          gameObject.turn++;
+          infoScreen.innerHTML = ' Turn: ' + gameObject.turn;
         }
       }
-      // if any is contested, lets go to settle them at endTurn
-      if (contestedCities.length > 0){
-        // save 'selected' to localStorage
-        localStorage.setItem('Go', JSON.stringify(gameObject));
-        // window.location = "https://thenewgame.glitch.me/endTurn";  disabled as i want to see log
-      } else {
-        gameObject.turn++;
-        infoScreen.innerHTML = ' Turn: ' + gameObject.turn;
-      }
-      
       // check if fights
       // check victory conditions...
     break;
@@ -289,7 +315,7 @@ function controlButtons(pushedButton, par2, par3, par4){
       
       if (looseMoney >= thisWouldCost) {
         infoScreen.innerHTML = 'Ok. Hired. Choose deployment area: ';
-        console.log('f', factions);
+        
         for (let i = 0; i < factions[checkPlayer()].controlling.length; i++) {
           infoScreen.innerHTML = infoScreen.innerHTML + '<br>' + 
           '<input name = "'+factions[checkPlayer()].controlling[i].nombre+'" id= "bought" value = "'+
@@ -333,7 +359,6 @@ function moveTarget(who, where){
   whoIs.moved = true;
   whoIs.location = where;  // Atm. so, but will be so that adds unit "marching"
   consoleUpdate(false); // false as we dont want .move reset.
-  console.log('move target clicked go, ', gameObject);
 }
 
 function hoverOnGrid(idOfPiece){
