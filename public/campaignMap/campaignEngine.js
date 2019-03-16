@@ -7,7 +7,6 @@ let player; // who is human player, allocated at startCampaign
 function startCampaign(){
   const cities = gameObject.campaignArmies.cities; // cities
   const factions = gameObject.campaignArmies.factions;
-  console.log('start campaign fired.');
   // mark this as campaign play:
   gameObject.campaignPlay = true;
   // load selected army from localStorage:
@@ -79,7 +78,6 @@ window.onload = ()=> {
   // load gameObject from localStorage:
   //gameObject = JSON.parse(localStorage.getItem('Go'));
   checki = JSON.parse(localStorage.getItem('Go'));
-  console.log('checki ', checki);
   
   // if first turn then saved localStorage item indicates the chosen race.
   if (checki === 'humans' ||
@@ -93,10 +91,8 @@ window.onload = ()=> {
     makeButtons(gameObject.phaze);
   } 
   else { // but if not, then campaign is going on.
-    console.log('not first turn.'); 
     gameObject = JSON.parse(localStorage.getItem('Go'));
     callUpdate();
-    console.log('gO, after 1st combat: ', gameObject);
   }
   
   callUpdate();

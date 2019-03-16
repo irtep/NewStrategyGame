@@ -1,5 +1,9 @@
 // this .js is when someone ends turn in campaign and there are contested cities.
 
+function aiVsAi(a1, a2){
+  console.log('got ai vs ai: ', a1, a2);
+}
+
 function getArmyList(whatString){
   let returning;  
   
@@ -48,7 +52,7 @@ function startBattles() {
         indexOfCombat = i;
       }
       
-      // check if all are from same side:
+      // check if all invaders are from same side:
       for (let ii = 0; ii < combats[i][1].length; ii++){
         
         if (combats[i][1][ii].commander !== combats[i][1][ii].commander && indexOfCombat == i) {
@@ -115,6 +119,34 @@ function startBattles() {
     gameObject.army1 = firstDeploy;
     gameObject.army2 = secondDeploy;    
   }
+  
+  // Now here, need to check if it is AI vs AI
+  let firstIsPlayer = false;
+  let secondIsPlayer = false;
+  
+  // from what army are these guy:
+  for (let ind = 0; ind < gameObject.campaignArmies.factions.length; ind++){
+  
+    if (firstDeploy[0].commander === campaignArmies.factions[ind].army[0].commander) {
+    
+      if (gameObject.campaignArmies.factions[ind].player === true){
+        firstIsPlayer = true;
+      }
+    }
+    if (secondDeploy[0].commander === campaignArmies.factions[ind].army[0].commander) {
+      
+      if (gameObject.campaignArmies.factions[ind].player === true){
+        secondIsPlayer = true;
+      }
+    }
+  }
+  
+  // Settle ai vs ai:
+  if (firstIsPlayer === false && secondIsPlayer === false) {
+    aiVsAi(gameObject.army1, gameObject.army2);
+  } else {
+  
+    // if player is involved, start close combat:
   console.log('4 randomizing field, saving and moving...');
   // randomize field, if more areas are added, need to make that callDice param bigger:
   const fieldRandom = callDice(3) - 1;
@@ -126,10 +158,7 @@ function startBattles() {
   combats.splice(0, 1); 
   // lets do the fight.
   window.location = "https://thenewgame.glitch.me/combat";   
-  // sort out combats like pushing ready "selected"-stuffs in "combats" array... from where first combats go to play first..
-  // first combat is always if invaders are 
-
-  // i think it can go directly to combat.html as startGame() there should recognize this is campaign play....
+  }
 }
 
 window.onload = ()=> {
@@ -141,7 +170,7 @@ window.onload = ()=> {
   const selected = gameObject.campaignArmies.selected;
   var combats;
   combats = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]];// here comes unsolved battles..
-  console.log('endTurn starts: ', gameObject, combats);
+  console.log('endTurn starts: ', combats);
   
   for (let i = 0; i < gameObject.campaignArmies.cities.length; i++) {
     if (gameObject.campaignArmies.cities[i].controlledBy === 'contested') {
@@ -200,38 +229,6 @@ window.onload = ()=> {
     'Area held by: ' + defenderList + '<br>' +
     'Invaders: ' + invaderList + '<br>';
     
-    
-    // separate invaders if they are from several armies...
-    // this code cant be checked yet, as ai for campaign play is not made....
-    // DISABLED AS I TRY TO DO THIS IN Start Battle section!
-    /*
-    for (let i = 0; i < invaders.length;) {
-      const tempFile = [[],[],[],[]];
-      
-      if (invaders[0].details.commander !== invaders[i].details.commander){
-        console.log('found different');
-        tempFile[0].push(invaders[i]);
-        const removed = invaders.splice(i, 1);
-      }
-      i++
-      // when ready, check tempFile
-      if (i === invaders.length) {
-        
-        for (let ix = 0; ix < tempFile.length; ix++) {
-          if (tempFile[ix].length > 0){
-            for (let ix2 = 0; ix2 < tempFile[ix][ix2].length; ix2++) {
-              // if found different team, push to next... 
-              if (tempFile[ix][0].details.commander !== tempFile[ix][ix2].details.commander){
-                const plusOne = ix2 + 1;
-                tempFile[ix][plusOne].push(tempFile[ix][ix2]);
-                const removedx = tempFile[ix].splice(ix2, 1);
-              }
-            }
-          }
-        }    //
-      }
-      // Make pushes to invaders from tempFile.........or maybe should pick to selected directly...
-    } */
   }
   // save combats array for use in start battle function
   sessionStorage.setItem('combatList', JSON.stringify(combats));

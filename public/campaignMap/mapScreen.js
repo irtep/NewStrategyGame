@@ -9,7 +9,6 @@ function callDice(max){
 }  
 
 function makeButtons(phaze){
-  console.log('makeButtons');
   const buttonPlace = document.getElementById('buttonPlace');
 
   switch (phaze) {
@@ -230,7 +229,6 @@ function controlButtons(pushedButton, par2, par3, par4){
   const cities = gameObject.campaignArmies.cities;
   
   updateFactions();
-  console.log('button clicked, gO before: ', gameObject);
   
   switch (pushedButton){
     case 'bought': // confirmation button for hire, after choosing deployment place
@@ -317,7 +315,7 @@ function controlButtons(pushedButton, par2, par3, par4){
       
       if (looseMoney >= thisWouldCost) {
         infoScreen.innerHTML = 'Ok. Hired. Choose deployment area: ';
-        console.log('f', factions);
+        
         for (let i = 0; i < factions[checkPlayer()].controlling.length; i++) {
           infoScreen.innerHTML = infoScreen.innerHTML + '<br>' + 
           '<input name = "'+factions[checkPlayer()].controlling[i].nombre+'" id= "bought" value = "'+
@@ -361,7 +359,6 @@ function moveTarget(who, where){
   whoIs.moved = true;
   whoIs.location = where;  // Atm. so, but will be so that adds unit "marching"
   consoleUpdate(false); // false as we dont want .move reset.
-  console.log('move target clicked go, ', gameObject);
 }
 
 function hoverOnGrid(idOfPiece){

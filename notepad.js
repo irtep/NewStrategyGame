@@ -8,7 +8,8 @@ To add:
 - Better highlight system.
 - Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
 
-  Next: continue with endTurn.js. Seems to categorizes pretty fine, but after that not really done...
+  Next: continue with endTurn.js. This might need to do again all over...
+  After done combat: check if anything if contested. if yes then go back to endTurn.js!
 
 */
 /*
