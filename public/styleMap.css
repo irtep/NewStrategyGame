@@ -94,3 +94,7 @@
   width: 100px;
   height: 15px;
 }
+
+.invis {
+  opacity: 0;
+}

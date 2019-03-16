@@ -90,16 +90,15 @@ window.onload = ()=> {
      ) {
     gameObject.turn++;
     startCampaign();
+    makeButtons(gameObject.phaze);
   } 
   else { // but if not, then campaign is going on.
     console.log('not first turn.'); 
-    gameObject = JSON.parse(localStorage.getItem('Go'));  
+    gameObject = JSON.parse(localStorage.getItem('Go'));
     callUpdate();
     console.log('gO, after 1st combat: ', gameObject);
   }
   
-  // AI decides purchases
-  computerPurchases(); // at public/ai/aiCommands.js
   callUpdate();
   
   // AI decides moves at endTurn!
