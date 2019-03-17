@@ -4,11 +4,11 @@ Start to look good.
 To add: 
 - More test.
 - Better and clearer user interface.
-- campaign tool.
+- Need "hunt" commands, as combat is too hard without them.
 - Better highlight system.
 - Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
 
-  Next: continue with endTurn.js. This might need to do again all over...
+  Next: continue with endTurn.js. Ai vs Ai combat. after that, check if anything contested and =>
   After done combat: check if anything if contested. if yes then go back to endTurn.js!
 
 */
@@ -18,14 +18,7 @@ Known bugs:
     #1
     Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
       -possible fix: automatic aggroes to closest after fight, instead of standby. Maybe move action to allow shooting.
-  
-    #2  I THINK THIS WAS FIXED WHEN CHANGED GAME DYNAMIC TO PHASES:
-    When bought x2 longbowman to northfield, moved them to centerwoods, then bought 1x crossbow man:
-      - longbowmen still appeared in "move" options
-      Also:
-      When then went to combat, couldnt start as got endTurn.js i think line: 101: cant read commander of undefined
-      And both armies where at defenders slots.
-  
+ 
   minors:
     #1
     Shoots dead if simultaneous shooting and target already dead.
@@ -96,4 +89,3 @@ Event: civil war. rebel general takes over half of your troops... damn...
   const removed = new2.splice(0, 1);
   console.log('t1 t2 now ', new1, new2);
   */
-

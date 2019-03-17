@@ -2,9 +2,13 @@
 
 function aiVsAi(a1, a2){
   console.log('got ai vs ai: ', a1, a2);
+  
+  // clear this fight from combats:
+  //combats.splice(0, 1); 
 }
 
 function getArmyList(whatString){
+  console.log('gAl: ', whatString);
   let returning;  
   
   switch (whatString){
@@ -25,6 +29,7 @@ function getArmyList(whatString){
     break;
     default: console.log(' whatString not found!');        
   }
+  console.log('returning from get army list: ', returning);
   return returning;
 }
 
@@ -36,117 +41,89 @@ function callDice(max){
 function startBattles() {
   
   const combats = JSON.parse(sessionStorage.getItem('combatList'));
-  var fightBetweenInvaders = false;
-  var indexOfRivalInvader;
-  var indexOfCombat;
-  
-  // find combat in turn:
-  for (let i = 0; i < combats.length; i++) {
-    //var zero = false;
-    var one = false;
-
-    if (typeof combats[i][1] !== 'undefined' && one === false) {
-      
-      if (combats[i][1].length > 0) {
-        one = true;  // find invaders  
-        indexOfCombat = i;
-      }
-      
-      // check if all invaders are from same side:
-      for (let ii = 0; ii < combats[i][1].length; ii++){
-        
-        if (combats[i][1][ii].commander !== combats[i][1][ii].commander && indexOfCombat == i) {
-          fightBetweenInvaders = true;
-          indexOfRivalInvader = ii;
-        }  
-      }
-    }
-    
-  }
-  let a1;
-  let a2;
+  // get "captains" as to get compare point to teams:
+  let captain1 = combats[0][1][0];
+  let captain2 = 'not found';
+  // team2 place to find where team2 is located:
+  let team1location = combats[0][1].concat([]);
+  let team2location = 'not found';
+  // teams:
+  const team1 = [];
+  const team2 = [];
+  // for gameObject:
   let a1list;
   let a2list;
   let firstDeploy;
   let secondDeploy;
   
-  // untested as ai of campaign game is not yet done.
-  // if more than one invading army
-  if (fightBetweenInvaders === true) { 
-    console.log('3a fight between invaders ');
-    a1 = combats[indexOfCombat][1][0];
-    a2 = combats[indexOfCombat][1][indexOfRivalInvader];
-
-    // deploys players army first as combat console excepts that:
-    if (a1[0].commander === gameObject.campaignArmies.armyOfPlayer[0].army) {
-      firstDeploy = a2;
-      secondDeploy = a1;
-    } else {
-      firstDeploy = a2; secondDeploy = a1;
-    }    
+  // find captain2:
+  // first from invaders
+  for (let i = 0; i < combats[0][1].length; i++) {
     
-    gameObject.factions[0] = getArmyList(firstDeploy.commander);
-    gameObject.factions[1] = getArmyList(secondDeploy.commander);
-    
-    for (let ix = 0; ix < combats[indexOfCombat][1].length; ix++) {
-      
-      if (combats[indexOfCombat][1][ix].commander === firstDeploy.commander){  
-        gameObject.army1.push(combats[indexOfCombat][1][ix]);
-      }
-      
-      if (combats[indexOfCombat][1][ix].commander === secondDeploy.commander){  
-        gameObject.army2.push(combats[indexOfCombat][1][ix]);
-      }      
-    }  
-    
-  } else { // if only one invader army
-    a1 = combats[indexOfCombat][0];
-    a2 = combats[indexOfCombat][1];
-    a1list = getArmyList(a1[0].commander);
-    a2list = getArmyList(a2[0].commander);
-    
-    // deploys players army first as combat console excepts that:
-    if (a1[0].commander === gameObject.campaignArmies.armyOfPlayer[0].army) {
-      firstDeploy = a2;
-      secondDeploy = a1;
-    } else {
-      firstDeploy = a2; secondDeploy = a1;
-    }
-    
-    gameObject.factions[0] = getArmyList(firstDeploy[0].commander);
-    gameObject.factions[1] = getArmyList(secondDeploy[0].commander);
-    
-    gameObject.army1 = firstDeploy;
-    gameObject.army2 = secondDeploy;    
-  }
-  
-  // Now here, need to check if it is AI vs AI
-  let firstIsPlayer = false;
-  let secondIsPlayer = false;
-  
-  // from what army are these guy:
-  for (let ind = 0; ind < gameObject.campaignArmies.factions.length; ind++){
-  
-    if (firstDeploy[0].commander === campaignArmies.factions[ind].army[0].commander) {
-    
-      if (gameObject.campaignArmies.factions[ind].player === true){
-        firstIsPlayer = true;
-      }
-    }
-    if (secondDeploy[0].commander === campaignArmies.factions[ind].army[0].commander) {
-      
-      if (gameObject.campaignArmies.factions[ind].player === true){
-        secondIsPlayer = true;
-      }
+    if (combats[0][1][i].commander !== captain1.commander) {
+      captain2 = combats[0][1][i];
+      i = 25; // to terminate loop.
     }
   }
-  
-  // Settle ai vs ai:
-  if (firstIsPlayer === false && secondIsPlayer === false) {
-    aiVsAi(gameObject.army1, gameObject.army2);
+  // if not found from invaders, he is from defenders:
+  if (captain2 === 'not found') {
+    
+    captain2 = combats[0][0][0];
+    team2location = combats[0][0].concat([]);
   } else {
+    
+    team2location = combats[0][1];
+  }
+  console.log('captain1, captain2: ', captain1, captain2);
   
-    // if player is involved, start close combat:
+  // create teams:
+  console.log('locations: ', team1location, team2location);
+  for (let i = 0; i < team1location.length; i++) {
+    
+    if (team1location[i].commander === captain1.commander){
+      
+      team1.push(team1location[i]);
+    } 
+  }
+  for (let i = 0; i < team2location.length; i++) {
+    
+    if (team2location[i].commander === captain2.commander){
+      
+      team2.push(team2location[i]);
+    } 
+  }
+ 
+  console.log('team1, team2: ', team1, team2);
+  
+  // if ai vs ai:
+  if (team1[0].commander !== gameObject.campaignArmies.armyOfPlayer[0].army &&
+      team2[0].commander !== gameObject.campaignArmies.armyOfPlayer[0].army){
+      
+    // Settle ai vs ai:
+    aiVsAi(team1, team2);   
+  } else {
+    
+    // player involved:
+    // deploys players army first as combat console excepts that:
+    if (team1[0].commander === gameObject.campaignArmies.armyOfPlayer[0].army) {
+      
+      firstDeploy = team2;
+      secondDeploy = team1;
+    } else {
+      
+      firstDeploy = team2; secondDeploy = team1;
+    }
+    
+  // armyLists and armies:
+  console.log('fd', firstDeploy);
+  gameObject.factions[0] = getArmyList(firstDeploy[0].commander);
+  gameObject.factions[1] = getArmyList(secondDeploy[0].commander);   
+  gameObject.army1 = firstDeploy;
+  gameObject.army2 = secondDeploy;     
+  
+    
+  console.log('gameObjc: ', gameObject);  
+  // start close combat:
   console.log('4 randomizing field, saving and moving...');
   // randomize field, if more areas are added, need to make that callDice param bigger:
   const fieldRandom = callDice(3) - 1;
@@ -154,10 +131,8 @@ function startBattles() {
   
   // save 'selected' to localStorage
   localStorage.setItem('Go', JSON.stringify(gameObject));
-  // clear this fight from combats:
-  combats.splice(0, 1); 
   // lets do the fight.
-  window.location = "https://thenewgame.glitch.me/combat";   
+  window.location = "https://thenewgame.glitch.me/combat";     
   }
 }
 
@@ -173,6 +148,7 @@ window.onload = ()=> {
   console.log('endTurn starts: ', combats);
   
   for (let i = 0; i < gameObject.campaignArmies.cities.length; i++) {
+    
     if (gameObject.campaignArmies.cities[i].controlledBy === 'contested') {
       contested.push(gameObject.campaignArmies.cities[i]);    
     }
@@ -186,17 +162,21 @@ window.onload = ()=> {
     
     // sort defenders and invaders:
     for (let ii = 0; ii < contested[i].unitsByControlled.length; ii++) {
+      
       if (contested[i].unitsByControlled[ii].commander === contested[i].defender) {
         defenders.push(contested[i].unitsByControlled[ii]);    
       } else {
+        
         invaders.push(contested[i].unitsByControlled[ii]); 
       }
           
       }
     for (let ii = 0; ii < contested[i].unitsByInvaded.length; ii++) {
+      
       if (contested[i].unitsByInvaded[ii].commander === contested[i].defender) {
         defenders.push(contested[i].unitsByInvaded[ii]);    
       } else {
+        
         invaders.push(contested[i].unitsByInvaded[ii]); 
       }
     }   
