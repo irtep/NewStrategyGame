@@ -233,11 +233,12 @@ function startBattles() {
     // deploys players army first as combat console excepts that:
     if (team1[0].commander === gameObject.campaignArmies.armyOfPlayer[0].army) {
       
-      firstDeploy = team2;
-      secondDeploy = team1;
+      firstDeploy = team1;
+      secondDeploy = team2;
     } else {
       
-      firstDeploy = team2; secondDeploy = team1;
+      firstDeploy = team2; 
+      secondDeploy = team1;
     }
     
   // armyLists and armies:
