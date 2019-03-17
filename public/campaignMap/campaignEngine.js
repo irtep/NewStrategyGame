@@ -93,13 +93,32 @@ window.onload = ()=> {
   else { // but if not, then campaign is going on.
     gameObject = JSON.parse(localStorage.getItem('Go'));
     callUpdate();
+    // Check if cities are still contested:
+    
+    const contestedCities = [];
+      
+    for (let i = 0; i < gameObject.campaignArmies.cities.length; i++){
+        
+      if (gameObject.campaignArmies.cities[i].controlledBy === 'contested') {
+        contestedCities.push(gameObject.campaignArmies.cities[i]);
+      }
+    }
+    
+    // if any is contested, lets go to settle them at endTurn
+    if (contestedCities.length > 0){
+      // save 'selected' to localStorage
+      localStorage.setItem('Go', JSON.stringify(gameObject));
+      window.location = "https://thenewgame.glitch.me/endTurn";        
+    } else {
+          
+      infoScreen.innerHTML = ' Turn: ' + gameObject.turn;
+      gameObject.phaze = 'hire';
+      makeButtons(gameObject.phaze);
+      callUpdate();
+    }
+    
   }
   
   callUpdate();
-  
-  // AI decides moves at endTurn!
-  
-  //console.log('gO; ', gameObject);
-  //console.log('cities ', cities);
 };
 //

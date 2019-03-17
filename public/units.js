@@ -1,4 +1,4 @@
-// imperial guard:
+
 // seq: nombre, type, desc, meleeWeapons, rangedWeapons,
 //stats, size, army, unitSize, longDesc, limit,
 
@@ -144,7 +144,7 @@ const vampires = [
   new gameUnit(
   'Vampire lord', 'commander','Strong sorcerer that can fight in melee too.', 
   ['enhanced sword'], ['fireball'],
-  {m: 5, s: 5, t: 4, ws: 5, bs: 2, a: 4, w: 6, i: 7, ld: 10, sv: 2, defMods: 0, pointCost: 65}, 1, 'elves', 1,
+  {m: 5, s: 5, t: 4, ws: 5, bs: 2, a: 4, w: 6, i: 7, ld: 10, sv: 2, defMods: 0, pointCost: 65}, 1, 'vampires', 1,
     'Strong sorcerer that can fight in melee too. Ancient vampire counts are maybe the most dangerous inviduals one can find', 1),
   new gameUnit(
   'Zombie', 'infantry', 'These walking deads are not really good for anything, but they are cheap.', 
