@@ -8,8 +8,8 @@ To add:
 - Better highlight system.
 - Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
 
-  Next: continue with endTurn.js. Ai vs Ai combat. after that, check if anything contested and =>
-  After done combat: check if anything if contested. if yes then go back to endTurn.js!
+  Next: continue with endTurn.js. there is some bug... after few fights, i got deployed opponent unit and he got my.
+  elf rider for vampire rider.
 
 */
 /*
@@ -33,12 +33,6 @@ Known bugs:
 Usefull about mouse coordinates:
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button
 */
-
-  /* classes to elements:
-  element.style.backgroundColor = "red";
-  document.getElementsByTagName("H1")[0].setAttribute("class", "democlass");
-  .topBorder
-  */
 
 /*
 for campaign:

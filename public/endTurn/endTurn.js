@@ -1,10 +1,139 @@
 // this .js is when someone ends turn in campaign and there are contested cities.
+function checkPower(group){
+  let power = 0;
+  
+  for (let i = 0; i < group.length; i++) {
+    power = power + (group[i].details.stats.pointCost * group[i].quantity);
+  }
+  
+  return power;
+}
+
+function destroyUnits(target){
+  console.log('destroy units launch: ', target);
+  const factions = [
+    gameObject.campaignArmies.humans.army,
+    gameObject.campaignArmies.elves.army,
+    gameObject.campaignArmies.dwarves.army,
+    gameObject.campaignArmies.savages.army,
+    gameObject.campaignArmies.vampires.army,
+  ];
+  
+  for (let i = 0; i < target.length; i++) {
+   
+    // find units and destroy them:
+    for (let i2 = 0; i2 < factions.length; i2++ ) {
+    
+      for (let i3 = 0; i3 < factions[i2].length; i3++) {
+        
+        if (target[i].unit == factions[i2][i3].unit &&
+           target[i].quantity == factions[i2][i3].quantity &&
+           target[i].location == factions[i2][i3].location ) {
+          
+          factions[i2].splice(i3, 1);
+        }
+      }
+    }
+  }
+}
+
+function deductUnits(target, loserPower){
+  let pow = loserPower;
+  const factions = [
+    gameObject.campaignArmies.humans.army,
+    gameObject.campaignArmies.elves.army,
+    gameObject.campaignArmies.dwarves.army,
+    gameObject.campaignArmies.savages.army,
+    gameObject.campaignArmies.vampires.army,
+  ];
+  
+  for (let i = 0; i < target.length; i++) {
+   
+    // find units and destroy/deduct them:
+    for (let i2 = 0; i2 < factions.length; i2++ ) {
+    
+      for (let i3 = 0; i3 < factions[i2].length; i3++) {
+        
+        if (target[i].unit == factions[i2][i3].unit &&
+           target[i].quantity == factions[i2][i3].quantity &&
+           target[i].location == factions[i2][i3].location ) {
+          const unitsPower = factions[i2][i3].details.stats.pointCost * factions[i2][i3].quantity;
+          
+          if (unitsPower <= pow) {
+            
+            factions[i2].splice(i3, 1);
+            pow = pow - unitsPower;
+          } else if (unitsPower > pow && factions[i2][i3].quantity > 1) {
+          
+            for (let xx = 0; xx < factions[i2][i3].quantity; xx++) {
+            
+              if (factions[i2][i3].details.stats.pointCost < pow) {
+                
+                factions[i2][i3].quantity--;
+                pow = pow - factions[i2][i3].details.stats.pointCost;
+              }  
+            }
+          } 
+        }
+      }
+    }
+  }  
+  
+}
 
 function aiVsAi(a1, a2){
-  console.log('got ai vs ai: ', a1, a2);
   
-  // clear this fight from combats:
-  //combats.splice(0, 1); 
+  //console.log('got ai vs ai: ', a1, a2);
+  let a1Power = checkPower(a1);
+  let a2Power = checkPower(a2);
+  let difference;
+  
+  //console.log('a1p a2p', a1Power, a2Power);
+  // destroy losing army from source and set difference
+  if (a1Power < a2Power) {
+    console.log('a2 wins');
+    difference = a2Power - a1Power;
+    destroyUnits(a1);
+    
+    // if not very big points difference, deduct from winner
+    if (difference < 150) {
+      deductUnits(a2, a1Power);    
+    }
+    
+  } else if (a1Power > a2Power){
+    //console.log('a1 wins');
+    difference = a1Power - a2Power;
+    destroyUnits(a2);
+    
+    // if not very big points difference, deduct from winner
+    if (difference < 150) {
+      deductUnits(a1, a2Power);    
+    }
+  } else if (a1Power === a2Power) {
+    //console.log('draw');
+    const winDice = callDice(6);
+    const dedu = a1Power * 0.7;
+    
+    if (winDice < 4) {
+      
+      destroyUnits(a1);
+      deductUnits(a2, dedu);
+    } else {
+      const dedu = a1Power * 0.7;
+      
+      destroyUnits(a2);
+      deductUnits(a1, dedu);
+    }
+    
+  }
+  
+    // clear contesteds:
+    gameObject.campaignArmies.contested.splice(0, gameObject.campaignArmies.contested.length);
+  
+    // save gameObject
+    localStorage.setItem('Go', JSON.stringify(gameObject));      
+  // go to map screen.
+    window.location = "https://thenewgame.glitch.me/mapscreen";
 }
 
 function getArmyList(whatString){
@@ -74,10 +203,8 @@ function startBattles() {
     
     team2location = combats[0][1];
   }
-  console.log('captain1, captain2: ', captain1, captain2);
   
   // create teams:
-  console.log('locations: ', team1location, team2location);
   for (let i = 0; i < team1location.length; i++) {
     
     if (team1location[i].commander === captain1.commander){
@@ -92,17 +219,16 @@ function startBattles() {
       team2.push(team2location[i]);
     } 
   }
- 
-  console.log('team1, team2: ', team1, team2);
   
   // if ai vs ai:
   if (team1[0].commander !== gameObject.campaignArmies.armyOfPlayer[0].army &&
       team2[0].commander !== gameObject.campaignArmies.armyOfPlayer[0].army){
-      
+      //console.log('aiai, because: ', team1[0].commander, gameObject.campaignArmies.armyOfPlayer[0].army, team2[0].commander, gameObject.campaignArmies.armyOfPlayer[0].army);
     // Settle ai vs ai:
     aiVsAi(team1, team2);   
   } else {
     
+      //console.log('not aiai, because: ', team1[0].commander, gameObject.campaignArmies.armyOfPlayer[0].army, team2[0].commander, gameObject.campaignArmies.armyOfPlayer[0].army);
     // player involved:
     // deploys players army first as combat console excepts that:
     if (team1[0].commander === gameObject.campaignArmies.armyOfPlayer[0].army) {
