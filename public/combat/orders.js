@@ -51,34 +51,36 @@ function moveUnit(who, to, mode){
     let collisionResult = collisionDetect(newLocation, size, targetLoc, targetSize); // at public/unitActions.js
     
     if (collisionResult === 'collision'){
-      console.log('collision with unit: ', allUnits[ix]);
+      
       if (who.commander !== allUnits[ix].commander){
         let whoDubli = false;
         let allUnitDubli = false;
         
         // check that opponent is not already at engaged list
         if (who.engaged.yes === true) {
+          
           for (let i = 0; i < who.engaged.withWho.length; i++) {
+            
             if (allUnits[ix] === who.engaged.withWho[i]) {whoDubli = true;}
           }    
         }
         
         if (allUnits[ix].engaged.yes === true) {
+          
           for (let i = 0; i < allUnits[ix].engaged.withWho.length; i++) {
+            
             if (who === allUnits[ix].engaged.withWho[i]) {allUnitDubli = true;}    
           }
         }
         
         who.engaged.yes = true;
         who.order = 'melee';
-        console.log('added to engaged: ', who);
         
         if (whoDubli === false) {   
           who.engaged.withWho.push(allUnits[ix]);
         }
       
         allUnits[ix].engaged.yes = true;
-        console.log('added unit to combat: ', allUnits[ix]);
         
         if (whoDubli === false) {
           allUnits[ix].engaged.withWho.push(who);
@@ -182,7 +184,7 @@ function shootTarget(who, to){
   const losAndR = lineOfSight(who.location, to.location);
   
   if (who.order === 'move') {
-    console.log('shooting while moving');
+    
     modAttack++; // harder to hit while moving.
   }
   

@@ -9,6 +9,29 @@ const listenPause = document.getElementById('pauseButton').addEventListener("cli
 const keyListeners = window.addEventListener("keydown", checkKeyPressed, false); 
 
 // Functions:
+
+// victory conditions checker:
+function checkVictoryCondition() {
+  
+  if (gameObject.army1.length < 1 || gameObject.army2.length < 1) {
+    let winner;
+    pause = true; 
+    
+    if (gameObject.army1.length < 1) { winner = 'Player 2'} else { winner = 'Player 1'}
+    
+    logScreen.innerHTML = logScreen.innerHTML + '<br>battle is over. '+ winner + ' wins!';
+    logScreen.innerHTML = logScreen.innerHTML + '<br><input type= "button" class= "endBattle" '+
+    'value= "Continue game" onclick= "endBattle()">';
+    
+    // scroll battlelog:
+    bLog.scrollTop = bLog.scrollHeight;
+    
+    pause = true;
+    clearInterval(gameLooper);
+    console.log('battle over, go: ', gameObject);
+  }
+}
+
 function roundExecutor(){
   draw();
   if (pause === false){ 
@@ -37,8 +60,8 @@ function roundExecutor(){
       const allDirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w']
       for (let ii = 0; ii < allDirs.length; ii++) {
         if (inTurn.order === 'melee' && inTurn.target === allDirs[ii]){
-          console.log('trying to melee a direction. changed to standby');
-          inTurn.order = 'standby';
+          console.log('trying to melee a direction. changed to move');
+          inTurn.order = 'move';
         }
       }
     }
@@ -55,8 +78,8 @@ function roundExecutor(){
       const allDirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w']
       for (let ii = 0; ii < allDirs.length; ii++) {
         if (inTurn.order === 'melee' && inTurn.target === allDirs[ii]){
-          console.log('trying to melee a direction. changed to standby');
-          inTurn.order = 'standby';
+          console.log('trying to melee a direction. changed to move');
+          inTurn.order = 'move';
         }
       }
     }
@@ -129,6 +152,8 @@ function roundExecutor(){
         // ------  SHOOT TO TARGET  --------
         if (unitInAction.order === 'shoot' && unitInAction.engaged.yes === false) {
           unitInAction.firingAt = unitInAction.target; // for line painting
+          console.log('trying to shoot unitInaction of target: : ', unitInAction);
+          console.log('target: ', unitInAction.target);
           const shootAttempt = shootTarget(unitInAction, unitInAction.target);
         }  
         
@@ -157,6 +182,7 @@ function roundExecutor(){
           // Shoot if someone was in range:
           if (foundTarget !== null){
             unitInAction.firingAt = foundTarget;
+            console.log('found closest target: ', foundTarget);
             const shoot = shootTarget(unitInAction, foundTarget);
           }  
         }  
@@ -174,24 +200,7 @@ function roundExecutor(){
     bLog.scrollTop = bLog.scrollHeight;
   }  
   // CHECK VICTORY CONDITIONS
-  // need to make its own function that is more frequently checked, to avoid problem that i have now.
-  if (gameObject.army1.length < 1 || gameObject.army2.length < 1) {
-    let winner;
-    pause = true; 
-    
-    if (gameObject.army1.length < 1) { winner = 'Player 2'} else { winner = 'Player 1'}
-    
-    logScreen.innerHTML = logScreen.innerHTML + '<br>battle is over. '+ winner + ' wins!';
-    logScreen.innerHTML = logScreen.innerHTML + '<br><input type= "button" class= "endBattle" '+
-    'value= "Continue game" onclick= "endBattle()">';
-    
-    // scroll battlelog:
-    bLog.scrollTop = bLog.scrollHeight;
-    
-    pause = true;
-    clearInterval(gameLooper);
-    console.log('battle over, go: ', gameObject);
-  }
+  checkVictoryCondition();
 }
 
 // Prepare game:

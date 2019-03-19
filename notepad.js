@@ -4,27 +4,19 @@ Start to look good.
 To add: 
 - More test.
 - Better and clearer user interface.
-- Need "hunt" commands, as combat is too hard without them.
-- Better highlight system.
-- Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
+- Need "hunt" commands, as combat is too hard without them. Maybe some formation commands too
 
-  Next: continue with endTurn.js. there is some bug... after few fights, i got deployed opponent unit and he got my.
-  elf rider for vampire rider.
+  Next: hunt commands etc.
 
 */
 /*
 Known bugs:
   serious:
-    #1
-    Sometimes after fight or fighting opponent unit just standbies and waits there. at engine.js or zunsu.js
-      -possible fix: automatic aggroes to closest after fight, instead of standby. Maybe move action to allow shooting.
  
   minors:
     #1
     Shoots dead if simultaneous shooting and target already dead.
 
-    -> Victory conditions need to be it own function that is checked more often. sometimes now it continues "too much" after army is dead.
-    
     #2
     map doesnt show most southern towns completely with texts, atleast with this laptop.
 */

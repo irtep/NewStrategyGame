@@ -1,7 +1,15 @@
+
+const normalTextMe = 'white';
+const normalTextYou = 'blue';
+const highText = 'gold';
+
 function drawUnits(canvas,ctx) {
   gameObject.army1.forEach((unit) => { // draw army 1
     const shortDesc = unit.quantity + ' x ' + unit.unit;
     let actionDesc;
+    const normalTextMe = 'white';
+    const normalTextYou = 'blue';
+    const highText = 'gold';
     
     if (unit.order === 'standby') {
       actionDesc = 'order: ' + unit.order;    
@@ -44,7 +52,9 @@ function drawUnits(canvas,ctx) {
     ctx.closePath();
     // write info texts:
     ctx.font = '15px serif';
-    ctx.fillStyle = 'white';
+    if (unit.highlighted === true){
+      ctx.fillStyle = highText;
+    }  else { ctx.fillStyle = normalTextMe; }
     ctx.fillText(shortDesc, unit.location.x-40, unit.location.y);
     ctx.fillText(actionDesc, unit.location.x-40, unit.location.y +13);  
     // paint firing lines:
@@ -101,7 +111,9 @@ function drawUnits(canvas,ctx) {
     ctx.closePath();
     // write info texts:
     ctx.font = '15px serif';
-    ctx.fillStyle = 'blue';
+    if (unit.highlighted === true){
+      ctx.fillStyle = highText;
+    }  else { ctx.fillStyle = normalTextYou; }
     ctx.fillText(shortDesc, unit.location.x-40, unit.location.y);
     ctx.fillText(actionDesc, unit.location.x-40, unit.location.y +13);    
     // paint firing lines:

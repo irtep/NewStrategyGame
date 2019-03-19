@@ -177,6 +177,10 @@ function lethalWound(to, who, isMelee){
   p1units.innerHTML = '';
   p2units.innerHTML = '';
   createUnitButtons();
+  
+  // CHECK VICTORY CONDITIONS
+  checkVictoryCondition();
+  
   console.log('gameObject after lethal wound: ', gameObject);
 }
 

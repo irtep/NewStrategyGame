@@ -91,6 +91,11 @@ const dwarves = [
   {m: 4, s: 4, t: 4, ws: 3, bs: 4, a: 1, w: 1, i: 3, ld: 9, sv: 3, defMods: 1, pointCost: 3}, 1, 'dwarves', 10,
   'Dwarf infantry is made of dwarven citizens. Tough and well armed, but somewhat slow.', 6),
   new gameUnit(
+  'Flamer infantry', 'infantry','These dwarves carry powerful, but short ranged flamers',
+  ['dagger', 'no weapon'], ['flamer'],
+  {m: 4, s: 4, t: 4, ws: 3, bs: 4, a: 1, w: 1, i: 3, ld: 9, sv: 3, defMods: 1, pointCost: 5}, 1, 'dwarves', 4,
+  'These dwarves carry powerful, but short ranged flamers. Slow unit but can be devastating from close range.', 6),
+  new gameUnit(
   'Mountain guardian', 'infantry', 'Elite infantry of dwarves. If you are opponent, watch out for these guys!', 
   ['halberd', 'shield'], ['no weapon'],
   {m: 4, s: 4, t: 5, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 1, defMods: 0, pointCost: 8}, 1,  'dwarves', 10,
@@ -103,7 +108,7 @@ const dwarves = [
   new gameUnit(
   'Steamtank', 'monster', 'Steam-powered battlewagon. hard to break and causes damage with powerful catapult', 
   ['crash'], ['catapult'],
-  {m: 5, s: 5, t: 8, ws: 3, bs: 4, a: 2, w: 10, i: 2, ld: 10, sv: 2, defMods: 0, pointCost: 90}, 13,  'dwarves', 1,
+  {m: 5, s: 5, t: 8, ws: 3, bs: 4, a: 2, w: 10, i: 2, ld: 10, sv: 2, defMods: 0, pointCost: 110}, 13,  'dwarves', 1,
   'Steam-powered battlewagon. hard to break and causes damage with powerful catapult. Humans have tried to copy these, but so far they havent been able to get realiable and powerful enough steam engine made.', 3)
 ];
 
