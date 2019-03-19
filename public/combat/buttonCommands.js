@@ -114,7 +114,8 @@ function clickedUnit1(who){ // selected unit to be ordened
 
 function clickedUnit2(who){ // selected target
   const selectedUnit = gameObject.selectedUnits.player1; // public/gameObject.js
-  const targetedNumber = gameObject.targetedUnits.player1;
+  //const targetedNumber = gameObject.targetedUnits.player1;  disabled as doesnt seem to do anything, but not erased just in case.
+  //console.log('selected unit and targetedNumber: ', selectedUnit, targetedNumber);
   
   if (multiCommand === false){
     gameObject.targetedUnits.player1 = who;
@@ -123,7 +124,7 @@ function clickedUnit2(who){ // selected target
     if (selectedCommand === 'run' || selectedCommand === 'move'){
       gameObject.army1[selectedUnit].target = who;
     } else { // in case of shooting.
-      gameObject.army1[selectedUnit].target = gameObject.army2[targetedNumber];
+      gameObject.army1[selectedUnit].target = gameObject.army2[who];
    }
   } else { // if multiCommand === true
     for (let i = 0; i < gameObject.army1.length; i++){
@@ -131,7 +132,7 @@ function clickedUnit2(who){ // selected target
       if (selectedCommand === 'run' || selectedCommand === 'move'){
         gameObject.army1[i].target = who;
       } else { // in case of shooting.
-        gameObject.army1[i].target = gameObject.army2[targetedNumber];
+        gameObject.army1[i].target = gameObject.army2[who];
       }
     }
   }

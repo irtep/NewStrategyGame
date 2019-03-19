@@ -64,7 +64,7 @@ function zunSu(actions){
       // -SET ORDERS-:
       if (unitInAction.order !== 'melee'){ // if not in melee
         // -if ranged unit-
-        if (unitInAction.details.stats.bs <= 3) {
+        if (unitInAction.details.rangedWeapons[0] !== 'no weapon') {
 
           // if target unit in range
           if (closestEnemy.distance <= rangedWeapon.range){
@@ -101,6 +101,7 @@ function zunSu(actions){
             unitInAction.order = 'move';
             unitInAction.target = closestEnemy.where;
           }
+          console.log('ai ranged unit order: ', unitInAction, unitInAction.order, unitInAction.target);
         } // ranged unit ends
 
         // if monster
@@ -125,11 +126,12 @@ function zunSu(actions){
         
         // if commander, chill out a bit first
         if (unitInAction.details.type === 'commander'){
-          if (history.length < 4) {
+          if (history.length < 2) {
             unitInAction.order = 'standby';
           }
         }
       } // if not in melee ends
+      
       // check if building or something is blocking the way:
       if (unitInAction.order === 'move' || unitInAction.order === 'run') {
         const directions = ['n','ne','e','se','s','sw','w', 'nw'];

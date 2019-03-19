@@ -16,9 +16,10 @@ const rangedWeapons = [           //r           a  s   ap  w
   new weapon('elven shortbow', 200, 'bow',      2, 3, 0, 1, false),
   new weapon('crossbow', 300, 'bow',            1, 4, 1, 1, false),
   new weapon('heavy crossbow', 300, 'bow',      1, 5, 2, 2, false),
-  new weapon('dragonfire', 100, 'heavy',     'd6', 9, 3, 1, false),
+  new weapon('dragonfire', 100, 'heavy',     'd6', 9, 3, 2, false),
+  new weapon('flamer', 100, 'heavy',         'd6', 7, 3, 1, false),
   new weapon('auto crossbow', 300, 'bow',       3, 4, 1, 1, false),
-  new weapon('catapult', 600, 'heavy',       'd6',8,  3, 'd6', false),
+  new weapon('catapult', 450, 'heavy',       'd6',8,  3, 'd6', false),
   new weapon('fireball', 150, 'magic',       'd6',5,  2, 'd6', false)
 ];
 const meleeWeapons = [           //r        a  s  ap w
