@@ -101,7 +101,6 @@ function zunSu(actions){
             unitInAction.order = 'move';
             unitInAction.target = closestEnemy.where;
           }
-          console.log('ai ranged unit order: ', unitInAction, unitInAction.order, unitInAction.target);
         } // ranged unit ends
 
         // if monster

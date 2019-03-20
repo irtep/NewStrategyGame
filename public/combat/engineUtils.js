@@ -84,14 +84,12 @@ function lethalWound(to, who, isMelee){
            unitToCheckFrom.location.city === unitToCompare.location && 
            unitToCheckFrom.quantity === unitToCompare.quantity) {
           
-          console.log('found unit to be killed from source', unitToCompare);
           sourceUnit = unitToCompare;
           sourcesArmyIndex = i;
           sourcesIndex = ii; 
           rootsIndex = ii;
           
           // find rootUnit
-          console.log('compare for root: ', gameObject.campaignArmies.factions[i], gameObject.campaignArmies.humans);
           if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.humans.nombre) {
             rootArmy = gameObject.campaignArmies.humans;
           }
@@ -120,7 +118,7 @@ function lethalWound(to, who, isMelee){
       gameObject.army1[indexOfDead].quantity--;
       if (gameObject.campaignPlay === true) {
         sourceUnit.quantity--; // deducts from source too
-        console.log('deducting from: ', rootArmy.army[rootsIndex]);
+        
         rootArmy.army[rootsIndex].quantity--; // and from root
       }
       if (gameObject.army1[indexOfDead].quantity < 1){
@@ -167,7 +165,7 @@ function lethalWound(to, who, isMelee){
           gameObject.campaignArmies.factions[sourcesArmyIndex].army.splice(sourcesIndex, 1); // removes from source too
           rootArmy.army.splice(rootsIndex, 1);
         }
-        console.log('gameObject after kill: ', gameObject);
+        
         // }  
       }
     break;
@@ -180,8 +178,6 @@ function lethalWound(to, who, isMelee){
   
   // CHECK VICTORY CONDITIONS
   checkVictoryCondition();
-  
-  console.log('gameObject after lethal wound: ', gameObject);
 }
 
 // attack executor.   Mod attack: the bigger is, the harder is to hit

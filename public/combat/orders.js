@@ -3,10 +3,59 @@ const orders = [
   'standby',
   'move',   // moveUnit(who, to)
   'shoot',  // shootTarget(who, to)
-  'run'     // meleeAttack(who, to)
+  'run',     // meleeAttack(who, to)
+  'hunt',   // keep ranged distance and shoot
+  'engage'  // run for melee range
 ];
 const logScreen = document.getElementById('logi'); // views/combat.html
 let historyForLog; // to check that no duplicated msg are sent
+
+function hunt(who, to) {
+/* WILL BE ABOUT LIKE THIS: */
+/*
+          // if target unit in range
+          if (closestEnemy.distance <= rangedWeapon.range){
+            const thirdOfRange = rangedWeapon.range / 3;
+            // if faraway
+            if (closestEnemy.distance > thirdOfRange) {
+              unitInAction.order = 'shoot';
+              unitInAction.target = enemyArmy[closestEnemy.number];
+              // check los:
+              const losCheck = lineOfSight(unitInAction.location, enemyArmy[closestEnemy.number].location);
+              if (losCheck === 'losBlocked'){
+                unitInAction.order = 'move';
+                unitInAction.target = closestEnemy.where;
+              }
+            } else {  // if closer
+              let escapeDir;
+
+              switch (closestEnemy.where){
+                case 'n': escapeDir = 's'; break;
+                case 'ne': escapeDir = 'sw'; break;
+                case 'e': escapeDir = 'w'; break;
+                case 'se': escapeDir = 'nw'; break;
+                case 's': escapeDir = 'n'; break;
+                case 'sw': escapeDir = 'ne'; break;
+                case 'w': escapeDir = 'e'; break;
+                case 'nw': escapeDir = 'se'; break;
+                default: console.log('not found where....');
+              }
+
+              unitInAction.order = 'move';
+              unitInAction.target = escapeDir;
+            }
+          } else { // not in range
+            unitInAction.order = 'move';
+            unitInAction.target = closestEnemy.where;
+          }
+*/  
+}
+
+function engage(who, to) {
+/*  WILL BE ABOUT LIKE THIS
+          unitInAction.order = 'run';
+          unitInAction.target = closestEnemy.where;*/
+}
 
 function moveUnit(who, to, mode){
   const cWidth = 950;
