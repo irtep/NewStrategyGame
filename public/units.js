@@ -27,12 +27,12 @@ const humans = [
   new gameUnit(
   'Crossbowman', 'infantry', 'Good and cheap ranged unit. Crossbows are deadly and easy to use.', 
   ['dagger'], ['crossbow'],
-  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 5}, 1,  'humans', 10,
+  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 3}, 1,  'humans', 10,
   'Usually not that trained, but using crossbows with deadly accuration doesnt need that much training. Mostly considered as unfair weapon as most unworthy rookie soldier can kill a noble life-time of trained knight with one shot.', 6),
   new gameUnit(
   'Longbowman', 'infantry', 'It takes lots of training to be a good archer, like these guys are.', 
   ['dagger'], ['longbow'],
-  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 7}, 1,  'humans', 10,
+  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 4}, 1,  'humans', 10,
   'I takes a lot of training to be a good archer, like these guys are. Absolutely deadly fire rate. Usually against most of the units it is one volley that all it takes to destroy the unit', 5),
   new gameUnit(
   'Peasant', 'infantry', 'These guys are not really fighters, but sometimes quantity overwhelmes quality.', 
@@ -60,12 +60,12 @@ const elves = [
   new gameUnit(
   'Elven archer', 'infantry', 'Longbow is very deadly ranged weapon and these guys are best archers around.', 
   ['dagger'], ['elven longbow'],
-  {m: 5, s: 3, t: 3, ws: 3, bs: 2, a: 1, w: 1, i: 4, ld: 8, sv: 5, defMods: 0, pointCost: 10}, 1,  'elves', 10,
+  {m: 5, s: 3, t: 3, ws: 3, bs: 2, a: 1, w: 1, i: 4, ld: 8, sv: 5, defMods: 0, pointCost: 7}, 1,  'elves', 10,
   'Longbow is very deadly ranged weapon and these guys are the best archers around.', 5),
   new gameUnit(
   'Elf rider', 'cavalry', 'Riding fast horse these elves like to ride around enemies while peppering them with deadly accuracy with their bows.', 
   ['longsword'], ['elven longbow'],
-  {m: 9, s: 3, t: 3, ws: 4, bs: 3, a: 1, w: 2, i: 4, ld: 8, sv: 4, defMods: 1, pointCost: 8}, 2,  'elves', 5,
+  {m: 9, s: 3, t: 3, ws: 4, bs: 3, a: 1, w: 2, i: 4, ld: 8, sv: 4, defMods: 1, pointCost: 7}, 2,  'elves', 5,
   'Riding fast horse these elves like to ride around enemies while peppering them with deadly accuracy with their bows.', 5),
   new gameUnit(
   'Swordmaster', 'infantry', 'Most of the elves love their bows but in some cases they decide to dedicate to join the swordmaster brotherhood to dedicate their life to train fighting with swords.', 
@@ -108,7 +108,7 @@ const dwarves = [
   new gameUnit(
   'Steamtank', 'monster', 'Steam-powered battlewagon. hard to break and causes damage with powerful catapult', 
   ['crash'], ['catapult'],
-  {m: 5, s: 5, t: 8, ws: 3, bs: 4, a: 2, w: 10, i: 2, ld: 10, sv: 2, defMods: 0, pointCost: 110}, 13,  'dwarves', 1,
+  {m: 5, s: 5, t: 8, ws: 3, bs: 4, a: 2, w: 10, i: 2, ld: 10, sv: 2, defMods: 0, pointCost: 100}, 13,  'dwarves', 1,
   'Steam-powered battlewagon. hard to break and causes damage with powerful catapult. Humans have tried to copy these, but so far they havent been able to get realiable and powerful enough steam engine made.', 3)
 ];
 
@@ -149,7 +149,7 @@ const vampires = [
   new gameUnit(
   'Vampire lord', 'commander','Strong sorcerer that can fight in melee too.', 
   ['enhanced sword'], ['fireball'],
-  {m: 5, s: 5, t: 4, ws: 5, bs: 2, a: 4, w: 6, i: 7, ld: 10, sv: 2, defMods: 0, pointCost: 65}, 1, 'vampires', 1,
+  {m: 5, s: 5, t: 4, ws: 5, bs: 2, a: 4, w: 6, i: 7, ld: 10, sv: 2, defMods: 0, pointCost: 45}, 1, 'vampires', 1,
     'Strong sorcerer that can fight in melee too. Ancient vampire counts are maybe the most dangerous inviduals one can find', 1),
   new gameUnit(
   'Zombie', 'infantry', 'These walking deads are not really good for anything, but they are cheap.', 
@@ -159,7 +159,7 @@ const vampires = [
   new gameUnit(
   'Skeleton archer', 'infantry', 'Longbow is very deadly ranged weapon. They are not as good shooters as living archers, but still quite good.', 
   ['dagger'], ['longbow'],
-  {m: 3, s: 3, t: 3, ws: 2, bs: 4, a: 1, w: 1, i: 2, ld: 8, sv: 6, defMods: 0, pointCost: 6}, 1,  'vampires', 10,
+  {m: 3, s: 3, t: 3, ws: 2, bs: 4, a: 1, w: 1, i: 2, ld: 8, sv: 6, defMods: 0, pointCost: 4}, 1,  'vampires', 10,
   'Longbow is very deadly ranged weapon. They are not as good shooters as living archers, but still quite good.', 5),
   new gameUnit(
   'Vampire rider', 'cavalry', 'Riding fast dire wolves or other monsters make them fast and deadly melee warriors.', 
@@ -169,7 +169,7 @@ const vampires = [
   new gameUnit(
   'Necromancer', 'infantry', 'Can not really fight in melee. But devastating short range fireball launcher.', 
   ['dagger'], ['fireball'],
-  {m: 4, s: 3, t: 3, ws: 4, bs: 3, a: 2, w: 1, i: 3, ld: 8, sv: 4, defMods: 1, pointCost: 10}, 1,  'vampires', 1,
+  {m: 4, s: 3, t: 3, ws: 4, bs: 3, a: 2, w: 1, i: 3, ld: 8, sv: 4, defMods: 1, pointCost: 8}, 1,  'vampires', 1,
   'Can not really fight in melee. But devastating short range fireball launcher.', 3),
   new gameUnit(
   'Black unicorn', 'monster', 'Mythical horselike creature, that can stick you with his magical horn. Fast but not very armoured.', 

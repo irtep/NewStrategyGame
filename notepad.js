@@ -6,7 +6,7 @@ To add:
 - Better and clearer user interface.
 - Need "hunt" commands, as combat is too hard without them. Maybe some formation commands too
 
-  Next: hunt commands etc.
+  Next: Working on hunt and engage orders. at orders.js and engine.js... models at zunsu.js
 
 */
 /*

@@ -96,6 +96,14 @@ function setCommand(command){ // sets selected command
     availCommands.innerHTML = '';
     infoBoxi.innerHTML = '';
     directions.innerHTML = '';
+  } 
+  if (command === 'hunt'){
+    infoBoxi.innerHTML = 'select target:';
+    directions.innerHTML = '';
+  } 
+  if (command === 'engage'){
+    infoBoxi.innerHTML = 'select target:';
+    directions.innerHTML = '';
   }
 }
 

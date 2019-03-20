@@ -47,20 +47,30 @@ function roundExecutor(){
     allUnits.sort(compare); // sort to initiative order
     
     // remove all firing lines and shoot orders to dead targets and meleeing to directions:
+    // also reloadStatus-- for those who have shot;
     for (let i = 0; i < gameObject.army1.length; i++){
       const inTurn = gameObject.army1[i];
       
+      if (inTurn.reloadStatus > 0) {
+      
+        inTurn.reloadStatus--;
+        if (inTurn.reloadStatus === 0) {  
+          console.log(inTurn.unit, ' has weapon reloaded');
+        }
+      }
+      
       inTurn.firing = false;
       inTurn.firingAt = null;
+      
       if (inTurn.order === 'shoot' && inTurn.target.quantity <= 0){
-        console.log('trying to shoot dead. changed to standby');
+        
         inTurn.order = 'standby';
       }
       // to fix as sometimes units might melee directions...this might cause "standby in melee problem"
       const allDirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w']
       for (let ii = 0; ii < allDirs.length; ii++) {
         if (inTurn.order === 'melee' && inTurn.target === allDirs[ii]){
-          console.log('trying to melee a direction. changed to move');
+          
           inTurn.order = 'move';
         }
       }
@@ -68,17 +78,26 @@ function roundExecutor(){
     for (let i = 0; i < gameObject.army2.length; i++){
       const inTurn = gameObject.army2[i];
       
+      if (inTurn.reloadStatus > 0) {
+      
+        inTurn.reloadStatus--;
+        if (inTurn.reloadStatus === 0) {  
+          console.log(inTurn.unit, ' has weapon reloaded');
+        }
+      }      
+      
       inTurn.firing = false;
       inTurn.firingAt = null;
+      
       if (inTurn.order === 'shoot' && inTurn.target.quantity <= 0){
-        console.log('trying to shoot dead. changed to standby');
+        
         inTurn.order = 'standby';
       }
       // to fix as sometimes units might melee directions...
       const allDirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w']
       for (let ii = 0; ii < allDirs.length; ii++) {
         if (inTurn.order === 'melee' && inTurn.target === allDirs[ii]){
-          console.log('trying to melee a direction. changed to move');
+          
           inTurn.order = 'move';
         }
       }
@@ -121,9 +140,12 @@ function roundExecutor(){
           }
           
           // Shoot if someone was in range:
-          if (foundTarget !== null){
+          if (foundTarget !== null && unitInAction.reloadStatus === 0){
+            const weapon = searchStatsOfWeapon(unitInAction.details.rangedWeapons[0], 'ranged');
             unitInAction.firingAt = foundTarget;
             const shoot = shootTarget(unitInAction, foundTarget);
+            
+            unitInAction.reloadStatus = weapon.reloadSpeed;
           }  
         }
         
@@ -145,16 +167,18 @@ function roundExecutor(){
       }
       //zunsu('checks');
     }, speedOfRound/2);
+    
     setTimeout(() => { 
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
         // ------  SHOOT TO TARGET  --------
-        if (unitInAction.order === 'shoot' && unitInAction.engaged.yes === false) {
+        if (unitInAction.order === 'shoot' && unitInAction.engaged.yes === false && unitInAction.reloadStatus === 0) {
+          const weapon = searchStatsOfWeapon(unitInAction.details.rangedWeapons[0], 'ranged');
           unitInAction.firingAt = unitInAction.target; // for line painting
-          console.log('trying to shoot unitInaction of target: : ', unitInAction);
-          console.log('target: ', unitInAction.target);
+          
           const shootAttempt = shootTarget(unitInAction, unitInAction.target);
+          unitInAction.reloadStatus = weapon.reloadSpeed;
         }  
         
         // --------  STANDBY  ---------
@@ -180,10 +204,12 @@ function roundExecutor(){
           }
           
           // Shoot if someone was in range:
-          if (foundTarget !== null){
+          if (foundTarget !== null && unitInAction.reloadStatus === 0){
+            const weapon = searchStatsOfWeapon(unitInAction.details.rangedWeapons[0], 'ranged');
             unitInAction.firingAt = foundTarget;
-            console.log('found closest target: ', foundTarget);
+            
             const shoot = shootTarget(unitInAction, foundTarget);
+            unitInAction.reloadStatus = weapon.reloadSpeed;
           }  
         }  
         
@@ -191,7 +217,17 @@ function roundExecutor(){
         if (unitInAction.order === 'melee') {
           // apply melee attack:
           const meleeAttackAttempt = meleeAttack(unitInAction, unitInAction.engaged.withWho[0]);
-        }       
+        }   
+        // ----- HUNT ORDER ------------
+        if (unitInAction.order === 'hunt') {
+          // apply hunt:
+          hunt();
+        }   
+        // ----- ENGAGE ORDER -----------
+        if (unitInAction.order === 'engage') {
+          // apply engage:
+          engage();
+        }   
       }
       
     }, speedOfRound);
@@ -232,7 +268,7 @@ function startGame(){
     arm2[ind2].details = foundUnit;
   }
   
-  // set x and y, commander and id for all:
+  // set x and y, commander, reloadStatus and id for all:
   function setStartLocations(activeArmy){
     var currentFile = 18;
     var currentFile2 = 580
@@ -250,6 +286,7 @@ function startGame(){
           activeArmy[i].location.y = currentFile;
           activeArmy[i].id = 1;
           activeArmy[i].commander = 'army1';
+          activeArmy[i].reloadStatus = 0;
         } else {
           const lastUnit = i - 1;
           
@@ -266,6 +303,7 @@ function startGame(){
           activeArmy[i].location.y = currentFile;
           activeArmy[i].id = activeArmy[lastUnit].id + 1;
           activeArmy[i].commander = 'army1';
+          activeArmy[i].reloadStatus = 0;
         }
       } else {  // army 2
         
@@ -278,6 +316,7 @@ function startGame(){
           activeArmy[i].location.y = currentFile2;
           activeArmy[i].id = 20;
           activeArmy[i].commander = 'army2';
+          activeArmy[i].reloadStatus = 0;
         } else {
           const lastUnit = i - 1;
           
@@ -294,6 +333,7 @@ function startGame(){
           activeArmy[i].location.y = currentFile2;
           activeArmy[i].id = activeArmy[lastUnit].id + 1;
           activeArmy[i].commander = 'army2';
+          activeArmy[i].reloadStatus = 0;
         }
       }
     }  

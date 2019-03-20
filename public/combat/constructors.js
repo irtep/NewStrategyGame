@@ -14,7 +14,7 @@ function gameUnit(nombre, type, desc, meleeWeapons, rangedWeapons,
   this.location = location;
 }
 
-function weapon(nombre, range, type, attacks, str, ap, wounds, barrage){
+function weapon(nombre, range, type, attacks, str, ap, wounds, barrage, reloadSpeed){
   this.nombre = nombre;
   this.range = range;
   this.type = type;
@@ -23,6 +23,7 @@ function weapon(nombre, range, type, attacks, str, ap, wounds, barrage){
   this.ap = ap;
   this.wounds = wounds;
   this.barrage = barrage;
+  this.reloadSpeed = reloadSpeed;
 }
 
 function building(nombre, width, height){
