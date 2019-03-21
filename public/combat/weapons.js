@@ -11,14 +11,14 @@ const rangedWeapons = [           //r           a  s   ap  w , rSpeed
   new weapon('laser cannon', 500, 'heavy',      1, 9,  3, 'd6', false, 6),
   // FA-BA
   new weapon('no weapon', 0, 'nothing',         0, 0, 0, 0, false, 0),
-  new weapon('elven longbow', 300, 'bow',       2, 4, 1, 1, false, 3),
-  new weapon('longbow', 250, 'bow',             2, 3, 1, 1, false, 4),
-  new weapon('elven shortbow', 200, 'bow',      2, 3, 0, 1, false, 3),
-  new weapon('crossbow', 300, 'bow',            1, 4, 1, 1, false, 7),
+  new weapon('elven longbow', 300, 'bow',       1, 4, 1, 1, false, 3),
+  new weapon('longbow', 250, 'bow',             1, 3, 1, 1, false, 4),
+  new weapon('elven shortbow', 200, 'bow',      1, 3, 0, 1, false, 3),
+  new weapon('crossbow', 300, 'bow',            1, 5, 1, 1, false, 7),
   new weapon('heavy crossbow', 300, 'bow',      1, 5, 2, 2, false, 8),
   new weapon('dragonfire', 100, 'heavy',     'd6', 9, 3, 2, false, 3),
   new weapon('flamer', 100, 'heavy',         'd6', 7, 3, 1, false, 3),
-  new weapon('auto crossbow', 300, 'bow',       3, 4, 1, 1, false, 2),
+  new weapon('auto crossbow', 300, 'bow',       1, 5, 1, 1, false, 3),
   new weapon('catapult', 450, 'heavy',       'd6',8,  3, 'd6', false, 8),
   new weapon('fireball', 150, 'magic',       'd6',5,  2, 'd6', false, 2)
 ];
