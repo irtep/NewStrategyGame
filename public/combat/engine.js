@@ -103,7 +103,9 @@ function roundExecutor(){
       }
     }
     
-    setTimeout(() => { 
+    // --------- COMPLETE ORDERS -----------------------
+    // ---------- MOVE AND RUN ----------------------------
+    setTimeout(() => {  
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
         
@@ -168,6 +170,7 @@ function roundExecutor(){
       //zunsu('checks');
     }, speedOfRound/2);
     
+    // ---------- REST OF ORDERS ---------------
     setTimeout(() => { 
       for (let i = 0; i < allUnits.length; i++) {
         const unitInAction = allUnits[i];
@@ -211,23 +214,97 @@ function roundExecutor(){
             const shoot = shootTarget(unitInAction, foundTarget);
             unitInAction.reloadStatus = weapon.reloadSpeed;
           }  
+        }     
+        // ----- HUNT ORDER ------------
+        if (unitInAction.order === 'hunt' && unitInAction.engaged.yes === false) {
+          const weapon = searchStatsOfWeapon(unitInAction.details.rangedWeapons[0], 'ranged');
+          const huntResult = hunt(unitInAction, unitInAction.target);
+          let movDir;
+          
+          switch (huntResult.what) {
+            
+            case 'move to flank':
+              
+              startMoving(unitInAction, huntResult.flank);            
+            break;  
+              
+            case 'shoot': 
+              
+              if (unitInAction.reloadStatus === 0) {
+                
+                unitInAction.reloadStatus = weapon.reloadSpeed;
+                unitInAction.firingAt = unitInAction.target;
+                shootTarget(unitInAction, unitInAction.target);
+              } else {
+              
+                startMoving(unitInAction, huntResult.escape);
+              }
+            break; 
+            
+            case 'escape and shoot':
+                          
+              if (unitInAction.reloadStatus === 0) {
+                
+                unitInAction.reloadStatus = weapon.reloadSpeed;
+                unitInAction.firingAt = unitInAction.target;
+                shootTarget(unitInAction, unitInAction.target);
+                startMoving(unitInAction, huntResult.escape);
+              } else {
+              
+                startMoving(unitInAction, huntResult.escape);
+              }
+            break;
+              
+            case 'closer':
+              
+              startMoving(unitInAction, huntResult.direx);
+            break;  
+          }
+        }   
+        // ----- ENGAGE ORDER -----------
+        if (unitInAction.order === 'engage' && unitInAction.engaged.yes === false) {
+          // apply engage:
+          const engageResult = engage(unitInAction, unitInAction.target);
+          
+          if (engageResult.what === 'noLos'){ // still even if no los directly at...didnt work nicely while to flanking if no-los
+            
+            const runSpeed = unitInAction.details.stats.m * 2;
+          
+            for (let iii = 0; iii < runSpeed; iii++){
+              const moveAttempt = moveUnit(unitInAction, engageResult.direx);
+                
+              if (moveAttempt === 'collision'){
+                unitInAction.notMovedInCombat = true;
+              } else {
+                  
+                unitInAction.location = moveAttempt;
+                unitInAction.notMovedInCombat = false;
+                draw();
+              }
+            }             
+          } else {
+                 
+            const runSpeed = unitInAction.details.stats.m * 2;
+          
+            for (let iii = 0; iii < runSpeed; iii++){
+              const moveAttempt = moveUnit(unitInAction, engageResult.direx);
+              
+              if (moveAttempt === 'collision'){
+                unitInAction.notMovedInCombat = true;
+              } else {
+                unitInAction.location = moveAttempt;
+                unitInAction.notMovedInCombat = false;
+                draw();
+              }
+            }  
+          } 
         }  
         
         // -----   MELEE ORDER  ---------
         if (unitInAction.order === 'melee') {
           // apply melee attack:
           const meleeAttackAttempt = meleeAttack(unitInAction, unitInAction.engaged.withWho[0]);
-        }   
-        // ----- HUNT ORDER ------------
-        if (unitInAction.order === 'hunt') {
-          // apply hunt:
-          hunt();
-        }   
-        // ----- ENGAGE ORDER -----------
-        if (unitInAction.order === 'engage') {
-          // apply engage:
-          engage();
-        }   
+        }
       }
       
     }, speedOfRound);

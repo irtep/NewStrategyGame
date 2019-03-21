@@ -4,15 +4,15 @@ Start to look good.
 To add: 
 - More test.
 - Better and clearer user interface.
-- Need "hunt" commands, as combat is too hard without them. Maybe some formation commands too
 
-  Next: Working on hunt and engage orders. at orders.js and engine.js... models at zunsu.js
+  Next: test a bit more... and check serious bug 1#
 
 */
 /*
 Known bugs:
   serious:
- 
+   1#
+     while hunting can move out of the bounds!
   minors:
     #1
     Shoots dead if simultaneous shooting and target already dead.

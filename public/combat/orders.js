@@ -11,50 +11,98 @@ const logScreen = document.getElementById('logi'); // views/combat.html
 let historyForLog; // to check that no duplicated msg are sent
 
 function hunt(who, to) {
-/* WILL BE ABOUT LIKE THIS: */
-/*
-          // if target unit in range
-          if (closestEnemy.distance <= rangedWeapon.range){
-            const thirdOfRange = rangedWeapon.range / 3;
-            // if faraway
-            if (closestEnemy.distance > thirdOfRange) {
-              unitInAction.order = 'shoot';
-              unitInAction.target = enemyArmy[closestEnemy.number];
-              // check los:
-              const losCheck = lineOfSight(unitInAction.location, enemyArmy[closestEnemy.number].location);
-              if (losCheck === 'losBlocked'){
-                unitInAction.order = 'move';
-                unitInAction.target = closestEnemy.where;
-              }
-            } else {  // if closer
-              let escapeDir;
+  
+  let opponent = gameObject.army2;
+  // check los:
+  const losCheck = lineOfSight(who.location, to.location);
+  const rWeapon = searchStatsOfWeapon(who.details.rangedWeapons[0], 'ranged');
+  const distance = distanceCheck(who.location, to.location);
+  const dire = findDirection(who.location, to.location);
+  const thirdOfRange = rWeapon.range / 3;      
+  let flankDir;
+  let escapeDir;
 
-              switch (closestEnemy.where){
-                case 'n': escapeDir = 's'; break;
-                case 'ne': escapeDir = 'sw'; break;
-                case 'e': escapeDir = 'w'; break;
-                case 'se': escapeDir = 'nw'; break;
-                case 's': escapeDir = 'n'; break;
-                case 'sw': escapeDir = 'ne'; break;
-                case 'w': escapeDir = 'e'; break;
-                case 'nw': escapeDir = 'se'; break;
-                default: console.log('not found where....');
-              }
+    switch (dire){
+      case 'n': flankDir = 'e'; escapeDir = 's'; break;
+      case 'ne': flankDir = 'nw'; escapeDir = 'sw'; break;
+      case 'e': flankDir = 'n'; escapeDir = 'w'; break;
+      case 'se': flankDir = 'sw'; escapeDir = 'nw'; break;
+      case 's': flankDir = 'w'; escapeDir = 'n'; break;
+      case 'sw': flankDir = 'se'; escapeDir = 'ne'; break;
+      case 'w': flankDir = 'n'; escapeDir = 'e'; break;
+      case 'nw': flankDir = 'ne'; escapeDir = 'se'; break;
+      default: console.log('not found where, flank / escape Dir....');
+    }
+  
+  let returnPack = {what: null, flank: flankDir, escape: escapeDir, direx: dire}; 
 
-              unitInAction.order = 'move';
-              unitInAction.target = escapeDir;
-            }
-          } else { // not in range
-            unitInAction.order = 'move';
-            unitInAction.target = closestEnemy.where;
-          }
-*/  
+  if (who.commander === 'army2') {
+
+    opponent = gameObject.army1;  
+  }
+  
+  // if target unit in range
+  if (distance <= rWeapon.range){
+
+    // if faraway
+    if (distance > thirdOfRange) {    
+        
+      if (losCheck === 'losBlocked'){
+        
+        returnPack.what = 'move to flank';
+        return returnPack;
+      } else {
+        
+        returnPack.what = 'shoot';
+        return returnPack;
+      }
+    } else {  // if closer
+
+      returnPack.what = 'escape and shoot';
+      return returnPack;
+    }
+  } else { // not in range
+
+    returnPack.what = 'closer';
+    return returnPack;
+  } 
 }
 
 function engage(who, to) {
-/*  WILL BE ABOUT LIKE THIS
-          unitInAction.order = 'run';
-          unitInAction.target = closestEnemy.where;*/
+  const losCheck = lineOfSight(who.location, to.location);
+  const dire = findDirection(who.location, to.location);
+  let flankDir;
+  let escapeDir;
+
+    switch (dire){
+      case 'n': flankDir = 'nw'; escapeDir = 's'; break;
+      case 'ne': flankDir = 'n'; escapeDir = 'sw'; break;
+      case 'e': flankDir = 'se'; escapeDir = 'w'; break;
+      case 'se': flankDir = 's'; escapeDir = 'nw'; break;
+      case 's': flankDir = 'sw'; escapeDir = 'n'; break;
+      case 's': flankDir = 'se'; escapeDir = 'ne'; break;
+      case 'w': flankDir = 'nw'; escapeDir = 'e'; break;
+      case 'nw': flankDir = 'n'; escapeDir = 'se'; break;
+      default: console.log('not found where, flank / escape Dir....');
+    }
+  
+  let returnPack = {what: null, flank: flankDir, escape: escapeDir, direx: dire}; 
+
+  if (who.commander === 'army2') {
+
+    opponent = gameObject.army1;  
+  }  
+  
+  if (losCheck === 'losBlocked') {
+    
+    returnPack.what = 'noLos';
+    return returnPack;
+  } else {
+    
+    returnPack.what = 'losOk';
+    return returnPack;
+  }
+  
 }
 
 function moveUnit(who, to, mode){

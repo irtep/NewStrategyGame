@@ -13,7 +13,7 @@ function drawUnits(canvas,ctx) {
     
     if (unit.order === 'standby') {
       actionDesc = 'order: ' + unit.order;    
-    } else if (unit.order === 'shoot'){ // need to make owns for shooting and moving
+    } else if (unit.order === 'shoot' || unit.order === 'hunt' || unit.order === 'engage'){ // need to make owns for shooting and moving
       actionDesc = 'order: ' + unit.order + ' at ' + unit.target.unit;
     } else if (unit.order === 'melee'){ // need to make owns for shooting and moving
       actionDesc = 'order: ' + unit.order;
@@ -74,7 +74,7 @@ function drawUnits(canvas,ctx) {
     
     if (unit.order === 'standby') {
       actionDesc = 'order: ' + unit.order;        
-    } else if (unit.order === 'shoot'){ // need to make owns for shooting and moving
+    } else if (unit.order === 'shoot' || unit.order === 'hunt' || unit.order === 'engage'){ // need to make owns for shooting and moving
       actionDesc = 'order: ' + unit.order + ' at ' + unit.target.unit;
     } else {
       actionDesc = 'order: ' + unit.order + ' at ' + unit.target;
