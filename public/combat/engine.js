@@ -32,6 +32,24 @@ function checkVictoryCondition() {
   }
 }
 
+// start moving:
+function startMoving(who, where){
+  for (let iii = 0; iii < who.details.stats.m; iii++){
+    const moveAttempt = moveUnit(who, where);
+
+    if (moveAttempt === 'collision'){
+      
+      console.log('got collision at startMoving');
+      who.notMovedInCombat = true;
+    } else {
+
+      who.location = moveAttempt;
+      who.notMovedInCombat = false;
+      draw();
+    }
+  }  
+}
+
 function roundExecutor(){
   draw();
   if (pause === false){ 
@@ -215,6 +233,7 @@ function roundExecutor(){
             unitInAction.reloadStatus = weapon.reloadSpeed;
           }  
         }     
+        
         // ----- HUNT ORDER ------------
         if (unitInAction.order === 'hunt' && unitInAction.engaged.yes === false) {
           const weapon = searchStatsOfWeapon(unitInAction.details.rangedWeapons[0], 'ranged');
@@ -225,7 +244,7 @@ function roundExecutor(){
             
             case 'move to flank':
               
-              startMoving(unitInAction, huntResult.flank);            
+              startMoving(unitInAction, huntResult.flank);      
             break;  
               
             case 'shoot': 
