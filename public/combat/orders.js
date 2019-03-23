@@ -11,9 +11,7 @@ const logScreen = document.getElementById('logi'); // views/combat.html
 let historyForLog; // to check that no duplicated msg are sent
 
 function hunt(who, to) {
-  
   let opponent = gameObject.army2;
-  // check los:
   const losCheck = lineOfSight(who.location, to.location);
   const rWeapon = searchStatsOfWeapon(who.details.rangedWeapons[0], 'ranged');
   const distance = distanceCheck(who.location, to.location);
@@ -257,7 +255,7 @@ function moveUnit(who, to, mode){
           collision = true;
         } 
         if (newLocation.x === -1 + (size)) { // w
-          wallOnWay = true;
+          collision = true;
         }
       break;
       console.log('to not found in detect wall collision');

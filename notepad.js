@@ -5,20 +5,21 @@ To add:
 - More test.
 - Better and clearer user interface.
 
-  Next: test a bit more... and check serious bug 1#
+  Next: test a bit more...
 
 */
 /*
 Known bugs:
   serious:
-   1#
-     while hunting can move out of the bounds!
+  
   minors:
     #1
     Shoots dead if simultaneous shooting and target already dead.
 
     #2
     map doesnt show most southern towns completely with texts, atleast with this laptop.
+    
+    #3 while hunting and when monster is killed (maybe by other ally), it continues to kill killed.
 */
 
 /*

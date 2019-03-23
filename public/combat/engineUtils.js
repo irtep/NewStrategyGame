@@ -18,23 +18,6 @@ function endBattle(){
   }  
 }
 
-// start moving:
-function startMoving(who, where){
-  for (let iii = 0; iii < who.details.stats.m; iii++){
-    const moveAttempt = moveUnit(who, where);
-
-    if (moveAttempt === 'collision'){
-
-      who.notMovedInCombat = true;
-    } else {
-
-      who.location = moveAttempt;
-      who.notMovedInCombat = false;
-      draw();
-    }
-  }  
-}
-
 // to sort in initiative order
 function compare(a,b) {
   if (a.details.stats.i < b.details.stats.i)
