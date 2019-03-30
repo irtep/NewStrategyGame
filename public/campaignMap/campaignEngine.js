@@ -4,13 +4,13 @@ let player; // who is human player, allocated at startCampaign
 
 // FUNCTIONS: 
 
-function startCampaign(){
+function startCampaign(selected, generalsName, generalsPw){
   const cities = gameObject.campaignArmies.cities; // cities
   const factions = gameObject.campaignArmies.factions;
   // mark this as campaign play:
   gameObject.campaignPlay = true;
-  // load selected army from localStorage:
-  const selected = JSON.parse(localStorage.getItem('Go'));
+  gameObject.playerStats.name = generalsName;
+  gameObject.playerStats.pw = generalsPw;
   
   // create armies for all players and allocate them to cities. at mapScreen.js
   addUnit('humans', 'Knight commander', 1, 'Crossroads');
@@ -71,6 +71,7 @@ function startCampaign(){
   factions.push(gameObject.campaignArmies.savages);
   
   callUpdate();
+  console.log('go: ', gameObject);
 }
 //  -------- ONLOAD:  ------------
 window.onload = ()=> {
@@ -80,14 +81,14 @@ window.onload = ()=> {
   checki = JSON.parse(localStorage.getItem('Go'));
   
   // if first turn then saved localStorage item indicates the chosen race.
-  if (checki === 'humans' ||
-     checki === 'elves' ||
-      checki === 'dwarves' ||
-      checki === 'savages' ||
-      checki === 'vampires'
+  if (checki[0] === 'humans' ||
+     checki[0] === 'elves' ||
+      checki[0] === 'dwarves' ||
+      checki[0] === 'savages' ||
+      checki[0] === 'vampires'
      ) {
     gameObject.turn++;
-    startCampaign();
+    startCampaign(checki[0], checki[1], checki[2]);
     makeButtons(gameObject.phaze);
   } 
   else { // but if not, then campaign is going on.

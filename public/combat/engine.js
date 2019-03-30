@@ -20,15 +20,19 @@ function checkVictoryCondition() {
     if (gameObject.army1.length < 1) { winner = 'Player 2'} else { winner = 'Player 1'}
     
     logScreen.innerHTML = logScreen.innerHTML + '<br>battle is over. '+ winner + ' wins!';
-    logScreen.innerHTML = logScreen.innerHTML + '<br><input type= "button" class= "endBattle" '+
-    'value= "Continue game" onclick= "endBattle()">';
+    if (winner === "Player 1") {
+      logScreen.innerHTML = logScreen.innerHTML + '<br><input type= "button" class= "endBattle" '+
+      'value= "Continue game" id= "winner1" onclick= "endBattle(this.id)">';
+    } else {
+      logScreen.innerHTML = logScreen.innerHTML + '<br><input type= "button" class= "endBattle" '+
+      'value= "Continue game" id= "winner2" onclick= "endBattle(this.id)">';
+    }
     
     // scroll battlelog:
     bLog.scrollTop = bLog.scrollHeight;
     
     pause = true;
     clearInterval(gameLooper);
-    console.log('battle over, go: ', gameObject);
   }
 }
 

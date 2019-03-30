@@ -3,9 +3,8 @@
 Start to look good.
 To add: 
 - More test.
-- Better and clearer user interface.
+- Better and clearer user interface. when lots of troops... impossible to see info screen at campaign..
 
-  Next: test a bit more...
 
 */
 /*
@@ -14,7 +13,6 @@ Known bugs:
   
   minors:
     #1
-    Shoots dead if simultaneous shooting and target already dead.
 
     #2
     map doesnt show most southern towns completely with texts, atleast with this laptop.
