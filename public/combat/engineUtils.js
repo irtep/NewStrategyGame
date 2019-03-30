@@ -1,4 +1,4 @@
-function endBattle(){
+function endBattle(winner){
   console.log('end battle');
   gameObject.comingFromFight = true;
   // clear army1 and army2
@@ -8,6 +8,14 @@ function endBattle(){
     // clear contesteds:
     gameObject.campaignArmies.contested.splice(0, gameObject.campaignArmies.contested.length);
   
+    // add stats:
+    if (winner === "winner1") {
+      console.log('w p1');
+      gameObject.playerStats.wins++;
+    } else {
+      console.log('winner2');
+      gameObject.playerStats.losses++;
+    }
     // save gameObject
     localStorage.setItem('Go', JSON.stringify(gameObject));  
   
@@ -79,32 +87,36 @@ function lethalWound(to, who, isMelee){
         } else {
           unitToCheckFrom = gameObject.army2[indexOfDead];
         }
-      
-        if (unitToCheckFrom.details.nombre === unitToCompare.unit &&
-           unitToCheckFrom.location.city === unitToCompare.location && 
-           unitToCheckFrom.quantity === unitToCompare.quantity) {
-          
-          sourceUnit = unitToCompare;
-          sourcesArmyIndex = i;
-          sourcesIndex = ii; 
-          rootsIndex = ii;
-          
-          // find rootUnit
-          if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.humans.nombre) {
-            rootArmy = gameObject.campaignArmies.humans;
-          }
-          if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.elves.nombre) {
-            rootArmy = gameObject.campaignArmies.elves;
-          }
-          if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.dwarves.nombre) {
-            rootArmy = gameObject.campaignArmies.dwarves;
-          }
-          if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.savages.nombre) {
-            rootArmy = gameObject.campaignArmies.savages;
-          }
-          if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.vampires.nombre) {
-            rootArmy = gameObject.campaignArmies.vampires;
-          }
+        
+        // bug fix attempt, to counter bug that kills killed...
+        if (typeof unitToCheckFrom !== 'undefined') {
+
+          if (unitToCheckFrom.details.nombre === unitToCompare.unit &&
+             unitToCheckFrom.location.city === unitToCompare.location && 
+             unitToCheckFrom.quantity === unitToCompare.quantity) {
+
+            sourceUnit = unitToCompare;
+            sourcesArmyIndex = i;
+            sourcesIndex = ii; 
+            rootsIndex = ii;
+
+            // find rootUnit
+            if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.humans.nombre) {
+              rootArmy = gameObject.campaignArmies.humans;
+            }
+            if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.elves.nombre) {
+              rootArmy = gameObject.campaignArmies.elves;
+            }
+            if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.dwarves.nombre) {
+              rootArmy = gameObject.campaignArmies.dwarves;
+            }
+            if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.savages.nombre) {
+              rootArmy = gameObject.campaignArmies.savages;
+            }
+            if (gameObject.campaignArmies.factions[i].nombre === gameObject.campaignArmies.vampires.nombre) {
+              rootArmy = gameObject.campaignArmies.vampires;
+            }
+          }    
         }
       }
     } 
