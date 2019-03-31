@@ -14,23 +14,21 @@
     <div id= "campaignMap">
       <img id= "theMap" src= "https://cdn.glitch.com/025cf530-1fd5-47cb-bdde-6124aa0e2469%2Fthemap.jpg?1546206461789"
             width="950" height="656">
-      <!--
-      <canvas id="mapCanvas" width="950" height="710"></canvas>
-      -->
       <div class="grid-container" id= "gridContainer">
       </div>
     </div>
     </center>
+    
     <div id= "console1">
       <span id= "buttonPlace"></span>
       Income from your lands:
       <div id= "yourIncome"></div>
-      Your army:<br><br>
-      <div id= "yourArmy"></div>
+      <div id= "infoScreen"></div> <!-- Switching yourArmy and infoScreen -->
       <div id= "infoLog" class= "logs">
-        <span id= "infoScreen" class= "logs"></span>
+        <span id= "yourArmy" class= "logs"></span>
       </div>
     </div>
+    
     <script src="../combat/constructors.js"></script>
     <script src="../combat/searchFuncs.js"></script>
     <script src="../combat/worlds.js"></script>

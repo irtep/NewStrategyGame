@@ -48,20 +48,6 @@
 .savages {
   border: 2px solid gold;
 }
-/*
-.topBorder {
-  border-top: 1px solid crimson;
-}
-.rightBorder {
-  border-right: 1px solid crimson;
-}
-.bottomBorder {
-  border-bottom: 1px solid crimson;
-}
-.leftBorder {
-  border-left: 1px solid crimson;
-}
-*/
 #console1 {			
   font-size: 10px;
   position: absolute;
@@ -83,6 +69,10 @@
   overflow-y: scroll;
   margin: 2px;
   text-shadow: 2px 2px gold;
+}
+#infoScreen{
+  width: 240px;
+  padding: 30px 0px 30px 0px;
 }
 .commandButton {
  background-color: white;

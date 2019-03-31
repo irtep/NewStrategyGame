@@ -442,6 +442,9 @@ function startGame(){
   setStartLocations(arm2);
   draw();
   createUnitButtons();
+  
+  // write info to bLog about how to play battle
+  
   console.log('start game ready, go: ', gameObject);
 }
 
