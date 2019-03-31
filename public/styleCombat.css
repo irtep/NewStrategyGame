@@ -80,6 +80,9 @@ input[type=button] {
 .whiteText {
   color: white;
 }
+.blueText {
+  color: blue;
+}
 .endBattle {
   color: black;
   background-color: yellow;

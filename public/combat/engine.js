@@ -3,6 +3,20 @@ let pause = true; // starts as true
 const bLog = document.getElementById('battleLog'); // views/combat.html
 const gameLooper = setInterval(roundExecutor, 1000); // execute orders
 const speedOfRound = 500 // how fast come sub rounds
+const tutorial = '<p class= "blueText">HOW TO PLAY:<br><br>'+
+    'Continue game/ Pause game button can be used to pause/continue game.<br><br>'+
+    '-While game is paused, you have good time to give orders to your units. '+
+  'You can also give commands, while game is not paused.<br><br>'+
+  'If you want to give same order to all your units, you can click “Command to all” button, after that you can choose move, run or standby orders. <br>'+
+  'If you want to give an order to single unit. Just click units name and then choose order you want this unit to do<br><br>'+
+  'Commands:<br>'+
+  '-<b>standby</b>: unit just stands there, shooting closest opponent it sees if it has a ranged weapon.<br><br>'+
+  '-<b>move</b>: unit moves to chosen direction. If it has ranged weapon like a crossbow, it will fire that if it sees and opponent, while moving. After you choose this order, you need to choose direction.<br><br>'+
+  '-<b>shoot</b>: unit stops moving and fires the opponent you choose. If it has line of sight and range to that.<br><br>'+
+  '-<b>run</b> same as move-order, except that unit moves faster, and can not shoot while doing it.<br><br>'+
+  '-<b>hunt</b>: choose target unit who you want this unit to hunt. After that your unit tries to find a place to shoot target unit, while avoiding melee with it. <br><br>'+
+  '<b>engage</b>: your unit that receives this order tries to run towards target you chose in order to engage melee. Please note that your unit does not have same magic crystal ball view as you, so if you use this from far away, your guy might choose unexpected way to engage the enemy. So maybe best use when closer to enemy.<br><br>'+
+  'You win by killing all enemies. Start by giving orders and or clicking "Continue game."</p>';
 
 // Event listeners
 const listenPause = document.getElementById('pauseButton').addEventListener("click", pauseGame);
@@ -444,7 +458,8 @@ function startGame(){
   createUnitButtons();
   
   // write info to bLog about how to play battle
-  
+  logScreen.innerHTML = tutorial; 
+    
   console.log('start game ready, go: ', gameObject);
 }
 
