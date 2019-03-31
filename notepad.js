@@ -3,8 +3,10 @@
 Start to look good.
 To add: 
 - More test.
-- Better and clearer user interface. when lots of troops... impossible to see info screen at campaign..
-
+- Save, load and delete if destroyed
+- check if won or lost
+- top20 players list.
+- info about phases and about combat
 
 */
 /*
@@ -13,11 +15,12 @@ Known bugs:
   
   minors:
     #1
+    sometimes when other team is killed, need to click standby, pause or whatever to get continue button
 
     #2
     map doesnt show most southern towns completely with texts, atleast with this laptop.
     
-    #3 while hunting and when monster is killed (maybe by other ally), it continues to kill killed.
+    #3 when in long battle, sometimes other team doesnt hit...maybe
 */
 
 /*

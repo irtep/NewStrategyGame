@@ -15,11 +15,15 @@ function makeButtons(phaze){
     case 'hire':
       buttonPlace.innerHTML = '<input type= "button" id= "hireUnits" value= "Hire units" onclick= "controlButtons(this.id)"><br>'+
       '<input type= "button" id= "endOfTurn" value= "End phase" onclick= "controlButtons(this.id)"><br><br>'; 
+      
+      // here add info about hire phase to infoScreen.innerHTML
     break;
       
     case 'move':
       buttonPlace.innerHTML = '<input type= "button" id= "moveUnits" value= "Move units" onclick= "controlButtons(this.id)"><br>'+
       '<input type= "button" id= "endOfTurn" value= "End phase" onclick= "controlButtons(this.id)"><br><br>'; 
+      
+      // here add info about move phase to infoScreen.innerHTML
     break;
       
     default: console.log('phaze not found in makeButtons');  
@@ -89,7 +93,7 @@ function consoleUpdate(resetMoves){
       totalPointCost + '<br>'+ werbNeeded + unitInTurn.location + '<br>';
     activeArmy.push(forAdd); 
   }
-  document.getElementById('yourArmy').innerHTML = activeArmy.join('<br>');
+  document.getElementById('yourArmy').innerHTML = 'Your army: <br><br>' + activeArmy.join('<br>');
 }
 
 function callUpdate(){  // updates cities, map, console.
