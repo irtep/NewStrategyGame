@@ -88,3 +88,7 @@
 .invis {
   opacity: 0;
 }
+
+.blueText {
+  color: blue;
+}

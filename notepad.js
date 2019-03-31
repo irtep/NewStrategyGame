@@ -6,7 +6,8 @@ To add:
 - Save, load and delete if destroyed
 - check if won or lost
 - top20 players list.
-- info about phases and about combat
+
+Continue: checkIfOver function
 
 */
 /*

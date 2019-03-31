@@ -281,6 +281,9 @@ window.onload = ()=> {
     }
   }  
   // write info:
+  
+  battles.innerHTML = '<p class= "blueText">Contested areas down below. Click button below to settle the battles'+
+    '. If your troops are involved in next fight, you have to fight the combat, if not, then battle is automatic.</p>'
   for (let i = 0; i < contested.length; i++) {
     const defenders = [];
     const invaders = [];
@@ -329,7 +332,7 @@ window.onload = ()=> {
     // make fight in combats array... maybe so that 0 is defender and others 1, 2 etc...
     combats[i].push(defenders);
     combats[i].push(invaders);
-    
+  
     // show contested areas in web element:
     battles.innerHTML = battles.innerHTML + 
     '<br> Contested area: ' + contested[i].nombre + ' of ' + contested[i].defender + '<br>' +

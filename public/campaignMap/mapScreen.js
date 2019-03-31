@@ -8,6 +8,46 @@ function callDice(max){
     return result;
 }  
 
+function checkIfOver(gameObject) {
+  const playersArmy = gameObject.campaignArmies[0].army;
+  let playerIsLiving = true;
+  const factions = [];
+  const eliminatedFactions = [];
+  
+  if (gameObject.campaignArmies.humans.army.length > 0) {
+    factions.push(gameObject.campaignArmies.humans);
+  } else {
+    eliminatedFactions.push(gameObject.campaignArmies.humans);
+  }
+  if (gameObject.campaignArmies.elves.army.length > 0) {
+    factions.push(gameObject.campaignArmies.elves);
+  } else {
+    eliminatedFactions.push(gameObject.campaignArmies.elves);
+  }
+  if (gameObject.campaignArmies.dwarves.army.length > 0) {
+    factions.push(gameObject.campaignArmies.dwarves);
+  } else {
+    eliminatedFactions.push(gameObject.campaignArmies.dwarves);
+  }
+  if (gameObject.campaignArmies.savages.army.length > 0) {
+    factions.push(gameObject.campaignArmies.savages);
+  } else {
+    eliminatedFactions.push(gameObject.campaignArmies.savages);
+  }
+  if (gameObject.campaignArmies.vampires.army.length > 0) {
+    factions.push(gameObject.campaignArmies.vampires);
+  } else {
+    eliminatedFactions.push(gameObject.campaignArmies.vampires);
+  }
+  
+  // check if player is lost
+  for (let i = 0; i < eliminatedFactions.length; i++) {
+    
+    // check if player is here.
+  }
+  console.log('player check: ', playersArmy);
+}
+
 function makeButtons(phaze){
   const buttonPlace = document.getElementById('buttonPlace');
 
@@ -17,6 +57,8 @@ function makeButtons(phaze){
       '<input type= "button" id= "endOfTurn" value= "End phase" onclick= "controlButtons(this.id)"><br><br>'; 
       
       // here add info about hire phase to infoScreen.innerHTML
+      infoScreen.innerHTML = '<span class= "blueText">Hire phase: Use this phase to hire units. Do not save your money. Whatever you'+
+        ' save will go to other expenses and you will not see it again. When ready, just click "End phase"</span>';
     break;
       
     case 'move':
@@ -24,6 +66,8 @@ function makeButtons(phaze){
       '<input type= "button" id= "endOfTurn" value= "End phase" onclick= "controlButtons(this.id)"><br><br>'; 
       
       // here add info about move phase to infoScreen.innerHTML
+      infoScreen.innerHTML = '<span class= "blueText">Move phase: Use this phase to move units. To attack area, just move units there'+
+        '  When ready, just click "End phase".</span>';
     break;
       
     default: console.log('phaze not found in makeButtons');  

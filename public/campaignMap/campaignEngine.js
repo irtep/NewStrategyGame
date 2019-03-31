@@ -42,22 +42,27 @@ function startCampaign(selected, generalsName, generalsPw){
     case 'humans':
       gameObject.campaignArmies.humans.player = true;
       gameObject.campaignArmies.armyOfPlayer = humans;
+      gameObject.playerStats.faction = 'humans';
     break;
     case 'elves':
       gameObject.campaignArmies.elves.player = true;
       gameObject.campaignArmies.armyOfPlayer = elves;
+      gameObject.playerStats.faction = 'elves';
     break;
     case 'dwarves':
       gameObject.campaignArmies.dwarves.player = true;
       gameObject.campaignArmies.armyOfPlayer = dwarves;
+      gameObject.playerStats.faction = 'dwarves';
     break;  
     case 'vampires':
       gameObject.campaignArmies.vampires.player = true;
       gameObject.campaignArmies.armyOfPlayer = vampires;
+      gameObject.playerStats.faction = 'vampires';
     break; 
     case 'savages':
       gameObject.campaignArmies.savages.player = true;
       gameObject.campaignArmies.armyOfPlayer = savages;
+      gameObject.playerStats.faction = 'savages';
     break; 
     default: console.log('cant find selected at addUnit');  
   }
@@ -112,6 +117,8 @@ window.onload = ()=> {
       window.location = "https://thenewgame.glitch.me/endTurn";        
     } else {
           
+      // check if game is over:
+      const gameOver = checkIfOver(gameObject);
       infoScreen.innerHTML = ' Turn: ' + gameObject.turn;
       gameObject.phaze = 'hire';
       makeButtons(gameObject.phaze);
