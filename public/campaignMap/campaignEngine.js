@@ -123,6 +123,12 @@ window.onload = ()=> {
       gameObject.phaze = 'hire';
       makeButtons(gameObject.phaze);
       callUpdate();
+      
+      // save process if player has atleast 5 wins
+      if (gameObject.playerStats.wins > 4) {
+        //make the save call.
+        console.log('exceeds 5 wins');
+      }
     }
     
   }

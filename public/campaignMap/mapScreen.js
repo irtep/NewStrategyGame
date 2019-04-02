@@ -44,8 +44,28 @@ function checkIfOver(gameObject) {
   for (let i = 0; i < eliminatedFactions.length; i++) {
     
     // check if player is here.
+    console.log('comparing: ', eliminatedFaction[i].army[0].commander, gameObject.playerStats.faction);
+    if (eliminatedFaction[i].army[0].commander == gameObject.playerStats.faction) {
+      
+      console.log('player eliminated!');
+      // end the game.
+    }  
   }
-  console.log('player check: ', playersArmy);
+  
+  // check if max rounds are reached:
+  if (gameObject.turn > 34) {  
+    // max turn reached. End the game->
+    console.log('max turn reached!');
+  }
+  
+  // check if player won:
+  console.log('comparing 2: ', factions[0].army[0].commander, gameObject.playerStats.faction);
+  if (factions.length == 1 && factions[0].army[0].commander == gameObject.playerStats.faction) {
+    console.log('player won by conquest!');
+  }
+  
+  console.log('game continues: player check, facs, elim: ', playersArmy, factions, eliminatedFactions);
+  // should return true or false or just directly end it...
 }
 
 function makeButtons(phaze){
