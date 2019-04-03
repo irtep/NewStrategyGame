@@ -126,8 +126,9 @@ window.onload = ()=> {
       
       // save process if player has atleast 5 wins
       if (gameObject.playerStats.wins > 4) {
-        //make the save call.
-        console.log('exceeds 5 wins');
+        //make the save html call.
+        console.log('exceeds 5 wins, sending save request.');
+        checkDatabase('saveGame', gameObject);
       }
     }
     
