@@ -3,15 +3,17 @@ const express = require('express');
 const app = express();
 
 // database access:
-/*
+
 const mongoose = require('mongoose'); 
 const mongoDB = process.env.SECRET1; // admin
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 const Schema = mongoose.Schema;
-*/
+
 app.use(express.static('public'));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 // ----------------- HANDLE GETS -------------------
 
@@ -42,6 +44,24 @@ app.get("/endTurn", (request, response) => {
 // ----------------- HANDLE GETS END ---------------------
 
 // -------------- DATABASE COMMANDS -------------------
+
+// this handles contacts with database.
+app.post('/dbBusiness', (request, response) => {
+  console.log('req', request.body.MSG);
+  const received = request.body.MSG;
+  let responding = 'hi guys!';
+  
+  console.log('Post received: ', received);
+  
+  setTimeout(() => {  // timed so that there is time to add the data
+     
+    const sending = JSON.stringify(responding);
+    console.log("responding with data ");
+    console.log('responding: ', responding);
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end(sending);      
+  }, 1000); //timer
+});
 
 /*
 // POST handlers: will be used for database access, to save and load armies.

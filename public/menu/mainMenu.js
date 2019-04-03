@@ -103,12 +103,20 @@ function menuClick(clickedButton){
     break;
     case 'Continue Campaign':
       console.log('clicked: ', clickedButton);
+      // ask username and password
+      // submit button.
+      
+      // on submit button make a html call to look for that game
+      // if found start game with that gameObject
+      checkDatabase('loadGame', 'usernameAndPassw here');
     break;
     case 'Skirmish game':
       window.location = "https://thenewgame.glitch.me/skirmish"; 
     break;
     case 'Top players':
       console.log('clicked: ', clickedButton);
+      // make html call to ask for top15 players list
+      checkDatabase('top15');
     break;  
     case 'Start campaign!':
       
