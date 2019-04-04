@@ -45,8 +45,10 @@ app.get("/endTurn", (request, response) => {
 
 // -------------- DATABASE COMMANDS -------------------
 
+// showHighscores, loadGame, saveGame, saveHighscore
+
 // this handles contacts with database.
-app.post('/dbBusiness', (request, response) => {
+app.post('/showHighscores', (request, response) => {
   console.log('req', request.body.MSG);
   const received = request.body.MSG;
   let responding = 'hi guys!';
@@ -63,6 +65,56 @@ app.post('/dbBusiness', (request, response) => {
   }, 1000); //timer
 });
 
+app.post('/loadGame', (request, response) => {
+  console.log('req', request.body.MSG);
+  const received = request.body.MSG;
+  let responding = 'hi guys!';
+  
+  console.log('Post received: ', received);
+  
+  setTimeout(() => {  // timed so that there is time to add the data
+     
+    const sending = JSON.stringify(responding);
+    console.log("responding with data ");
+    console.log('responding: ', responding);
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end(sending);      
+  }, 1000); //timer
+});
+
+app.post('/saveGame', (request, response) => {
+  console.log('req', request.body.MSG);
+  const received = request.body.MSG;
+  let responding = 'hi guys!';
+  
+  console.log('Post received: ', received);
+  
+  setTimeout(() => {  // timed so that there is time to add the data
+     
+    const sending = JSON.stringify(responding);
+    console.log("responding with data ");
+    console.log('responding: ', responding);
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end(sending);      
+  }, 1000); //timer
+});
+
+app.post('/saveHighscore', (request, response) => {
+  console.log('req', request.body.MSG);
+  const received = request.body.MSG;
+  let responding = 'hi guys!';
+  
+  console.log('Post received: ', received);
+  
+  setTimeout(() => {  // timed so that there is time to add the data
+     
+    const sending = JSON.stringify(responding);
+    console.log("responding with data ");
+    console.log('responding: ', responding);
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end(sending);      
+  }, 1000); //timer
+});
 /*
 // POST handlers: will be used for database access, to save and load armies.
 app.post('/showAll', (request, response) => {
