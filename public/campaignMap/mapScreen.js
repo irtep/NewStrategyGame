@@ -9,7 +9,6 @@ function callDice(max){
 }  
 
 function checkIfOver(gameObject) {
-  const playersArmy = gameObject.campaignArmies[0].army;
   let playerIsLiving = true;
   const factions = [];
   const eliminatedFactions = [];
@@ -64,7 +63,7 @@ function checkIfOver(gameObject) {
     console.log('player won by conquest!');
   }
   
-  console.log('game continues: player check, facs, elim: ', playersArmy, factions, eliminatedFactions);
+  console.log('game continues: player check, facs, elim: ', factions, eliminatedFactions);
   // should return true or false or just directly end it...
 }
 
@@ -372,8 +371,6 @@ function controlButtons(pushedButton, par2, par3, par4){
           infoScreen.innerHTML = ' Turn: ' + gameObject.turn;
         }
       }
-      // check if fights
-      // check victory conditions...
     break;
     case 'shopping': // buttons that appear, when player clicks "hire units"
       const currentCost = countFactionUpkeep(factions[checkPlayer()].army);

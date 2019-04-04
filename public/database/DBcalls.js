@@ -1,6 +1,7 @@
-function checkDatabase(why, data){
+function checkDatabase(why, origData){
+  const data = JSON.stringify(origData);
   const http = new XMLHttpRequest();
-  const url = '/dbBusiness'; // showData, loadGame, saveGame, saveHighscore
+  const url = '/'+ why; // showHighcores, loadGame, saveGame, saveHighscore
   let params = 'MSG='+ why;
   
   /* handle data like this
@@ -11,6 +12,24 @@ function checkDatabase(why, data){
   const url = '/updateAll';
   const params = 'MSG=' + theList;
   */
+  
+  
+  switch (why) {
+  
+    case 'showHighscores':    
+      params = 'MSG=showHighscores';
+    break;     
+    case 'loadGame':    
+      params = 'MSG='+ data;
+    break;
+    case 'saveGame':     
+      params = 'MSG='+ data;
+    break;
+    case 'saveHighScore':    
+      params = 'MSG='+ data;
+    break;
+    default: console.log('could not find what on checkDatabase');
+  }
   
   console.log('database request: ', params);
   

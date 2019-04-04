@@ -116,7 +116,7 @@ function menuClick(clickedButton){
     case 'Top players':
       console.log('clicked: ', clickedButton);
       // make html call to ask for top15 players list
-      checkDatabase('top15');
+      checkDatabase('showHighscores');
     break;  
     case 'Start campaign!':
       
