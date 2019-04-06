@@ -6,7 +6,83 @@ const infoScreen = document.getElementById('infoScreen');
 function callDice(max){
     const result =  1 + Math.floor(Math.random() * max);
     return result;
-}  
+}
+
+// this will make savedGame object to save in database.
+// could use also directly gameObject, but this saves space in database.
+function makeSavedGame(gameObject){
+  // what i need: gameObject.playerStats
+  // troop infos from all armies: name, quantity, location.
+  const gcA = gameObject.campaignArmies;
+  let savedGame = gameObject.playerStats;
+  const armies = {humans: [],
+                  elves: [],
+                  dwarves: [],
+                  vampires: [],
+                  savages: []
+                 };
+  // update turn number:
+  savedGame.turn = gameObject.turn;
+  // fill armies
+  if (gcA.humans.army.length > 0) {
+    let humans = [];
+    
+    for (let i = 0; i < gcA.humans.army.length; i++) {
+      
+      const unit = {name: gcA.humans.army[i].unit, quantity: gcA.humans.army[i].quantity, 
+                   location: gcA.humans.army[i].location};
+      humans.push(unit);
+    }
+    armies.humans.push(humans);
+  }
+  if (gcA.elves.army.length > 0) {
+    let elves = [];
+    
+    for (let i = 0; i < gcA.elves.army.length; i++) {
+      
+      const unit = {name: gcA.elves.army[i].unit, quantity: gcA.elves.army[i].quantity, 
+                   location: gcA.elves.army[i].location};
+      elves.push(unit);
+    }
+    armies.elves.push(elves);
+  }   
+  if (gcA.dwarves.army.length > 0) {
+    let dwarves = [];
+    
+    for (let i = 0; i < gcA.dwarves.army.length; i++) {
+      
+      const unit = {name: gcA.dwarves.army[i].unit, quantity: gcA.dwarves.army[i].quantity, 
+                   location: gcA.dwarves.army[i].location};
+      dwarves.push(unit);
+    }
+    armies.dwarves.push(dwarves);
+  }
+  if (gcA.vampires.army.length > 0) {
+    let vampires = [];
+    
+    for (let i = 0; i < gcA.vampires.army.length; i++) {
+      
+      const unit = {name: gcA.vampires.army[i].unit, quantity: gcA.vampires.army[i].quantity, 
+                   location: gcA.vampires.army[i].location};
+      vampires.push(unit);
+    }
+    armies.vampires.push(vampires);
+  }
+  if (gcA.savages.army.length > 0) {
+    let savages = [];
+    
+    for (let i = 0; i < gcA.savages.army.length; i++) {
+      
+      const unit = {name: gcA.savages.army[i].unit, quantity: gcA.savages.army[i].quantity, 
+                   location: gcA.savages.army[i].location};
+      savages.push(unit);
+    }
+    armies.savages.push(savages);
+  }
+  
+  savedGame.armies = armies;
+  return savedGame;
+}
 
 function checkIfOver(gameObject) {
   let playerIsLiving = true;
@@ -259,9 +335,10 @@ function addUnit(targetArmy, targetUnit, unitSize, location){
   
   let chosenArmy;
   let newDetails;
-  const newUnit = {unit: targetUnit, id: null, location: {x: 0, y: 0, z: 0}, quantity: unitSize, order: 'standby', target: null, 
+  const newUnit = {unit: targetUnit, id: null,/* location: {x: 0, y: 0, z: 0},*/ quantity: unitSize, order: 'standby', target: null, 
   engaged: {yes: false, withWho: []}, joinedCharacters: [], highlighted: false, commander: targetArmy, details: null,
   firing: false, firingAt: null, notMovedInCombat: false, location: location,  moved: false}; // army, unit, location and quantity... all else to default
+  // why location is two times? prolly not intensional... need to investigate further... disabled now other.
   
   // set chosenArmy:
   switch (targetArmy){

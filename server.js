@@ -3,13 +3,20 @@ const express = require('express');
 const app = express();
 
 // database access:
-
 const mongoose = require('mongoose'); 
 const mongoDB = process.env.SECRET1; // admin
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 const Schema = mongoose.Schema;
+
+const nlSchema = new Schema( {
+  savedGames: {
+    type: Array    
+  } 
+});
+
+const nlModel = mongoose.model('nlModel', nlSchema ); 
 
 app.use(express.static('public'));
 app.use(bodyParser.json()); // support json encoded bodies
@@ -86,8 +93,28 @@ app.post('/saveGame', (request, response) => {
   console.log('req', request.body.MSG);
   const received = request.body.MSG;
   let responding = 'hi guys!';
+  const nlQuery = { name:  'northernLands' };  
+  let loadedGames = null;
   
   console.log('Post received: ', received);
+  
+  // fetch savedGames from server
+  nlModel.find((err, results) => {
+    
+    if (err) console.log(err);
+      // push received new game inside
+      results[0].savedGames.push(received);    
+  
+      // make update
+      nlModel.update(nlQuery, {  
+        savedGames: results[0].savedGames
+      }, (err) => {
+        console.log("game saved"); 
+     });
+  });
+  
+  
+
   
   setTimeout(() => {  // timed so that there is time to add the data
      
