@@ -7,7 +7,9 @@ To add:
 - check if won or lost
 - top20 players list.
 
-Continue: checkIfOver function
+Continue: dataBase save function works. 
+  Next, make it override if same name and password.
+  Then, if someone tries to take same name, dont let it do that.
 
 */
 /*

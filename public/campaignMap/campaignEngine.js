@@ -1,10 +1,8 @@
-
-// most of commands are there too.
 let player; // who is human player, allocated at startCampaign
 
 // FUNCTIONS: 
 
-function startCampaign(selected, generalsName, generalsPw){
+function startCampaign(selected, generalsName, generalsPw, newGame){
   const cities = gameObject.campaignArmies.cities; // cities
   const factions = gameObject.campaignArmies.factions;
   // mark this as campaign play:
@@ -76,6 +74,14 @@ function startCampaign(selected, generalsName, generalsPw){
   factions.push(gameObject.campaignArmies.savages);
   
   callUpdate();
+  
+  // databasecheck test
+  /*  Not testing atm.
+        const savedGame = makeSavedGame(gameObject);
+        //make the save html call.
+        console.log('exceeds 5 wins, sending save request. ', savedGame);
+        checkDatabase('saveGame', savedGame);
+  */
   console.log('go: ', gameObject);
 }
 //  -------- ONLOAD:  ------------
@@ -92,8 +98,8 @@ window.onload = ()=> {
       checki[0] === 'savages' ||
       checki[0] === 'vampires'
      ) {
-    gameObject.turn++;
-    startCampaign(checki[0], checki[1], checki[2]);
+    gameObject.turn = 1;
+    startCampaign(checki[0], checki[1], checki[2], true);
     makeButtons(gameObject.phaze);
   } 
   else { // but if not, then campaign is going on.
@@ -118,6 +124,7 @@ window.onload = ()=> {
     } else {
           
       // check if game is over:
+      gameObject.turn++;
       const gameOver = checkIfOver(gameObject);
       infoScreen.innerHTML = ' Turn: ' + gameObject.turn;
       gameObject.phaze = 'hire';
@@ -126,9 +133,10 @@ window.onload = ()=> {
       
       // save process if player has atleast 5 wins
       if (gameObject.playerStats.wins > 4) {
+        const savedGame = makeSavedGame(gameObject);
         //make the save html call.
-        console.log('exceeds 5 wins, sending save request.');
-        checkDatabase('saveGame', gameObject);
+        console.log('exceeds 5 wins, sending save request. ', savedGame);
+        checkDatabase('saveGame', savedGame);
       }
     }
     
