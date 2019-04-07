@@ -119,8 +119,8 @@ function checkIfOver(gameObject) {
   for (let i = 0; i < eliminatedFactions.length; i++) {
     
     // check if player is here.
-    console.log('comparing: ', eliminatedFaction[i].army[0].commander, gameObject.playerStats.faction);
-    if (eliminatedFaction[i].army[0].commander == gameObject.playerStats.faction) {
+    console.log('comparing: ', eliminatedFactions[i].army[0].commander, gameObject.playerStats.faction);
+    if (eliminatedFactions[i].army[0].commander == gameObject.playerStats.faction) {
       
       console.log('player eliminated!');
       // end the game.

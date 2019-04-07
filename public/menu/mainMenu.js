@@ -2,7 +2,7 @@
 
 const info1 = document.getElementById('information1');
 // if this is locked, moveOut doenst work:
-let lockInfo1 = false;
+let lockInfo1 = false; // is needed? check sometime...
 let selectedArmy; // here comes the selected army if starts campaign.
 let selectedName;
 let selectedPassword = '';
