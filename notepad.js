@@ -7,16 +7,16 @@ To add:
 - check if won or lost
 - top20 players list.
 
-Continue: dataBase save function works. 
-  Next, make it override if same name and password.
-  Then, if someone tries to take same name, dont let it do that, also all saves with same name should override older entry
-
+Continue: some bugs below.
 */
 /*
 Known bugs:
   serious:
     #1 long combat problematic as they dont necessarily engage after killing many..
   
+    #2 engage enemy doesnt work almost ever.
+    
+    #3 mapscreen.js line 122 bug
   minors:
     #1
     sometimes when other team is killed, need to click standby, pause or whatever to get continue button

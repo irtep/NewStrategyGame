@@ -119,6 +119,7 @@ function checkIfOver(gameObject) {
   for (let i = 0; i < eliminatedFactions.length; i++) {
     
     // check if player is here.
+    // BUG HERE! cant find commander of undefined.
     console.log('comparing: ', eliminatedFactions[i].army[0].commander, gameObject.playerStats.faction);
     if (eliminatedFactions[i].army[0].commander == gameObject.playerStats.faction) {
       
@@ -128,7 +129,7 @@ function checkIfOver(gameObject) {
   }
   
   // check if max rounds are reached:
-  if (gameObject.turn > 34) {  
+  if (gameObject.turn > 49) {  
     // max turn reached. End the game->
     console.log('max turn reached!');
   }
@@ -226,8 +227,8 @@ function consoleUpdate(resetMoves){
     }
     
     if (unitInTurn.moved === false){ werbNeeded = ' at '} else { werbNeeded = ' is marching to '}; 
-      
-    forAdd = '<strong><span id= "'+unitInTurn.unit+'" onmouseover= "showDetails(this.id)" onmouseout = "clearDetails()">' +
+      // removed: onmouseover= "showDetails(this.id)" onmouseout = "clearDetails()"
+    forAdd = '<strong><span id= "'+unitInTurn.unit+'" >' +
       unitInTurn.quantity + ' x ' + unitInTurn.unit+ '</strong></span><br>' + 'upkeep cost: ' + 
       totalPointCost + '<br>'+ werbNeeded + unitInTurn.location + '<br>';
     activeArmy.push(forAdd); 
