@@ -17,22 +17,22 @@ const humans = [
   new gameUnit(
   'Knight', 'cavalry','Tough elite unit mounted on warhorses. Well armed with lances and armoured with excellent plate armours',
   ['lance', 'shield'], ['no weapon'],
-  {m: 8, s: 4, t: 4, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 7}, 2, 'humans', 5,
+  {m: 8, s: 4, t: 4, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 6}, 2, 'humans', 5,
   'Tough elite unit mounted on warhorses. Well armed with lances, shields and armoured with excellent plate armours', 5),
   new gameUnit(
   'Swordsman', 'infantry', 'Infantryman of human. Well trained. Armed with sword and shield.', 
   ['longsword', 'shield'], ['no weapon'],
-  {m: 5, s: 3, t: 3, ws: 3, bs: 4, a: 1, w: 1, i: 3, ld: 8, sv: 5, defMods: 1, pointCost: 3}, 1,  'humans', 10,
+  {m: 5, s: 3, t: 3, ws: 3, bs: 4, a: 1, w: 1, i: 3, ld: 8, sv: 5, defMods: 1, pointCost: 2}, 1,  'humans', 10,
   'Professional infantry soldiers, lightly armoured, armed with longsword and shield.', 5),
   new gameUnit(
   'Crossbowman', 'infantry', 'Good and cheap ranged unit. Crossbows are deadly and easy to use.', 
   ['dagger'], ['crossbow'],
-  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 3}, 1,  'humans', 10,
+  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 2}, 1,  'humans', 10,
   'Usually not that trained, but using crossbows with deadly accuration doesnt need that much training. Mostly considered as unfair weapon as most unworthy rookie soldier can kill a noble life-time of trained knight with one shot.', 6),
   new gameUnit(
   'Longbowman', 'infantry', 'It takes lots of training to be a good archer, like these guys are.', 
   ['dagger'], ['longbow'],
-  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 4}, 1,  'humans', 10,
+  {m: 5, s: 3, t: 3, ws: 2, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 6, defMods: 0, pointCost: 3}, 1,  'humans', 10,
   'I takes a lot of training to be a good archer, like these guys are. Absolutely deadly fire rate. Usually against most of the units it is one volley that all it takes to destroy the unit', 5),
   new gameUnit(
   'Peasant', 'infantry', 'These guys are not really fighters, but sometimes quantity overwhelmes quality.', 

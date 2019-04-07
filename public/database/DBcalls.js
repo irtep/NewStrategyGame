@@ -16,8 +16,8 @@ function checkDatabase(why, origData){
   
   switch (why) {
   
-    case 'showHighscores':    
-      params = 'MSG=showHighscores';
+    case 'showGames': 
+      params = 'MSG=showGames';
     break;     
     case 'loadGame':    
       params = 'MSG='+ data;
@@ -41,6 +41,10 @@ function checkDatabase(why, origData){
     if (http.readyState == 4 && http.status == 200) {
       const resp = JSON.parse(http.responseText);
       console.log("response from server: ", resp);
+      
+      if (why === 'showGames') {
+        listOfGames = resp;    
+      }
     }
   }
   

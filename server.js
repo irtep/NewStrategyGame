@@ -52,24 +52,30 @@ app.get("/endTurn", (request, response) => {
 
 // -------------- DATABASE COMMANDS -------------------
 
-// showHighscores, loadGame, saveGame, saveHighscore
+// showGames, loadGame, saveGame, saveHighscore
 
 // this handles contacts with database.
-app.post('/showHighscores', (request, response) => {
+app.post('/showGames', (request, response) => {
   console.log('req', request.body.MSG);
   const received = request.body.MSG;
-  let responding = 'hi guys!';
+  const responding = {names: [], pws: []};
   
-  console.log('Post received: ', received);
-  
-  setTimeout(() => {  // timed so that there is time to add the data
-     
+  // fetch savedGames from server
+  nlModel.find((err, results) => {
+    
+    if (err) console.log(err);
+    
+    // get details from savedGames:
+    for (let i = 0; i < results[0].savedGames.length; i++){
+      const jso = JSON.parse(results[0].savedGames[i]);
+      
+      responding.names.push(jso.name); responding.pws.push(jso.pw);
+    } 
     const sending = JSON.stringify(responding);
-    console.log("responding with data ");
-    console.log('responding: ', responding);
+    
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.end(sending);      
-  }, 1000); //timer
+  });  
 });
 
 app.post('/loadGame', (request, response) => {
@@ -131,10 +137,7 @@ app.post('/saveGame', (request, response) => {
         console.log("game saved"); 
      });
   });
-  
-  
 
-  
   setTimeout(() => {  // timed so that there is time to add the data
      
     const sending = JSON.stringify(responding);

@@ -6,6 +6,7 @@ let lockInfo1 = false; // is needed? check sometime...
 let selectedArmy; // here comes the selected army if starts campaign.
 let selectedName;
 let selectedPassword = '';
+let listOfGames = null;
 // armies:
 const availArmies = ['Humans', 'Elves', 'Dwarves', 'Savages', 'Vampires'];
 
@@ -43,6 +44,10 @@ function menuClick(clickedButton){
         ' to take control of all Northern Lands region to your beloved faction!';
     break;
     case 'Start Campaign':
+      // clear possible old selections:
+      selectedArmy = '';
+      selectedName = '';
+      selectedPassword = '';
       
       info1.innerHTML = 'Welcome general! <br><br>Your name:<br>' + 
       '<input type= "text" id= "generalsName" onchange = "changeName()"><br><br>'+
@@ -55,6 +60,14 @@ function menuClick(clickedButton){
       for (let i = 0; i < availArmies.length; i++) {
         info1.innerHTML = info1.innerHTML + '<input type= "radio" name= "army1" value="'+ availArmies[i] +'"/>'+availArmies[i]+'<br>';
       }
+      
+      // some tutorial stuff:
+      info1.innerHTML = info1.innerHTML + '<span class= "blueText"><br> In campaign you have 50 turns times to do some conquest.<br>'+
+        'choose name and password as in case you score atleast 5 wins in combat your progress will be saved and you can continue later.<br>'+
+        'Note that if you have an earlier saved game with same name that you want to use now, the earlier game will be deleted as this will replace it. <br>'+
+        'So if you want to start new game, and you have earlier saved one, use other name.<br><br>'+
+        'The best result is that inside 50 turns you conquest all lands, but even if you survive for 50 turns is considered as a success.<br>'+
+        'You also score some points by keeping your starting lands and from every victory and your victory percent.';
 
       // event listener for radio buttons above:
       const selector1 = document.selectArmyForm.army1;
@@ -120,11 +133,41 @@ function menuClick(clickedButton){
     break;  
     case 'Start campaign!':
       
+      let nameInUse = false;
       const armyAndName = [selectedArmy, selectedName, selectedPassword];
-      console.log(armyAndName);
+      // get list from db about names and pws:
+      const toDb = checkDatabase('showGames');     
+      
+      setTimeout(() => {
+        console.log('lisfOfGames', listOfGames);
+        for (let i = 0; i < listOfGames.names.length; i++){
+          
+          if (selectedName === listOfGames.names[i]) {
+          
+            console.log('found name index: ', i);
+            // found name in used names.
+            nameInUse = true;
+      
+            if (selectedPassword === listOfGames.pws[i]) {
+            
+              // but password ok!
+              nameInUse = false;
+              console.log('pw ok!');
+            }
+          }
+        }
+        
+        if (nameInUse === true) {
+        
+          info1.innerHTML = 'Name you chose is already in use, with no password match.'
+        } else {
+          
+      // new name or password matches with old name, all good to go.    
       // save 'selectedArmy' to localStorage and start camp!
       localStorage.setItem('Go', JSON.stringify(armyAndName));
       window.location = "https://thenewgame.glitch.me/mapscreen"; 
+        }
+      }, 2000);
     break;  
     default: console.log('menuClick: not found clickedButton', clickedButton);  
   }
@@ -146,4 +189,5 @@ function outAction(){
 window.onload = ()=> {
   
   menuClick('Intro'); 
+     
 }
