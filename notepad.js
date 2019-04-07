@@ -9,12 +9,13 @@ To add:
 
 Continue: dataBase save function works. 
   Next, make it override if same name and password.
-  Then, if someone tries to take same name, dont let it do that.
+  Then, if someone tries to take same name, dont let it do that, also all saves with same name should override older entry
 
 */
 /*
 Known bugs:
   serious:
+    #1 long combat problematic as they dont necessarily engage after killing many..
   
   minors:
     #1

@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 // database access:
-const mongoose = require('mongoose'); 
+const mongoose = require('mongoose', { useNewUrlParser: true }); 
 const mongoDB = process.env.SECRET1; // admin
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
@@ -95,16 +95,35 @@ app.post('/saveGame', (request, response) => {
   let responding = 'hi guys!';
   const nlQuery = { name:  'northernLands' };  
   let loadedGames = null;
-  
-  console.log('Post received: ', received);
+  let nameExists = {result: false, index: null};
+  const jsoned = JSON.parse(received);
   
   // fetch savedGames from server
   nlModel.find((err, results) => {
     
     if (err) console.log(err);
-      // push received new game inside
-      results[0].savedGames.push(received);    
-  
+    
+    // check if game with this players name already exists:
+    for (let i = 0; i < results[0].savedGames.length; i++){
+      const jso = JSON.parse(results[0].savedGames[i]);
+      
+      if (jso.name === jsoned.name) {
+        console.log('found name!');
+        nameExists.result = true;
+        nameExists.index = i;
+      } 
+    } 
+    
+    // push received new game inside
+    if (nameExists.result === false) {
+      // new name, adding to savedGames list
+      console.log('new game, adding');
+      results[0].savedGames.push(received);
+    }  else {
+      // name already exists. replacing:
+      console.log('old game, replacing');
+      results[0].savedGames[nameExists.index] = received;
+    }
       // make update
       nlModel.update(nlQuery, {  
         savedGames: results[0].savedGames

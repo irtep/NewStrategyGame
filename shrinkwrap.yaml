@@ -2,8 +2,8 @@ dependencies:
   bcrypt: 3.0.5
   body-parser: 1.18.3
   express: 4.16.4
-  mongojs: 2.5.0
-  mongoose: 5.4.21
+  mongojs: 2.6.0
+  mongoose: 5.4.22
 packages:
   /abbrev/1.1.1:
     dev: false
@@ -93,12 +93,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==
-  /bson/1.0.5:
+  /bson/1.0.9:
     dev: false
     engines:
       node: '>=0.6.19'
     resolution:
-      integrity: sha512-D4SCtud6mlEb48kXdTHU31DRU0bsgOJ+4St1Dcx30uYNnf/aGc+hC9gHB/z0Eth8HYYs/hr0SFdyZViht19SwA==
+      integrity: sha512-IQX9/h7WdMBIW/q/++tGd+emQr0XMdeZ6icnT/74Xk9fnabWn+gZgpE+9V+gujL3hhJOoNrnDVY7tWdzc7NUTg==
   /bson/1.1.1:
     dev: false
     engines:
@@ -495,13 +495,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
-  /mongodb-core/2.1.19:
+  /mongodb-core/2.1.20:
     dependencies:
-      bson: 1.0.5
+      bson: 1.0.9
       require_optional: 1.0.1
     dev: false
     resolution:
-      integrity: sha512-Jt4AtWUkpuW03kRdYGxga4O65O1UHlFfvvInslEfLlGi+zDMxbBe3J2NVmN9qPJ957Mn6Iz0UpMtV80cmxCVxw==
+      integrity: sha512-IN57CX5/Q1bhDq6ShAR6gIv4koFsZP7L8WOK1S0lR0pVDQaScffSMV5jxubLsmZ7J+UdqmykKw4r9hG3XQEGgQ==
   /mongodb-core/3.1.11:
     dependencies:
       bson: 1.1.1
@@ -512,16 +512,16 @@ packages:
       saslprep: 1.0.2
     resolution:
       integrity: sha512-rD2US2s5qk/ckbiiGFHeu+yKYDXdJ1G87F6CG3YdaZpzdOm5zpoAZd/EKbPmFO6cQZ+XVXBXBJ660sSI0gc6qg==
-  /mongodb/2.2.35:
+  /mongodb/2.2.36:
     dependencies:
       es6-promise: 3.2.1
-      mongodb-core: 2.1.19
+      mongodb-core: 2.1.20
       readable-stream: 2.2.7
     dev: false
     engines:
       node: '>=0.10.3'
     resolution:
-      integrity: sha512-3HGLucDg/8EeYMin3k+nFWChTA85hcYDCw1lPsWR6yV9A6RgKb24BkLiZ9ySZR+S0nfBjWoIUS7cyV6ceGx5Gg==
+      integrity: sha512-P2SBLQ8Z0PVx71ngoXwo12+FiSfbNfGOClAao03/bant5DgLNkOPAck5IaJcEk4gKlQhDEURzfR3xuBG1/B+IA==
   /mongodb/3.1.13:
     dependencies:
       mongodb-core: 3.1.11
@@ -531,26 +531,26 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-sz2dhvBZQWf3LRNDhbd30KHVzdjZx9IKC0L+kSZ/gzYquCF5zPOgGqRz6sSCqYZtKP2ekB4nfLxhGtzGHnIKxA==
-  /mongojs/2.5.0:
+  /mongojs/2.6.0:
     dependencies:
       each-series: 1.0.0
-      mongodb: 2.2.35
+      mongodb: 2.2.36
       once: 1.4.0
       parse-mongo-url: 1.1.1
-      readable-stream: 2.3.5
-      thunky: 1.0.2
+      readable-stream: 2.3.6
+      thunky: 1.0.3
       to-mongodb-core: 2.0.0
       xtend: 4.0.1
     dev: false
     resolution:
-      integrity: sha512-VJ2WSZheiVI7aFFA+470cMQLNQE3phsVemj1f4Hr1FkQmP5T6h5qInrSlakEliG3WIig8urvCEk2ZOfZvzONxQ==
+      integrity: sha512-r6tj71DjYcaRTi2jpa+CA6Iq72cTZclB2JKy+Zub+0JPTEq/l2plsAYfF2eHqSYBtZbKNcObvhGYk9E9UKZWJg==
   /mongoose-legacy-pluralize/1.0.2:
     dev: false
     peerDependencies:
       mongoose: '*'
     resolution:
       integrity: sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
-  /mongoose/5.4.21:
+  /mongoose/5.4.22:
     dependencies:
       async: 2.6.1
       bson: 1.1.1
@@ -568,7 +568,7 @@ packages:
     engines:
       node: '>=4.0.0'
     resolution:
-      integrity: sha512-8teQZ/YUXv7+m5GaPDTmyoSJx7tPczZ99vM0/MS8GFCGVn8BKb5jQzuQCP62nBH4vN6Dmf0OiVKTFUkCpkVp+Q==
+      integrity: sha512-rbtmFmXe5YJfBrVfOpSW2xeSAKFtnJ5RLQjl4ULzT1icmY/SUHtJ5b+mW4SMCEk7whm/w+2oHO9qMBr8UI1xIw==
   /mpath/0.5.1:
     dev: false
     engines:
@@ -787,18 +787,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-BwV6y+JGeyIELTb5jFrVBwVOlbE=
-  /readable-stream/2.3.5:
-    dependencies:
-      core-util-is: 1.0.2
-      inherits: 2.0.3
-      isarray: 1.0.0
-      process-nextick-args: 2.0.0
-      safe-buffer: 5.1.1
-      string_decoder: 1.0.3
-      util-deprecate: 1.0.2
-    dev: false
-    resolution:
-      integrity: sha512-tK0yDhrkygt/knjowCUiWP9YdV7c5R+8cR0r/kt9ZhBU906Fs6RpQJCEilamRJj1Nx2rWI6LkW9gKqjTkshhEw==
   /readable-stream/2.3.6:
     dependencies:
       core-util-is: 1.0.2
@@ -818,7 +806,7 @@ packages:
   /require_optional/1.0.1:
     dependencies:
       resolve-from: 2.0.0
-      semver: 5.5.0
+      semver: 5.7.0
     dev: false
     resolution:
       integrity: sha512-qhM/y57enGWHAe3v/NcwML6a3/vfESLe/sGM2dII+gEO0BpKRUkWZow/tyloNqJyN6kXSl3RyyM8Ll5D/sJP8g==
@@ -835,10 +823,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
-  /safe-buffer/5.1.1:
-    dev: false
-    resolution:
-      integrity: sha512-kKvNJn6Mm93gAczWVJg7wH+wGYWNrDHdWvpUmHyEsgCtIwwo3bqPtV4tR5tuPaUhTOo/kvhVwd8XwwOllGYkbg==
   /safe-buffer/5.1.2:
     dev: false
     resolution:
@@ -860,11 +844,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
-  /semver/5.5.0:
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-4SJ3dm0WAwWy/NVeioZh5AntkdJoWKxHxcmyP622fOkgHa4z3R0TdBJICINyaSDE6uNwVc8gZr+ZinwZAH4xIA==
   /semver/5.7.0:
     dev: false
     hasBin: true
@@ -957,7 +936,7 @@ packages:
       integrity: sha512-nOqH59deCq9SRHlxq1Aw85Jnt4w6KvLKqWVik6oA9ZklXLNIOlqg4F2yrT1MVaTjAqvVwdfeZ7w7aCvJD7ugkw==
   /string_decoder/1.0.3:
     dependencies:
-      safe-buffer: 5.1.1
+      safe-buffer: 5.1.2
     dev: false
     resolution:
       integrity: sha512-4AH6Z5fzNNBcH+6XDMfA/BTt87skxqJlO0lAh3Dker5zThcAxG6mKz+iGu308UKoPPQ8Dcqx/4JhujzltRa+hQ==
@@ -1003,10 +982,10 @@ packages:
       node: '>=4.5'
     resolution:
       integrity: sha512-LzHF64s5chPQQS0IYBn9IN5h3i98c12bo4NCO7e0sGM2llXQ3p2FGC5sdENN4cTW48O915Sh+x+EXx7XW96xYQ==
-  /thunky/1.0.2:
+  /thunky/1.0.3:
     dev: false
     resolution:
-      integrity: sha1-qGLgGOP7HqLsP85dVWBc9X8kc3E=
+      integrity: sha512-YwT8pjmNcAXBZqrubu22P4FYsh2D4dxRmnWBOL8Jk8bUcRUtc5326kx32tuTmFDAZtLOGEVNl8POAR8j896Iow==
   /to-mongodb-core/2.0.0:
     dev: false
     resolution:
@@ -1069,5 +1048,5 @@ specifiers:
   bcrypt: ^3.0.5
   body-parser: ^1.18.3
   express: ^4.16.4
-  mongojs: ^2.5.0
-  mongoose: ^5.4.21
+  mongojs: ^2.6.0
+  mongoose: ^5.4.22
