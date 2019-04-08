@@ -119,9 +119,7 @@ function checkIfOver(gameObject) {
   for (let i = 0; i < eliminatedFactions.length; i++) {
     
     // check if player is here.
-    // BUG HERE! cant find commander of undefined.
-    console.log('comparing: ', eliminatedFactions[i].army[0].commander, gameObject.playerStats.faction);
-    if (eliminatedFactions[i].army[0].commander == gameObject.playerStats.faction) {
+    if (eliminatedFactions[i].player == true) {
       
       console.log('player eliminated!');
       // end the game.
@@ -135,8 +133,7 @@ function checkIfOver(gameObject) {
   }
   
   // check if player won:
-  console.log('comparing 2: ', factions[0].army[0].commander, gameObject.playerStats.faction);
-  if (factions.length == 1 && factions[0].army[0].commander == gameObject.playerStats.faction) {
+  if (factions.length == 1 && factions[0].player == true) {
     console.log('player won by conquest!');
   }
   

@@ -3,8 +3,8 @@
 Start to look good.
 To add: 
 - More test.
-- Save, load and delete if destroyed
-- check if won or lost
+- load and delete game 
+- complete end game
 - top20 players list.
 
 Continue: some bugs below.
@@ -12,11 +12,10 @@ Continue: some bugs below.
 /*
 Known bugs:
   serious:
-    #1 long combat problematic as they dont necessarily engage after killing many..
+    #1 long combat problematic as they dont necessarily engage after killing many.. (check from battlelog...)
   
-    #2 engage enemy doesnt work almost ever.
+    #2 engage enemy doesnt work almost ever. (fix in, keep checking....)
     
-    #3 mapscreen.js line 122 bug
   minors:
     #1
     sometimes when other team is killed, need to click standby, pause or whatever to get continue button
