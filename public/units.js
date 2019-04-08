@@ -98,7 +98,7 @@ const dwarves = [
   new gameUnit(
   'Mountain guardian', 'infantry', 'Elite infantry of dwarves. If you are opponent, watch out for these guys!', 
   ['halberd', 'shield'], ['no weapon'],
-  {m: 4, s: 4, t: 5, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 1, defMods: 0, pointCost: 8}, 1,  'dwarves', 10,
+  {m: 4, s: 4, t: 5, ws: 5, bs: 4, a: 2, w: 1, i: 4, ld: 9, sv: 1, defMods: 0, pointCost: 8}, 1,  'dwarves', 10,
   'Unlike normal dwarf infantry, these elite infantry are professionals. If you are opponent, watch out for these guys!', 6),
   new gameUnit(
   'Steel golem', 'monster', 'Steam-powered monstrosity. Controlled by dwarf warchief to punish enemies', 
@@ -179,6 +179,7 @@ const vampires = [
 ];
 
 // SCI-FI:
+/* DISABLED AS FOR NOW THE SCI-FI GAME IS NOT MADE
 
 const imperials = [
   new gameUnit(
@@ -221,3 +222,4 @@ const royalGuard = [
   {m: 5, s: 7, t: 8, ws: 2, bs: 3, a: 1, w: 12, i: 3, ld: 9, sv: 2, defMods: -2, pointCost: 50}, 12,  'royalGuard', 1,
   'Very heavy tank. With very heavy armour and firepower. Rips armoured units with two laser cannons and infantry with two heavy machine guns.', 3)
 ];
+*/

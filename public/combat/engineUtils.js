@@ -196,6 +196,7 @@ function lethalWound(to, who, isMelee){
 function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber is indexnro of rangedWeapons of attacker
   switch (type){
     case 'ranged':
+      const bDetails = document.getElementById('battleDetails');
       const weaponsStats =  searchStatsOfWeapon(who.details.rangedWeapons[attackNumber], 'ranged');
       let attacks;
       const rangeToTarget = distanceCheck(who.location, to.location);
@@ -280,6 +281,10 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
         }
         attackSummary.attacks = totalAttacks;
       } // attack with attacks
+      const longLog = 'Attacker: '+ attackSummary.attacker + '. weapon: '+ attackSummary.weapon+ '. attacks: '+ attackSummary.attacks+
+      '. hits: '+ attackSummary.hits+ '. saved by armour: '+ attackSummary.saved+ '. serious wounds: '+ attackSummary.wounds;
+
+      bDetails.innerHTML = bDetails.innerHTML + '<br>' + longLog;
       console.log('attack summary: ', attackSummary);
     break;
     case 'melee':

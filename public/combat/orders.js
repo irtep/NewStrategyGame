@@ -8,6 +8,7 @@ const orders = [
   'engage'  // run for melee range
 ];
 const logScreen = document.getElementById('logi'); // views/combat.html
+const bDetails = document.getElementById('battleDetails'); // views/combat.html
 let historyForLog; // to check that no duplicated msg are sent
 
 function hunt(who, to) {
@@ -355,7 +356,12 @@ function meleeAttack(who, to){
             } // wound ends
         } // armour pierced ends
       } // attacks with weapon ends
-    } console.log('melee attack summary; ', attackSummary);
+    } 
+    const longLog = 'Attacker: '+ attackSummary.attacker + '. weapon: '+ attackSummary.weapon+ '. attacks: '+ attackSummary.attacks+
+      '. hits: '+ attackSummary.hits+ '. saved by armour: '+ attackSummary.saved+ '. serious wounds: '+ attackSummary.wounds;
+
+    console.log('melee attack summary; ', attackSummary);
+    bDetails.innerHTML = bDetails.innerHTML + '<br>' + longLog;
   } // attack with weapons end
 } // melee attack ends
 

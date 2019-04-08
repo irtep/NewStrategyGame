@@ -302,13 +302,14 @@ function roundExecutor(){
         if (unitInAction.order === 'engage' && unitInAction.engaged.yes === false) {
           // apply engage:
           const engageResult = engage(unitInAction, unitInAction.target);
+          console.log('eResult: ', engageResult);
           
-          if (engageResult.what === 'noLos'){ // still even if no los directly at...didnt work nicely while to flanking if no-los
+          if (engageResult.what === 'noLos'){ 
             
             const runSpeed = unitInAction.details.stats.m * 2;
           
             for (let iii = 0; iii < runSpeed; iii++){
-              const moveAttempt = moveUnit(unitInAction, engageResult.direx);
+              const moveAttempt = moveUnit(unitInAction, engageResult.flank);
                 
               if (moveAttempt === 'collision'){
                 unitInAction.notMovedInCombat = true;
@@ -329,6 +330,7 @@ function roundExecutor(){
               if (moveAttempt === 'collision'){
                 unitInAction.notMovedInCombat = true;
               } else {
+                
                 unitInAction.location = moveAttempt;
                 unitInAction.notMovedInCombat = false;
                 draw();

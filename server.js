@@ -165,6 +165,7 @@ app.post('/saveHighscore', (request, response) => {
   }, 1000); //timer
 });
 /*
+NOTES FROM OTHER APP TO BE USED AS A REFERENCE:
 // POST handlers: will be used for database access, to save and load armies.
 app.post('/showAll', (request, response) => {
   
