@@ -67,6 +67,7 @@
     phaze: 'hire',
     campaignPlay: false, // tells if combat is on.
     comingFromFight: false,
+    loadingGame: false,
     playerStats: {name: null, wins: 0, losses: 0, result: 'live', pw: null, faction: null, armies: null, turn: 0}
   };
               

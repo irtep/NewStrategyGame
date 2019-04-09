@@ -60,7 +60,7 @@ app.post('/showGames', (request, response) => {
   const received = request.body.MSG;
   const responding = {names: [], pws: []};
   
-  // fetch savedGames from server
+  // fetch loaded games from server
   nlModel.find((err, results) => {
     
     if (err) console.log(err);
@@ -81,18 +81,17 @@ app.post('/showGames', (request, response) => {
 app.post('/loadGame', (request, response) => {
   console.log('req', request.body.MSG);
   const received = request.body.MSG;
-  let responding = 'hi guys!';
+  let responding = null;
   
-  console.log('Post received: ', received);
-  
-  setTimeout(() => {  // timed so that there is time to add the data
-     
-    const sending = JSON.stringify(responding);
-    console.log("responding with data ");
-    console.log('responding: ', responding);
+  // fetch loaded games from server
+  nlModel.find((err, results) => {
+    
+    if (err) console.log(err);
+    
+    //console.log(results[0].savedGames);
     response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end(sending);      
-  }, 1000); //timer
+    response.end(JSON.stringify(results[0].savedGames));      
+  });  
 });
 
 app.post('/saveGame', (request, response) => {

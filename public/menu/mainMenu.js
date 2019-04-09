@@ -15,6 +15,10 @@ function changeName(){
   selectedName = document.getElementById('generalsName').value;
 }
 
+function pwChecker(){
+  selectedPassword = document.getElementById('passw1').value;
+}
+
 function changePw(){
   const pw1 = document.getElementById('passw1').value;
   const pw2 = document.getElementById('passw2').value;
@@ -26,6 +30,43 @@ function changePw(){
     
     console.log('not same');
   }
+}
+
+function loadGame(){    
+  // get list from db about names and pws:
+  const toDb = checkDatabase('loadGame');     
+  let nameAndPwOk = false;
+  let gameIndex = null;
+  /*
+  let selectedName;
+let selectedPassword = '';
+  */
+      
+  setTimeout(() => {
+
+    for (let i = 0; i < listOfGames.length; i++){
+      const gameToCheck = JSON.parse(listOfGames[i]);
+      
+      if (selectedName === gameToCheck.name && selectedPassword === gameToCheck.pw) {
+        console.log('found name and pw!');
+        nameAndPwOk = true;
+        gameIndex = i;
+      }
+    }
+    
+    if (nameAndPwOk) {
+      const loadedGame = JSON.parse(listOfGames[gameIndex]);
+      // create gameOBject from info from db:
+      gameObject.playerStats = loadedGame;
+      gameObject.loadingGame = true; 
+      // save gameObject to localStorage and start camp!
+      localStorage.setItem('Go', JSON.stringify(gameObject));
+      window.location = "https://thenewgame.glitch.me/mapscreen"; 
+      
+    } else {
+      info1.innerHTML = 'Username or password wrong or maybe your game is not saved.'
+    } 
+  }, 2000);
 }
 
 function menuClick(clickedButton){
@@ -115,13 +156,19 @@ function menuClick(clickedButton){
       }
     break;
     case 'Continue Campaign':
-      console.log('clicked: ', clickedButton);
-      // ask username and password
-      // submit button.
+      // clear possible old selections:
+      selectedArmy = '';
+      selectedName = '';
+      selectedPassword = '';
+      
+      info1.innerHTML = 'Welcome general! <br><br>Your name:<br>' + 
+      '<input type= "text" id= "generalsName" onchange = "changeName()"><br><br>'+
+      'Repeat password: <input type= "password" id= "passw1" onchange = "pwChecker()"><br><br>'+
+      'please note that you must have had atleast 5 wins in campaign to get your game saved.'+
+      '<input type= "button" onclick= "loadGame()" value= "Load game">';
       
       // on submit button make a html call to look for that game
       // if found start game with that gameObject
-      checkDatabase('loadGame', 'usernameAndPassw here');
     break;
     case 'Skirmish game':
       window.location = "https://thenewgame.glitch.me/skirmish"; 
@@ -129,7 +176,7 @@ function menuClick(clickedButton){
     case 'Top players':
       console.log('clicked: ', clickedButton);
       // make html call to ask for top15 players list
-      checkDatabase('showHighscores');
+     // checkDatabase('showHighscores');
     break;  
     case 'Start campaign!':
       
