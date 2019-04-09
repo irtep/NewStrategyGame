@@ -7,7 +7,7 @@ To add:
 - complete end game
 - top20 players list.
 
-Continue: some bugs below.
+Continue: load game doesnt work... need to investigate, stucks at mapscreen.js at callUpdate..
 */
 /*
 Known bugs:

@@ -20,7 +20,7 @@ function checkDatabase(why, origData){
       params = 'MSG=showGames';
     break;     
     case 'loadGame':    
-      params = 'MSG='+ data;
+      params = 'MSG=loadGame';
     break;
     case 'saveGame':     
       params = 'MSG='+ data;
@@ -40,9 +40,10 @@ function checkDatabase(why, origData){
     
     if (http.readyState == 4 && http.status == 200) {
       const resp = JSON.parse(http.responseText);
-      console.log("response from server: ", resp);
+      //console.log("response from server: ", resp);
       
-      if (why === 'showGames') {
+      if (why === 'showGames' || why === 'loadGame') {
+        // listOfGames is global variable in mainMenu.js
         listOfGames = resp;    
       }
     }
