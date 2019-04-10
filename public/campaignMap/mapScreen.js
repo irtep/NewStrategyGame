@@ -122,19 +122,32 @@ function checkIfOver(gameObject) {
     if (eliminatedFactions[i].player == true) {
       
       console.log('player eliminated!');
+      gameObject.playerStats.result = 'eliminated';
+      // save 'selected' to localStorage
+      localStorage.setItem('Go', JSON.stringify(gameObject));
+      window.location = "https://thenewgame.glitch.me/gameOver";  
       // end the game.
     }  
   }
   
   // check if max rounds are reached:
-  if (gameObject.turn > 49) {  
+  if (gameObject.turn > 19) {  
     // max turn reached. End the game->
-    console.log('max turn reached!');
+    console.log('max turn reached!');      
+    gameObject.playerStats.result = 'timeEnds';
+    // save 'selected' to localStorage
+    localStorage.setItem('Go', JSON.stringify(gameObject));
+    window.location = "https://thenewgame.glitch.me/gameOver";  
+      // end the game.
   }
   
   // check if player won:
   if (factions.length == 1 && factions[0].player == true) {
     console.log('player won by conquest!');
+    gameObject.playerStats.result = 'conquest';
+    // save 'selected' to localStorage
+    localStorage.setItem('Go', JSON.stringify(gameObject));
+    window.location = "https://thenewgame.glitch.me/gameOver"; 
   }
   
   console.log('game continues: player check, facs, elim: ', factions, eliminatedFactions);
@@ -239,7 +252,8 @@ function callUpdate(){  // updates cities, map, console.
   const gameObjectCopy = Object.assign({}, gameObject); was here just to check what gO looked like at this point.
   console.log('update call, goCpy: ', gameObjectCopy);*/
   const playersFaction = factions[checkPlayer()];
-  
+  console.log('callUpdate: ', gameObject)
+  console.log('playersFaction: ', playersFaction);
   // reset cities unit arrays and
   // first factions array need to be up to date
   updateFactions();
@@ -305,6 +319,7 @@ function callUpdate(){  // updates cities, map, console.
 
 // use this like this: countFactionUpkeep(factions[checkPlayer()].army);
 function countFactionUpkeep(army){
+  console.log('countFactionUpkeep, param: ', army);
   let totalCount = 0;
   
   for (let i = 0; i < army.length; i++){

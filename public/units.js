@@ -17,7 +17,7 @@ const humans = [
   new gameUnit(
   'Knight', 'cavalry','Tough elite unit mounted on warhorses. Well armed with lances and armoured with excellent plate armours',
   ['lance', 'shield'], ['no weapon'],
-  {m: 8, s: 4, t: 4, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 6}, 2, 'humans', 5,
+  {m: 8, s: 4, t: 4, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 5}, 2, 'humans', 5,
   'Tough elite unit mounted on warhorses. Well armed with lances, shields and armoured with excellent plate armours', 5),
   new gameUnit(
   'Swordsman', 'infantry', 'Infantryman of human. Well trained. Armed with sword and shield.', 
@@ -44,13 +44,13 @@ const humans = [
 const elves = [
   new gameUnit(
   'Elven lord', 'commander','Elven lords are very dangerous, both melee and ranged combat.', 
-  ['enhanced sword'], ['elven longbow'],
+  ['enhanced sword'], ['enhanced longbow'],
   {m: 5, s: 3, t: 3, ws: 5, bs: 2, a: 3, w: 3, i: 6, ld: 10, sv: 2, defMods: 0, pointCost: 15}, 1, 'elves', 1,
     'Elven lords are very dangerous, both melee and ranged combat.', 1),
   new gameUnit(
   'Green dragon', 'monster','Huge winged monster that burns everything, except those that it will rip to parts.',
   ['teeth and claws'], ['dragonfire'],
-  {m: 8, s: 6, t: 7, ws: 4, bs: 4, a: 5, w: 10, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 60}, 10, 'elves', 1,
+  {m: 8, s: 6, t: 7, ws: 4, bs: 4, a: 5, w: 15, i: 3, ld: 10, sv: 2, defMods: 0, pointCost: 60}, 10, 'elves', 1,
   'Huge winged monster that burns everything, except those that it will rip to parts.', 2),
   new gameUnit(
   'Elf ranger', 'infantry', 'Excellent scout unit that can fight both ranged and melee.', 
@@ -93,7 +93,7 @@ const dwarves = [
   new gameUnit(
   'Flamer infantry', 'infantry','These dwarves carry powerful, but short ranged flamers',
   ['dagger', 'no weapon'], ['flamer'],
-  {m: 4, s: 4, t: 4, ws: 3, bs: 4, a: 1, w: 1, i: 3, ld: 9, sv: 3, defMods: 1, pointCost: 5}, 1, 'dwarves', 4,
+  {m: 4, s: 4, t: 4, ws: 3, bs: 4, a: 1, w: 1, i: 3, ld: 9, sv: 3, defMods: 1, pointCost: 10}, 1, 'dwarves', 4,
   'These dwarves carry powerful, but short ranged flamers. Slow unit but can be devastating from close range.', 6),
   new gameUnit(
   'Mountain guardian', 'infantry', 'Elite infantry of dwarves. If you are opponent, watch out for these guys!', 
@@ -121,7 +121,7 @@ const savages = [
   new gameUnit(
   'Red dragon', 'monster','Huge winged monster that burns everything, except those that it will rip to parts.',
   ['teeth and claws'], ['dragonfire'],
-  {m: 8, s: 5, t: 7, ws: 4, bs: 3, a: 4, w: 10, i: 4, ld: 10, sv: 2, defMods: 0, pointCost: 55}, 10, 'savages', 1,
+  {m: 8, s: 5, t: 7, ws: 4, bs: 3, a: 4, w: 15, i: 4, ld: 10, sv: 2, defMods: 0, pointCost: 55}, 10, 'savages', 1,
   'Huge winged monster that burns everything. Red dragons are more dangerous with their fire, than their green cousins. But greens are bit better in melee.', 2),
   new gameUnit(
   'Viking raider', 'infantry', 'Elite infantry. Fearless and relentless!', 

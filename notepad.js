@@ -13,6 +13,17 @@ Continue: load game doesnt work... need to investigate, stucks at mapscreen.js a
 Known bugs:
   serious:
     #1 long combat problematic as they dont necessarily engage after killing many.. (check from battlelog...)
+    ( Dahirs note about this bug:
+    Taisin trackaa sen
+Eli jos on 2 identtistä vihollista vastassa
+yksittäisiä unitteja
+esim just, joku elf lord
+ja tapat niistä toisen
+Niin kun rupeet tappamaan sitä toista joka on vielä hengissä
+Se yrittää "targetaa" sitä kuollutta
+koska ne on saman nimisiä
+ja muulla tavalla "identtisiä"
+    )
   
     #2 engage enemy doesnt work almost ever. (fix in, keep checking....)
     

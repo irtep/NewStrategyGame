@@ -107,7 +107,7 @@ function menuClick(clickedButton){
         'choose name and password as in case you score atleast 5 wins in combat your progress will be saved and you can continue later.<br>'+
         'Note that if you have an earlier saved game with same name that you want to use now, the earlier game will be deleted as this will replace it. <br>'+
         'So if you want to start new game, and you have earlier saved one, use other name.<br><br>'+
-        'The best result is that inside 50 turns you conquest all lands, but even if you survive for 50 turns is considered as a success.<br>'+
+        'The best result is that inside 20 turns you conquest all lands, but even if you survive for 20 turns is considered as a success.<br>'+
         'You also score some points by keeping your starting lands, kept "liberated lands" and from every victory and your victory percent.';
 
       // event listener for radio buttons above:
