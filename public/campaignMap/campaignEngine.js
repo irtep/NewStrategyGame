@@ -6,7 +6,6 @@ function startCampaign(selected, generalsName, generalsPw){
   const cities = gameObject.campaignArmies.cities; // cities
   const factions = gameObject.campaignArmies.factions;
   
-  console.log('startCampaign: args: ', selected, generalsName, generalsPw);
   // mark this as campaign play:
   gameObject.campaignPlay = true;  
   // starting a new game:
@@ -77,20 +76,32 @@ function startCampaign(selected, generalsName, generalsPw){
     const arms = gameObject.playerStats.armies;
     const teams = gameObject.campaignArmies;
     
-    if (arms.humans.length > 0) {
-      teams.humans.army = arms.humans;    
+    if (arms.humans[0].length > 0) {
+      //teams.humans.army = arms.humans[0]; 
+      // addUnit('vampires', 'Zombie', 30, 'Arequipa');
+      for (let i = 0; i < arms.humans[0].length; i++) {
+        addUnit('humans', arms.humans[0][i].name, arms.humans[0][i].quantity , arms.humans[0][i].location);  
+      }
     }    
-    if (arms.elves.length > 0) {
-      teams.elves.army = arms.elves;    
+    if (arms.elves[0].length > 0) {
+      for (let i = 0; i < arms.elves[0].length; i++) {
+        addUnit('elves', arms.elves[0][i].name, arms.elves[0][i].quantity , arms.elves[0][i].location);  
+      }  
     }    
-    if (arms.dwarves.length > 0) {
-      teams.dwarves.army = arms.dwarves;    
+    if (arms.dwarves[0].length > 0) {
+      for (let i = 0; i < arms.dwarves[0].length; i++) {
+        addUnit('dwarves', arms.dwarves[0][i].name, arms.dwarves[0][i].quantity , arms.dwarves[0][i].location);  
+      }   
     }    
-    if (arms.savages.length > 0) {
-      teams.savages.army = arms.savages;    
+    if (arms.savages[0].length > 0) {
+      for (let i = 0; i < arms.savages[0].length; i++) {
+        addUnit('savages', arms.savages[0][i].name, arms.savages[0][i].quantity , arms.savages[0][i].location);  
+      }   
     }    
-    if (arms.vampires.length > 0) {
-      teams.vampires.army = arms.vampires;    
+    if (arms.vampires[0].length > 0) {
+      for (let i = 0; i < arms.vampires[0].length; i++) {
+        addUnit('vampires', arms.vampires[0][i].name, arms.vampires[0][i].quantity , arms.vampires[0][i].location);  
+      }   
     }
   }
   player = selected;
@@ -101,7 +112,6 @@ function startCampaign(selected, generalsName, generalsPw){
   factions.push(gameObject.campaignArmies.dwarves); 
   factions.push(gameObject.campaignArmies.vampires);
   factions.push(gameObject.campaignArmies.savages);
-  
   callUpdate();
   
   // databasecheck test
@@ -117,7 +127,6 @@ function startCampaign(selected, generalsName, generalsPw){
 window.onload = ()=> {
   
   // load gameObject from localStorage:
-  //gameObject = JSON.parse(localStorage.getItem('Go'));
   checki = JSON.parse(localStorage.getItem('Go'));
   
   // if first turn then saved localStorage item indicates the chosen race.
@@ -133,16 +142,16 @@ window.onload = ()=> {
   } 
   else { // but if not, then campaign is going on or loaded game.
     
+    // get gameObject
+    gameObject = checki;
     // check if loaded game:
     if (gameObject.loadingGame) {
-      
+      console.log('loaded game!');
       gameObject.turn = gameObject.playerStats.turn;
       startCampaign(gameObject.playerStats.faction, gameObject.playerStats.name, gameObject.playerStats.pw);
       makeButtons(gameObject.phaze);
     } else {
       
-      // not loaded game
-      gameObject = JSON.parse(localStorage.getItem('Go'));
       callUpdate();
       
       // Check if cities are still contested:

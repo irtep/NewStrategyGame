@@ -48,6 +48,11 @@ app.get("/endTurn", (request, response) => {
   console.log("get received for endTurn");
   response.sendFile(__dirname + '/views/endTurn.html');
 });
+
+app.get("/gameOver", (request, response) => {
+  console.log("get received for gameOver");
+  response.sendFile(__dirname + '/views/gameOver.html');
+});
 // ----------------- HANDLE GETS END ---------------------
 
 // -------------- DATABASE COMMANDS -------------------
