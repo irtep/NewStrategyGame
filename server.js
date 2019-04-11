@@ -13,6 +13,9 @@ const Schema = mongoose.Schema;
 const nlSchema = new Schema( {
   savedGames: {
     type: Array    
+  },
+  highscores: {
+    type: Array    
   } 
 });
 
@@ -153,20 +156,60 @@ app.post('/saveGame', (request, response) => {
 });
 
 app.post('/saveHighscore', (request, response) => {
+  const forDelete = [];
   console.log('req', request.body.MSG);
   const received = request.body.MSG;
-  let responding = 'hi guys!';
+  const nlQuery = { name:  'northernLands' };  
   
-  console.log('Post received: ', received);
+  console.log('what you got: ', received);  /*
+   //console.log('results: ', results); THIS WORKS BUT DISABLED UNTIL NEXT PART WORKS
+      // make update
+      nlModel.updateOne(nlQuery, {  
+        highscores: received
+      }, (err) => {
+        console.log("error?"); 
+     });
+  */
+     // delete query for ended game to savedGame:
+  nlModel.find((err, results) => {
+    //
+    for (let i = 0; i < received.length; i++){
+      console.log('r ', received);
+      const entry = JSON.parse(received);
+      console.log('entry ', entry);
+      const playersName = entry.name;
+      console.log('entry.name', entry.name);
   
-  setTimeout(() => {  // timed so that there is time to add the data
-     
-    const sending = JSON.stringify(responding);
-    console.log("responding with data ");
-    console.log('responding: ', responding);
+      for (let ii = 0; ii < results[0].savedGames.length; ii++){
+        console.log('saveds: ', results[0].savedGames[i]);
+        const jso = JSON.parse(results[0].savedGames[i]);
+        console.log('checking: ', playersName, jso.name);
+    
+        if (jso.name === playersName) {
+          forDelete.push(i);
+        } 
+      }
+    }
+
+    for (let iii = 0; iii < forDelete.length; iii++) {
+      results[0].savedGames.splice(forDelete[iii], 1)
+    }
+    console.log('savedGames after delete: ', results[0].savedGames);
+    //
+  }); 
+});
+
+app.post('/fetchHighScores', (request, response) => {
+  // fetch highscores from server
+  nlModel.find((err, results) => {
+    
+    if (err) console.log(err);
+    
+    //console.log(results[0].highscores);
     response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end(sending);      
-  }, 1000); //timer
+    response.end(JSON.stringify(results[0].highscores));  
+
+  }); 
 });
 /*
 NOTES FROM OTHER APP TO BE USED AS A REFERENCE:

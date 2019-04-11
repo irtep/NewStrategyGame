@@ -7,7 +7,7 @@ To add:
 - complete end game
 - top20 players list.
 
-Continue: load game doesnt work... need to investigate, stucks at mapscreen.js at callUpdate..
+Continue: server.js save highscores
 */
 /*
 Known bugs:
@@ -34,7 +34,9 @@ ja muulla tavalla "identtisiä"
     #2
     map doesnt show most southern towns completely with texts, atleast with this laptop.
     
-    #3 when in long battle, sometimes other team doesnt hit...maybe
+    #3 when in long battle, sometimes other team doesnt hit...
+    
+    #4 battlesummary doesnt update for kill round
 */
 
 /*

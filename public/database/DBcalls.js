@@ -28,6 +28,9 @@ function checkDatabase(why, origData){
     case 'saveHighScore':    
       params = 'MSG='+ data;
     break;
+    case 'fetchHighScores':    
+      params = 'MSG=fetchHighScores';
+    break;
     default: console.log('could not find what on checkDatabase');
   }
   
@@ -45,6 +48,11 @@ function checkDatabase(why, origData){
       if (why === 'showGames' || why === 'loadGame') {
         // listOfGames is global variable in mainMenu.js
         listOfGames = resp;    
+      }
+      
+      if (why === 'fetchHighScores') {
+        // this variable is at gameOver.js
+        highscores = JSON.parse(resp);
       }
     }
   }
