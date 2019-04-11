@@ -75,30 +75,36 @@ function startCampaign(selected, generalsName, generalsPw){
     // armies to teams.
     const arms = gameObject.playerStats.armies;
     const teams = gameObject.campaignArmies;
+    console.log(typeof arms.humans[0]); console.log(typeof arms.elves[0]);
     
-    if (arms.humans[0].length > 0) {
-      //teams.humans.army = arms.humans[0]; 
-      // addUnit('vampires', 'Zombie', 30, 'Arequipa');
+    if (arms.humans[0] === undefined) {console.log('undeh');} else {
+      
       for (let i = 0; i < arms.humans[0].length; i++) {
         addUnit('humans', arms.humans[0][i].name, arms.humans[0][i].quantity , arms.humans[0][i].location);  
-      }
-    }    
-    if (arms.elves[0].length > 0) {
+      } 
+    }
+    
+    if (arms.elves[0] === undefined) {console.log('undee');} else {
+      
       for (let i = 0; i < arms.elves[0].length; i++) {
         addUnit('elves', arms.elves[0][i].name, arms.elves[0][i].quantity , arms.elves[0][i].location);  
       }  
     }    
-    if (arms.dwarves[0].length > 0) {
+    
+    if (arms.dwarves[0] === undefined) {console.log('unded');} else {
+      
       for (let i = 0; i < arms.dwarves[0].length; i++) {
         addUnit('dwarves', arms.dwarves[0][i].name, arms.dwarves[0][i].quantity , arms.dwarves[0][i].location);  
       }   
     }    
-    if (arms.savages[0].length > 0) {
+    if (arms.savages[0] === undefined) {console.log('undes');} else {
+      
       for (let i = 0; i < arms.savages[0].length; i++) {
         addUnit('savages', arms.savages[0][i].name, arms.savages[0][i].quantity , arms.savages[0][i].location);  
       }   
     }    
-    if (arms.vampires[0].length > 0) {
+    if (arms.vampires[0] === undefined) {console.log('undev');} else {
+      
       for (let i = 0; i < arms.vampires[0].length; i++) {
         addUnit('vampires', arms.vampires[0][i].name, arms.vampires[0][i].quantity , arms.vampires[0][i].location);  
       }   
@@ -150,6 +156,7 @@ window.onload = ()=> {
       gameObject.turn = gameObject.playerStats.turn;
       startCampaign(gameObject.playerStats.faction, gameObject.playerStats.name, gameObject.playerStats.pw);
       makeButtons(gameObject.phaze);
+      const gameOver = checkIfOver(gameObject);
     } else {
       
       callUpdate();

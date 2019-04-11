@@ -131,7 +131,7 @@ function checkIfOver(gameObject) {
   }
   
   // check if max rounds are reached:
-  if (gameObject.turn > 19) {  
+  if (gameObject.turn > 14) {  
     // max turn reached. End the game->
     console.log('max turn reached!');      
     gameObject.playerStats.result = 'timeEnds';

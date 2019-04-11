@@ -83,7 +83,7 @@ const dwarves = [
   new gameUnit(
   'Dwarf warchief', 'commander','Battlegroup commander, heavily armed and armoured, veteran of hundreads of battles', 
   ['runic axe', 'shield'], ['no weapon'],
-  {m: 4, s: 4, t: 4, ws: 6, bs: 2, a: 3, w: 4, i: 3, ld: 10, sv: 1, defMods: 1, pointCost: 25}, 1, 'dwarves', 1,
+  {m: 4, s: 4, t: 4, ws: 6, bs: 2, a: 3, w: 2, i: 3, ld: 10, sv: 1, defMods: 1, pointCost: 25}, 1, 'dwarves', 1,
   'Battlegroup commander, heavily armed and armoured, veteran of hundreads of battles', 1),
   new gameUnit(
   'Dwarf infantry', 'infantry','Tough and well armed, but somewhat slow.',
