@@ -7,6 +7,7 @@ let selectedArmy; // here comes the selected army if starts campaign.
 let selectedName;
 let selectedPassword = '';
 let listOfGames = null;
+let highscores;
 // armies:
 const availArmies = ['Humans', 'Elves', 'Dwarves', 'Savages', 'Vampires'];
 
@@ -163,7 +164,7 @@ function menuClick(clickedButton){
       
       info1.innerHTML = 'Welcome general! <br><br>Your name:<br>' + 
       '<input type= "text" id= "generalsName" onchange = "changeName()"><br><br>'+
-      'Repeat password: <input type= "password" id= "passw1" onchange = "pwChecker()"><br><br>'+
+      'Password: <input type= "password" id= "passw1" onchange = "pwChecker()"><br><br>'+
       'please note that you must have had atleast 5 wins in campaign to get your game saved.'+
       '<input type= "button" onclick= "loadGame()" value= "Load game">';
       
@@ -174,9 +175,20 @@ function menuClick(clickedButton){
       window.location = "https://thenewgame.glitch.me/skirmish"; 
     break;
     case 'Top players':
-      console.log('clicked: ', clickedButton);
+      
       // make html call to ask for top15 players list
-     // checkDatabase('showHighscores');
+      checkDatabase('fetchHighScores');
+      
+      info1.innerHTML = 'TOP PLAYERS: <br><br>'
+      setTimeout(()=> {
+        
+        console.log('hs', highscores);
+        for (let i = 0; i < highscores.length; i++) {
+          
+          info1.innerHTML = info1.innerHTML + '<strong><span class= "goldText">'+ highscores[i].name+ '</span></strong> of '+ highscores[i].faction+ ' who '+ highscores[i].result+ '.<br>'+
+            'Wins: '+highscores[i].wins+'. Losses: '+highscores[i].losses+'. Victory points: '+highscores[i].points+ '.<br><br>';
+        }
+      }, 1000);
     break;  
     case 'Start campaign!':
       

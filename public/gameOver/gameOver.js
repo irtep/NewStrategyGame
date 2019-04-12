@@ -1,6 +1,10 @@
 // js for game over screen, after completing the campaign:
 
-let highscores = [];
+let highscore = [];
+
+function backToMainScreen(){
+  window.location = "https://thenewgame.glitch.me/";
+}
 
 function calculatePoints(results){
   var points = 0;
@@ -64,16 +68,11 @@ window.onload = () => {
   
   const entry = {name: stats.name, faction: stats.faction, result: resultEntry, turns: stats.turn, wins: stats.wins, losses: stats.losses, points: pointsTotal};
   
-  console.log('entry: ', entry);
-  checkDatabase('fetchHighScores');
-  setTimeout(()=> {
-    console.log(highscores);
-    // 1 sec to give time to update
-    highscores.push(entry); 
+    highscore.push(entry); 
     
     // update new list:
-    checkDatabase('saveHighScore', highscores);
-    ;
-  }, 1000);
+    checkDatabase('saveHighScore', highscore);
+    
+  //;}, 1000);
 }
 
