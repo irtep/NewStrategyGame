@@ -7,7 +7,7 @@ To add:
 - complete end game
 - top20 players list.
 
-Continue: sort highscores... then start to fix close combat.
+Continue: sort highscores... fix close combats melee combat part.
 */
 /*
 Known bugs:

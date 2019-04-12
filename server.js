@@ -184,16 +184,15 @@ app.post('/saveHighscore', (request, response) => {
     results[0].highscores.push(received[0]);
     console.log('pushing: ', received[0]);
     
-    // sort highscorelist:
-    /*
-    homes.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-    */
-    // delete if more than 20 entries:
-    /*
-     if (deletedList.length < 10) {
-      deletedList.splice(10, 1);
+    // sort list by points
+    results[0].highscores.sort((a, b) => parseFloat(b.points) - parseFloat(a.points));
+    console.log('length: ', results[0].highscores.length);
+    
+    // remove 21st entry
+    if (results[0].highscores.length > 20) {
+      results[0].highscores.splice(20, 1);
+      console.log('spliced last entry!');
      }
-    */
     
     // make update to highScores
     nlModel.updateOne(nlQuery, {  

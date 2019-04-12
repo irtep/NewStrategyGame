@@ -76,6 +76,7 @@ function roundExecutor(){
     zunSu('orders'); 
     draw();
     // gather all units:
+    // SHOULD PROPABLY MAKE THIS GATHERING AFTER ALL SHOOTINGS!
     const forCheckUnits1 = gameObject.army1.concat([]);
     const forCheckUnits2 = gameObject.army2.concat([]);
     const allUnits = forCheckUnits1.concat(forCheckUnits2);
@@ -111,6 +112,7 @@ function roundExecutor(){
         }
       }
     }
+    // same for player 2
     for (let i = 0; i < gameObject.army2.length; i++){
       const inTurn = gameObject.army2[i];
       
@@ -340,10 +342,38 @@ function roundExecutor(){
         }  
         
         // -----   MELEE ORDER  ---------
-        if (unitInAction.order === 'melee') {
+        /* maybe should change so that this applies to all, not only who have order melee... maybe whole melee order should be removed*/
+        /* for now the melee order can stay, but i make so that it doesnt really do nothing itself*/
+        /*
+        
+        // MELEE PHASE VERSION 2.0
+        // gather all units: New gathering as some might have died in shooting.
+        const forCheckUnitsM1 = gameObject.army1.concat([]);
+        const forCheckUnitsM2 = gameObject.army2.concat([]);
+        const allUnits = forCheckUnitsM1.concat(forCheckUnitsM2);
+        */
+        if (unitInAction.order === 'melee') {  // DELETE THIS LINE
           // apply melee attack:
           const meleeAttackAttempt = meleeAttack(unitInAction, unitInAction.engaged.withWho[0]);
-        }
+          /* this bug too much. need to replace with something else... for example like:
+          // find closest enemy:
+          /* CAN USE THIS, however need to modificate a bit.:
+          // check closest opponent
+          for (let ii = 0; ii < enemyArmy.length; ii++) {
+            const distance = distanceCheck(unitInAction.location, enemyArmy[ii].location);
+
+            if (distance < closestEnemy.distance) {
+              closestEnemy.number = ii;
+              closestEnemy.distance = distance;
+              closestEnemy.where = findDirection(unitInAction.location, enemyArmy[ii].location);
+            }  
+            // check if that is in melee range
+              // if yes, then hit your melee attack
+          }
+          */
+          
+        
+        }  // DELETE THIS LINE
       }
       
     }, speedOfRound);
