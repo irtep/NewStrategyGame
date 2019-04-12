@@ -138,7 +138,7 @@ app.post('/saveGame', (request, response) => {
       results[0].savedGames[nameExists.index] = received;
     }
       // make update
-      nlModel.update(nlQuery, {  
+      nlModel.updateOne(nlQuery, {  
         savedGames: results[0].savedGames
       }, (err) => {
         console.log("game saved"); 
@@ -156,45 +156,59 @@ app.post('/saveGame', (request, response) => {
 });
 
 app.post('/saveHighscore', (request, response) => {
-  const forDelete = [];
-  console.log('req', request.body.MSG);
-  const received = request.body.MSG;
+  const received = JSON.parse(request.body.MSG);
   const nlQuery = { name:  'northernLands' };  
+  let oldHighscores;  
+  console.log('received: ', received);
   
-  console.log('what you got: ', received);  /*
-   //console.log('results: ', results); THIS WORKS BUT DISABLED UNTIL NEXT PART WORKS
-      // make update
-      nlModel.updateOne(nlQuery, {  
-        highscores: received
-      }, (err) => {
-        console.log("error?"); 
-     });
-  */
-     // delete query for ended game to savedGame:
+  // get results to delete ended game at savedGame
+  // and to old highscore results to update that too.
   nlModel.find((err, results) => {
-    //
+    
+    // find the relevant game at savedGames
     for (let i = 0; i < received.length; i++){
-      console.log('r ', received);
-      const entry = JSON.parse(received);
-      console.log('entry ', entry);
-      const playersName = entry.name;
-      console.log('entry.name', entry.name);
+      const playersName = received[i].name;
   
       for (let ii = 0; ii < results[0].savedGames.length; ii++){
-        console.log('saveds: ', results[0].savedGames[i]);
-        const jso = JSON.parse(results[0].savedGames[i]);
-        console.log('checking: ', playersName, jso.name);
+        const jso = JSON.parse(results[0].savedGames[ii]);
     
         if (jso.name === playersName) {
-          forDelete.push(i);
+          // delete the found game.
+          results[0].savedGames.splice(ii, 1);
+          ii--; // should not be necessary, but does no harm either... atleast i hope so.
         } 
       }
     }
-
-    for (let iii = 0; iii < forDelete.length; iii++) {
-      results[0].savedGames.splice(forDelete[iii], 1)
-    }
-    console.log('savedGames after delete: ', results[0].savedGames);
+    
+    // add new highscore canditate:
+    results[0].highscores.push(received[0]);
+    console.log('pushing: ', received[0]);
+    
+    // sort highscorelist:
+    /*
+    homes.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+    */
+    // delete if more than 20 entries:
+    /*
+     if (deletedList.length < 10) {
+      deletedList.splice(10, 1);
+     }
+    */
+    
+    // make update to highScores
+    nlModel.updateOne(nlQuery, {  
+    // highscores: received
+       highscores: results[0].highscores
+    }, (err) => {
+      console.log("saved hs"); 
+    });
+    
+    // make update to saved games
+    nlModel.updateOne(nlQuery, {  
+      savedGames: results[0].savedGames
+    }, (err) => {
+        console.log("saved sg"); 
+    });
     //
   }); 
 });
@@ -204,96 +218,13 @@ app.post('/fetchHighScores', (request, response) => {
   nlModel.find((err, results) => {
     
     if (err) console.log(err);
-    
-    //console.log(results[0].highscores);
+  
+    console.log(results[0].highscores);
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.end(JSON.stringify(results[0].highscores));  
 
   }); 
 });
-/*
-NOTES FROM OTHER APP TO BE USED AS A REFERENCE:
-// POST handlers: will be used for database access, to save and load armies.
-app.post('/showAll', (request, response) => {
-  
-  const received = request.body.MSG;
-  let armyList;
-  let responding;
-  
-  console.log('Post with showAll received: ', received);
-  switch (received){
-    case ('show'):
-      armyListModel.find((err, results) => {
-      if (err) console.log(err);
-      armyList = results;   
-        console.log('result for sahalist search: ', results);
-      });
-      setTimeout(() => {  // timed so that there is time to add the data
-        responding = armyList;  
-        const sending = JSON.stringify(responding);
-        console.log("responding with data ");
-        console.log('army list now: ', responding);
-        response.writeHead(200, {'Content-Type': 'text/plain'});
-        response.end(sending);      
-      }, 1000); //timer
-    break;  
-  }
-  
-  //console.log(request.headers);
-
-});
-
-app.post('/updateAll', (request, response) => {
-  console.log('update army list request received');
-  
-  const received = JSON.parse(request.body.MSG); 
-  console.log('received: ', received);
-  const inTurnNow = received.armiesInDb.length -1;
-  const armyQuery = { name:  'armies' };  
-  
-  if (received.armiesInDb[inTurnNow][2] == pasw) {
-    const listEntry = [];
-    
-    // if this was deletation of army:
-    if (received.armiesInDb[inTurnNow][0] == 'forDelete') {
-    
-      console.log('deletation detected, splicing: ', received.armiesInDb[inTurnNow]);
-    // delete entry as it was just to bring password:
-      received.armiesInDb.splice(inTurnNow, 1);    
-    } else {
-      
-      console.log('add on received, adding: ', received.armiesInDb[inTurnNow]);
-    // if it was update of new army    
-    // delete password from entry:
-      received.armiesInDb[inTurnNow].splice(2, 1);
-    }
-    // make a new armylist
-    for (let i = 0; i < received.armiesInDb.length; i++) {
-      const newEntry = [received.armiesInDb[i][0], received.armiesInDb[i][1]];
-      
-      listEntry.push(newEntry);
-    }
-      
-      armyListModel.update(armyQuery, {
-        armyList: listEntry
-      }, (err, numberAffected, rawResponse) => {
-        console.log("armyList updated"); 
-      }); 
-
-      const sending = JSON.stringify('Database updated successfully!');
-      console.log("responding with data ");
-      response.writeHead(200, {'Content-Type': 'text/plain'});
-      response.end(sending); 
-    
-  } else {
-      const sending = JSON.stringify('Database update failed, due wrong password!');
-      console.log("responding with data ");
-      response.writeHead(200, {'Content-Type': 'text/plain'});
-      response.end(sending);
-    console.log('update failed due wrong password');
-  }
-});
-*/
 
 // --------------------- LISTEN PORT ---------------------
 

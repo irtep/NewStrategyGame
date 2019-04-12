@@ -52,7 +52,7 @@ function checkDatabase(why, origData){
       
       if (why === 'fetchHighScores') {
         // this variable is at gameOver.js
-        highscores = JSON.parse(resp);
+        highscores = resp;
       }
     }
   }

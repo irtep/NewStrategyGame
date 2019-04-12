@@ -7,7 +7,7 @@ To add:
 - complete end game
 - top20 players list.
 
-Continue: server.js save highscores
+Continue: sort highscores... then start to fix close combat.
 */
 /*
 Known bugs:
