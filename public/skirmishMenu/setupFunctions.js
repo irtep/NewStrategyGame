@@ -1,11 +1,17 @@
 function randomArmies() {  // not very random atm. but allows quick setup for ua-test.
   
   selected.army1.chosenArmy = humans; // selected object is at public/start/setup.js
-  selected.army2.chosenArmy = humans;
-  addUnit('army1', 'Knight commander', 1, 10);
-  addUnit('army1', 'Knight commander', 1, 10);
-  addUnit('army2', 'Knight commander', 1, 10);
-  addUnit('army2', 'Knight commander', 1, 10);
+  selected.army2.chosenArmy = dwarves;
+  addUnit('army1', 'Knight', 5, 5);
+  addUnit('army1', 'Swordsman', 10, 2);
+  addUnit('army1', 'Crossbowman', 10, 2);
+  addUnit('army1', 'Swordsman', 10, 2);
+  addUnit('army1', 'Swordsman', 10, 2);
+  addUnit('army1', 'Swordsman', 10, 2);
+  addUnit('army2', 'Dwarf warchief', 1, 25);
+  addUnit('army2', 'Mountain guardian', 10, 8);
+  addUnit('army2', 'Dwarf infantry', 10, 3);
+  addUnit('army2', 'Steel golem', 1, 30);
   extraButtonHandler('ready1');
   extraButtonHandler('ready2');
 }

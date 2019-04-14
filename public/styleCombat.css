@@ -29,7 +29,7 @@ input[type=button] {
   border:1px solid #000000;
 } 
 #console1 {				
-  position: fixed;
+  /*position: fixed;*/
 	top: 5%;
 	left: 1px;  
 	float: left;

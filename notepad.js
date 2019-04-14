@@ -7,36 +7,16 @@ To add:
 - complete end game
 - top20 players list.
 
-Continue: sort highscores... fix close combats melee combat part.
+Continue: more test..
 */
 /*
 Known bugs:
-  serious:
-    #1 long combat problematic as they dont necessarily engage after killing many.. (check from battlelog...)
-    ( Dahirs note about this bug:
-    Taisin trackaa sen
-Eli jos on 2 identtistä vihollista vastassa
-yksittäisiä unitteja
-esim just, joku elf lord
-ja tapat niistä toisen
-Niin kun rupeet tappamaan sitä toista joka on vielä hengissä
-Se yrittää "targetaa" sitä kuollutta
-koska ne on saman nimisiä
-ja muulla tavalla "identtisiä"
-    )
-  
-    #2 engage enemy doesnt work almost ever. (fix in, keep checking....)
     
   minors:
     #1
-    sometimes when other team is killed, need to click standby, pause or whatever to get continue button
-
+    
     #2
     map doesnt show most southern towns completely with texts, atleast with this laptop.
-    
-    #3 when in long battle, sometimes other team doesnt hit...
-    
-    #4 battlesummary doesnt update for kill round
 */
 
 /*

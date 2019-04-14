@@ -17,7 +17,7 @@ const humans = [
   new gameUnit(
   'Knight', 'cavalry','Tough elite unit mounted on warhorses. Well armed with lances and armoured with excellent plate armours',
   ['lance', 'shield'], ['no weapon'],
-  {m: 8, s: 4, t: 4, ws: 5, bs: 4, a: 2, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 5}, 2, 'humans', 5,
+  {m: 8, s: 4, t: 4, ws: 5, bs: 4, a: 1, w: 2, i: 4, ld: 9, sv: 2, defMods: 1, pointCost: 5}, 2, 'humans', 5,
   'Tough elite unit mounted on warhorses. Well armed with lances, shields and armoured with excellent plate armours', 5),
   new gameUnit(
   'Swordsman', 'infantry', 'Infantryman of human. Well trained. Armed with sword and shield.', 
@@ -98,7 +98,7 @@ const dwarves = [
   new gameUnit(
   'Mountain guardian', 'infantry', 'Elite infantry of dwarves. If you are opponent, watch out for these guys!', 
   ['halberd', 'shield'], ['no weapon'],
-  {m: 4, s: 4, t: 5, ws: 5, bs: 4, a: 2, w: 1, i: 4, ld: 9, sv: 1, defMods: 0, pointCost: 8}, 1,  'dwarves', 10,
+  {m: 4, s: 4, t: 5, ws: 5, bs: 4, a: 1, w: 1, i: 4, ld: 9, sv: 1, defMods: 0, pointCost: 8}, 1,  'dwarves', 10,
   'Unlike normal dwarf infantry, these elite infantry are professionals. If you are opponent, watch out for these guys!', 6),
   new gameUnit(
   'Steel golem', 'monster', 'Steam-powered monstrosity. Controlled by dwarf warchief to punish enemies', 
@@ -136,7 +136,7 @@ const savages = [
   new gameUnit(
   'Ogre merc', 'infantry', 'Ogre mercenaries are strong and quite well equipped big humanoids.',  
   ['halberd'], ['heavy crossbow'],
-  {m: 5, s: 5, t: 5, ws: 4, bs: 4, a: 2, w: 3, i: 2, ld: 10, sv: 3, defMods: 0, pointCost: 7}, 3,  'savages', 5,
+  {m: 5, s: 5, t: 5, ws: 4, bs: 4, a: 1, w: 3, i: 2, ld: 10, sv: 3, defMods: 0, pointCost: 7}, 3,  'savages', 5,
   'Ogre mercenaries are strong and quite well equipped humanoids. That are very brutal melee warriors and with deadly heavy crossbows.', 3),
   new gameUnit(
   'Peasant rebel', 'infantry', 'These guys are not really fighters, but sometimes quantity overwhelmes quality.', 
@@ -169,7 +169,7 @@ const vampires = [
   new gameUnit(
   'Necromancer', 'infantry', 'Can not really fight in melee. But devastating short range fireball launcher.', 
   ['dagger'], ['fireball'],
-  {m: 4, s: 3, t: 3, ws: 4, bs: 3, a: 2, w: 1, i: 3, ld: 8, sv: 4, defMods: 1, pointCost: 8}, 1,  'vampires', 1,
+  {m: 4, s: 3, t: 3, ws: 4, bs: 3, a: 1, w: 1, i: 3, ld: 8, sv: 4, defMods: 1, pointCost: 8}, 1,  'vampires', 1,
   'Can not really fight in melee. But devastating short range fireball launcher.', 3),
   new gameUnit(
   'Black unicorn', 'monster', 'Mythical horselike creature, that can stick you with his magical horn. Fast but not very armoured.', 
