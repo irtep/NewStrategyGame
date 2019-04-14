@@ -282,13 +282,13 @@ function executeAttack(type, who, to, modAttack, attackNumber){ // attackNumber 
         attackSummary.attacks = totalAttacks;
       } // attack with attacks
       const longLog = 'Attacker: '+ attackSummary.attacker + '. weapon: '+ attackSummary.weapon+ '. attacks: '+ attackSummary.attacks+
-      '. hits: '+ attackSummary.hits+ '. saved by armour: '+ attackSummary.saved+ '. serious wounds: '+ attackSummary.wounds;
+      '. hits: '+ attackSummary.hits+ '. saved by armour: '+ attackSummary.saved+ '. serious wounds: '+ attackSummary.wounds + ' target: '+ to.unit;
 
       bDetails.innerHTML = bDetails.innerHTML + '<br>' + longLog;
       console.log('attack summary: ', attackSummary);
     break;
     case 'melee':
-      // at the moment melee is handled in 'orders' section
+      // at the moment melee is handled in 'orders' section separately
     break;
     default: console.log('attack type not found.');
   }

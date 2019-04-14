@@ -161,8 +161,9 @@ function drawTerrain(canvas,ctx) {
 function draw() {
   const canvas = document.getElementById('kanveesi');
   const ctx = canvas.getContext("2d");
-
+  
   ctx.clearRect(0,0,canvas.width,canvas.height);  // clear all 
   drawTerrain(canvas, ctx);
   drawUnits(canvas, ctx);
 }
+

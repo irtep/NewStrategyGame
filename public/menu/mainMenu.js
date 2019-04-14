@@ -109,7 +109,7 @@ function menuClick(clickedButton){
         'Note that if you have an earlier saved game with same name that you want to use now, the earlier game will be deleted as this will replace it. <br>'+
         'So if you want to start new game, and you have earlier saved one, use other name.<br><br>'+
         'The best result is that inside 15 turns you conquest all lands, but even if you survive for 15 turns is considered as a success.<br>'+
-        'You also score some points for every win in combat and the lands you can keep.';
+        'You also score some points for every win in combat and the lands you can keep. Faster you conquest all, more points you get.';
 
       // event listener for radio buttons above:
       const selector1 = document.selectArmyForm.army1;

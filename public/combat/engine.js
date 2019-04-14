@@ -1,6 +1,8 @@
+// COMBAT ENGINE
 
 let pause = true; // starts as true
 const bLog = document.getElementById('battleLog'); // views/combat.html
+const bd = document.getElementById('battleDetails');
 const gameLooper = setInterval(roundExecutor, 1000); // execute orders
 const speedOfRound = 500 // how fast come sub rounds
 const tutorial = '<p class= "blueText">HOW TO PLAY:<br><br>'+
@@ -16,7 +18,8 @@ const tutorial = '<p class= "blueText">HOW TO PLAY:<br><br>'+
   '-<b>run</b> same as move-order, except that unit moves faster, and can not shoot while doing it.<br><br>'+
   '-<b>hunt</b>: choose target unit who you want this unit to hunt. After that your unit tries to find a place to shoot target unit, while avoiding melee with it. <br><br>'+
   '<b>engage</b>: your unit that receives this order tries to run towards target you chose in order to engage melee. Please note that your unit does not have same magic crystal ball view as you, so if you use this from far away, your guy might choose unexpected way to engage the enemy. So maybe best use when closer to enemy.<br><br>'+
-  'You win by killing all enemies. Start by giving orders and or clicking "Continue game."</p>';
+  'You win by killing all enemies. Start by giving orders and or clicking "Continue game."<br><br> Green circles are forests that are passable, but its hard to do ranged attacks in them or through them.'+
+  '<br>Black boxes are buildings. They block all ranged assault and can not be passed through.</p>';
 
 // Event listeners
 const listenPause = document.getElementById('pauseButton').addEventListener("click", pauseGame);
@@ -57,7 +60,6 @@ function startMoving(who, where){
 
     if (moveAttempt === 'collision'){
       
-      console.log('got collision at startMoving');
       who.notMovedInCombat = true;
     } else {
 
@@ -76,7 +78,7 @@ function roundExecutor(){
     zunSu('orders'); 
     draw();
     // gather all units:
-    // SHOULD PROPABLY MAKE THIS GATHERING AFTER ALL SHOOTINGS!
+    // SHOULD PROPABLY MAKE THIS GATHERING AFTER ALL SHOOTINGS OR ELIMINATE KILLED UNITS FROM HERE TOO IF FATALITIES!
     const forCheckUnits1 = gameObject.army1.concat([]);
     const forCheckUnits2 = gameObject.army2.concat([]);
     const allUnits = forCheckUnits1.concat(forCheckUnits2);
@@ -104,6 +106,7 @@ function roundExecutor(){
         inTurn.order = 'standby';
       }
       // to fix as sometimes units might melee directions...this might cause "standby in melee problem"
+      // however new melee combat by resolve this problem too...
       const allDirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w']
       for (let ii = 0; ii < allDirs.length; ii++) {
         if (inTurn.order === 'melee' && inTurn.target === allDirs[ii]){
@@ -120,7 +123,7 @@ function roundExecutor(){
       
         inTurn.reloadStatus--;
         if (inTurn.reloadStatus === 0) {  
-          console.log(inTurn.unit, ' has weapon reloaded');
+          // reload ready
         }
       }      
       
@@ -210,7 +213,7 @@ function roundExecutor(){
     
     // ---------- REST OF ORDERS ---------------
     setTimeout(() => { 
-      for (let i = 0; i < allUnits.length; i++) {
+      for (let i = 0; i < allUnits.length; i++) { 
         const unitInAction = allUnits[i];
         
         // ------  SHOOT TO TARGET  --------
@@ -304,7 +307,6 @@ function roundExecutor(){
         if (unitInAction.order === 'engage' && unitInAction.engaged.yes === false) {
           // apply engage:
           const engageResult = engage(unitInAction, unitInAction.target);
-          console.log('eResult: ', engageResult);
           
           if (engageResult.what === 'noLos'){ 
             
@@ -341,45 +343,36 @@ function roundExecutor(){
           } 
         }  
         
-        // -----   MELEE ORDER  ---------
-        /* maybe should change so that this applies to all, not only who have order melee... maybe whole melee order should be removed*/
-        /* for now the melee order can stay, but i make so that it doesnt really do nothing itself*/
-        /*
-        
-        // MELEE PHASE VERSION 2.0
-        // gather all units: New gathering as some might have died in shooting.
-        const forCheckUnitsM1 = gameObject.army1.concat([]);
-        const forCheckUnitsM2 = gameObject.army2.concat([]);
-        const allUnits = forCheckUnitsM1.concat(forCheckUnitsM2);
-        */
-        if (unitInAction.order === 'melee') {  // DELETE THIS LINE
-          // apply melee attack:
-          const meleeAttackAttempt = meleeAttack(unitInAction, unitInAction.engaged.withWho[0]);
-          /* this bug too much. need to replace with something else... for example like:
-          // find closest enemy:
-          /* CAN USE THIS, however need to modificate a bit.:
-          // check closest opponent
-          for (let ii = 0; ii < enemyArmy.length; ii++) {
-            const distance = distanceCheck(unitInAction.location, enemyArmy[ii].location);
-
-            if (distance < closestEnemy.distance) {
-              closestEnemy.number = ii;
-              closestEnemy.distance = distance;
-              closestEnemy.where = findDirection(unitInAction.location, enemyArmy[ii].location);
-            }  
-            // check if that is in melee range
-              // if yes, then hit your melee attack
-          }
-          */
+        // -----   MELEE PHASE  ---------
+          let opponent = gameObject.army2;
+          let foundTarget = null;
           
-        
-        }  // DELETE THIS LINE
+          if (unitInAction.commander === 'army2') {
+            opponent = gameObject.army1;  
+          }
+          
+          for (let i = 0; i < opponent.length; i++){
+            const meleeRange = (opponent[i].details.size * opponent[i].quantity) + (unitInAction.details.size * unitInAction.quantity) + 7; 
+            const distance = distanceCheck(unitInAction.location, opponent[i].location);
+            
+            if (meleeRange >= distance && foundTarget === null) {
+                foundTarget = opponent[i];
+            }
+            
+            if (foundTarget !== null) {
+              // apply melee attack:
+              meleeAttack(unitInAction, foundTarget);
+              // response from enemy: 
+              meleeAttack(foundTarget, unitInAction);
+            }
+          }
       }
       
     }, speedOfRound);
     draw();
     // scroll battlelog:
     bLog.scrollTop = bLog.scrollHeight;
+    bd.scrollTop = bd.scrollHeight;
   }  
   // CHECK VICTORY CONDITIONS
   checkVictoryCondition();
@@ -498,4 +491,5 @@ function startGame(){
 //  -------- ONLOAD:  ------------
 window.onload = ()=> {
   startGame();
+  console.log('go: ', gameObject);
 };

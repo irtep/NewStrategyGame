@@ -284,8 +284,8 @@ function shootTarget(who, to){
     modAttack++; // harder to hit while moving.
   }
   
-  console.log('los check: ', losAndR);
-  if (losAndR === 'losBlocked'){console.log('no los');}
+  if (losAndR === 'losBlocked'){// no los
+  }
   if (losAndR === 'los ok') {
     for (let i = 0; i < who.details.rangedWeapons.length; i++){
       who.firing = true;
@@ -298,9 +298,15 @@ function shootTarget(who, to){
 // melee attack
 function meleeAttack(who, to){
   for (let i = 0; i < who.details.meleeWeapons.length; i++){
-    const meleeWeapon = searchStatsOfWeapon(who.details.meleeWeapons[0], 'melee');
+    const meleeWeapon = searchStatsOfWeapon(who.details.meleeWeapons[i], 'melee');
     const totalAttacks = (who.details.stats.a + meleeWeapon.attacks) * who.quantity;
     let attackSummary = {attacker: who.unit, target: to.unit, weapon: meleeWeapon.nombre, attacks: totalAttacks, hits: 0, wounds: 0, saved: 0};
+    let writeToLog = true; // will be written to log
+    
+    if (to.quantity < 1){
+      // no need to write a log if opponent is already dead.
+      writeToLog = false;    
+    }
     
     for (let ii = 0; ii < totalAttacks; ii++){
       const attackDice = callDice(6);
@@ -332,7 +338,7 @@ function meleeAttack(who, to){
               else {
                 wounds = meleeWeapon.wounds;
               }
-              attackSummary.wounds = wounds;
+              attackSummary.wounds = attackSummary.wounds + wounds;
                 
               if (wounds < to.details.stats.w) {                  
                 let woundStatus;
@@ -350,7 +356,8 @@ function meleeAttack(who, to){
                 } else { // kills
                 const forLog = '<br>' + who.unit +' attacks '+ to.unit + ' with ' + meleeWeapon.nombre + ' causing ' + attackSummary.wounds+
                 ' wounds.';
-                logScreen.innerHTML = logScreen.innerHTML + forLog;
+                // logScreen update maybe not necessary...
+                //logScreen.innerHTML = logScreen.innerHTML + forLog;
                 lethalWound(to, who, true); // true for melee attack
               }
             } // wound ends
@@ -358,10 +365,17 @@ function meleeAttack(who, to){
       } // attacks with weapon ends
     } 
     const longLog = 'Attacker: '+ attackSummary.attacker + '. weapon: '+ attackSummary.weapon+ '. attacks: '+ attackSummary.attacks+
-      '. hits: '+ attackSummary.hits+ '. saved by armour: '+ attackSummary.saved+ '. serious wounds: '+ attackSummary.wounds;
-
-    console.log('melee attack summary; ', attackSummary);
-    bDetails.innerHTML = bDetails.innerHTML + '<br>' + longLog;
+      '. hits: '+ attackSummary.hits+ '. saved by armour: '+ attackSummary.saved+ '. serious wounds: '+ attackSummary.wounds+ ' at: '+ to.unit;
+    
+    if (attackSummary.attacks === 0) {
+      // not logging empty attacks from unit that just died.
+      writeToLog = false;
+    }
+    //console.log('melee attack summary; ', attackSummary);
+    if (writeToLog === true){
+      
+      bDetails.innerHTML = bDetails.innerHTML + '<br>' + longLog;
+    }
   } // attack with weapons end
 } // melee attack ends
 

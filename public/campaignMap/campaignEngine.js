@@ -119,14 +119,7 @@ function startCampaign(selected, generalsName, generalsPw){
   factions.push(gameObject.campaignArmies.vampires);
   factions.push(gameObject.campaignArmies.savages);
   callUpdate();
-  
-  // databasecheck test
-  /*  disabled as not testing atm.
-        const savedGame = makeSavedGame(gameObject);
-        //make the save html call.
-        console.log('exceeds 5 wins, sending save request. ', savedGame);
-        checkDatabase('saveGame', savedGame);
-  */
+ 
   console.log('go: ', gameObject);
 }
 //  -------- ONLOAD:  ------------

@@ -48,6 +48,7 @@ const meleeWeapons = [           //r        a  s  ap w
   new weapon('unicorn horn', 0, 'melee',    0, 1, 2, 1, false),
   new weapon('runic axe', 0, 'melee',       1, 2, 3, 2, false),
   new weapon('halberd', 0, 'melee',         0, 2, 3, 2, false),
+  new weapon('shield', 0, 'melee',          0, 0, -1, 1, false),
   new weapon('gigantic sword', 0, 'melee',  0, 2, 4, 'd6', false),
   new weapon('steel fists', 0, 'melee',     0, 0, 2, 'd6', false),
   new weapon('treetrunk', 0, 'melee',       0, 0, 3, 'd6', false)
